@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Copy, Check, Star, Terminal, Code, Shield, Zap, GitBranch, Users, Clock } from "lucide-react"
+import { Copy, Check, Star, Terminal, Code, Shield, Zap, GitBranch, Users, Clock, Container } from "lucide-react"
 
 // GitHub Icon Component (inline SVG to avoid deprecation)
 const GitHubIcon = ({ className }: { className?: string }) => (
@@ -165,7 +165,7 @@ export default function HomePage() {
       title: "Validate",
       description: "Check configs for consistency",
       cmd: "krci-ai validate",
-      hover: "Catch misconfigurations and broken links before they cost time."
+      hover: "Catch misconfigurations and broken links before they cost time and LLM tokens."
     },
     {
       icon: <Code className="w-6 h-6" />,
@@ -205,7 +205,7 @@ export default function HomePage() {
   ]
 
   const stats = [
-    { label: "Codebases", value: "20+" },
+    { label: "Integrated Codebases", value: "20+" },
     { label: "Agile SDLC Roles", value: "6" },
     { label: "Baseline Tasks", value: "30+" },
     { label: "SDLC Framework", value: "1" },
@@ -280,10 +280,20 @@ export default function HomePage() {
             <Button
               size="lg"
               variant="outline"
-              className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent"
-              onClick={() => window.open('https://github.com/KubeRocketCI/kuberocketai/tree/main/docs', '_blank')}
+              className="border-green-500 text-green-300 hover:bg-green-900/20 hover:text-green-100 bg-transparent"
+              onClick={() => window.location.href = '/quickstart'}
             >
-              View Documentation
+              <Terminal className="w-4 h-4 mr-2" />
+              Quick Start Guide
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-blue-500 text-blue-300 hover:bg-blue-900/20 hover:text-blue-100 bg-transparent"
+              onClick={() => window.location.href = '/architecture'}
+            >
+              <Container className="w-4 h-4 mr-2" />
+              Architecture
             </Button>
           </div>
         </div>
@@ -519,7 +529,12 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
             Join the next evolution of DevOps practices. Start managing your AI agents like infrastructure.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8 ring-1 ring-cyan-300/40">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8 ring-1 ring-cyan-300/40"
+              onClick={() => window.location.href = '/quickstart'}
+            >
+              <Terminal className="w-4 h-4 mr-2" />
               Get Started Now
             </Button>
             <Button
