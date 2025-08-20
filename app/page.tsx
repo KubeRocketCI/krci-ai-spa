@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Copy, Check, Star, Terminal, Code, Shield, Zap, GitBranch, Users } from "lucide-react"
+import { Copy, Check, Star, Terminal, Code, Shield, Zap, GitBranch, Users, Clock } from "lucide-react"
 
 // GitHub Icon Component (inline SVG to avoid deprecation)
 const GitHubIcon = ({ className }: { className?: string }) => (
@@ -130,9 +130,11 @@ export default function HomePage() {
     return count.toString()
   }
 
-  const getGitHubStarsValue = (): string => {
+  const getGitHubStarsValue = (): string | JSX.Element => {
     if (repoLoading) return "..."
-    if (repoError || !repoData) return "100+"
+    if (repoError || !repoData) {
+      return <Clock className="w-4 h-4 animate-pulse text-cyan-400" />
+    }
     return formatStarCount(repoData.stargazers_count)
   }
 
