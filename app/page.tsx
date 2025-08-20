@@ -173,8 +173,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-black text-green-400 font-mono">
       {/* Header */}
-      <header className="border-b border-green-900/20 bg-black/70 backdrop-blur-md sticky top-0 z-50 supports-[backdrop-filter]:bg-black/40 shadow-lg shadow-green-900/5">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <header className="sticky top-0 z-50 flex justify-center py-4">
+        <div className="w-11/12 max-w-7xl border border-cyan-500/40 bg-gradient-to-r from-blue-950/80 via-slate-950/70 to-green-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-blue-950/40 supports-[backdrop-filter]:via-slate-950/30 supports-[backdrop-filter]:to-green-950/40 shadow-lg shadow-cyan-400/10 rounded-2xl px-8 py-3 flex items-center justify-between">
           <div className="flex items-center space-x-3 group">
             <Terminal className="w-6 h-6 text-green-400 group-hover:text-green-300 transition-colors duration-200" />
             <span className="text-xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-blue-400 bg-clip-text text-transparent hover:from-green-300 hover:via-emerald-300 hover:to-blue-300 transition-all duration-300">
@@ -184,12 +184,12 @@ export default function HomePage() {
           <div className="flex items-center space-x-4">
             <Button
               variant="ghost"
-              className="text-green-400 hover:text-green-300 hover:bg-green-900/30 border border-transparent hover:border-green-700/50 transition-all duration-200 backdrop-blur-sm"
+              className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20"
               onClick={openGitHubRepo}
             >
-              <GitHubIcon className="w-4 h-4 mr-2 transition-transform duration-200 hover:scale-110" />
-              <Star className="w-4 h-4 mr-1 text-yellow-400" />
-              <span className="font-semibold">{getGitHubStarsValue()}</span>
+              <GitHubIcon className="w-4 h-4 mr-2 transition-all duration-300 hover:scale-110 hover:text-cyan-100" />
+              <Star className="w-4 h-4 mr-1 text-yellow-300 hover:text-yellow-200 transition-colors duration-300" />
+              <span className="font-semibold bg-gradient-to-r from-cyan-200 to-green-200 bg-clip-text text-transparent hover:from-cyan-100 hover:to-green-100 transition-all duration-300">{getGitHubStarsValue()}</span>
             </Button>
           </div>
         </div>
