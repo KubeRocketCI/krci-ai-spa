@@ -4,7 +4,7 @@
 
 ## Executive Summary
 
-Developers and AI adopters currently lack accessible documentation and demonstration of KubeRocketAI framework capabilities, creating adoption barriers for teams seeking Infrastructure-as-Code approaches to AI agent management. We will create a static showcase website with interactive demos, agent persona explanations, and visual effects to demonstrate framework value, targeting 100+ monthly visitors and 200+ GitHub stars within 3 months. This minimal-cost solution leverages free hosting platforms and focuses on converting developers from awareness to framework adoption through clear value demonstration and accessible onboarding.
+Developers and AI adopters currently lack accessible documentation and demonstration of KubeRocketAI framework capabilities, creating adoption barriers for teams seeking Pipeline-as-Code approaches to AI agent management. We will create a static showcase website with interactive demos, agent persona explanations, and visual effects to demonstrate framework value, targeting 100+ monthly visitors and 200+ GitHub stars within 3 months. This minimal-cost solution leverages free hosting platforms and focuses on converting developers from awareness to framework adoption through clear value demonstration and accessible onboarding.
 
 ---
 
@@ -34,7 +34,7 @@ Developers and AI adopters currently lack accessible documentation and demonstra
 
 ## Opportunity
 
-**Business Value**: Creating an accessible showcase website would significantly accelerate framework adoption by providing clear value demonstration, reducing barrier to entry for developers evaluating AI workflow improvements, and establishing thought leadership in the Infrastructure-as-Code for AI space.
+**Business Value**: Creating an accessible showcase website would significantly accelerate framework adoption by providing clear value demonstration, reducing barrier to entry for developers evaluating AI workflow improvements, and establishing thought leadership in the Pipeline-as-Code for AI space.
 
 **User Value**: Developers gain immediate understanding of framework capabilities through interactive demos, visual agent persona presentations, and clear SDLC integration examples, reducing evaluation time from hours to minutes.
 
@@ -67,7 +67,7 @@ Developers and AI adopters currently lack accessible documentation and demonstra
 
 - Technical decision-makers evaluating framework for team adoption
 - Open-source contributors seeking to understand project scope and contribution opportunities
-- AI community members researching Infrastructure-as-Code approaches
+- AI community members researching Pipeline-as-Code approaches
 
 ---
 

@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "KubeRocketAI - AI-as-Code for Development Teams",
   description:
-    "Apply Infrastructure-as-Code principles to AI agent management. Version-controlled, project-aware AI agents that understand your codebase.",
+    "Apply Pipeline-as-Code principles to AI agent management. Version-controlled, project-aware AI agents that understand your codebase.",
   generator: "v0.app",
   keywords: ["AI", "Infrastructure as Code", "CLI", "Developer Tools", "AI Agents", "DevOps"],
 }

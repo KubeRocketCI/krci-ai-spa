@@ -95,7 +95,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center max-w-4xl">
-          <Badge className="mb-6 bg-green-900/30 text-green-300 border-green-700">Infrastructure-as-Code for AI</Badge>
+          <Badge className="mb-6 bg-green-900/30 text-green-300 border-green-700">Pipeline-as-Code for AI</Badge>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
             AI-as-Code for
@@ -104,7 +104,7 @@ export default function HomePage() {
           </h1>
 
           <p className="text-xl text-green-300/80 mb-8 max-w-2xl mx-auto">
-            Apply Infrastructure-as-Code principles to AI agent management. Version-controlled, project-aware AI agents
+            Apply Pipeline-as-Code principles to AI agent management. Version-controlled, project-aware AI agents
             that understand your codebase.
           </p>
 
@@ -375,7 +375,7 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
             <Terminal className="w-5 h-5 text-green-400" />
             <span className="text-lg font-bold text-green-400">KubeRocketAI</span>
           </div>
-          <p className="text-green-300/60 text-sm">Infrastructure-as-Code for AI Agent Management</p>
+          <p className="text-green-300/60 text-sm">Pipeline-as-Code for AI Agent Management</p>
           <p className="text-green-300/40 text-xs mt-2">Built with ❤️ for the developer community</p>
         </div>
       </footer>
