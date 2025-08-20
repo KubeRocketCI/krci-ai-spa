@@ -32,8 +32,6 @@ agent:
     - "Maintain consistent styling with cn() utility for class merging"
 
   customization: |
-    Working Directory: /Users/Sergiy_Kulanov/my_projects/edp/ai-run-epam/krci-ai-spa
-
     Technology Stack:
     - Next.js 15.2.4 with App Router
     - React with TypeScript (strict mode)
