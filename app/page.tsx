@@ -6,19 +6,91 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Copy, Check, Star, Github, Terminal, Code, Shield, Zap, GitBranch, Users } from "lucide-react"
 
+// Types
+interface GitHubRepoData {
+  stargazers_count: number
+  forks_count: number
+}
+
+interface UseGitHubRepoReturn {
+  data: GitHubRepoData | null
+  loading: boolean
+  error: string | null
+}
+
+// Constants
+const GITHUB_REPO_URL = 'https://github.com/KubeRocketCI/kuberocketai'
+const CACHE_DURATION = 10 * 60 * 1000 // 10 minutes
+const HERO_COMMAND = "brew tap KubeRocketCI/homebrew-tap && brew install krci-ai"
+
+// Custom hook for fetching GitHub repository data
+const useGitHubRepo = (repoUrl: string): UseGitHubRepoReturn => {
+  const [data, setData] = useState<GitHubRepoData | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchRepoData = async (): Promise<void> => {
+      const cacheKey = `github-repo-${repoUrl}`
+      const cachedData = sessionStorage.getItem(cacheKey)
+      const cacheTime = sessionStorage.getItem(`${cacheKey}-time`)
+
+      // Check if we have valid cached data (less than 10 minutes old)
+      if (cachedData && cacheTime) {
+        const age = Date.now() - parseInt(cacheTime, 10)
+        if (age < CACHE_DURATION) {
+          setData(JSON.parse(cachedData))
+          setLoading(false)
+          return
+        }
+      }
+
+      try {
+        const repoPath = repoUrl.replace('https://github.com/', '')
+        const response = await fetch(`https://api.github.com/repos/${repoPath}`)
+
+        if (!response.ok) {
+          throw new Error(`GitHub API error: ${response.status}`)
+        }
+
+        const repoData = await response.json()
+        const result: GitHubRepoData = {
+          stargazers_count: repoData.stargazers_count,
+          forks_count: repoData.forks_count
+        }
+
+        // Cache the result
+        sessionStorage.setItem(cacheKey, JSON.stringify(result))
+        sessionStorage.setItem(`${cacheKey}-time`, Date.now().toString())
+
+        setData(result)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch repository data')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchRepoData()
+  }, [repoUrl])
+
+  return { data, loading, error }
+}
+
 export default function HomePage() {
   const [copiedCommand, setCopiedCommand] = useState<string | null>(null)
   const [typedText, setTypedText] = useState("")
   const [showCursor, setShowCursor] = useState(true)
 
-  const heroCommand = "brew tap KubeRocketCI/homebrew-tap && brew install krci-ai"
+  // Fetch GitHub repository data
+  const { data: repoData, loading: repoLoading, error: repoError } = useGitHubRepo(GITHUB_REPO_URL)
 
+  // Typing animation effect
   useEffect(() => {
-    const text = heroCommand
     let i = 0
     const timer = setInterval(() => {
-      if (i < text.length) {
-        setTypedText(text.slice(0, i + 1))
+      if (i < HERO_COMMAND.length) {
+        setTypedText(HERO_COMMAND.slice(0, i + 1))
         i++
       } else {
         clearInterval(timer)
@@ -28,6 +100,7 @@ export default function HomePage() {
     return () => clearInterval(timer)
   }, [])
 
+  // Cursor blinking effect
   useEffect(() => {
     const cursorTimer = setInterval(() => {
       setShowCursor((prev) => !prev)
@@ -36,12 +109,31 @@ export default function HomePage() {
     return () => clearInterval(cursorTimer)
   }, [])
 
-  const copyToClipboard = async (text: string, command: string) => {
+  // Helper functions
+  const copyToClipboard = async (text: string, command: string): Promise<void> => {
     await navigator.clipboard.writeText(text)
     setCopiedCommand(command)
     setTimeout(() => setCopiedCommand(null), 2000)
   }
 
+  const formatStarCount = (count: number): string => {
+    if (count >= 1000) {
+      return `${(count / 1000).toFixed(1)}k`
+    }
+    return count.toString()
+  }
+
+  const getGitHubStarsValue = (): string => {
+    if (repoLoading) return "..."
+    if (repoError || !repoData) return "100+"
+    return formatStarCount(repoData.stargazers_count)
+  }
+
+  const openGitHubRepo = (): void => {
+    window.open(GITHUB_REPO_URL, '_blank')
+  }
+
+  // Data and configuration
   const features = [
     {
       icon: <Code className="w-6 h-6" />,
@@ -68,7 +160,7 @@ export default function HomePage() {
   const stats = [
     { label: "Reduction in AI fixes", value: "85%" },
     { label: "Daily time saved", value: "5-10 min" },
-    { label: "GitHub Stars", value: "100+" },
+    { label: "GitHub Stars", value: getGitHubStarsValue() },
   ]
 
   return (
@@ -83,10 +175,14 @@ export default function HomePage() {
             </span>
           </div>
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" className="text-green-400 hover:text-green-300 hover:bg-green-900/20">
+            <Button
+              variant="ghost"
+              className="text-green-400 hover:text-green-300 hover:bg-green-900/20"
+              onClick={() => window.open('https://github.com/KubeRocketCI/kuberocketai', '_blank')}
+            >
               <Github className="w-4 h-4 mr-2" />
               <Star className="w-4 h-4 mr-1" />
-              100+
+              {getGitHubStarsValue()}
             </Button>
           </div>
         </div>
@@ -128,7 +224,7 @@ export default function HomePage() {
             <Button
               size="lg"
               className="bg-green-600 hover:bg-green-700 text-black font-semibold px-8"
-              onClick={() => copyToClipboard("brew tap KubeRocketCI/homebrew-tap && brew install krci-ai", "brew")}
+              onClick={() => copyToClipboard(HERO_COMMAND, "brew")}
             >
               {copiedCommand === "brew" ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
               Install Now
@@ -360,6 +456,7 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
               size="lg"
               variant="outline"
               className="border-green-600 text-green-400 hover:bg-green-900/20 bg-transparent"
+              onClick={openGitHubRepo}
             >
               <Github className="w-4 h-4 mr-2" />
               View on GitHub
