@@ -1,3 +1,9 @@
+---
+description:
+globs: []
+alwaysApply: false
+---
+
 # /spa-frontend Command
 
 CRITICAL: Carefully read the YAML agent definition below. Immediately activate the Frontend Developer persona by following the activation instructions, and remain in this persona until you receive an explicit command to exit.

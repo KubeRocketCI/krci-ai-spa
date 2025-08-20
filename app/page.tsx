@@ -147,35 +147,72 @@ export default function HomePage() {
   // Data and configuration
   const features = [
     {
-      icon: <Code className="w-6 h-6" />,
-      title: "Project-Local Definitions",
-      description: "Version-controlled Markdown files living alongside your code",
+      icon: <Terminal className="w-6 h-6" />,
+      title: "Plugin‑free",
+      description: "No IDE plugins required",
+      cmd: "info",
+      hover: "Works in your IDE today. Nothing to install."
     },
     {
       icon: <Zap className="w-6 h-6" />,
-      title: "Universal Compatibility",
-      description: "Works across Cursor, Claude Code, WindSurf, and web chat tools",
+      title: "Lightweight CLI",
+      description: "Single binary, fast setup",
+      cmd: "krci-ai",
+      hover: "One small binary to set up and manage your AI workflow."
     },
     {
       icon: <Shield className="w-6 h-6" />,
-      title: "Token Transparency",
-      description: "Built-in size calculation and optimization for cost control",
+      title: "Validate",
+      description: "Check configs for consistency",
+      cmd: "krci-ai validate",
+      hover: "Catch misconfigurations and broken links before they cost time."
+    },
+    {
+      icon: <Code className="w-6 h-6" />,
+      title: "Tokens",
+      description: "Analyze token usage",
+      cmd: "krci-ai tokens",
+      hover: "See context size to prevent truncation and surprise failures."
+    },
+    {
+      icon: <Users className="w-6 h-6" />,
+      title: "Bundles",
+      description: "Create agent bundles for chat",
+      cmd: "krci-ai bundle",
+      hover: "Generate a paste‑ready package for ChatGPT, Claude, or Gemini."
     },
     {
       icon: <GitBranch className="w-6 h-6" />,
-      title: "Selective Installation",
-      description: "Install only what you need, when you need it",
+      title: "Install & List",
+      description: "Set up and explore components",
+      cmd: "krci-ai install",
+      hover: "Install core assets and quickly see available agents."
+    },
+    {
+      icon: <Terminal className="w-6 h-6" />,
+      title: "Autocomplete",
+      description: "Shell completion scripts",
+      cmd: "krci-ai completion",
+      hover: "Type less, move faster with shell suggestions."
+    },
+    {
+      icon: <Clock className="w-6 h-6" />,
+      title: "Versions",
+      description: "Check version & updates",
+      cmd: "krci-ai version",
+      hover: "Verify your setup and share reproducible versions."
     },
   ]
 
   const stats = [
-    { label: "Reduction in AI fixes", value: "85%" },
-    { label: "Daily time saved", value: "5-10 min" },
-    { label: "GitHub Stars", value: getGitHubStarsValue() },
+    { label: "Codebases", value: "20+" },
+    { label: "Agile SDLC Roles", value: "6" },
+    { label: "Baseline Tasks", value: "30+" },
+    { label: "SDLC Framework", value: "1" },
   ]
 
   return (
-    <div className="min-h-screen bg-black text-green-400 font-mono">
+    <div className="min-h-screen bg-black text-slate-200 font-mono">
       {/* Header */}
       <header className="sticky top-0 z-50 flex justify-center py-4">
         <div className="w-11/12 max-w-7xl border border-cyan-500/40 bg-gradient-to-r from-blue-950/80 via-slate-950/70 to-green-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-blue-950/40 supports-[backdrop-filter]:via-slate-950/30 supports-[backdrop-filter]:to-green-950/40 shadow-lg shadow-cyan-400/10 rounded-2xl px-8 py-3 flex items-center justify-between">
@@ -202,15 +239,15 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center max-w-4xl">
-          <Badge className="mb-6 bg-green-900/30 text-green-300 border-green-700">Pipeline-as-Code for AI</Badge>
+          <Badge className="mb-6 bg-cyan-900/30 text-cyan-300 border-cyan-700">Pipeline-as-Code for AI</Badge>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-300 via-blue-300 to-emerald-300 bg-clip-text text-transparent">
             AI-as-Code for
             <br />
             Development Teams
           </h1>
 
-          <p className="text-xl text-green-300/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300/80 mb-8 max-w-2xl mx-auto">
             Apply Pipeline-as-Code principles to AI agent management. Version-controlled, project-aware AI agents
             that understand your codebase.
           </p>
@@ -234,7 +271,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-green-600 hover:bg-green-700 text-black font-semibold px-8"
+              className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8 ring-1 ring-cyan-300/40"
               onClick={() => copyToClipboard(HERO_COMMAND, "brew")}
             >
               {copiedCommand === "brew" ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
@@ -243,7 +280,8 @@ export default function HomePage() {
             <Button
               size="lg"
               variant="outline"
-              className="border-green-600 text-green-400 hover:bg-green-900/20 bg-transparent"
+              className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent"
+              onClick={() => window.open('https://github.com/KubeRocketCI/kuberocketai/tree/main/docs', '_blank')}
             >
               View Documentation
             </Button>
@@ -254,11 +292,12 @@ export default function HomePage() {
       {/* Stats */}
       <section className="py-12 border-y border-green-900/30">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <h3 className="text-center text-sm uppercase tracking-widest text-cyan-300/80 mb-6">Adoption at a glance</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, index) => (
               <div key={index}>
-                <div className="text-3xl font-bold text-green-400 mb-2">{stat.value}</div>
-                <div className="text-green-300/70">{stat.label}</div>
+                <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-cyan-300 via-blue-300 to-emerald-300 bg-clip-text text-transparent">{stat.value}</div>
+                <div className="text-slate-400/70">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -318,14 +357,34 @@ export default function HomePage() {
       {/* Features Grid */}
       <section className="py-20 px-4 bg-gray-900/20">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl font-bold text-center mb-12 text-green-400">Key Features</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">Key Features</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <Card key={index} className="bg-black/50 border-green-700/30 hover:border-green-600/50 transition-colors">
-                <CardContent className="p-6">
-                  <div className="text-green-400 mb-4">{feature.icon}</div>
-                  <h3 className="text-lg font-semibold text-green-300 mb-2">{feature.title}</h3>
-                  <p className="text-green-300/70 text-sm">{feature.description}</p>
+              <Card
+                key={index}
+                className="group relative overflow-hidden bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors"
+              >
+                <CardContent className="p-6 relative">
+                  <div className="transition-all duration-300 group-hover:blur-[1.5px] group-hover:opacity-60">
+                    <div className="text-cyan-400 mb-4">{feature.icon}</div>
+                    <h3 className="text-lg font-semibold text-slate-200 mb-2">{feature.title}</h3>
+                    <p className="text-slate-400/80 text-sm">{feature.description}</p>
+                  </div>
+
+                  {/* Hover overlay */}
+                  <div
+                    className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out flex items-center p-6 rounded-lg backdrop-blur-sm backdrop-brightness-75 bg-black/40"
+                    aria-hidden="true"
+                  >
+                    <div className="w-full">
+                      <div className="font-mono text-xs text-cyan-300/90 mb-2">
+                        <span className="text-blue-300">$</span> {feature.cmd ?? 'info'}
+                      </div>
+                      <div className="font-mono text-[13px] leading-relaxed whitespace-pre-line text-green-300 drop-shadow-[0_0_10px_rgba(34,197,94,0.35)]">
+                        {feature.hover ?? 'lorem ipsum dolor sit amet, consectetur adipiscing elit. nulla facilisi.\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -336,7 +395,7 @@ export default function HomePage() {
       {/* Installation */}
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-4xl font-bold text-center mb-12 text-green-400">Installation</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">Installation</h2>
 
           <div className="space-y-6">
             {/* macOS - Homebrew (Recommended) */}
@@ -349,7 +408,7 @@ brew install krci-ai`}</code></pre>
                   size="sm"
                   variant="ghost"
                   onClick={() => copyToClipboard(`brew tap KubeRocketCI/homebrew-tap\nbrew install krci-ai`, "macos")}
-                  className="text-green-400 hover:text-green-300"
+                  className="text-cyan-300 hover:text-cyan-200"
                   aria-label="Copy macOS Homebrew install commands"
                 >
                   {copiedCommand === "macos" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -373,7 +432,7 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
                       "linux"
                     )
                   }
-                  className="text-green-400 hover:text-green-300"
+                  className="text-cyan-300 hover:text-cyan-200"
                   aria-label="Copy Linux install commands"
                 >
                   {copiedCommand === "linux" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -419,7 +478,7 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
       {/* Architecture */}
       <section className="py-20 px-4 bg-gray-900/20">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl font-bold mb-12 text-green-400">How It Works</h2>
+          <h2 className="text-4xl font-bold mb-12 text-cyan-400">How It Works</h2>
 
           <div className="bg-black/50 border border-green-700/30 rounded-lg p-8">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-8">
@@ -455,18 +514,18 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
       {/* CTA */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center max-w-2xl">
-          <h2 className="text-4xl font-bold mb-6 text-green-400">Ready to Transform Your AI Workflow?</h2>
+          <h2 className="text-4xl font-bold mb-6 text-cyan-400">Ready to Transform Your AI Workflow?</h2>
           <p className="text-xl text-green-300/80 mb-8">
             Join the next evolution of DevOps practices. Start managing your AI agents like infrastructure.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-black font-semibold px-8">
+            <Button size="lg" className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8 ring-1 ring-cyan-300/40">
               Get Started Now
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-green-600 text-green-400 hover:bg-green-900/20 bg-transparent"
+              className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent"
               onClick={openGitHubRepo}
             >
               <GitHubIcon className="w-4 h-4 mr-2" />

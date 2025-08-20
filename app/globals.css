@@ -87,19 +87,19 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
+  --primary: oklch(0.88 0.14 220); /* cyan/blue accent for primary */
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.78 0.15 190); /* cyan accent */
+  --accent-foreground: oklch(0.145 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --ring: oklch(0.55 0.1 210);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -154,7 +154,7 @@ header > div {
   transform: translateZ(0);
   /* Force GPU acceleration */
   /* Enhanced lens visibility with subtle glow */
-  box-shadow: 
+  box-shadow:
     0 2px 8px rgba(6, 182, 212, 0.15),
     0 8px 24px rgba(34, 197, 94, 0.08),
     inset 0 1px 0 rgba(6, 182, 212, 0.2),
@@ -166,9 +166,9 @@ header > div {
   header > div {
     will-change: auto;
     /* Maintain lens visibility on mobile with reduced glow */
-    box-shadow: 
+    box-shadow:
       0 1px 4px rgba(6, 182, 212, 0.12),
-      0 4px 16px rgba(34, 197, 94, 0.06),
+      0 4px 16px rgba(59, 130, 246, 0.06),
       inset 0 1px 0 rgba(6, 182, 212, 0.15),
       0 0 20px rgba(6, 182, 212, 0.03);
   }
@@ -192,9 +192,9 @@ header > div {
 
   /* Fallback solid backgrounds for reduced motion */
   header > div {
-    background: linear-gradient(90deg, 
-      rgba(30, 58, 138, 0.9), 
-      rgba(15, 23, 42, 0.9), 
+    background: linear-gradient(90deg,
+      rgba(30, 58, 138, 0.9),
+      rgba(15, 23, 42, 0.9),
       rgba(20, 83, 45, 0.9)
     ) !important;
     box-shadow: none !important;
