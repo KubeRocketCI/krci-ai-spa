@@ -6,7 +6,8 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Copy, Check, Star, Terminal, Code, Shield, Zap, GitBranch, Users, Clock, Container } from "lucide-react"
+import { AuroraBackground } from "@/components/ui/aurora-background"
+import { Copy, Check, Star, Terminal, Code, Shield, Zap, GitBranch, Users, Clock, Container, Globe } from "lucide-react"
 
 // GitHub Icon Component (inline SVG to avoid deprecation)
 const GitHubIcon = ({ className }: { className?: string }) => (
@@ -181,7 +182,7 @@ export default function HomePage() {
       hover: "See context size to prevent truncation and surprise failures."
     },
     {
-      icon: <Users className="w-6 h-6" aria-label="Users icon representing team collaboration and bundling features" />,
+      icon: <Globe className="w-6 h-6" aria-label="Globe icon representing web bundles and global chat deployment" />,
       title: "Bundles",
       description: "Create agent bundles for chat",
       cmd: "krci-ai bundle",
@@ -305,108 +306,115 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-12 border-y border-green-900/30">
-        <div className="container mx-auto px-4">
-          <h3 className="text-center text-sm uppercase tracking-widest text-cyan-300/80 mb-6">Adoption at a glance</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((stat, index) => (
-              <div key={index}>
-                <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-cyan-300 via-blue-300 to-emerald-300 bg-clip-text text-transparent">{stat.value}</div>
-                <div className="text-slate-400/70">{stat.label}</div>
+      {/* Aurora Background Section - From Stats to Features */}
+      <AuroraBackground className="py-0 -my-8">
+
+        {/* Stats */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <h3 className="text-center text-sm uppercase tracking-widest text-white/90 mb-6">Adoption at a glance</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              {stats.map((stat, index) => (
+                <div key={index}>
+                  <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                  <div className="text-white/80">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Problem/Solution */}
+        <section className="py-20 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl font-bold text-red-400 mb-6">The Problem</h2>
+                <ul className="space-y-4 text-white/80">
+                  <li className="flex items-start">
+                    <span className="text-red-400 mr-3">×</span>
+                    Context switching between AI tools and IDEs
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-400 mr-3">×</span>
+                    Inconsistent AI configurations across team members
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-400 mr-3">×</span>
+                    Manual fixes for AI-generated code that doesn&apos;t fit project patterns
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-400 mr-3">×</span>
+                    No version control for AI agent definitions
+                  </li>
+                </ul>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Problem/Solution */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-red-400 mb-6">The Problem</h2>
-              <ul className="space-y-4 text-green-300/80">
-                <li className="flex items-start">
-                  <span className="text-red-400 mr-3">×</span>
-                  Context switching between AI tools and IDEs
-                </li>
-                <li className="flex items-start">
-                  <span className="text-red-400 mr-3">×</span>
-                  Inconsistent AI configurations across team members
-                </li>
-                <li className="flex items-start">
-                  <span className="text-red-400 mr-3">×</span>
-                  Manual fixes for AI-generated code that doesn&apos;t fit project patterns
-                </li>
-                <li className="flex items-start">
-                  <span className="text-red-400 mr-3">×</span>
-                  No version control for AI agent definitions
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-green-400 mb-6">The Solution</h2>
-              <ul className="space-y-4 text-green-300/80">
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3">✓</span>
-                  Declarative agent management with project-specific context
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3">✓</span>
-                  Version-controlled Markdown definitions alongside code
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3">✓</span>
-                  Universal compatibility across all AI-powered IDEs
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3">✓</span>
-                  Built-in transparency and auditability for security teams
-                </li>
-              </ul>
+              <div>
+                <h2 className="text-3xl font-bold text-green-400 mb-6">The Solution</h2>
+                <ul className="space-y-4 text-white/80">
+                  <li className="flex items-start">
+                    <span className="text-green-400 mr-3">✓</span>
+                    Declarative agent management with project-specific context
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-400 mr-3">✓</span>
+                    Version-controlled Markdown definitions alongside code
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-400 mr-3">✓</span>
+                    Universal compatibility across all AI-powered IDEs
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-400 mr-3">✓</span>
+                    Built-in transparency and auditability for security teams
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Features Grid */}
-      <section className="py-20 px-4 bg-gray-900/20">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">Key Features</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <Card
-                key={index}
-                className="group relative overflow-hidden bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors"
-              >
-                <CardContent className="p-6 relative">
-                  <div className="transition-all duration-300 group-hover:blur-[1.5px] group-hover:opacity-60">
-                    <div className="text-cyan-400 mb-4">{feature.icon}</div>
-                    <h3 className="text-lg font-semibold text-slate-200 mb-2">{feature.title}</h3>
-                    <p className="text-slate-400/80 text-sm">{feature.description}</p>
-                  </div>
-
-                  {/* Hover overlay */}
+        {/* Features Grid */}
+        <section className="py-20 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <h2 className="text-4xl font-bold text-center mb-12 text-white">Key Features</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {features.map((feature, index) => (
+                <Card
+                  key={index}
+                  className="group relative overflow-hidden bg-black/50 border border-white/20 hover:border-cyan-400/60 hover:bg-black/80 transition-all duration-300 backdrop-blur-sm"
+                >
+                  {/* Hover overlay - fixed hover detection */}
                   <div
-                    className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out flex items-center p-6 rounded-lg backdrop-blur-sm backdrop-brightness-75 bg-black/40"
+                    className="pointer-events-none absolute inset-[1px] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-[7px] bg-black/90"
                     aria-hidden="true"
                   >
-                    <div className="w-full">
-                      <div className="font-mono text-xs text-cyan-300/90 mb-2">
-                        <span className="text-blue-300">$</span> {feature.cmd ?? 'info'}
-                      </div>
-                      <div className="font-mono text-[13px] leading-relaxed whitespace-pre-line text-green-300 drop-shadow-[0_0_10px_rgba(34,197,94,0.35)]">
-                        {feature.hover ?? 'lorem ipsum dolor sit amet, consectetur adipiscing elit. nulla facilisi.\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                    <div className="flex items-center justify-center h-full p-6">
+                      <div className="w-full">
+                        <div className="font-mono text-xs text-cyan-200/90 mb-2">
+                          <span className="text-blue-200">$</span> {feature.cmd ?? 'info'}
+                        </div>
+                        <div className="font-mono text-[13px] leading-relaxed whitespace-pre-line text-green-200 drop-shadow-[0_0_10px_rgba(34,197,94,0.35)]">
+                          {feature.hover ?? 'lorem ipsum dolor sit amet, consectetur adipiscing elit. nulla facilisi.\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+
+                  <CardContent className="p-6 relative z-10">
+                    <div className="transition-all duration-300 group-hover:blur-[1.5px] group-hover:opacity-60">
+                      <div className="text-cyan-300 mb-4">{feature.icon}</div>
+                      <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
+                      <p className="text-white/80 text-sm">{feature.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+      </AuroraBackground>
 
       {/* Installation */}
       <section className="py-20 px-4">
