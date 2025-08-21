@@ -1,105 +1,23 @@
 
 "use client"
-import type { JSX } from "react"
-
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { AuroraBackground } from "@/components/ui/aurora-background"
-import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Clock, Container, Globe, Blocks, BellRing, LetterText, ShieldCheck } from "lucide-react"
-
-// GitHub Icon Component (inline SVG to avoid deprecation)
-const GitHubIcon = ({ className }: { className?: string }) => (
-  <svg
-    className={className}
-    fill="currentColor"
-    viewBox="0 0 24 24"
-    aria-label="GitHub Repository"
-    role="img"
-  >
-    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-  </svg>
-)
-
-// Types
-interface GitHubRepoData {
-  stargazers_count: number
-  forks_count: number
-}
-
-interface UseGitHubRepoReturn {
-  data: GitHubRepoData | null
-  loading: boolean
-  error: string | null
-}
+import { SharedHeader } from "@/components/shared-header"
+import { GitHubIcon } from "@/components/github-icon"
+import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Globe, Blocks, BellRing, LetterText, ShieldCheck } from "lucide-react"
+import { GITHUB_REPO_URL_EXPORT } from "@/lib/use-github-repo"
+import Link from "next/link"
 
 // Constants
-const GITHUB_REPO_URL = 'https://github.com/KubeRocketCI/kuberocketai'
-const CACHE_DURATION = 10 * 60 * 1000 // 10 minutes
 const HERO_COMMAND = "brew tap KubeRocketCI/homebrew-tap && brew install krci-ai"
-
-// Custom hook for fetching GitHub repository data
-const useGitHubRepo = (repoUrl: string): UseGitHubRepoReturn => {
-  const [data, setData] = useState<GitHubRepoData | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    const fetchRepoData = async (): Promise<void> => {
-      const cacheKey = `github-repo-${repoUrl}`
-      const cachedData = sessionStorage.getItem(cacheKey)
-      const cacheTime = sessionStorage.getItem(`${cacheKey}-time`)
-
-      // Check if we have valid cached data (less than 10 minutes old)
-      if (cachedData && cacheTime) {
-        const age = Date.now() - parseInt(cacheTime, 10)
-        if (age < CACHE_DURATION) {
-          setData(JSON.parse(cachedData))
-          setLoading(false)
-          return
-        }
-      }
-
-      try {
-        const repoPath = repoUrl.replace('https://github.com/', '')
-        const response = await fetch(`https://api.github.com/repos/${repoPath}`)
-
-        if (!response.ok) {
-          throw new Error(`GitHub API error: ${response.status}`)
-        }
-
-        const repoData = await response.json()
-        const result: GitHubRepoData = {
-          stargazers_count: repoData.stargazers_count,
-          forks_count: repoData.forks_count
-        }
-
-        // Cache the result
-        sessionStorage.setItem(cacheKey, JSON.stringify(result))
-        sessionStorage.setItem(`${cacheKey}-time`, Date.now().toString())
-
-        setData(result)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch repository data')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchRepoData()
-  }, [repoUrl])
-
-  return { data, loading, error }
-}
 
 export default function HomePage() {
   const [copiedCommand, setCopiedCommand] = useState<string | null>(null)
   const [typedText, setTypedText] = useState("")
   const [showCursor, setShowCursor] = useState(true)
-
-  // Fetch GitHub repository data
-  const { data: repoData, loading: repoLoading, error: repoError } = useGitHubRepo(GITHUB_REPO_URL)
 
   // Typing animation effect
   useEffect(() => {
@@ -132,23 +50,8 @@ export default function HomePage() {
     setTimeout(() => setCopiedCommand(null), 2000)
   }
 
-  const formatStarCount = (count: number): string => {
-    if (count >= 1000) {
-      return `${(count / 1000).toFixed(1)}k`
-    }
-    return count.toString()
-  }
-
-  const getGitHubStarsValue = (): string | JSX.Element => {
-    if (repoLoading) return "..."
-    if (repoError || !repoData) {
-      return <Clock className="w-4 h-4 animate-pulse text-cyan-400" />
-    }
-    return formatStarCount(repoData.stargazers_count)
-  }
-
   const openGitHubRepo = (): void => {
-    window.open(GITHUB_REPO_URL, '_blank')
+    window.open(GITHUB_REPO_URL_EXPORT, '_blank')
   }
 
   // Data and configuration
@@ -221,27 +124,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-black text-slate-200 font-mono">
       {/* Header */}
-      <header className="sticky top-0 z-50 flex justify-center py-4">
-        <div className="w-11/12 max-w-7xl border border-cyan-500/40 bg-gradient-to-r from-blue-950/80 via-slate-950/70 to-green-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-blue-950/40 supports-[backdrop-filter]:via-slate-950/30 supports-[backdrop-filter]:to-green-950/40 shadow-lg shadow-cyan-400/10 rounded-2xl px-8 py-3 flex items-center justify-between">
-          <div className="flex items-center space-x-3 group">
-            <Terminal className="w-6 h-6 text-green-400 group-hover:text-green-300 transition-colors duration-200" aria-label="KubeRocketAI logo terminal icon" />
-            <span className="text-xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-blue-400 bg-clip-text text-transparent hover:from-green-300 hover:via-emerald-300 hover:to-blue-300 transition-all duration-300">
-              KubeRocketAI
-            </span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20"
-              onClick={openGitHubRepo}
-            >
-              <GitHubIcon className="w-4 h-4 mr-2 transition-all duration-300 hover:scale-110 hover:text-cyan-100" />
-              <Star className="w-4 h-4 mr-1 text-yellow-300 hover:text-yellow-200 transition-colors duration-300" />
-              <span className="font-semibold bg-gradient-to-r from-cyan-200 to-green-200 bg-clip-text text-transparent hover:from-cyan-100 hover:to-green-100 transition-all duration-300">{getGitHubStarsValue()}</span>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <SharedHeader currentPage="home" />
 
       {/* Hero Section */}
       <section className="py-20 px-4">
@@ -275,32 +158,28 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {/* PRIMARY CTA - Install Now */}
             <Button
               size="lg"
-              className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8 ring-1 ring-cyan-300/40"
+              className="bg-gradient-to-r from-cyan-400 via-blue-500 to-emerald-400 hover:from-cyan-300 hover:via-blue-400 hover:to-emerald-300 text-black font-bold px-8 h-12 text-base shadow-xl shadow-cyan-400/30 hover:shadow-cyan-400/50 ring-2 ring-cyan-300/60 hover:ring-cyan-200/80 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
               onClick={() => copyToClipboard(HERO_COMMAND, "brew")}
             >
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
               {copiedCommand === "brew" ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
               Install Now
             </Button>
+
+            {/* SECONDARY CTA - Star on GitHub */}
             <Button
               size="lg"
               variant="outline"
-              className="border-green-500 text-green-300 hover:bg-green-900/20 hover:text-green-100 bg-transparent"
-              onClick={() => window.location.href = '/quickstart'}
+              className="border-slate-600 hover:border-slate-500 text-slate-300 hover:text-slate-100 bg-slate-900/50 hover:bg-slate-800/70 px-6 h-12 text-base font-medium shadow-lg shadow-slate-900/25 hover:shadow-slate-700/30 transform hover:scale-102 transition-all duration-300 backdrop-blur-sm"
+              onClick={openGitHubRepo}
             >
-              <Terminal className="w-4 h-4 mr-2" />
-              Quick Start Guide
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-blue-500 text-blue-300 hover:bg-blue-900/20 hover:text-blue-100 bg-transparent"
-              onClick={() => window.location.href = '/architecture'}
-            >
-              <Container className="w-4 h-4 mr-2" />
-              Architecture
+              <Star className="w-4 h-4 mr-2 text-yellow-400" />
+              Star on GitHub
             </Button>
           </div>
         </div>
@@ -314,12 +193,43 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             <h3 className="relative z-10 text-center text-sm uppercase tracking-widest text-white/90 mb-6">Adoption at a glance</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {stats.map((stat, index) => (
-                <div key={index} className="relative z-10">
-                  <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
-                  <div className="text-white/80">{stat.label}</div>
-                </div>
-              ))}
+              {stats.map((stat, index) => {
+                // Make the "Agile SDLC Roles" stat clickable
+                if (stat.label === "Agile SDLC Roles") {
+                  return (
+                    <Link
+                      key={index}
+                      href="/architecture#agent-relations"
+                      className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none"
+                      aria-label="View details about the 7 SDLC agent roles and responsibilities"
+                    >
+                      <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-white/80">{stat.label}</div>
+                    </Link>
+                  )
+                }
+                // Make the "SDLC Framework" stat clickable
+                else if (stat.label === "SDLC Framework") {
+                  return (
+                    <Link
+                      key={index}
+                      href="/architecture#sdlc-workflow"
+                      className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none"
+                      aria-label="View the complete SDLC agent workflow from idea to code"
+                    >
+                      <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-white/80">{stat.label}</div>
+                    </Link>
+                  )
+                } else {
+                  return (
+                    <div key={index} className="relative z-10">
+                      <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-white/80">{stat.label}</div>
+                    </div>
+                  )
+                }
+              })}
             </div>
           </div>
         </section>

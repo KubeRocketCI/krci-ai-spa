@@ -3,8 +3,9 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Terminal, Shield, GitBranch, Users, ArrowLeft, FileText, Settings, Layers, Zap, Database, Network } from "lucide-react"
+import { Terminal, Shield, GitBranch, Users, FileText, Settings, Layers, Zap, Database, Network } from "lucide-react"
 import Link from "next/link"
+import { SharedHeader } from "@/components/shared-header"
 
 
 export default function ArchitecturePage() {
@@ -72,25 +73,7 @@ export default function ArchitecturePage() {
 
   return (
     <div className="min-h-screen bg-black text-slate-200 font-mono">
-      {/* Header */}
-      <header className="sticky top-0 z-50 flex justify-center py-4">
-        <div className="w-11/12 max-w-7xl border border-cyan-500/40 bg-gradient-to-r from-blue-950/80 via-slate-950/70 to-green-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-blue-950/40 supports-[backdrop-filter]:via-slate-950/30 supports-[backdrop-filter]:to-green-950/40 shadow-lg shadow-cyan-400/10 rounded-2xl px-8 py-3 flex items-center justify-between">
-          <div className="flex items-center space-x-3 group">
-            <Terminal className="w-6 h-6 text-green-400 group-hover:text-green-300 transition-colors duration-200" aria-label="KubeRocketAI logo terminal icon" />
-            <Link href="/" className="text-xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-blue-400 bg-clip-text text-transparent hover:from-green-300 hover:via-emerald-300 hover:to-blue-300 transition-all duration-300">
-              KubeRocketAI
-            </Link>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Link href="/">
-              <Button variant="ghost" className="text-cyan-300 hover:text-cyan-200">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Home
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SharedHeader currentPage="architecture" />
 
       {/* Hero Section */}
       <section className="py-16 px-4">
@@ -160,11 +143,11 @@ export default function ArchitecturePage() {
       </section>
 
       {/* Agent Relations */}
-      <section className="py-16 px-4">
+      <section id="agent-relations" className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           {/* Agent Relations Table */}
           <div>
-            <h3 className="text-2xl font-bold text-center mb-8 text-green-400">SDLC Agent Relations & Responsibilities</h3>
+            <h3 className="text-2xl font-bold text-center mb-8 text-green-400">SDLC Base Agents Relations & Responsibilities</h3>
 
             <Card className="bg-black/50 border-green-700/30">
               <CardContent className="p-6">
@@ -226,13 +209,13 @@ export default function ArchitecturePage() {
                   </table>
                 </div>
               </CardContent>
-                        </Card>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* SDLC Process Overview */}
-      <section className="py-16 px-4">
+      <section id="sdlc-workflow" className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">From Idea to Code: SDLC Agent Workflow</h2>
 
