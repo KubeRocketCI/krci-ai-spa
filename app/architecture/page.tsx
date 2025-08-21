@@ -4,11 +4,129 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Terminal, Shield, GitBranch, Users, FileText, Settings, Layers, Zap, Database, Network } from "lucide-react"
+import { DiagramCarousel } from "@/components/ui/diagram-carousel"
 import Link from "next/link"
 import { SharedHeader } from "@/components/shared-header"
 
 
 export default function ArchitecturePage() {
+
+  // Diagram data for carousel
+  const diagramSlides = [
+    {
+      id: "artifacts-dependency",
+      title: "SDLC Artifacts Dependency Flow",
+      description: "How artifacts depend on each other, forming a clear hierarchy from vision to implementation",
+      badge: "Artifact Flow",
+      zoom: 1.25,
+      diagram: `graph TD
+    Idea([💡 Idea]) --> Brief[📄 Project Brief<br/>Vision & Strategy]
+    Brief --> PRD[📋 PRD<br/>Product Requirements]
+    PRD --> Epic[🎯 Epic<br/>High-level Feature]
+    Epic --> Story[📖 Story<br/>User Requirement<br/>+ Implementation Tasks<br/>+ Deployment Info]
+
+    PRD --> Arch[🏗️ Architecture<br/>System Design]
+    Epic --> Arch
+    Story --> Code[💻 Code<br/>Implementation<br/>+ Deployment Config]
+    Arch --> Code
+
+    Code --> Test[🧪 Test Result<br/>Quality Validation]
+    Story --> Test
+
+    Code --> MVP[🎉 MVP Delivered]
+    Test --> MVP
+
+    style Idea fill:#e1f5fe,stroke:#22d3ee,color:#000
+    style Brief fill:#f0e68c,stroke:#eab308,color:#000
+    style PRD fill:#f3e5f5,stroke:#a855f7,color:#000
+    style Epic fill:#e8f5e8,stroke:#10b981,color:#000
+    style Story fill:#fff3e0,stroke:#f59e0b,color:#000
+    style Arch fill:#e0f2f1,stroke:#06b6d4,color:#000
+    style Code fill:#f1f8e9,stroke:#22c55e,color:#000
+    style Test fill:#fff9c4,stroke:#facc15,color:#000
+    style MVP fill:#ffebee,stroke:#ef4444,color:#000`
+    },
+    {
+      id: "business-process-flow",
+      title: "Business Process Flow",
+      description: "Role-based collaboration flow showing how teams work together through the SDLC",
+      badge: "Team Flow",
+      zoom: 1.25,
+      diagram: `flowchart TD
+    Idea([Idea]) -->|Market Research| PM[Product Manager]
+    PM -->|PRD| BA[Business Analyst]
+    BA -->|Refined PRD| PO[Product Owner]
+    PM -->|Roadmap + Vision| PO
+    BA -.Draft Epics.-> Arch[Architect]
+    PO -->|Epics + Stories| Arch
+    PO -->|Prioritized Backlog| Dev[Developer]
+    Arch -->|Architecture Documents| Dev
+    Dev -->|Code + Pull Requests| QA[QA Engineer]
+    QA -->|Test Results| Dev
+    QA -->|Test Validation| DevOps[DevOps Engineer]
+    DevOps -->|CI/CD + Infrastructure| MVP([MVP Delivered])
+    MVP -->|Feedback| PO
+    MVP -->|Feedback + Metrics| PM
+
+    style Idea fill:#e1f5fe,stroke:#22d3ee,color:#000
+    style PM fill:#f0e68c,stroke:#eab308,color:#000
+    style BA fill:#f3e5f5,stroke:#a855f7,color:#000
+    style PO fill:#e8f5e8,stroke:#10b981,color:#000
+    style Arch fill:#e0f2f1,stroke:#06b6d4,color:#000
+    style Dev fill:#f1f8e9,stroke:#22c55e,color:#000
+    style QA fill:#fff9c4,stroke:#facc15,color:#000
+    style DevOps fill:#ffebee,stroke:#ef4444,color:#000
+    style MVP fill:#e1f5fe,stroke:#22d3ee,color:#000`
+    },
+    {
+      id: "artifact-sequence",
+      title: "Artifact Transfer Sequence",
+      description: "Detailed sequence showing how artifacts are created and transferred between roles",
+      badge: "Sequence Flow",
+      scale: "compact" as const,
+      diagram: `sequenceDiagram
+    participant Stakeholder
+    participant PM as Product Manager
+    participant BA as Business Analyst
+    participant PO as Product Owner
+    participant Arch as Architect
+    participant Dev as Developer
+    participant QA as QA Engineer
+
+    Note over Stakeholder: Initial Business Idea
+
+    Stakeholder->>PM: Business Idea & Market Opportunity
+    PM->>PM: Market Research & Analysis
+    PM->>PM: Create Project Brief
+
+    PM->>PM: Create PRD (based on Project Brief)
+    PM->>BA: PRD for Analysis
+    BA->>BA: Refine PRD with Detailed Requirements
+    BA->>PO: Refined PRD
+
+    PO->>PO: Create Epics (based on PRD)
+    PO->>Arch: PRD + Epics for Technical Review
+    Arch->>Arch: Create Architecture Documents
+
+    PO->>PO: Create Stories (based on Epics)
+    PO->>Dev: Stories + Architecture Documents
+
+    Dev->>Dev: Implement Code (based on Stories + Architecture)
+    Dev->>QA: Code + Stories for Testing
+
+    QA->>QA: Create Test Results (based on Stories + Code)
+    QA->>Dev: Test Results
+
+    alt Tests Pass
+        QA->>PM: Test Results (Success)
+        Note over PM: MVP Ready for Delivery
+    else Tests Fail
+        QA->>Dev: Test Results (Issues Found)
+        Dev->>Dev: Fix Code Issues
+        Dev->>QA: Updated Code
+    end`
+    }
+  ]
 
   // Data
   const coreComponents = [
@@ -219,33 +337,10 @@ export default function ArchitecturePage() {
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">From Idea to Code: SDLC Agent Workflow</h2>
 
-          {/* Process Steps */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <Card className="bg-black/50 border-blue-700/30 hover:border-blue-600/50 transition-colors">
-              <CardContent className="p-6 text-center">
-                <div className="text-4xl mb-4">💡</div>
-                <h3 className="text-lg font-semibold text-blue-300 mb-2">Ideation Phase</h3>
-                <p className="text-sm text-slate-400">Initial business needs identified and scoped by Product Manager</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-black/50 border-green-700/30 hover:border-green-600/50 transition-colors">
-              <CardContent className="p-6 text-center">
-                <div className="text-4xl mb-4">🔨</div>
-                <h3 className="text-lg font-semibold text-green-300 mb-2">Development Phase</h3>
-                <p className="text-sm text-slate-400">Architects design, Developers implement, QA validates quality</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-black/50 border-purple-700/30 hover:border-purple-600/50 transition-colors">
-              <CardContent className="p-6 text-center">
-                <div className="text-4xl mb-4">🚀</div>
-                <h3 className="text-lg font-semibold text-purple-300 mb-2">Delivery Phase</h3>
-                <p className="text-sm text-slate-400">MVP delivered with complete documentation and deployment</p>
-              </CardContent>
-            </Card>
+          {/* SDLC Diagrams Carousel */}
+          <div className="mb-12">
+            <DiagramCarousel slides={diagramSlides} />
           </div>
-
 
         </div>
       </section>
