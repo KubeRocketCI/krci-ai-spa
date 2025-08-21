@@ -329,7 +329,7 @@ export default function HomePage() {
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl font-bold text-red-400 mb-6">The Problem</h2>
+                <h2 className="relative z-10 text-3xl font-bold text-red-400 mb-6">The Problem</h2>
                 <ul className="space-y-4 text-white/80">
                   <li className="flex items-start">
                     <span className="text-red-400 mr-3">×</span>
@@ -350,7 +350,7 @@ export default function HomePage() {
                 </ul>
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-green-400 mb-6">The Solution</h2>
+                <h2 className="relative z-10 text-3xl font-bold text-green-400 mb-6">The Solution</h2>
                 <ul className="space-y-4 text-white/80">
                   <li className="flex items-start">
                     <span className="text-green-400 mr-3">✓</span>
@@ -377,7 +377,7 @@ export default function HomePage() {
         {/* Features Grid */}
         <section className="py-20 px-4">
           <div className="container mx-auto max-w-6xl">
-            <h2 className="text-4xl font-bold text-center mb-12 text-white">Key Features</h2>
+            <h2 className="relative z-10 text-4xl font-bold text-center mb-12 text-cyan-400">Key Features</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {features.map((feature, index) => (
                 <Card
