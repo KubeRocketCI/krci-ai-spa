@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Copy, Check, Terminal, Code, Shield, GitBranch, Users, Clock, ArrowLeft, CheckCircle } from "lucide-react"
+import { Copy, Check, Terminal, Code, GitBranch, Users, Clock, ArrowLeft, CheckCircle, ShieldCheck } from "lucide-react"
 import Link from "next/link"
 
 // Constants
@@ -55,7 +55,7 @@ export default function QuickStartPage() {
       highlight: "6"
     },
     {
-      icon: <Shield className="w-6 h-6" aria-label="Shield icon representing built-in validation and security features" />,
+      icon: <ShieldCheck className="w-6 h-6" aria-label="Shield check icon representing built-in validation and security features" />,
       title: "Validation",
       description: "Built-in configuration checks",
       highlight: "✓"

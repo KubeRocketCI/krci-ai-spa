@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { AuroraBackground } from "@/components/ui/aurora-background"
-import { Copy, Check, Star, Terminal, Code, Shield, Zap, GitBranch, Users, Clock, Container, Globe } from "lucide-react"
+import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Clock, Container, Globe, Blocks, BellRing, LetterText, ShieldCheck } from "lucide-react"
 
 // GitHub Icon Component (inline SVG to avoid deprecation)
 const GitHubIcon = ({ className }: { className?: string }) => (
@@ -154,7 +154,7 @@ export default function HomePage() {
   // Data and configuration
   const features = [
     {
-      icon: <Terminal className="w-6 h-6" aria-label="Terminal icon representing plugin-free operation" />,
+      icon: <Blocks className="w-6 h-6" aria-label="Blocks icon representing plugin-free operation" />,
       title: "Plugin‑free",
       description: "No IDE plugins required",
       cmd: "info",
@@ -168,14 +168,14 @@ export default function HomePage() {
       hover: "One small binary to set up and manage your AI workflow."
     },
     {
-      icon: <Shield className="w-6 h-6" aria-label="Shield icon representing validation and security" />,
+      icon: <ShieldCheck className="w-6 h-6" aria-label="Shield check icon representing validation and security verification" />,
       title: "Validate",
       description: "Check configs for consistency",
       cmd: "krci-ai validate",
       hover: "Catch misconfigurations and broken links before they cost time and LLM tokens."
     },
     {
-      icon: <Code className="w-6 h-6" aria-label="Code icon representing token analysis and development tools" />,
+      icon: <LetterText className="w-6 h-6" aria-label="Letter text icon representing token analysis and text processing" />,
       title: "Tokens",
       description: "Analyze token usage",
       cmd: "krci-ai tokens",
@@ -203,7 +203,7 @@ export default function HomePage() {
       hover: "Type less, move faster with shell suggestions."
     },
     {
-      icon: <Clock className="w-6 h-6" aria-label="Clock icon representing version tracking and updates" />,
+      icon: <BellRing className="w-6 h-6" aria-label="Bell ring icon representing version tracking and updates" />,
       title: "Versions",
       description: "Check version & updates",
       cmd: "krci-ai version",
@@ -312,10 +312,10 @@ export default function HomePage() {
         {/* Stats */}
         <section className="py-20">
           <div className="container mx-auto px-4">
-            <h3 className="text-center text-sm uppercase tracking-widest text-white/90 mb-6">Adoption at a glance</h3>
+            <h3 className="relative z-10 text-center text-sm uppercase tracking-widest text-white/90 mb-6">Adoption at a glance</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {stats.map((stat, index) => (
-                <div key={index}>
+                <div key={index} className="relative z-10">
                   <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
                   <div className="text-white/80">{stat.label}</div>
                 </div>
