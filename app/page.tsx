@@ -213,7 +213,7 @@ export default function HomePage() {
 
   const stats = [
     { label: "Integrated Codebases", value: "20+" },
-    { label: "Agile SDLC Roles", value: "6" },
+    { label: "Agile SDLC Roles", value: "7" },
     { label: "Baseline Tasks", value: "30+" },
     { label: "SDLC Framework", value: "1" },
   ]
