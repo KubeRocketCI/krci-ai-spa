@@ -49,10 +49,10 @@ export default function QuickStartPage() {
       highlight: "3min"
     },
     {
-      icon: <Users className="w-6 h-6" aria-label="Users icon representing the 6 SDLC agents available" />,
-      title: "6 Agents",
+      icon: <Users className="w-6 h-6" aria-label="Users icon representing the 7 SDLC agents available" />,
+      title: "7 Agents",
       description: "Complete SDLC team ready",
-      highlight: "6"
+      highlight: "7"
     },
     {
       icon: <ShieldCheck className="w-6 h-6" aria-label="Shield check icon representing built-in validation and security features" />,
@@ -94,7 +94,7 @@ Next steps:
       time: "10 seconds",
       description: "Discover available AI agents and their roles",
       command: "krci-ai list agents",
-      output: `✅ Found 6 agent(s):
+      output: `✅ Found 7 agent(s):
 
 Name         | Role               | Description
 ------------ | ------------------ | -----------------------------------
@@ -147,7 +147,7 @@ What would you like to work on today?`
 
 ✅ FRAMEWORK VALID
 
-📊 Overview: 6 agents, 24 tasks, 14 templates, 11 data files
+📊 Overview: 7 agents, 24 tasks, 14 templates, 11 data files
 🔗 All internal links resolved (33 references checked)
 
 💡 FRAMEWORK INSIGHTS:
