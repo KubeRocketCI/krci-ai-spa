@@ -75,11 +75,18 @@ export default function QuickStartPage() {
       time: "20 seconds",
       description: "Get KubeRocketAI CLI with IDE integration",
       command: "krci-ai install --ide=claude",
-      output: `✅ Claude Code integration installed successfully!
+      output: `🔄 Installing KubeRocketAI framework components...
+ℹ️ IDE integration: claude
+ℹ️ Creating .krci-ai directory structure...
+ℹ️ Setting up Claude Code integration...
+✅ Claude Code integration installed successfully!
 ✅ Framework installation completed successfully!
-
+ℹ️ Framework components installed to: .krci-ai
+ℹ️
 Next steps:
-• Run 'krci-ai list agents' to see available agents`
+ℹ️   • Run 'krci-ai list agents' to see available agents
+ℹ️   • Run 'krci-ai validate' to verify installation
+ℹ️   • Claude Code commands installed to: .claude/commands/krci-ai/`
     },
     {
       step: "2",
@@ -89,12 +96,16 @@ Next steps:
       command: "krci-ai list agents",
       output: `✅ Found 6 agent(s):
 
-pm  | Senior Product Manager     | Product strategy, requirements
-po  | Senior Product Owner       | User story creation, backlog
-ba  | Senior Business Analyst    | Requirements gathering
-architect | Senior Software Architect | System design, architecture
-dev | Software Developer         | Implementation, code assistance
-qa  | Senior QA Engineer         | Testing strategy, quality assurance`
+Name         | Role               | Description
+------------ | ------------------ | -----------------------------------
+architect    | Software Architect | Software architect specializing in system design and architecture guidance
+ba           | Business Analyst   | Business analyst specializing in requirements gathering...
+dev          | Software Developer | Software Developer for implementation and code assistance
+pm           | Product Manager    | Product manager specializing in product strategy, requirements...
+po           | Product Owner      | Product owner specializing in user story creation and agile...
+qa           | QA Engineer        | Quality assurance engineer specializing in testing strategy, test...
+
+ℹ️ Use 'krci-ai list agents -v' for dependency table showing tasks, templates, and data`
     },
             {
       step: "3",
@@ -132,10 +143,24 @@ What would you like to work on today?`
       time: "10 seconds",
       description: "Ensure your setup is working correctly",
       command: "krci-ai validate",
-      output: `✅ FRAMEWORK VALID
+      output: `🔍 Validating framework integrity...
+
+✅ FRAMEWORK VALID
 
 📊 Overview: 6 agents, 24 tasks, 14 templates, 11 data files
-⚡ Validation completed in 0.0s`
+🔗 All internal links resolved (33 references checked)
+
+💡 FRAMEWORK INSIGHTS:
+   • architect → 4 tasks → 3 templates
+   • ba → 4 tasks → 4 templates
+   • dev → 3 tasks → 1 templates
+   • pm → 4 tasks → 2 templates
+   • po → 5 tasks → 2 templates
+   • qa → 4 tasks → 4 templates
+   • Most used template: story.md (used by 3 tasks)
+⚡ Validation completed in 0.0s
+
+Exit code: 0 (framework functional)`
     },
     {
       step: "5",
@@ -143,10 +168,18 @@ What would you like to work on today?`
       time: "30 seconds",
       description: "Bundle agents for ChatGPT/Claude Web",
       command: "krci-ai bundle --all --output project-context.md",
-      output: `✅ Bundle created successfully!
-
-📁 Generated: project-context.md (2.3MB)
-🚀 Upload to ChatGPT/Claude for strategic discussions`
+      output: `🔄 Validating framework integrity...
+✅ Framework validation passed
+🔄 Discovering agents and dependencies...
+ℹ️ Generating bundle: /tmp/test/.krci-ai/bundle/project-context.md
+✅ Bundle generated successfully!
+ℹ️ Bundle file: /tmp/test/.krci-ai/bundle/project-context.md
+ℹ️ Bundle size: 293329 bytes
+ℹ️
+Usage instructions:
+ℹ️ • Copy the entire bundle content to your web chat tool (ChatGPT, Claude Web, Gemini Pro)
+ℹ️ • The bundle includes all agents, tasks, templates, and project-specific data
+ℹ️ • Each section is clearly separated with collision-resistant delimiters`
     }
   ]
 
@@ -200,18 +233,6 @@ What would you like to work on today?`
               </Card>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Problem We Solve */}
-      <section className="py-12 px-4 border-y border-green-900/30">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-6 text-cyan-400">The Problem We Solve</h2>
-          <p className="text-lg text-green-300/80 mb-8">
-                        You&apos;ve figured out how to make AI agents work, but now you need to
-            <span className="text-green-300 font-semibold"> scale that success </span>
-            across your team and projects. KubeRocketAI brings AI-as-Code principles to AI agent management.
-          </p>
         </div>
       </section>
 
@@ -279,7 +300,7 @@ What would you like to work on today?`
       {/* Your First 3 Minutes */}
       <section className="py-16 px-4 bg-gray-900/20">
         <div className="container mx-auto max-w-5xl">
-          <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">Your First 3 Minutes</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">Start in 3 Minutes</h2>
 
           <div className="space-y-8">
             {quickstartSteps.map((stepData, index) => (
