@@ -43,25 +43,25 @@ export default function QuickStartPage() {
   // Data
   const features = [
     {
-      icon: <Clock className="w-6 h-6" />,
+      icon: <Clock className="w-6 h-6" aria-label="Clock icon indicating quick 3-minute installation time" />,
       title: "3 Minutes",
       description: "From install to first agent",
       highlight: "3min"
     },
     {
-      icon: <Users className="w-6 h-6" />,
+      icon: <Users className="w-6 h-6" aria-label="Users icon representing the 6 SDLC agents available" />,
       title: "6 Agents",
       description: "Complete SDLC team ready",
       highlight: "6"
     },
     {
-      icon: <Shield className="w-6 h-6" />,
+      icon: <Shield className="w-6 h-6" aria-label="Shield icon representing built-in validation and security features" />,
       title: "Validation",
       description: "Built-in configuration checks",
       highlight: "✓"
     },
     {
-      icon: <GitBranch className="w-6 h-6" />,
+      icon: <GitBranch className="w-6 h-6" aria-label="Git branch icon representing version control integration" />,
       title: "Version Control",
       description: "Agent definitions in Git",
       highlight: "Git"
@@ -189,7 +189,7 @@ Usage instructions:
       <header className="sticky top-0 z-50 flex justify-center py-4">
         <div className="w-11/12 max-w-7xl border border-cyan-500/40 bg-gradient-to-r from-blue-950/80 via-slate-950/70 to-green-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-blue-950/40 supports-[backdrop-filter]:via-slate-950/30 supports-[backdrop-filter]:to-green-950/40 shadow-lg shadow-cyan-400/10 rounded-2xl px-8 py-3 flex items-center justify-between">
           <div className="flex items-center space-x-3 group">
-            <Terminal className="w-6 h-6 text-green-400 group-hover:text-green-300 transition-colors duration-200" />
+            <Terminal className="w-6 h-6 text-green-400 group-hover:text-green-300 transition-colors duration-200" aria-label="KubeRocketAI logo terminal icon" />
             <Link href="/" className="text-xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-blue-400 bg-clip-text text-transparent hover:from-green-300 hover:via-emerald-300 hover:to-blue-300 transition-all duration-300">
               KubeRocketAI
             </Link>
@@ -237,7 +237,7 @@ Usage instructions:
       </section>
 
       {/* Installation */}
-      <section className="py-16 px-4">
+      <section id="install" className="py-16 px-4">
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">Install KubeRocketAI</h2>
 
@@ -298,7 +298,7 @@ Usage instructions:
       </section>
 
       {/* Your First 3 Minutes */}
-      <section className="py-16 px-4 bg-gray-900/20">
+      <section id="agents" className="py-16 px-4 bg-gray-900/20">
         <div className="container mx-auto max-w-5xl">
           <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">Start in 3 Minutes</h2>
 
@@ -331,10 +331,10 @@ Usage instructions:
                   {/* Command */}
                   <div className="bg-gray-900 border border-green-700/30 rounded-lg p-4 mb-4">
                     <div className="flex items-center mb-2">
-                      <div className="flex space-x-2">
-                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <div className="flex space-x-2" aria-hidden="true">
+                        <div className="w-3 h-3 bg-red-500 rounded-full" title="Close button (decorative)"></div>
+                        <div className="w-3 h-3 bg-yellow-500 rounded-full" title="Minimize button (decorative)"></div>
+                        <div className="w-3 h-3 bg-green-500 rounded-full" title="Maximize button (decorative)"></div>
                       </div>
                       <span className="ml-4 text-green-400 text-sm">terminal</span>
                     </div>
@@ -366,7 +366,7 @@ Usage instructions:
       </section>
 
       {/* Next Steps */}
-      <section className="py-16 px-4">
+      <section id="usage" className="py-16 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-bold mb-6 text-cyan-400">🎯 You&apos;re Ready!</h2>
           <p className="text-lg text-green-300/80 mb-8">

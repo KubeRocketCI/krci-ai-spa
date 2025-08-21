@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+Sitemap: https://krci-ai.kuberocketci.io/sitemap.xml
+Host: https://krci-ai.kuberocketci.io

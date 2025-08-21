@@ -10,7 +10,13 @@ import { Copy, Check, Star, Terminal, Code, Shield, Zap, GitBranch, Users, Clock
 
 // GitHub Icon Component (inline SVG to avoid deprecation)
 const GitHubIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+  <svg
+    className={className}
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    aria-label="GitHub Repository"
+    role="img"
+  >
     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
   </svg>
 )
@@ -147,56 +153,56 @@ export default function HomePage() {
   // Data and configuration
   const features = [
     {
-      icon: <Terminal className="w-6 h-6" />,
+      icon: <Terminal className="w-6 h-6" aria-label="Terminal icon representing plugin-free operation" />,
       title: "Plugin‑free",
       description: "No IDE plugins required",
       cmd: "info",
       hover: "Works in your IDE today. Nothing to install."
     },
     {
-      icon: <Zap className="w-6 h-6" />,
+      icon: <Zap className="w-6 h-6" aria-label="Lightning bolt icon representing speed and lightweight design" />,
       title: "Lightweight CLI",
       description: "Single binary, fast setup",
       cmd: "krci-ai",
       hover: "One small binary to set up and manage your AI workflow."
     },
     {
-      icon: <Shield className="w-6 h-6" />,
+      icon: <Shield className="w-6 h-6" aria-label="Shield icon representing validation and security" />,
       title: "Validate",
       description: "Check configs for consistency",
       cmd: "krci-ai validate",
       hover: "Catch misconfigurations and broken links before they cost time and LLM tokens."
     },
     {
-      icon: <Code className="w-6 h-6" />,
+      icon: <Code className="w-6 h-6" aria-label="Code icon representing token analysis and development tools" />,
       title: "Tokens",
       description: "Analyze token usage",
       cmd: "krci-ai tokens",
       hover: "See context size to prevent truncation and surprise failures."
     },
     {
-      icon: <Users className="w-6 h-6" />,
+      icon: <Users className="w-6 h-6" aria-label="Users icon representing team collaboration and bundling features" />,
       title: "Bundles",
       description: "Create agent bundles for chat",
       cmd: "krci-ai bundle",
       hover: "Generate a paste‑ready package for ChatGPT, Claude, or Gemini."
     },
     {
-      icon: <GitBranch className="w-6 h-6" />,
+      icon: <GitBranch className="w-6 h-6" aria-label="Git branch icon representing installation and component management" />,
       title: "Install & List",
       description: "Set up and explore components",
       cmd: "krci-ai install",
       hover: "Install core assets and quickly see available agents."
     },
     {
-      icon: <Terminal className="w-6 h-6" />,
+      icon: <Terminal className="w-6 h-6" aria-label="Terminal icon representing shell autocompletion features" />,
       title: "Autocomplete",
       description: "Shell completion scripts",
       cmd: "krci-ai completion",
       hover: "Type less, move faster with shell suggestions."
     },
     {
-      icon: <Clock className="w-6 h-6" />,
+      icon: <Clock className="w-6 h-6" aria-label="Clock icon representing version tracking and updates" />,
       title: "Versions",
       description: "Check version & updates",
       cmd: "krci-ai version",
@@ -217,7 +223,7 @@ export default function HomePage() {
       <header className="sticky top-0 z-50 flex justify-center py-4">
         <div className="w-11/12 max-w-7xl border border-cyan-500/40 bg-gradient-to-r from-blue-950/80 via-slate-950/70 to-green-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-blue-950/40 supports-[backdrop-filter]:via-slate-950/30 supports-[backdrop-filter]:to-green-950/40 shadow-lg shadow-cyan-400/10 rounded-2xl px-8 py-3 flex items-center justify-between">
           <div className="flex items-center space-x-3 group">
-            <Terminal className="w-6 h-6 text-green-400 group-hover:text-green-300 transition-colors duration-200" />
+            <Terminal className="w-6 h-6 text-green-400 group-hover:text-green-300 transition-colors duration-200" aria-label="KubeRocketAI logo terminal icon" />
             <span className="text-xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-blue-400 bg-clip-text text-transparent hover:from-green-300 hover:via-emerald-300 hover:to-blue-300 transition-all duration-300">
               KubeRocketAI
             </span>
@@ -255,10 +261,10 @@ export default function HomePage() {
           {/* Terminal Demo */}
           <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6 mb-8 text-left max-w-2xl mx-auto">
             <div className="flex items-center mb-4">
-              <div className="flex space-x-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="flex space-x-2" aria-hidden="true">
+                <div className="w-3 h-3 bg-red-500 rounded-full" title="Close button (decorative)"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full" title="Minimize button (decorative)"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full" title="Maximize button (decorative)"></div>
               </div>
               <span className="ml-4 text-green-400 text-sm">terminal</span>
             </div>
@@ -493,22 +499,22 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
           <div className="bg-black/50 border border-green-700/30 rounded-lg p-8">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-8">
               <div className="flex flex-col items-center">
-                <Users className="w-12 h-12 text-blue-400 mb-2" />
+                <Users className="w-12 h-12 text-blue-400 mb-2" aria-label="Developer icon representing the user starting the AI-as-Code workflow" />
                 <span className="text-green-300">Developer</span>
               </div>
-              <div className="text-green-400 text-2xl">→</div>
+              <div className="text-green-400 text-2xl" aria-hidden="true">→</div>
               <div className="flex flex-col items-center">
-                <Terminal className="w-12 h-12 text-green-400 mb-2" />
+                <Terminal className="w-12 h-12 text-green-400 mb-2" aria-label="Terminal icon representing the KubeRocketAI command-line interface" />
                 <span className="text-green-300">krci-ai CLI</span>
               </div>
-              <div className="text-green-400 text-2xl">→</div>
+              <div className="text-green-400 text-2xl" aria-hidden="true">→</div>
               <div className="flex flex-col items-center">
-                <Code className="w-12 h-12 text-purple-400 mb-2" />
+                <Code className="w-12 h-12 text-purple-400 mb-2" aria-label="Code icon representing the local AI framework installation" />
                 <span className="text-green-300">Local Framework</span>
               </div>
-              <div className="text-green-400 text-2xl">→</div>
+              <div className="text-green-400 text-2xl" aria-hidden="true">→</div>
               <div className="flex flex-col items-center">
-                <GitBranch className="w-12 h-12 text-yellow-400 mb-2" />
+                <GitBranch className="w-12 h-12 text-yellow-400 mb-2" aria-label="Git branch icon representing the target project where AI agents are deployed" />
                 <span className="text-green-300">Target Project</span>
               </div>
             </div>
