@@ -24,10 +24,14 @@ export const metadata: Metadata = {
   },
   description: "Apply Pipeline-as-Code principles to AI agent management. Version-controlled, project-aware AI agents that understand your codebase and team conventions.",
   keywords: [
-    "AI", "Infrastructure as Code", "CLI", "Developer Tools", "AI Agents", "DevOps",
-    "Next.js", "React", "TypeScript", "Pipeline as Code", "AI-as-Code", "SDLC",
+    "AI", "Pipeline-as-Code", "CLI", "Developer Tools", "AI Agents", "DevOps",
+    "Next.js", "KubeRocketAI", "TypeScript", "Pipeline as Code", "AI-as-Code", "SDLC",
     "Software Development", "Agent Management", "Version Control", "KubeRocketCI"
   ],
+  alternates: {
+    // Default canonical for the homepage; child routes override as needed
+    canonical: '/'
+  },
   authors: [{ name: 'KubeRocketCI Team', url: 'https://github.com/KubeRocketCI' }],
   creator: 'KubeRocketCI',
   publisher: 'KubeRocketCI',
