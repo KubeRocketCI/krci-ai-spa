@@ -55,10 +55,6 @@ export default function HomePage() {
     setTimeout(() => setCopiedCommand(null), 2000)
   }
 
-  const openGitHubRepo = (): void => {
-    window.open(GITHUB_REPO_URL_EXPORT, '_blank')
-  }
-
   // Data and configuration
   const features = [
     {
@@ -127,7 +123,7 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-black text-slate-200 font-mono">
+    <div className="min-h-screen bg-black text-slate-200 font-sans">
       {/* Header */}
       <SharedHeader currentPage="home" />
 
@@ -148,7 +144,7 @@ export default function HomePage() {
           </p>
 
           {/* Terminal Demo */}
-          <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6 mb-8 text-left max-w-2xl mx-auto">
+          <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6 mb-8 text-left max-w-2xl mx-auto font-mono">
             <div className="flex items-center mb-4">
               <div className="flex space-x-2" aria-hidden="true">
                 <div className="w-3 h-3 bg-red-500 rounded-full" title="Close button (decorative)"></div>
@@ -181,10 +177,12 @@ export default function HomePage() {
               size="lg"
               variant="outline"
               className="border-slate-600 hover:border-slate-500 text-slate-300 hover:text-slate-100 bg-slate-900/50 hover:bg-slate-800/70 px-6 h-12 text-base font-medium shadow-lg shadow-slate-900/25 hover:shadow-slate-700/30 transform hover:scale-102 transition-all duration-300 backdrop-blur-sm"
-              onClick={openGitHubRepo}
+              asChild
             >
-              <Star className="w-4 h-4 mr-2 text-yellow-400" />
-              Star on GitHub
+              <a href={GITHUB_REPO_URL_EXPORT} target="_blank" rel="noopener noreferrer" aria-label="Star KubeRocketAI on GitHub (opens in a new tab)">
+                <Star className="w-4 h-4 mr-2 text-yellow-400" aria-hidden="true" />
+                Star on GitHub
+              </a>
             </Button>
           </div>
 
@@ -210,8 +208,8 @@ export default function HomePage() {
         {/* Stats */}
         <section className="py-20">
           <div className="container mx-auto px-4">
-            <h3 className="relative z-10 text-center text-sm uppercase tracking-widest text-white/90 mb-6">Adoption at a glance</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <h3 className="relative z-10 text-center text-xs md:text-sm uppercase tracking-[0.08em] text-slate-300/90 mb-6">Adoption at a glance</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
               {stats.map((stat, index) => {
                 // Make the "Agile SDLC Roles" stat clickable
                 if (stat.label === "Agile SDLC Roles") {
@@ -219,11 +217,11 @@ export default function HomePage() {
                     <Link
                       key={index}
                       href="/architecture#agent-relations"
-                      className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none"
+                      className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-md"
                       aria-label="View details about the 7 SDLC agent roles and responsibilities"
                     >
-                      <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
-                      <div className="text-white/80">{stat.label}</div>
+                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-xs sm:text-sm md:text-base text-slate-400/90 leading-5 font-medium">{stat.label}</div>
                     </Link>
                   )
                 }
@@ -233,18 +231,18 @@ export default function HomePage() {
                     <Link
                       key={index}
                       href="/architecture#sdlc-workflow"
-                      className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none"
+                      className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-md"
                       aria-label="View the complete SDLC agent workflow from idea to code"
                     >
-                      <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
-                      <div className="text-white/80">{stat.label}</div>
+                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-xs sm:text-sm md:text-base text-slate-400/90 leading-5 font-medium">{stat.label}</div>
                     </Link>
                   )
                 } else {
                   return (
                     <div key={index} className="relative z-10">
-                      <div className="text-4xl md:text-5xl font-extrabold mb-2 leading-tight bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
-                      <div className="text-white/80">{stat.label}</div>
+                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-xs sm:text-sm md:text-base text-slate-400/90 leading-5 font-medium">{stat.label}</div>
                     </div>
                   )
                 }
@@ -354,7 +352,7 @@ export default function HomePage() {
             {/* macOS - Homebrew (Recommended) */}
             <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-green-300 mb-4">macOS - Homebrew (Recommended)</h3>
-              <div className="bg-black rounded p-4 flex items-start justify-between">
+              <div className="bg-black rounded p-4 flex items-start justify-between font-mono">
                 <pre className="text-green-400 whitespace-pre-wrap break-words mr-2"><code>{`brew tap KubeRocketCI/homebrew-tap
 brew install krci-ai`}</code></pre>
                 <Button
@@ -372,7 +370,7 @@ brew install krci-ai`}</code></pre>
             {/* Linux - Direct Download */}
             <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-green-300 mb-4">Linux - Direct Download</h3>
-              <div className="bg-black rounded p-4 flex items-start justify-between">
+              <div className="bg-black rounded p-4 flex items-start justify-between font-mono">
                 <pre className="text-green-400 whitespace-pre-wrap break-words mr-2"><code>{`curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz
 chmod +x krci-ai
 sudo mv krci-ai /usr/local/bin/`}</code></pre>
@@ -399,23 +397,23 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
             <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-green-300 mb-4">Quick Start</h3>
               <div className="space-y-2">
-                <div className="bg-black rounded p-4">
+                <div className="bg-black rounded p-4 font-mono">
                   <code className="text-green-400">krci-ai install --ide=cursor</code>
                   <span className="text-green-300/60 ml-4"># Install framework with IDE integration</span>
                 </div>
-                <div className="bg-black rounded p-4">
+                <div className="bg-black rounded p-4 font-mono">
                   <code className="text-green-400">krci-ai validate</code>
                   <span className="text-green-300/60 ml-4"># Validate your agent configurations</span>
                 </div>
-                <div className="bg-black rounded p-4">
+                <div className="bg-black rounded p-4 font-mono">
                   <code className="text-green-400">krci-ai bundle --agent po</code>
                   <span className="text-green-300/60 ml-4"># Create PO context-aware bundle for web chat tools</span>
                 </div>
-                <div className="bg-black rounded p-4">
+                <div className="bg-black rounded p-4 font-mono">
                   <code className="text-green-400">krci-ai list agents</code>
                   <span className="text-green-300/60 ml-4"># List available agents</span>
                 </div>
-                <div className="bg-black rounded p-4">
+                <div className="bg-black rounded p-4 font-mono">
                   <code className="text-green-400">krci-ai install --all</code>
                   <span className="text-green-300/60 ml-4"># Install with all IDE integrations</span>
                 </div>
@@ -475,19 +473,23 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
             <Button
               size="lg"
               className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8 ring-1 ring-cyan-300/40"
-              onClick={() => window.location.href = '/quickstart'}
+              asChild
             >
-              <Terminal className="w-4 h-4 mr-2" />
-              Get Started Now
+              <Link href="/quickstart" aria-label="Open Quickstart page">
+                <Terminal className="w-4 h-4 mr-2" aria-hidden="true" />
+                Get Started Now
+              </Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent"
-              onClick={openGitHubRepo}
+              asChild
             >
-              <GitHubIcon className="w-4 h-4 mr-2" />
-              View on GitHub
+              <a href={GITHUB_REPO_URL_EXPORT} target="_blank" rel="noopener noreferrer" aria-label="View KubeRocketAI on GitHub (opens in a new tab)">
+                <GitHubIcon className="w-4 h-4 mr-2" aria-hidden="true" />
+                View on GitHub
+              </a>
             </Button>
           </div>
         </div>

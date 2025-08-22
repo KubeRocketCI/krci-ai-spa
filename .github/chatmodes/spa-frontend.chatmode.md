@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Frontend Developer role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['codebase', 'usages', 'problems', 'changes', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'editFiles', 'search', 'runCommands', 'sequential-thinking']
 ---
 
 # spa-frontend Command

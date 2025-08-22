@@ -190,7 +190,7 @@ export default function ArchitecturePage() {
 
 
   return (
-    <div className="min-h-screen bg-black text-slate-200 font-mono">
+    <div className="min-h-screen bg-black text-slate-200 font-sans">
       <SharedHeader currentPage="architecture" />
 
       {/* Hero Section */}
@@ -481,10 +481,12 @@ export default function ArchitecturePage() {
               size="lg"
               variant="outline"
               className="border-green-500 text-green-300 hover:bg-green-900/20 hover:text-green-100 bg-transparent"
-              onClick={() => window.open('https://github.com/KubeRocketCI/kuberocketai', '_blank')}
+              asChild
             >
-              <GitBranch className="w-4 h-4 mr-2" />
-              View Source Code
+              <a href="https://github.com/KubeRocketCI/kuberocketai" target="_blank" rel="noopener noreferrer" aria-label="View KubeRocketAI source code on GitHub (opens in a new tab)">
+                <GitBranch className="w-4 h-4 mr-2" aria-hidden="true" />
+                View Source Code
+              </a>
             </Button>
           </div>
         </div>

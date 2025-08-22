@@ -7,13 +7,13 @@ import { OrganizationSchema, SoftwareApplicationSchema, WebsiteSchema } from "./
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-mono",
+  variable: "--font-jetbrains-mono",
 })
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-sans",
+  variable: "--font-inter",
 })
 
 export const metadata: Metadata = {
@@ -122,7 +122,7 @@ export default function RootLayout({
         <SoftwareApplicationSchema />
         <WebsiteSchema />
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans`}>{children}</body>
     </html>
   )
 }

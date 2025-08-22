@@ -186,7 +186,7 @@ Usage instructions:
   ]
 
   return (
-    <div className="min-h-screen bg-black text-slate-200 font-mono">
+    <div className="min-h-screen bg-black text-slate-200 font-sans">
       <SharedHeader currentPage="quickstart" />
 
       {/* Hero Section */}
@@ -235,7 +235,7 @@ Usage instructions:
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="bg-black rounded-lg p-4 flex items-start justify-between">
+                <div className="bg-black rounded-lg p-4 flex items-start justify-between font-mono">
                   <pre className="text-green-400 text-sm"><code>{INSTALL_COMMANDS.macos}</code></pre>
                   <Button
                     size="sm"
@@ -258,7 +258,7 @@ Usage instructions:
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="bg-black rounded-lg p-4 flex items-start justify-between">
+                <div className="bg-black rounded-lg p-4 flex items-start justify-between font-mono">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap"><code>{INSTALL_COMMANDS.linux}</code></pre>
                   <Button
                     size="sm"
@@ -313,7 +313,7 @@ Usage instructions:
                 </CardHeader>
                 <CardContent>
                   {/* Command */}
-                  <div className="bg-gray-900 border border-green-700/30 rounded-lg p-4 mb-4">
+                  <div className="bg-gray-900 border border-green-700/30 rounded-lg p-4 mb-4 font-mono">
                     <div className="flex items-center mb-2">
                       <div className="flex space-x-2" aria-hidden="true">
                         <div className="w-3 h-3 bg-red-500 rounded-full" title="Close button (decorative)"></div>
@@ -338,7 +338,7 @@ Usage instructions:
                   </div>
 
                   {/* Output */}
-                  <div className="bg-black rounded-lg p-4">
+                  <div className="bg-black rounded-lg p-4 font-mono">
                     <div className="text-green-400 text-sm mb-2 opacity-60">Output:</div>
                     <pre className="text-green-300 text-sm whitespace-pre-wrap">{stepData.output}</pre>
                   </div>
@@ -377,9 +377,9 @@ Usage instructions:
                 <Button
                   variant="outline"
                   className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent mt-auto"
-                  onClick={() => window.location.href = '/architecture'}
+                  asChild
                 >
-                  View Architecture
+                  <Link href="/architecture" aria-label="View system architecture">View Architecture</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -397,20 +397,22 @@ Usage instructions:
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/">
-              <Button size="lg" className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8">
-                <Terminal className="w-4 h-4 mr-2" />
+            <Button size="lg" className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8" asChild>
+              <Link href="/" aria-label="Explore the framework homepage">
+                <Terminal className="w-4 h-4 mr-2" aria-hidden="true" />
                 Explore Framework
-              </Button>
-            </Link>
+              </Link>
+            </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-green-500 text-green-300 hover:bg-green-900/20 hover:text-green-100 bg-transparent"
-              onClick={() => window.open('https://github.com/KubeRocketCI/kuberocketai', '_blank')}
+              asChild
             >
-              <GitBranch className="w-4 h-4 mr-2" />
-              View on GitHub
+              <a href="https://github.com/KubeRocketCI/kuberocketai" target="_blank" rel="noopener noreferrer" aria-label="View KubeRocketAI on GitHub (opens in a new tab)">
+                <GitBranch className="w-4 h-4 mr-2" aria-hidden="true" />
+                View on GitHub
+              </a>
             </Button>
           </div>
         </div>
@@ -450,16 +452,16 @@ Usage instructions:
               <Button
                 variant="outline"
                 className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent"
-                onClick={() => window.open('https://github.com/KubeRocketCI/kuberocketai/issues', '_blank')}
+                asChild
               >
-                GitHub Issues
+                <a href="https://github.com/KubeRocketCI/kuberocketai/issues" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub Issues (opens in a new tab)">GitHub Issues</a>
               </Button>
               <Button
                 variant="outline"
                 className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent"
-                onClick={() => window.open('https://github.com/KubeRocketCI/kuberocketai', '_blank')}
+                asChild
               >
-                Documentation Hub
+                <a href="https://github.com/KubeRocketCI/kuberocketai" target="_blank" rel="noopener noreferrer" aria-label="Open KubeRocketAI documentation hub (opens in a new tab)">Documentation Hub</a>
               </Button>
             </div>
           </div>
