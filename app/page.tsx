@@ -1,4 +1,3 @@
-
 "use client"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
@@ -10,14 +9,18 @@ import { GitHubIcon } from "@/components/github-icon"
 import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Globe, Blocks, BellRing, LetterText, ShieldCheck } from "lucide-react"
 import { GITHUB_REPO_URL_EXPORT } from "@/lib/use-github-repo"
 import Link from "next/link"
+import InlineVideo, { AutoplayMode } from "@/components/ui/inline-video"
 
 // Constants
 const HERO_COMMAND = "brew tap KubeRocketCI/homebrew-tap && brew install krci-ai"
+// Autoplay behavior for the hero video: 'onView' plays when visible, 'onLoad' plays immediately
+const VIDEO_AUTOPLAY_MODE: AutoplayMode = 'onView'
 
 export default function HomePage() {
   const [copiedCommand, setCopiedCommand] = useState<string | null>(null)
   const [typedText, setTypedText] = useState("")
   const [showCursor, setShowCursor] = useState(true)
+
 
   // Typing animation effect
   useEffect(() => {
@@ -33,6 +36,8 @@ export default function HomePage() {
 
     return () => clearInterval(timer)
   }, [])
+
+  // InlineVideo handles autoplay logic
 
   // Cursor blinking effect
   useEffect(() => {
@@ -181,6 +186,20 @@ export default function HomePage() {
               <Star className="w-4 h-4 mr-2 text-yellow-400" />
               Star on GitHub
             </Button>
+          </div>
+
+          {/* Video Demo (simple, autoplay on view) */}
+          <div className="mt-6 max-w-4xl mx-auto" id="hero-demo">
+            <InlineVideo
+              src="https://3nwqeqhvckfwsch6.public.blob.vercel-storage.com/krci-ai-user-intro.mp4"
+              poster="/social.png"
+              title="KubeRocketAI — 60-second intro"
+              ariaLabel="KubeRocketAI — 60-second intro video"
+              autoPlayMode={VIDEO_AUTOPLAY_MODE}
+              intersectionThreshold={0.35}
+              className="rounded-md bg-black transition ring-0 group-hover:ring-1 group-hover:ring-cyan-500/30 group-hover:shadow-[0_0_16px_rgba(6,182,212,0.10)]"
+              containerClassName="group"
+            />
           </div>
         </div>
       </section>
