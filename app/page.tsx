@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { AuroraBackground } from "@/components/ui/aurora-background"
 import { SharedHeader } from "@/components/shared-header"
 import { GitHubIcon } from "@/components/github-icon"
-import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Globe, Blocks, BellRing, LetterText, ShieldCheck, MessageCircle } from "lucide-react"
+import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Globe, Blocks, BellRing, LetterText, ShieldCheck, MessageCircle, PencilLine, Brain, Presentation, FileText, NotebookText } from "lucide-react"
 import { GITHUB_REPO_URL_EXPORT } from "@/lib/use-github-repo"
 import Link from "next/link"
 import InlineVideo, { AutoplayMode } from "@/components/ui/inline-video"
@@ -514,39 +514,175 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
 
 
 
-      {/* Architecture */}
+      {/* How It Works */}
       <section className="py-20 px-4 bg-gray-900/20">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl font-bold mb-12 text-cyan-400">How It Works</h2>
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">How It Works</h2>
 
-          <div className="bg-black/50 border border-green-700/30 rounded-lg p-8">
-            <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-8">
-              <div className="flex flex-col items-center">
-                <Users className="w-12 h-12 text-blue-400 mb-2" aria-label="Developer icon representing the user starting the AI-as-Code workflow" />
-                <span className="text-green-300">Developer</span>
+          {/* Framework Philosophy */}
+          <div className="text-center mb-16">
+            <p className="text-xl text-green-300/90 max-w-4xl mx-auto">
+              <strong className="text-cyan-300">AI-as-Code methodology</strong> for development teams. 
+              Define AI agents in simple Markdown files that live with your codebase, 
+              understand your project context, and follow structured SDLC workflows.
+            </p>
+          </div>
+
+          {/* Three Core Pillars */}
+          <div className="grid md:grid-cols-3 gap-8 mb-20">
+            <Card className="bg-black/50 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <PencilLine className="w-12 h-12 text-cyan-400 mb-4 mx-auto" aria-label="No-code markdown and YAML approach" />
+                <h3 className="text-xl font-semibold text-white mb-3">No-Code Simplicity</h3>
+                <p className="text-green-300/80 text-sm leading-relaxed">
+                  Define agents using familiar <strong className="text-cyan-300">Markdown + YAML</strong> format. 
+                  No complex coding required—just structured documentation that agents understand.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-black/50 border border-green-500/30 hover:border-green-400/60 transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <Users className="w-12 h-12 text-green-400 mb-4 mx-auto" aria-label="Human-centered AI assistance" />
+                <h3 className="text-xl font-semibold text-white mb-3">Human-Centered</h3>
+                <p className="text-green-300/80 text-sm leading-relaxed">
+                  <strong className="text-green-300">Agents assist, don&apos;t replace</strong> developers. 
+                  Human-in-the-loop design ensures you stay in control of all decisions.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-black/50 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <GitBranch className="w-12 h-12 text-purple-400 mb-4 mx-auto" aria-label="Version-controlled codebase integration" />
+                <h3 className="text-xl font-semibold text-white mb-3">Version-Controlled</h3>
+                <p className="text-green-300/80 text-sm leading-relaxed">
+                  Agents <strong className="text-purple-300">live in your codebase</strong>, understand your patterns, 
+                  and evolve with your project through Git version control.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* SDLC Workflow */}
+          <div className="mb-20">
+            <h3 className="text-2xl font-semibold text-center mb-8 text-cyan-300">Structured SDLC Workflow</h3>
+            <div className="bg-black/50 border border-green-700/30 rounded-lg p-8">
+              <div className="flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0 lg:space-x-4">
+                <div className="flex flex-col items-center text-center">
+                  <Brain className="w-10 h-10 text-blue-400 mb-2" aria-label="Initial idea generation" />
+                  <span className="text-green-300 font-medium">Idea</span>
+                  <span className="text-green-300/60 text-xs">Concept</span>
+                </div>
+                <div className="text-green-400 text-xl lg:text-2xl lg:rotate-0 rotate-90" aria-hidden="true">→</div>
+                <div className="flex flex-col items-center text-center">
+                  <Presentation className="w-10 h-10 text-cyan-400 mb-2" aria-label="Project brief creation" />
+                  <span className="text-green-300 font-medium">Brief</span>
+                  <span className="text-green-300/60 text-xs">Vision</span>
+                </div>
+                <div className="text-green-400 text-xl lg:text-2xl lg:rotate-0 rotate-90" aria-hidden="true">→</div>
+                <div className="flex flex-col items-center text-center">
+                  <FileText className="w-10 h-10 text-purple-400 mb-2" aria-label="Product requirements document" />
+                  <span className="text-green-300 font-medium">PRD</span>
+                  <span className="text-green-300/60 text-xs">Requirements</span>
+                </div>
+                <div className="text-green-400 text-xl lg:text-2xl lg:rotate-0 rotate-90" aria-hidden="true">→</div>
+                <div className="flex flex-col items-center text-center">
+                  <Zap className="w-10 h-10 text-yellow-400 mb-2" aria-label="Epic feature definition" />
+                  <span className="text-green-300 font-medium">Epic</span>
+                  <span className="text-green-300/60 text-xs">Features</span>
+                </div>
+                <div className="text-green-400 text-xl lg:text-2xl lg:rotate-0 rotate-90" aria-hidden="true">→</div>
+                <div className="flex flex-col items-center text-center">
+                  <NotebookText className="w-10 h-10 text-cyan-400 mb-2" aria-label="User story creation" />
+                  <span className="text-green-300 font-medium">Story</span>
+                  <span className="text-green-300/60 text-xs">User Needs</span>
+                </div>
+                <div className="text-green-400 text-xl lg:text-2xl lg:rotate-0 rotate-90" aria-hidden="true">→</div>
+                <div className="flex flex-col items-center text-center">
+                  <Code className="w-10 h-10 text-green-400 mb-2" aria-label="Code implementation" />
+                  <span className="text-green-300 font-medium">Code</span>
+                  <span className="text-green-300/60 text-xs">Implementation</span>
+                </div>
               </div>
-              <div className="text-green-400 text-2xl" aria-hidden="true">→</div>
-              <div className="flex flex-col items-center">
-                <Terminal className="w-12 h-12 text-green-400 mb-2" aria-label="Terminal icon representing the KubeRocketAI command-line interface" />
-                <span className="text-green-300">krci-ai CLI</span>
-              </div>
-              <div className="text-green-400 text-2xl" aria-hidden="true">→</div>
-              <div className="flex flex-col items-center">
-                <Code className="w-12 h-12 text-purple-400 mb-2" aria-label="Code icon representing the local AI framework installation" />
-                <span className="text-green-300">Local Framework</span>
-              </div>
-              <div className="text-green-400 text-2xl" aria-hidden="true">→</div>
-              <div className="flex flex-col items-center">
-                <GitBranch className="w-12 h-12 text-yellow-400 mb-2" aria-label="Git branch icon representing the target project where AI agents are deployed" />
-                <span className="text-green-300">Target Project</span>
-              </div>
+              <p className="text-green-300/70 text-center mt-6 text-sm">
+                <strong className="text-cyan-300">7 specialized AI agents</strong> guide you through proven agile workflows, 
+                ensuring consistent quality from initial idea to delivered code.
+              </p>
             </div>
           </div>
 
-          <p className="text-green-300/70 mt-6 max-w-2xl mx-auto">
-            Offline operation with native IDE integration. Your AI agents understand your project structure, coding
-            patterns, and team conventions without sending data to external services.
-          </p>
+          {/* Two Integration Paths */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* IDE Integration */}
+            <Card className="bg-black/50 border border-cyan-500/30">
+              <CardContent className="p-6">
+                <div className="text-center mb-4">
+                  <Code className="w-12 h-12 text-cyan-400 mb-3 mx-auto" aria-label="IDE integration workflow" />
+                  <h3 className="text-xl font-semibold text-white">IDE Integration</h3>
+                  <p className="text-cyan-300/80 text-sm">Native workflow in your editor</p>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-start">
+                    <ShieldCheck className="w-4 h-4 text-green-400 mr-3 mt-0.5 flex-shrink-0" />
+                    <span className="text-green-300/90">Cross-IDE compatible (Cursor, Claude Code, VS Code, JetBrains)</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Blocks className="w-4 h-4 text-blue-400 mr-3 mt-0.5 flex-shrink-0" />
+                    <span className="text-green-300/90">No plugins required—agents read Markdown files directly</span>
+                  </div>
+                  <div className="flex items-start">
+                    <GitBranch className="w-4 h-4 text-purple-400 mr-3 mt-0.5 flex-shrink-0" />
+                    <span className="text-green-300/90">Context-aware: agents understand your project structure</span>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-green-700/30">
+                  <code className="text-xs text-green-400">krci-ai install --ide=cursor</code>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Web Chat Bundles */}
+            <Card className="bg-black/50 border border-green-500/30">
+              <CardContent className="p-6">
+                <div className="text-center mb-4">
+                  <Globe className="w-12 h-12 text-green-400 mb-3 mx-auto" aria-label="Web chat bundle creation" />
+                  <h3 className="text-xl font-semibold text-white">Web Chat Bundles</h3>
+                  <p className="text-green-300/80 text-sm">Portable context for any AI tool</p>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-start">
+                    <MessageCircle className="w-4 h-4 text-cyan-400 mr-3 mt-0.5 flex-shrink-0" />
+                    <span className="text-green-300/90">Works with ChatGPT, Claude Web, Gemini Pro</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Copy className="w-4 h-4 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" />
+                    <span className="text-green-300/90">Paste-ready bundles with complete project context</span>
+                  </div>
+                  <div className="flex items-start">
+                    <ShieldCheck className="w-4 h-4 text-green-400 mr-3 mt-0.5 flex-shrink-0" />
+                    <span className="text-green-300/90">Validated packages ensure reliable AI interactions</span>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-green-700/30">
+                  <code className="text-xs text-green-400">krci-ai bundle --agent po</code>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Context Engineering */}
+          <div className="mt-16 text-center">
+            <div className="bg-black/50 border border-yellow-500/30 rounded-lg p-6 max-w-4xl mx-auto">
+              <h3 className="text-lg font-semibold text-yellow-300 mb-3">Context Engineering vs Static Prompting</h3>
+              <p className="text-green-300/80 text-sm leading-relaxed">
+                Instead of static prompts that ignore your project, KubeRocketAI agents use 
+                <strong className="text-yellow-300"> dynamic context engineering</strong>—reading your codebase structure, 
+                existing patterns, and <strong className="text-cyan-300">simple validation rules</strong> to provide 
+                intelligent, project-aware assistance that reduces token usage and improves accuracy.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
