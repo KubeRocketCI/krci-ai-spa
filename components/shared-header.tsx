@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Terminal, Container, Star, Clock } from "lucide-react"
+import { Terminal, Container, Star, Clock, Play } from "lucide-react"
 import Link from "next/link"
 import { useGitHubRepo, formatStarCount, GITHUB_REPO_URL_EXPORT } from "@/lib/use-github-repo"
 import { GitHubIcon } from "@/components/github-icon"
@@ -63,14 +63,32 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
             <span className="font-semibold">Architecture</span>
           </Button>
 
+          {/* YouTube Tutorials */}
+          <Button
+            variant="ghost"
+            className="group text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full sm:w-auto sm:min-w-[120px]"
+            asChild
+          >
+            <a href="https://www.youtube.com/@theplatformteam" target="_blank" rel="noopener noreferrer" aria-label="Watch tutorials on YouTube (opens in a new tab)" className="group">
+              <div className="relative">
+                <Play className="w-4 h-4 mr-2 text-red-400 transition-all duration-300" fill="none" stroke="currentColor" />
+                <Play className="w-4 h-4 mr-2 text-red-400 transition-all duration-300 absolute top-0 left-0 opacity-0 group-hover:opacity-100" fill="currentColor" stroke="none" />
+              </div>
+              <span className="font-semibold">Tutorials</span>
+            </a>
+          </Button>
+
           {/* GitHub Stars */}
           <Button
             variant="ghost"
-            className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full sm:w-auto sm:min-w-[120px]"
+            className="group text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full sm:w-auto sm:min-w-[120px]"
             onClick={openGitHubRepo}
           >
-            <GitHubIcon className="w-4 h-4 mr-2 transition-all duration-300 hover:scale-110 hover:text-cyan-100" />
-            <Star className="w-4 h-4 mr-1 text-yellow-300 hover:text-yellow-200 transition-colors duration-300" />
+            <div className="relative">
+              <Star className="w-4 h-4 mr-2 text-yellow-300 hover:text-yellow-200 transition-all duration-300" fill="none" stroke="currentColor" />
+              <Star className="w-4 h-4 mr-2 text-yellow-300 hover:text-yellow-200 transition-all duration-300 absolute top-0 left-0 opacity-0 group-hover:opacity-100" fill="currentColor" stroke="none" />
+            </div>
+            <GitHubIcon className="w-4 h-4 mr-1 transition-all duration-300 hover:scale-110 hover:text-cyan-100" />
             <span className="font-semibold bg-gradient-to-r from-cyan-200 to-green-200 bg-clip-text text-transparent hover:from-cyan-100 hover:to-green-100 transition-all duration-300">{getGitHubStarsValue()}</span>
           </Button>
         </div>
