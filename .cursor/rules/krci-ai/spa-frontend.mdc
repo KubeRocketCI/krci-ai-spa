@@ -66,6 +66,6 @@ agent:
     exit: "Exit Frontend Developer persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/add-ui-component.md
-    - ./.krci-ai/tasks/optimize-frontend.md
+    - ./.krci-ai/local/tasks/add-ui-component.md
+    - ./.krci-ai/local/tasks/optimize-frontend.md
 ```

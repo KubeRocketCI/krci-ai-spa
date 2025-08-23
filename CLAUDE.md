@@ -79,6 +79,15 @@ docs/                  # Project documentation
 - Client components marked with `"use client"` directive
 - Custom hooks for API data fetching with error handling and caching
 - Absolute imports configured with `@/*` path mapping
+- **ALWAYS run `npm run build` after changes to verify production compatibility**
+
+### Mobile Responsive Guidelines
+
+- **Breakpoint**: Use `sm:` (640px) for mobile-to-desktop transitions
+- **Header**: Stacks logo above navigation on mobile (`flex-col sm:flex-row`)
+- **Feature Cards**: Include tap-to-toggle functionality for mobile hover content
+- **Long Text**: Truncate with ellipsis on mobile for commands/URLs
+- **Comments**: Stack below content on mobile (`hidden sm:inline` + `sm:hidden` pattern)
 
 ### AI Agent Integration
 
@@ -102,3 +111,5 @@ The homepage (`app/page.tsx`) demonstrates:
 - Real-time GitHub statistics integration
 
 When working on this project, maintain the terminal/developer aesthetic, follow the established component patterns, and ensure all new features align with the KubeRocketAI showcase objectives.
+
+- to memorize

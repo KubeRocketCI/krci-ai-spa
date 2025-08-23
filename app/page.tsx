@@ -393,7 +393,13 @@ brew install krci-ai`}</code></pre>
             <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-green-300 mb-4">Linux - Direct Download</h3>
               <div className="bg-black rounded p-4 flex items-start justify-between font-mono">
-                <pre className="text-green-400 whitespace-pre-wrap break-words mr-2"><code>{`curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz
+                {/* Mobile: truncated version, Desktop: full version */}
+                <div className="block sm:hidden text-green-400 mr-2 overflow-hidden">
+                  <div className="truncate">curl -L &quot;https://github.com/KubeRocketCI/...&quot;</div>
+                  <div className="truncate">chmod +x krci-ai</div>
+                  <div className="truncate">sudo mv krci-ai /usr/local/bin/</div>
+                </div>
+                <pre className="hidden sm:block text-green-400 whitespace-pre-wrap break-words mr-2"><code>{`curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz
 chmod +x krci-ai
 sudo mv krci-ai /usr/local/bin/`}</code></pre>
                 <Button
@@ -405,7 +411,7 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
                       "linux"
                     )
                   }
-                  className="text-cyan-300 hover:text-cyan-200"
+                  className="text-cyan-300 hover:text-cyan-200 flex-shrink-0"
                   aria-label="Copy Linux install commands"
                 >
                   {copiedCommand === "linux" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -419,25 +425,85 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
             <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-green-300 mb-4">Quick Start</h3>
               <div className="space-y-2">
-                <div className="bg-black rounded p-4 font-mono">
-                  <code className="text-green-400">krci-ai install --ide=cursor</code>
-                  <span className="text-green-300/60 ml-4"># Install framework with IDE integration</span>
+                <div className="bg-black rounded p-4 font-mono flex items-start justify-between">
+                  <div className="flex-1 mr-2">
+                    <code className="text-green-400">krci-ai install --ide=cursor</code>
+                    <span className="text-green-300/60 ml-4 hidden sm:inline"># Install framework with IDE integration</span>
+                    <div className="text-green-300/60 text-xs mt-1 sm:hidden"># Install framework with IDE integration</div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => copyToClipboard("krci-ai install --ide=cursor", "quickstart-1")}
+                    className="text-cyan-300 hover:text-cyan-200 flex-shrink-0"
+                    aria-label="Copy install command"
+                  >
+                    {copiedCommand === "quickstart-1" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </Button>
                 </div>
-                <div className="bg-black rounded p-4 font-mono">
-                  <code className="text-green-400">krci-ai validate</code>
-                  <span className="text-green-300/60 ml-4"># Validate your agent configurations</span>
+                <div className="bg-black rounded p-4 font-mono flex items-start justify-between">
+                  <div className="flex-1 mr-2">
+                    <code className="text-green-400">krci-ai validate</code>
+                    <span className="text-green-300/60 ml-4 hidden sm:inline"># Validate your agent configurations</span>
+                    <div className="text-green-300/60 text-xs mt-1 sm:hidden"># Validate your agent configurations</div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => copyToClipboard("krci-ai validate", "quickstart-2")}
+                    className="text-cyan-300 hover:text-cyan-200 flex-shrink-0"
+                    aria-label="Copy validate command"
+                  >
+                    {copiedCommand === "quickstart-2" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </Button>
                 </div>
-                <div className="bg-black rounded p-4 font-mono">
-                  <code className="text-green-400">krci-ai bundle --agent po</code>
-                  <span className="text-green-300/60 ml-4"># Create PO context-aware bundle for web chat tools</span>
+                <div className="bg-black rounded p-4 font-mono flex items-start justify-between">
+                  <div className="flex-1 mr-2">
+                    <code className="text-green-400">krci-ai bundle --agent po</code>
+                    <span className="text-green-300/60 ml-4 hidden sm:inline"># Create PO context-aware bundle for web chat tools</span>
+                    <div className="text-green-300/60 text-xs mt-1 sm:hidden"># Create PO context-aware bundle for web chat tools</div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => copyToClipboard("krci-ai bundle --agent po", "quickstart-3")}
+                    className="text-cyan-300 hover:text-cyan-200 flex-shrink-0"
+                    aria-label="Copy bundle command"
+                  >
+                    {copiedCommand === "quickstart-3" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </Button>
                 </div>
-                <div className="bg-black rounded p-4 font-mono">
-                  <code className="text-green-400">krci-ai list agents</code>
-                  <span className="text-green-300/60 ml-4"># List available agents</span>
+                <div className="bg-black rounded p-4 font-mono flex items-start justify-between">
+                  <div className="flex-1 mr-2">
+                    <code className="text-green-400">krci-ai list agents</code>
+                    <span className="text-green-300/60 ml-4 hidden sm:inline"># List available agents</span>
+                    <div className="text-green-300/60 text-xs mt-1 sm:hidden"># List available agents</div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => copyToClipboard("krci-ai list agents", "quickstart-4")}
+                    className="text-cyan-300 hover:text-cyan-200 flex-shrink-0"
+                    aria-label="Copy list agents command"
+                  >
+                    {copiedCommand === "quickstart-4" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </Button>
                 </div>
-                <div className="bg-black rounded p-4 font-mono">
-                  <code className="text-green-400">krci-ai install --all</code>
-                  <span className="text-green-300/60 ml-4"># Install with all IDE integrations</span>
+                <div className="bg-black rounded p-4 font-mono flex items-start justify-between">
+                  <div className="flex-1 mr-2">
+                    <code className="text-green-400">krci-ai install --all</code>
+                    <span className="text-green-300/60 ml-4 hidden sm:inline"># Install with all IDE integrations</span>
+                    <div className="text-green-300/60 text-xs mt-1 sm:hidden"># Install with all IDE integrations</div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => copyToClipboard("krci-ai install --all", "quickstart-5")}
+                    className="text-cyan-300 hover:text-cyan-200 flex-shrink-0"
+                    aria-label="Copy install all command"
+                  >
+                    {copiedCommand === "quickstart-5" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </Button>
                 </div>
               </div>
             </div>
