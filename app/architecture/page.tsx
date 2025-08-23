@@ -125,6 +125,47 @@ export default function ArchitecturePage() {
         Dev->>Dev: Fix Code Issues
         Dev->>QA: Updated Code
     end`
+    },
+    {
+      id: "component-relationships",
+      title: "Framework Components Relationships",
+      description: "UML diagram showing the relationships and interactions between the four framework components",
+      badge: "Data Model",
+      diagram: `classDiagram
+    class Agent {
+        +string name
+        +string description
+        +string[] principles
+        +string activation_prompt
+        +object commands
+        +string[] tasks
+    }
+
+    class Task {
+        +string task
+        +string description
+        +string instructions
+    }
+
+    class Template {
+        +string content
+        +string[] variables
+    }
+
+    class Data {
+        +any content
+        +string type
+    }
+
+    Agent --> Task : exposes via commands
+    Agent --> Data : references behavioral
+    Task --> Data : references technical
+    Task --> Template : references formatting
+
+    note for Agent "WHO<br/>Persona & Behavior<br/>Level 1: Core Identity"
+    note for Task "WHAT<br/>Procedural Workflows<br/>Level 2: + Logic"
+    note for Template "HOW<br/>Output Formatting<br/>Level 3: + Structure"
+    note for Data "REFERENCE<br/>Knowledge & Constraints<br/>Level 4: + Knowledge"`
     }
   ]
 
