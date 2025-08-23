@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { AuroraBackground } from "@/components/ui/aurora-background"
 import { SharedHeader } from "@/components/shared-header"
 import { GitHubIcon } from "@/components/github-icon"
-import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Globe, Blocks, BellRing, LetterText, ShieldCheck } from "lucide-react"
+import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Globe, Blocks, BellRing, LetterText, ShieldCheck, MessageCircle } from "lucide-react"
 import { GITHUB_REPO_URL_EXPORT } from "@/lib/use-github-repo"
 import Link from "next/link"
 import InlineVideo, { AutoplayMode } from "@/components/ui/inline-video"
@@ -20,6 +20,7 @@ export default function HomePage() {
   const [copiedCommand, setCopiedCommand] = useState<string | null>(null)
   const [typedText, setTypedText] = useState("")
   const [showCursor, setShowCursor] = useState(true)
+  const [expandedFeature, setExpandedFeature] = useState<number | null>(null)
 
 
   // Typing animation effect
@@ -53,6 +54,10 @@ export default function HomePage() {
     await navigator.clipboard.writeText(text)
     setCopiedCommand(command)
     setTimeout(() => setCopiedCommand(null), 2000)
+  }
+
+  const toggleFeatureExpansion = (index: number): void => {
+    setExpandedFeature(expandedFeature === index ? null : index)
   }
 
   // Data and configuration
@@ -306,37 +311,54 @@ export default function HomePage() {
           <div className="container mx-auto max-w-6xl">
             <h2 className="relative z-10 text-4xl font-bold text-center mb-12 text-cyan-400">Key Features</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {features.map((feature, index) => (
-                <Card
-                  key={index}
-                  className="group relative overflow-hidden bg-black/50 border border-white/20 hover:border-cyan-400/60 hover:bg-black/80 transition-all duration-300 backdrop-blur-sm"
-                >
-                  {/* Hover overlay - fixed hover detection */}
-                  <div
-                    className="pointer-events-none absolute inset-[1px] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-[7px] bg-black/90"
-                    aria-hidden="true"
+              {features.map((feature, index) => {
+                const isExpanded = expandedFeature === index;
+                return (
+                  <Card
+                    key={index}
+                    className="group relative overflow-hidden bg-black/50 border border-white/20 hover:border-cyan-400/60 hover:bg-black/80 transition-all duration-300 backdrop-blur-sm cursor-pointer sm:cursor-default"
+                    onClick={() => toggleFeatureExpansion(index)}
                   >
-                    <div className="flex items-center justify-center h-full p-6">
-                      <div className="w-full">
-                        <div className="font-mono text-xs text-cyan-200/90 mb-2">
-                          <span className="text-blue-200">$</span> {feature.cmd ?? 'info'}
-                        </div>
-                        <div className="font-mono text-[13px] leading-relaxed whitespace-pre-line text-green-200 drop-shadow-[0_0_10px_rgba(34,197,94,0.35)]">
-                          {feature.hover ?? 'lorem ipsum dolor sit amet, consectetur adipiscing elit. nulla facilisi.\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                    {/* Mobile tap indicator - only visible on small screens */}
+                    <div className="absolute top-3 right-3 z-30 sm:hidden">
+                      <div className="flex items-center justify-center w-6 h-6 bg-cyan-900/40 border border-cyan-500/50 rounded-full">
+                        <MessageCircle className="w-3 h-3 text-cyan-300" />
+                      </div>
+                    </div>
+
+                    {/* Hover overlay for desktop + tap overlay for mobile */}
+                    <div
+                      className={`pointer-events-none absolute inset-[1px] z-20 transition-opacity duration-300 rounded-[7px] bg-black/90 ${
+                        // Desktop: show on hover, Mobile: show when expanded
+                        'opacity-0 group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100'
+                      } ${isExpanded ? 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100' : ''}`}
+                      aria-hidden="true"
+                    >
+                      <div className="flex items-center justify-center h-full p-6">
+                        <div className="w-full">
+                          <div className="font-mono text-xs text-cyan-200/90 mb-2">
+                            <span className="text-blue-200">$</span> {feature.cmd ?? 'info'}
+                          </div>
+                          <div className="font-mono text-[13px] leading-relaxed whitespace-pre-line text-green-200 drop-shadow-[0_0_10px_rgba(34,197,94,0.35)]">
+                            {feature.hover ?? 'lorem ipsum dolor sit amet, consectetur adipiscing elit. nulla facilisi.\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <CardContent className="p-6 relative z-10">
-                    <div className="transition-all duration-300 group-hover:blur-[1.5px] group-hover:opacity-60">
-                      <div className="text-cyan-300 mb-4">{feature.icon}</div>
-                      <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                      <p className="text-white/80 text-sm">{feature.description}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    <CardContent className="p-6 relative z-10">
+                      <div className={`transition-all duration-300 ${
+                        // Desktop: blur on hover, Mobile: blur when expanded
+                        'group-hover:blur-[1.5px] group-hover:opacity-60 sm:group-hover:blur-[1.5px] sm:group-hover:opacity-60'
+                      } ${isExpanded ? 'blur-[1.5px] opacity-60 sm:blur-0 sm:opacity-100 sm:group-hover:blur-[1.5px] sm:group-hover:opacity-60' : ''}`}>
+                        <div className="text-cyan-300 mb-4">{feature.icon}</div>
+                        <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
+                        <p className="text-white/80 text-sm">{feature.description}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </section>
