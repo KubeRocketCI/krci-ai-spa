@@ -131,6 +131,8 @@ export default function ArchitecturePage() {
       title: "Framework Components Relationships",
       description: "UML diagram showing the relationships and interactions between the four framework components",
       badge: "Data Model",
+      zoom: 2.75,
+      scale: "compact" as const,
       diagram: `classDiagram
     class Agent {
         +string name
