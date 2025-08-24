@@ -8,7 +8,7 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-jetbrains-mono",
-  preload: false, // Only preload when actually used
+  preload: true, // Preload since terminal demo is visible on homepage load
 })
 
 const inter = Inter({

@@ -331,7 +331,7 @@ export default function HomePage() {
                       className={`pointer-events-none absolute inset-[1px] z-20 transition-opacity duration-300 rounded-[7px] bg-black/90 ${
                         // Desktop: show on hover, Mobile: show when expanded
                         'opacity-0 group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100'
-                      } ${isExpanded ? 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100' : ''}`}
+                        } ${isExpanded ? 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100' : ''}`}
                       aria-hidden="true"
                     >
                       <div className="flex items-center justify-center h-full p-6">
@@ -350,7 +350,7 @@ export default function HomePage() {
                       <div className={`transition-all duration-300 ${
                         // Desktop: blur on hover, Mobile: blur when expanded
                         'group-hover:blur-[1.5px] group-hover:opacity-60 sm:group-hover:blur-[1.5px] sm:group-hover:opacity-60'
-                      } ${isExpanded ? 'blur-[1.5px] opacity-60 sm:blur-0 sm:opacity-100 sm:group-hover:blur-[1.5px] sm:group-hover:opacity-60' : ''}`}>
+                        } ${isExpanded ? 'blur-[1.5px] opacity-60 sm:blur-0 sm:opacity-100 sm:group-hover:blur-[1.5px] sm:group-hover:opacity-60' : ''}`}>
                         <div className="text-cyan-300 mb-4">{feature.icon}</div>
                         <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
                         <p className="text-white/80 text-sm">{feature.description}</p>
@@ -522,8 +522,8 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
           {/* Framework Philosophy */}
           <div className="text-center mb-16">
             <p className="text-xl text-green-300/90 max-w-4xl mx-auto">
-              <strong className="text-cyan-300">AI-as-Code methodology</strong> for development teams. 
-              Define AI agents in simple Markdown files that live with your codebase, 
+              <strong className="text-cyan-300">AI-as-Code methodology</strong> for development teams.
+              Define AI agents in simple Markdown files that live with your codebase,
               understand your project context, and follow structured SDLC workflows.
             </p>
           </div>
@@ -535,7 +535,7 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
                 <PencilLine className="w-12 h-12 text-cyan-400 mb-4 mx-auto" aria-label="No-code markdown and YAML approach" />
                 <h3 className="text-xl font-semibold text-white mb-3">No-Code Simplicity</h3>
                 <p className="text-green-300/80 text-sm leading-relaxed">
-                  Define agents using familiar <strong className="text-cyan-300">Markdown + YAML</strong> format. 
+                  Define agents using familiar <strong className="text-cyan-300">Markdown + YAML</strong> format.
                   No complex coding required—just structured documentation that agents understand.
                 </p>
               </CardContent>
@@ -546,7 +546,7 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
                 <Users className="w-12 h-12 text-green-400 mb-4 mx-auto" aria-label="Human-centered AI assistance" />
                 <h3 className="text-xl font-semibold text-white mb-3">Human-Centered</h3>
                 <p className="text-green-300/80 text-sm leading-relaxed">
-                  <strong className="text-green-300">Agents assist, don&apos;t replace</strong> developers. 
+                  <strong className="text-green-300">Agents assist, don&apos;t replace</strong> developers.
                   Human-in-the-loop design ensures you stay in control of all decisions.
                 </p>
               </CardContent>
@@ -557,7 +557,7 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
                 <GitBranch className="w-12 h-12 text-purple-400 mb-4 mx-auto" aria-label="Version-controlled codebase integration" />
                 <h3 className="text-xl font-semibold text-white mb-3">Version-Controlled</h3>
                 <p className="text-green-300/80 text-sm leading-relaxed">
-                  Agents <strong className="text-purple-300">live in your codebase</strong>, understand your patterns, 
+                  Agents <strong className="text-purple-300">live in your codebase</strong>, understand your patterns,
                   and evolve with your project through Git version control.
                 </p>
               </CardContent>
@@ -606,7 +606,7 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
                 </div>
               </div>
               <p className="text-green-300/70 text-center mt-6 text-sm">
-                <strong className="text-cyan-300">7 specialized AI agents</strong> guide you through proven agile workflows, 
+                <strong className="text-cyan-300">7 specialized AI agents</strong> guide you through proven agile workflows,
                 ensuring consistent quality from initial idea to delivered code.
               </p>
             </div>
@@ -676,9 +676,9 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
             <div className="bg-black/50 border border-yellow-500/30 rounded-lg p-6 max-w-4xl mx-auto">
               <h3 className="text-lg font-semibold text-yellow-300 mb-3">Context Engineering vs Static Prompting</h3>
               <p className="text-green-300/80 text-sm leading-relaxed">
-                Instead of static prompts that ignore your project, KubeRocketAI agents use 
-                <strong className="text-yellow-300"> dynamic context engineering</strong>—reading your codebase structure, 
-                existing patterns, and <strong className="text-cyan-300">simple validation rules</strong> to provide 
+                Instead of static prompts that ignore your project, KubeRocketAI agents use
+                <strong className="text-yellow-300"> dynamic context engineering</strong>—reading your codebase structure,
+                existing patterns, and <strong className="text-cyan-300">simple validation rules</strong> to provide
                 intelligent, project-aware assistance that reduces token usage and improves accuracy.
               </p>
             </div>
