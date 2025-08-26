@@ -27,7 +27,7 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
     // Position rocket between MVP (Aug 2025) and KubeRocketCI Integration (Sep 2025)
     return 35 // ~35% puts us right after MVP completion
   }
-  
+
   const currentProgress = calculateCurrentProgress()
   const currentDateLabel = "Aug 2025"
 
@@ -149,7 +149,7 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
                         : 'bg-slate-800/30 text-slate-400 border-slate-600'
                     }
                   `}>
-                    {milestone.status === 'completed' ? 'COMPLETE' :
+                    {milestone.status === 'completed' ? 'COMPLETED' :
                       milestone.status === 'current' ? 'EXECUTING' : 'PLANNED'}
                   </Badge>
 

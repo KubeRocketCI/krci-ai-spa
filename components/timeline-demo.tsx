@@ -17,7 +17,7 @@ export default function TimelineDemo() {
               <h3 className="text-2xl font-bold text-white">KubeRocketAI MVP Completion</h3>
               <p className="text-slate-300 text-sm">Jun-Aug 2025</p>
               <Badge className="mt-2 bg-green-900/30 text-green-300 border-green-700">
-                COMPLETE
+                COMPLETED
               </Badge>
             </div>
           </div>

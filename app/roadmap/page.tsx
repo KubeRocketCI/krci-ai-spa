@@ -14,7 +14,7 @@ export default function RoadmapPage() {
     {
       id: "start",
       title: "Project Start",
-      date: "Jun 2024",
+      date: "Jun 2025",
       status: "completed" as const,
       description: "KubeRocketAI framework development begins with initial research and prototype",
       icon: <Lightbulb className="w-5 h-5" />
@@ -163,13 +163,13 @@ export default function RoadmapPage() {
             Strategic Vision: Platform Evolution
           </h2>
           <p className="text-xl text-slate-300/90 leading-relaxed mb-8">
-            We&apos;re helping developers use AI in their native IDEs while keeping their code 
+            We&apos;re helping developers use AI in their native IDEs while keeping their code
             and AI agents aligned through context engineering.
           </p>
           <div className="bg-black/50 border border-green-700/30 rounded-lg p-8">
             <p className="text-lg text-green-300/90 leading-relaxed">
-              <strong className="text-cyan-300">Context Engineering:</strong> Instead of fighting AI hallucinations, 
-              we provide tools that keep your codebase and AI agents in sync. Developers code in their preferred environment 
+              <strong className="text-cyan-300">Context Engineering:</strong> Instead of fighting AI hallucinations,
+              we provide tools that keep your codebase and AI agents in sync. Developers code in their preferred environment
               while <strong className="text-green-300">agents understand project context</strong> automatically.
             </p>
           </div>
