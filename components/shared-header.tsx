@@ -1,14 +1,14 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Terminal, Container, Star, Clock, Play, MapPin } from "lucide-react"
+import { Terminal, Container, Star, Clock, Play, MapPin, Users } from "lucide-react"
 import Link from "next/link"
 import { useGitHubRepo, formatStarCount, GITHUB_REPO_URL_EXPORT } from "@/lib/use-github-repo"
 import { GitHubIcon } from "@/components/github-icon"
 import type { JSX } from "react"
 
 interface SharedHeaderProps {
-  currentPage?: 'home' | 'quickstart' | 'architecture' | 'roadmap'
+  currentPage?: 'home' | 'quickstart' | 'architecture' | 'roadmap' | 'use-cases'
 }
 
 export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
@@ -62,6 +62,15 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
           >
             <Container className="w-4 h-4 mr-2" />
             <span className="font-semibold">Architecture</span>
+          </Button>
+
+          <Button
+            variant="ghost"
+            className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full sm:w-auto sm:min-w-[120px]"
+            onClick={() => window.location.href = '/use-cases'}
+          >
+            <Users className="w-4 h-4 mr-2" />
+            <span className="font-semibold">Use Cases</span>
           </Button>
 
           <Button
