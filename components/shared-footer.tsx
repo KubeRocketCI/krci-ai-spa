@@ -54,7 +54,7 @@ export function SharedFooter({ className = "" }: SharedFooterProps) {
                 rel="noopener noreferrer"
                 className="flex items-center text-green-300/80 hover:text-green-200 text-sm transition-colors"
               >
-                Tutorials <ExternalLink className="w-3 h-3 ml-1" />
+                Tutorials <ExternalLink className="w-3 h-3 ml-1 text-slate-400" />
               </a>
             </div>
           </div>
@@ -67,14 +67,14 @@ export function SharedFooter({ className = "" }: SharedFooterProps) {
                 onClick={openTelegramFeedback}
                 className="flex items-center text-green-300/80 hover:text-green-200 text-sm transition-colors cursor-pointer"
               >
-                <Send className="w-4 h-4 mr-2 text-blue-400" />
+                <Send className="w-4 h-4 mr-2 text-cyan-400" />
                 Telegram Channel
               </button>
               <button
                 onClick={openGitHubRepo}
                 className="flex items-center text-green-300/80 hover:text-green-200 text-sm transition-colors cursor-pointer"
               >
-                <GitHubIcon className="w-4 h-4 mr-2" />
+                <GitHubIcon className="w-4 h-4 mr-2 text-slate-300" />
                 GitHub Issues
               </button>
               <a
@@ -83,8 +83,8 @@ export function SharedFooter({ className = "" }: SharedFooterProps) {
                 rel="noopener noreferrer"
                 className="flex items-center text-green-300/80 hover:text-green-200 text-sm transition-colors"
               >
-                <Globe className="w-4 h-4 mr-2" />
-                KubeRocketCI <ExternalLink className="w-3 h-3 ml-1" />
+                <Globe className="w-4 h-4 mr-2 text-slate-300" />
+                KubeRocketCI <ExternalLink className="w-3 h-3 ml-1 text-slate-400" />
               </a>
             </div>
           </div>
@@ -99,7 +99,7 @@ export function SharedFooter({ className = "" }: SharedFooterProps) {
                 rel="noopener noreferrer"
                 className="flex items-center text-green-300/80 hover:text-green-200 text-sm transition-colors"
               >
-                Releases <ExternalLink className="w-3 h-3 ml-1" />
+                Releases <ExternalLink className="w-3 h-3 ml-1 text-slate-400" />
               </a>
               <a
                 href={`${GITHUB_REPO_URL_EXPORT}/blob/main/README.md`}
@@ -107,7 +107,7 @@ export function SharedFooter({ className = "" }: SharedFooterProps) {
                 rel="noopener noreferrer"
                 className="flex items-center text-green-300/80 hover:text-green-200 text-sm transition-colors"
               >
-                Documentation <ExternalLink className="w-3 h-3 ml-1" />
+                Documentation <ExternalLink className="w-3 h-3 ml-1 text-slate-400" />
               </a>
               <a
                 href={`${GITHUB_REPO_URL_EXPORT}/blob/main/CONTRIBUTING.md`}
@@ -115,7 +115,7 @@ export function SharedFooter({ className = "" }: SharedFooterProps) {
                 rel="noopener noreferrer"
                 className="flex items-center text-green-300/80 hover:text-green-200 text-sm transition-colors"
               >
-                Contributing <ExternalLink className="w-3 h-3 ml-1" />
+                Contributing <ExternalLink className="w-3 h-3 ml-1 text-slate-400" />
               </a>
               <a
                 href={`${GITHUB_REPO_URL_EXPORT}/blob/main/LICENSE`}
@@ -123,7 +123,7 @@ export function SharedFooter({ className = "" }: SharedFooterProps) {
                 rel="noopener noreferrer"
                 className="flex items-center text-green-300/80 hover:text-green-200 text-sm transition-colors"
               >
-                License <ExternalLink className="w-3 h-3 ml-1" />
+                License <ExternalLink className="w-3 h-3 ml-1 text-slate-400" />
               </a>
             </div>
           </div>

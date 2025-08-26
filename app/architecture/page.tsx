@@ -3,9 +3,10 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Terminal, Shield, GitBranch, Users, FileText, Settings, Layers, Zap, Database, Network } from "lucide-react"
+import { Terminal, GitBranch, Users, FileText, Settings, Layers, Network } from "lucide-react"
 import { DiagramCarousel } from "@/components/ui/diagram-carousel"
 import Link from "next/link"
+import Image from "next/image"
 import { SharedHeader } from "@/components/shared-header"
 import { SharedFooter } from "@/components/shared-footer"
 
@@ -419,117 +420,85 @@ export default function ArchitecturePage() {
         </div>
       </section>
 
-      {/* Key Principles */}
-      <section className="py-16 px-4 bg-gray-900/20">
+      {/* Supported IDEs */}
+      <section id="supported-ides" className="py-16 px-4 bg-gray-900/20">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">Design Principles</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">Supported IDEs</h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="bg-black/50 border-green-700/30">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-green-300 mb-4 flex items-center">
-                  <GitBranch className="w-5 h-5 mr-2" />
-                  AI-as-Code
-                </h3>
-                <ul className="space-y-2 text-slate-400 text-sm">
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">•</span>
-                    Version-controlled agent definitions in Git
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">•</span>
-                    Declarative configuration management
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">•</span>
-                    Reproducible deployments across environments
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">•</span>
-                    Audit trails and change tracking
-                  </li>
-                </ul>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
+              <CardContent className="p-4 text-center">
+                <div className="text-cyan-400 mb-2 flex justify-center">
+                  <Image 
+                    src="/icons/ides/cursor.webp" 
+                    alt="Cursor IDE"
+                    width={32}
+                    height={32}
+                    className="w-8 h-8"
+                  />
+                </div>
+                <div className="text-sm font-semibold text-slate-200 mb-1">Cursor</div>
+                <div className="text-xs text-slate-400">AI-native IDE</div>
               </CardContent>
             </Card>
 
-            <Card className="bg-black/50 border-blue-700/30">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-blue-300 mb-4 flex items-center">
-                  <Zap className="w-5 h-5 mr-2" />
-                  Universal Compatibility
-                </h3>
-                <ul className="space-y-2 text-slate-400 text-sm">
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
-                    No IDE plugins required - works everywhere
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
-                    Single binary deployment model
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
-                    Cross-platform support (macOS, Linux, Windows)
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
-                    Lightweight, fast installation
-                  </li>
-                </ul>
+            <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
+              <CardContent className="p-4 text-center">
+                <div className="text-cyan-400 mb-2 flex justify-center">
+                  <Image 
+                    src="/icons/ides/windsurf.svg" 
+                    alt="Windsurf IDE"
+                    width={32}
+                    height={32}
+                    className="w-8 h-8"
+                  />
+                </div>
+                <div className="text-sm font-semibold text-slate-200 mb-1">Windsurf</div>
+                <div className="text-xs text-slate-400">AI-first IDE</div>
               </CardContent>
             </Card>
 
-            <Card className="bg-black/50 border-purple-700/30">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-purple-300 mb-4 flex items-center">
-                  <Database className="w-5 h-5 mr-2" />
-                  Project-Aware Context
-                </h3>
-                <ul className="space-y-2 text-slate-400 text-sm">
-                  <li className="flex items-start">
-                    <span className="text-purple-400 mr-2">•</span>
-                    Automatic project structure understanding
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-purple-400 mr-2">•</span>
-                    Code pattern recognition and adherence
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-purple-400 mr-2">•</span>
-                    Team convention enforcement
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-purple-400 mr-2">•</span>
-                    Dynamic context injection
-                  </li>
-                </ul>
+            <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
+              <CardContent className="p-4 text-center">
+                <div className="text-cyan-400 mb-2 flex justify-center">
+                  <Image 
+                    src="/icons/ides/copilot.png" 
+                    alt="GitHub Copilot"
+                    width={32}
+                    height={32}
+                    className="w-8 h-8"
+                  />
+                </div>
+                <div className="text-sm font-semibold text-slate-200 mb-1">Copilot</div>
+                <div className="text-xs text-slate-400">GitHub AI assistant</div>
               </CardContent>
             </Card>
 
-            <Card className="bg-black/50 border-cyan-700/30">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-cyan-300 mb-4 flex items-center">
-                  <Shield className="w-5 h-5 mr-2" />
-                  Enterprise Ready
-                </h3>
-                <ul className="space-y-2 text-slate-400 text-sm">
-                  <li className="flex items-start">
-                    <span className="text-cyan-400 mr-2">•</span>
-                    Built-in validation and consistency checks
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-cyan-400 mr-2">•</span>
-                    Token usage analysis and optimization
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-cyan-400 mr-2">•</span>
-                    Security-first design principles
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-cyan-400 mr-2">•</span>
-                    Scalable team collaboration
-                  </li>
-                </ul>
+            <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
+              <CardContent className="p-4 text-center">
+                <div className="text-cyan-400 mb-2 flex justify-center">
+                  <Image 
+                    src="/icons/ides/claude.ico" 
+                    alt="Claude Code"
+                    width={32}
+                    height={32}
+                    className="w-8 h-8"
+                  />
+                </div>
+                <div className="text-sm font-semibold text-slate-200 mb-1">Claude Code</div>
+                <div className="text-xs text-slate-400">Web-based AI IDE</div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors cursor-pointer group">
+              <CardContent className="p-4 text-center">
+                <div className="text-cyan-400 mb-2 flex justify-center">
+                  <div className="w-8 h-8 border-2 border-dashed border-cyan-400/50 rounded flex items-center justify-center group-hover:border-cyan-400 transition-colors">
+                    <span className="text-2xl text-cyan-400/70 group-hover:text-cyan-400 transition-colors">+</span>
+                  </div>
+                </div>
+                <div className="text-sm font-semibold text-slate-200 mb-1">Your IDE</div>
+                <div className="text-xs text-slate-400">Add your favorite</div>
               </CardContent>
             </Card>
           </div>

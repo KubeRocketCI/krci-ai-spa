@@ -126,6 +126,7 @@ export default function HomePage() {
     { label: "Integrated Codebases", value: "20+" },
     { label: "Agile SDLC Roles", value: "7+" },
     { label: "Baseline Tasks", value: "30+" },
+    { label: "Supported IDEs", value: "4" },
     { label: "SDLC Framework", value: "1" },
   ]
 
@@ -216,7 +217,7 @@ export default function HomePage() {
         <section className="py-20">
           <div className="container mx-auto px-4">
             <h3 className="relative z-10 text-center text-xs md:text-sm uppercase tracking-[0.08em] text-slate-300/90 mb-6">Adoption at a glance</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
+            <div className="grid grid-cols-5 gap-2 sm:gap-4 md:gap-6 text-center">
               {stats.map((stat, index) => {
                 // Make the "Agile SDLC Roles" stat clickable
                 if (stat.label === "Agile SDLC Roles") {
@@ -227,8 +228,22 @@ export default function HomePage() {
                       className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-md"
                       aria-label="View details about the 7+ SDLC agent roles and responsibilities"
                     >
-                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
-                      <div className="text-xs sm:text-sm md:text-base text-slate-400/90 leading-5 font-medium">{stat.label}</div>
+                      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-xs sm:text-sm md:text-sm text-slate-400/90 leading-4 font-medium">{stat.label}</div>
+                    </Link>
+                  )
+                }
+                // Make the "Supported IDEs" stat clickable
+                else if (stat.label === "Supported IDEs") {
+                  return (
+                    <Link
+                      key={index}
+                      href="/architecture#supported-ides"
+                      className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-md"
+                      aria-label="View details about the 4 supported IDEs and their integration features"
+                    >
+                      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-xs sm:text-sm md:text-sm text-slate-400/90 leading-4 font-medium">{stat.label}</div>
                     </Link>
                   )
                 }
@@ -241,15 +256,15 @@ export default function HomePage() {
                       className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-md"
                       aria-label="View the complete SDLC agent workflow from idea to code"
                     >
-                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
-                      <div className="text-xs sm:text-sm md:text-base text-slate-400/90 leading-5 font-medium">{stat.label}</div>
+                      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-xs sm:text-sm md:text-sm text-slate-400/90 leading-4 font-medium">{stat.label}</div>
                     </Link>
                   )
                 } else {
                   return (
                     <div key={index} className="relative z-10">
-                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
-                      <div className="text-xs sm:text-sm md:text-base text-slate-400/90 leading-5 font-medium">{stat.label}</div>
+                      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
+                      <div className="text-xs sm:text-sm md:text-sm text-slate-400/90 leading-4 font-medium">{stat.label}</div>
                     </div>
                   )
                 }
