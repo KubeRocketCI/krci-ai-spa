@@ -7,6 +7,7 @@ import { Terminal, Shield, GitBranch, Users, FileText, Settings, Layers, Zap, Da
 import { DiagramCarousel } from "@/components/ui/diagram-carousel"
 import Link from "next/link"
 import { SharedHeader } from "@/components/shared-header"
+import { SharedFooter } from "@/components/shared-footer"
 
 
 export default function ArchitecturePage() {
@@ -566,16 +567,7 @@ export default function ArchitecturePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-green-900/30 py-8 px-4">
-        <div className="container mx-auto text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Terminal className="w-5 h-5 text-green-400" />
-            <span className="text-lg font-bold text-green-400">KubeRocketAI</span>
-          </div>
-          <p className="text-green-300/60 text-sm">🏗️ Built for scale, designed for developers</p>
-          <p className="text-green-300/40 text-xs mt-2">AI-as-Code architecture for modern development teams</p>
-        </div>
-      </footer>
+      <SharedFooter />
     </div>
   )
 }

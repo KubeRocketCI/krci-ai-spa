@@ -1,6 +1,7 @@
 "use client"
 
 import { SharedHeader } from "@/components/shared-header"
+import { SharedFooter } from "@/components/shared-footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { HorizontalTimeline } from "@/components/ui/horizontal-timeline"
@@ -174,6 +175,9 @@ export default function RoadmapPage() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <SharedFooter />
     </div>
   )
 }

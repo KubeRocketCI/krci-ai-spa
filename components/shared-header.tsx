@@ -28,6 +28,7 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
     window.open(GITHUB_REPO_URL_EXPORT, '_blank')
   }
 
+
   return (
     <header className="sticky top-0 z-50 flex justify-center py-4">
       <div className="w-11/12 max-w-7xl border border-cyan-500/40 bg-gradient-to-r from-blue-950/80 via-slate-950/70 to-green-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-blue-950/40 supports-[backdrop-filter]:via-slate-950/30 supports-[backdrop-filter]:to-green-950/40 shadow-lg shadow-cyan-400/10 rounded-2xl px-8 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">

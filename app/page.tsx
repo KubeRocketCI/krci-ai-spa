@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { AuroraBackground } from "@/components/ui/aurora-background"
 import { SharedHeader } from "@/components/shared-header"
+import { SharedFooter } from "@/components/shared-footer"
 import { GitHubIcon } from "@/components/github-icon"
 import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Globe, Blocks, BellRing, LetterText, ShieldCheck, MessageCircle, PencilLine, Brain, Presentation, FileText, NotebookText } from "lucide-react"
 import { GITHUB_REPO_URL_EXPORT } from "@/lib/use-github-repo"
@@ -765,16 +766,7 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</code></pre>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-green-900/30 py-8 px-4">
-        <div className="container mx-auto text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Terminal className="w-5 h-5 text-green-400" />
-            <span className="text-lg font-bold text-green-400">KubeRocketAI</span>
-          </div>
-          <p className="text-green-300/60 text-sm">Pipeline-as-Code for AI Agent Management</p>
-          <p className="text-green-300/40 text-xs mt-2">Built with ❤️ for the developer community</p>
-        </div>
-      </footer>
+      <SharedFooter />
     </div>
   )
 }

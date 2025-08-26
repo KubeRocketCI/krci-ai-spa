@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Copy, Check, Terminal, Code, GitBranch, Users, Clock, CheckCircle, ShieldCheck } from "lucide-react"
 import Link from "next/link"
 import { SharedHeader } from "@/components/shared-header"
+import { SharedFooter } from "@/components/shared-footer"
 
 // Constants
 const INSTALL_COMMANDS = {
@@ -469,16 +470,7 @@ Usage instructions:
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-green-900/30 py-8 px-4">
-        <div className="container mx-auto text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Terminal className="w-5 h-5 text-green-400" />
-            <span className="text-lg font-bold text-green-400">KubeRocketAI</span>
-          </div>
-          <p className="text-green-300/60 text-sm">⏱️ That&apos;s it! You now have a complete AI-as-Code framework running locally.</p>
-          <p className="text-green-300/40 text-xs mt-2">Your agents are ready to help with everything from project planning to code implementation.</p>
-        </div>
-      </footer>
+      <SharedFooter />
     </div>
   )
 }
