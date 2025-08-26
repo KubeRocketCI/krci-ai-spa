@@ -52,7 +52,7 @@ export default function QuickStartPage() {
       highlight: "3min"
     },
     {
-      icon: <Users className="w-6 h-6" aria-label="Users icon representing the 7 SDLC agents available" />,
+      icon: <Users className="w-6 h-6" aria-label="Users icon representing the 7+ SDLC agents available" />,
       title: "7 Agents",
       description: "Complete SDLC team ready",
       highlight: "7"

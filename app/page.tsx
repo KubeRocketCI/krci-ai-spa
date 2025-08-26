@@ -124,7 +124,7 @@ export default function HomePage() {
 
   const stats = [
     { label: "Integrated Codebases", value: "20+" },
-    { label: "Agile SDLC Roles", value: "7" },
+    { label: "Agile SDLC Roles", value: "7+" },
     { label: "Baseline Tasks", value: "30+" },
     { label: "SDLC Framework", value: "1" },
   ]
@@ -225,7 +225,7 @@ export default function HomePage() {
                       key={index}
                       href="/architecture#agent-relations"
                       className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-md"
-                      aria-label="View details about the 7 SDLC agent roles and responsibilities"
+                      aria-label="View details about the 7+ SDLC agent roles and responsibilities"
                     >
                       <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">{stat.value}</div>
                       <div className="text-xs sm:text-sm md:text-base text-slate-400/90 leading-5 font-medium">{stat.label}</div>

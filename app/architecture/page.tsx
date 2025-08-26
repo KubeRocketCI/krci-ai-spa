@@ -205,9 +205,9 @@ export default function ArchitecturePage() {
   // Data
   const coreComponents = [
     {
-      icon: <Users className="w-8 h-8" aria-label="Users icon representing the 7 SDLC agent personas" />,
+      icon: <Users className="w-8 h-8" aria-label="Users icon representing the 7+ SDLC agent personas" />,
       title: "SDLC Agents",
-      count: "7",
+      count: "7+",
       description: "Pre-configured agent personas covering complete software development lifecycle",
       details: ["Product Manager", "Product Owner", "Business Analyst", "Software Architect", "Developer", "QA Engineer"]
     },
