@@ -10,6 +10,7 @@ import { Copy, Check, Star, Terminal, Code, Zap, GitBranch, Users, Globe, Blocks
 import { GITHUB_REPO_URL_EXPORT } from "@/lib/use-github-repo"
 import Link from "next/link"
 import InlineVideo, { AutoplayMode } from "@/components/ui/inline-video"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 // Constants
 const HERO_COMMAND = "brew tap KubeRocketCI/homebrew-tap && brew install krci-ai"
@@ -370,60 +371,104 @@ export default function HomePage() {
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">Installation</h2>
 
-          <div className="space-y-6">
-            {/* macOS - Homebrew (Recommended) */}
-            <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-green-300 mb-4">macOS - Homebrew (Recommended)</h3>
-              <div className="bg-black rounded p-4 flex items-start justify-between font-mono">
-                <pre className="text-green-400 whitespace-pre-wrap break-words mr-2"><code>{`brew tap KubeRocketCI/homebrew-tap
-brew install krci-ai`}</code></pre>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => copyToClipboard(`brew tap KubeRocketCI/homebrew-tap\nbrew install krci-ai`, "macos")}
-                  className="text-cyan-300 hover:text-cyan-200"
-                  aria-label="Copy macOS Homebrew install commands"
-                >
-                  {copiedCommand === "macos" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                </Button>
-              </div>
-            </div>
+          <Tabs defaultValue="macos" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-8 sm:mb-10 max-w-[320px] sm:max-w-lg mx-auto">
+              <TabsTrigger value="macos">macOS</TabsTrigger>
+              <TabsTrigger value="linux">Linux</TabsTrigger>
+              <TabsTrigger value="windows">Windows</TabsTrigger>
+            </TabsList>
 
-            {/* Linux - Direct Download */}
-            <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-green-300 mb-4">Linux - Direct Download</h3>
-              <div className="bg-black rounded p-4 flex items-start justify-between font-mono">
-                {/* Mobile: truncated version, Desktop: full version */}
-                <div className="block sm:hidden text-green-400 mr-2 overflow-hidden">
-                  <div className="truncate">curl -L &quot;https://github.com/KubeRocketCI/...&quot;</div>
-                  <div className="truncate">chmod +x krci-ai</div>
-                  <div className="truncate">sudo mv krci-ai /usr/local/bin/</div>
+            {/* macOS Tab */}
+            <TabsContent value="macos">
+              <div className="bg-gray-900 border border-green-700/30 rounded-lg p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold text-green-300 mb-4">Homebrew (Recommended)</h3>
+                <div className="bg-black rounded p-3 sm:p-4 flex items-start justify-between font-mono">
+                  <pre className="text-green-400 whitespace-pre-wrap break-words mr-2"><code>{`brew tap KubeRocketCI/homebrew-tap
+brew install krci-ai`}</code></pre>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => copyToClipboard(`brew tap KubeRocketCI/homebrew-tap\nbrew install krci-ai`, "macos")}
+                    className="text-cyan-300 hover:text-cyan-200"
+                    aria-label="Copy macOS Homebrew install commands"
+                  >
+                    {copiedCommand === "macos" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </Button>
                 </div>
-                <pre className="hidden sm:block text-green-400 whitespace-pre-wrap break-words mr-2"><code>{`curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz
+              </div>
+            </TabsContent>
+
+            {/* Linux Tab */}
+            <TabsContent value="linux">
+              <div className="bg-gray-900 border border-green-700/30 rounded-lg p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold text-green-300 mb-4">Direct Download</h3>
+                <div className="bg-black rounded p-3 sm:p-4 flex items-start justify-between font-mono">
+                  {/* Mobile: truncated version, Desktop: full version */}
+                  <div className="block sm:hidden text-green-400 mr-2 overflow-hidden">
+                    <div className="truncate">curl -L &quot;https://github.com/KubeRocketCI/...&quot;</div>
+                    <div className="truncate">chmod +x krci-ai</div>
+                    <div className="truncate">sudo mv krci-ai /usr/local/bin/</div>
+                  </div>
+                  <pre className="hidden sm:block text-green-400 whitespace-pre-wrap break-words mr-2"><code>{`curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz
 chmod +x krci-ai
 sudo mv krci-ai /usr/local/bin/`}</code></pre>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() =>
-                    copyToClipboard(
-                      `curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz\nchmod +x krci-ai\nsudo mv krci-ai /usr/local/bin/`,
-                      "linux"
-                    )
-                  }
-                  className="text-cyan-300 hover:text-cyan-200 flex-shrink-0"
-                  aria-label="Copy Linux install commands"
-                >
-                  {copiedCommand === "linux" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() =>
+                      copyToClipboard(
+                        `curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz\nchmod +x krci-ai\nsudo mv krci-ai /usr/local/bin/`,
+                        "linux"
+                      )
+                    }
+                    className="text-cyan-300 hover:text-cyan-200 flex-shrink-0"
+                    aria-label="Copy Linux install commands"
+                  >
+                    {copiedCommand === "linux" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </Button>
+                </div>
               </div>
-            </div>
+            </TabsContent>
 
+            {/* Windows Tab */}
+            <TabsContent value="windows">
+              <div className="bg-gray-900 border border-green-700/30 rounded-lg p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold text-green-300 mb-4">PowerShell / Command Prompt</h3>
+                <div className="bg-black rounded p-3 sm:p-4 flex items-start justify-between font-mono">
+                  {/* Mobile: truncated version, Desktop: full version */}
+                  <div className="block sm:hidden text-green-400 mr-2 overflow-hidden">
+                    <div className="truncate">curl -L &quot;https://github.com/KubeRocketCI/...&quot; -o krci-ai.zip</div>
+                    <div className="truncate">Expand-Archive -Path krci-ai.zip -DestinationPath .</div>
+                    <div className="truncate">Move-Item krci-ai.exe &quot;C:\Program Files\krci-ai\...&quot;</div>
+                  </div>
+                  <pre className="hidden sm:block text-green-400 whitespace-pre-wrap break-words mr-2"><code>{`# Download and extract
+curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Windows_x86_64.zip" -o krci-ai.zip
+Expand-Archive -Path krci-ai.zip -DestinationPath .
+# Move to PATH (requires admin)
+Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</code></pre>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() =>
+                      copyToClipboard(
+                        `curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Windows_x86_64.zip" -o krci-ai.zip\nExpand-Archive -Path krci-ai.zip -DestinationPath .\nMove-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`,
+                        "windows"
+                      )
+                    }
+                    className="text-cyan-300 hover:text-cyan-200 flex-shrink-0"
+                    aria-label="Copy Windows install commands"
+                  >
+                    {copiedCommand === "windows" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </Button>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
 
-
-            {/* Quick Start */}
-            <div className="bg-gray-900 border border-green-700/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-green-300 mb-4">Quick Start</h3>
+          {/* Quick Start section remains below tabs */}
+          <div className="mt-8 sm:mt-12">
+            <div className="bg-gray-900 border border-green-700/30 rounded-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-semibold text-green-300 mb-4">Quick Start</h3>
               <div className="space-y-2">
                 <div className="bg-black rounded p-4 font-mono flex items-start justify-between">
                   <div className="flex-1 mr-2">
@@ -507,8 +552,8 @@ sudo mv krci-ai /usr/local/bin/`}</code></pre>
                 </div>
               </div>
             </div>
-
           </div>
+
         </div>
       </section>
 

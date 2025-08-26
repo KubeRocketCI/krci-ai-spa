@@ -168,6 +168,36 @@ export default function ArchitecturePage() {
     note for Task "WHAT<br/>Procedural Workflows<br/>Level 2: + Logic"
     note for Template "HOW<br/>Output Formatting<br/>Level 3: + Structure"
     note for Data "REFERENCE<br/>Knowledge & Constraints<br/>Level 4: + Knowledge"`
+    },
+    {
+      id: "ide-integration",
+      title: "KubeRocketAI IDE Integration Flow",
+      description: "How KubeRocketAI integrates with IDEs using declarative AI-as-Code approach without plugins",
+      badge: "IDE Integration",
+      scale: "compact" as const,
+      zoom: 2.75,
+      diagram: `graph TD
+    Developer["👨‍💻 Developer<br/>Uses existing tools"]
+    CLI["🛠️ krci-ai CLI<br/>📦 Embedded Framework Assets<br/>🔧 AI-as-Code Management"]
+    IDE["🎨 AI-Powered IDE<br/>Native Integration<br/>(No plugins required)"]
+    LocalFramework["📁 ./krci-ai/<br/>🔗 Declarative AI Agents<br/>📋 Extracted + Local"]
+    TargetProject["💻 Target Project<br/>🔀 Git Repository"]
+    GoldenRepo["🏢 Golden Source<br/>🔗 Git Repository<br/>🤖 AI-as-Code<br/>🔮 Future Enhancement"]
+
+    Developer --> CLI
+    Developer --> IDE
+    CLI -->|"📦 Extract embedded assets<br/>Offline operation"| LocalFramework
+    IDE -.->|"📖 Reads declarative configs<br/>Native filesystem access"| LocalFramework
+    LocalFramework --> TargetProject
+    GoldenRepo -.->|"🔮 Post-MVP: Remote updates<br/>Community contributions"| CLI
+    TargetProject -.->|"🔄 Future: Contribute back<br/>Local customizations"| GoldenRepo
+
+    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
+    style IDE fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style GoldenRepo fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray: 5 5,color:#111
+    style LocalFramework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style Developer fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
+    style TargetProject fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#111`
     }
   ]
 
