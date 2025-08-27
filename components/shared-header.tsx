@@ -2,10 +2,9 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Terminal, Container, Star, Clock, Play, MapPin, Users, Menu, X } from "lucide-react"
+import { Terminal, Star, Clock, Menu, X, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { useGitHubRepo, formatStarCount, GITHUB_REPO_URL_EXPORT } from "@/lib/use-github-repo"
-import { GitHubIcon } from "@/components/github-icon"
 import type { JSX } from "react"
 
 interface SharedHeaderProps {
@@ -15,7 +14,7 @@ interface SharedHeaderProps {
 export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
   // Mobile menu state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  
+
   // Fetch GitHub repository data
   const { data: repoData, loading: repoLoading, error: repoError } = useGitHubRepo()
 
@@ -50,75 +49,94 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
               </Link>
             )}
           </div>
-          <div className="flex items-center space-x-3">
-            {/* Navigation Buttons - All uniform size */}
-            <Button
-              variant="ghost"
-              className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 sm:min-w-[120px]"
-              onClick={() => window.location.href = '/quickstart'}
-            >
-              <Terminal className="w-4 h-4 mr-2" />
-              <span className="font-semibold">Quick Start</span>
-            </Button>
+          <div className="flex items-center space-x-8">
+            {/* Clean Text Navigation */}
+            <nav className="flex items-center space-x-8">
+              <Link
+                href="/quickstart"
+                className={`text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium relative group flex items-center ${currentPage === 'quickstart' ? 'text-blue-300' : ''
+                  }`}
+              >
+                <span className={`mr-1 font-sans font-bold transition-opacity duration-200 ${currentPage === 'quickstart' ? 'text-blue-300 opacity-100' : 'opacity-0'
+                  }`}>{'>'}</span>
+                /quickstart
+                <span className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${currentPage === 'quickstart'
+                    ? 'w-full bg-blue-300'
+                    : 'w-0 bg-blue-400 group-hover:w-full'
+                  }`}></span>
+              </Link>
 
-            <Button
-              variant="ghost"
-              className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 sm:min-w-[120px]"
-              onClick={() => window.location.href = '/architecture'}
-            >
-              <Container className="w-4 h-4 mr-2" />
-              <span className="font-semibold">Architecture</span>
-            </Button>
+              <Link
+                href="/architecture"
+                className={`text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium relative group flex items-center ${currentPage === 'architecture' ? 'text-blue-300' : ''
+                  }`}
+              >
+                <span className={`mr-1 font-sans font-bold transition-opacity duration-200 ${currentPage === 'architecture' ? 'text-blue-300 opacity-100' : 'opacity-0'
+                  }`}>{'>'}</span>
+                /architecture
+                <span className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${currentPage === 'architecture'
+                    ? 'w-full bg-blue-300'
+                    : 'w-0 bg-blue-400 group-hover:w-full'
+                  }`}></span>
+              </Link>
 
-            <Button
-              variant="ghost"
-              className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 sm:min-w-[120px]"
-              onClick={() => window.location.href = '/use-cases'}
-            >
-              <Users className="w-4 h-4 mr-2" />
-              <span className="font-semibold">Use Cases</span>
-            </Button>
+              <Link
+                href="/use-cases"
+                className={`text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium relative group flex items-center ${currentPage === 'use-cases' ? 'text-blue-300' : ''
+                  }`}
+              >
+                <span className={`mr-1 font-sans font-bold transition-opacity duration-200 ${currentPage === 'use-cases' ? 'text-blue-300 opacity-100' : 'opacity-0'
+                  }`}>{'>'}</span>
+                /use-cases
+                <span className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${currentPage === 'use-cases'
+                    ? 'w-full bg-blue-300'
+                    : 'w-0 bg-blue-400 group-hover:w-full'
+                  }`}></span>
+              </Link>
 
-            <Button
-              variant="ghost"
-              className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 sm:min-w-[120px]"
-              onClick={() => window.location.href = '/roadmap'}
-            >
-              <MapPin className="w-4 h-4 mr-2" />
-              <span className="font-semibold">Roadmap</span>
-            </Button>
+              <Link
+                href="/roadmap"
+                className={`text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium relative group flex items-center ${currentPage === 'roadmap' ? 'text-blue-300' : ''
+                  }`}
+              >
+                <span className={`mr-1 font-sans font-bold transition-opacity duration-200 ${currentPage === 'roadmap' ? 'text-blue-300 opacity-100' : 'opacity-0'
+                  }`}>{'>'}</span>
+                /roadmap
+                <span className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${currentPage === 'roadmap'
+                    ? 'w-full bg-blue-300'
+                    : 'w-0 bg-blue-400 group-hover:w-full'
+                  }`}></span>
+              </Link>
 
-            {/* YouTube Tutorials */}
-            <Button
-              variant="ghost"
-              className="group text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 sm:min-w-[120px]"
-              asChild
-            >
-              <a href="https://www.youtube.com/@theplatformteam" target="_blank" rel="noopener noreferrer" aria-label="Watch tutorials on YouTube (opens in a new tab)" className="group">
-                <div className="relative">
-                  <Play className="w-4 h-4 mr-2 text-red-400 transition-all duration-300" fill="none" stroke="currentColor" />
-                  <Play className="w-4 h-4 mr-2 text-red-400 transition-all duration-300 absolute top-0 left-0 opacity-0 group-hover:opacity-100" fill="currentColor" stroke="none" />
-                </div>
-                <span className="font-semibold">Tutorials</span>
+              <a
+                href="https://www.youtube.com/@theplatformteam"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium relative group flex items-center"
+                aria-label="Watch tutorials on YouTube (opens in a new tab)"
+              >
+                /tutorials
+                <ExternalLink className="w-3 h-3 ml-1 opacity-70 group-hover:opacity-100 transition-opacity duration-200" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-blue-400 group-hover:w-full transition-all duration-300"></span>
               </a>
-            </Button>
+            </nav>
 
-            {/* GitHub Stars */}
-            <Button
-              variant="ghost"
-              className="group text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 sm:min-w-[120px]"
+            {/* GitHub Starred Button */}
+            <div
+              className="flex items-center bg-white/10 border border-gray-400/30 rounded-lg px-3 py-1.5 backdrop-blur-sm hover:bg-white/15 hover:border-gray-300/50 transition-all duration-200 cursor-pointer"
               onClick={openGitHubRepo}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openGitHubRepo(); }}
+              aria-label="View GitHub repository and star count"
             >
-              <div className="relative">
-                <Star className="w-4 h-4 mr-2 text-yellow-300 hover:text-yellow-200 transition-all duration-300" fill="none" stroke="currentColor" />
-                <Star className="w-4 h-4 mr-2 text-yellow-300 hover:text-yellow-200 transition-all duration-300 absolute top-0 left-0 opacity-0 group-hover:opacity-100" fill="currentColor" stroke="none" />
-              </div>
-              <GitHubIcon className="w-4 h-4 mr-1 transition-all duration-300 hover:scale-110 hover:text-cyan-100" />
-              <span className="font-semibold bg-gradient-to-r from-cyan-200 to-green-200 bg-clip-text text-transparent hover:from-cyan-100 hover:to-green-100 transition-all duration-300">{getGitHubStarsValue()}</span>
-            </Button>
+              <Star className="w-4 h-4 text-amber-400 mr-2 fill-current" />
+              <span className="text-gray-200 font-medium text-sm mr-3">Starred</span>
+              <span className="bg-gray-500/40 text-gray-200 font-medium text-sm px-2 py-0.5 rounded">{getGitHubStarsValue()}</span>
+            </div>
           </div>
         </div>
-        
+
         {/* Mobile & Tablet Layout (Collapsible) */}
         <div className="lg:hidden">
           <div className="flex items-center justify-between w-full">
@@ -134,7 +152,7 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
                 </Link>
               )}
             </div>
-            
+
             {/* Mobile Menu Toggle */}
             <Button
               variant="ghost"
@@ -152,78 +170,82 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
               <span className="text-sm font-semibold">{isMobileMenuOpen ? 'Close' : 'Menu'}</span>
             </Button>
           </div>
-          
+
           {/* Collapsible Mobile Navigation */}
-          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen 
-              ? 'max-h-96 opacity-100 mt-4' 
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen
+              ? 'max-h-96 opacity-100 mt-4'
               : 'max-h-0 opacity-0'
-          }`}>
-            <div className="flex flex-col space-y-2">
-              <Button
-                variant="ghost"
-                className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full justify-start"
-                onClick={() => { window.location.href = '/quickstart'; setIsMobileMenuOpen(false); }}
+            }`}>
+            <div className="flex flex-col space-y-3 py-2">
+              <Link
+                href="/quickstart"
+                className={`text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium py-2 px-1 border-b border-cyan-500/20 hover:border-blue-400/40 flex items-center ${currentPage === 'quickstart' ? 'text-blue-300 border-blue-300/60' : ''
+                  }`}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Terminal className="w-4 h-4 mr-2" />
-                <span className="font-semibold">Quick Start</span>
-              </Button>
+                <span className={`mr-2 font-mono transition-opacity duration-200 ${currentPage === 'quickstart' ? 'text-blue-300 opacity-100' : 'opacity-0'
+                  }`}>{'>'}</span>
+                /quickstart
+              </Link>
 
-              <Button
-                variant="ghost"
-                className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full justify-start"
-                onClick={() => { window.location.href = '/architecture'; setIsMobileMenuOpen(false); }}
+              <Link
+                href="/architecture"
+                className={`text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium py-2 px-1 border-b border-cyan-500/20 hover:border-blue-400/40 flex items-center ${currentPage === 'architecture' ? 'text-blue-300 border-blue-300/60' : ''
+                  }`}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Container className="w-4 h-4 mr-2" />
-                <span className="font-semibold">Architecture</span>
-              </Button>
+                <span className={`mr-2 font-mono transition-opacity duration-200 ${currentPage === 'architecture' ? 'text-blue-300 opacity-100' : 'opacity-0'
+                  }`}>{'>'}</span>
+                /architecture
+              </Link>
 
-              <Button
-                variant="ghost"
-                className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full justify-start"
-                onClick={() => { window.location.href = '/use-cases'; setIsMobileMenuOpen(false); }}
+              <Link
+                href="/use-cases"
+                className={`text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium py-2 px-1 border-b border-cyan-500/20 hover:border-blue-400/40 flex items-center ${currentPage === 'use-cases' ? 'text-blue-300 border-blue-300/60' : ''
+                  }`}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Users className="w-4 h-4 mr-2" />
-                <span className="font-semibold">Use Cases</span>
-              </Button>
+                <span className={`mr-2 font-mono transition-opacity duration-200 ${currentPage === 'use-cases' ? 'text-blue-300 opacity-100' : 'opacity-0'
+                  }`}>{'>'}</span>
+                /use-cases
+              </Link>
 
-              <Button
-                variant="ghost"
-                className="text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full justify-start"
-                onClick={() => { window.location.href = '/roadmap'; setIsMobileMenuOpen(false); }}
+              <Link
+                href="/roadmap"
+                className={`text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium py-2 px-1 border-b border-cyan-500/20 hover:border-blue-400/40 flex items-center ${currentPage === 'roadmap' ? 'text-blue-300 border-blue-300/60' : ''
+                  }`}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                <MapPin className="w-4 h-4 mr-2" />
-                <span className="font-semibold">Roadmap</span>
-              </Button>
+                <span className={`mr-2 font-mono transition-opacity duration-200 ${currentPage === 'roadmap' ? 'text-blue-300 opacity-100' : 'opacity-0'
+                  }`}>{'>'}</span>
+                /roadmap
+              </Link>
 
-              {/* YouTube Tutorials */}
-              <Button
-                variant="ghost"
-                className="group text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full justify-start"
-                asChild
+              <a
+                href="https://www.youtube.com/@theplatformteam"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-300 hover:text-blue-400 transition-colors duration-200 font-sans text-sm font-medium py-2 px-1 border-b border-cyan-500/20 hover:border-blue-400/40 flex items-center"
+                aria-label="Watch tutorials on YouTube (opens in a new tab)"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                <a href="https://www.youtube.com/@theplatformteam" target="_blank" rel="noopener noreferrer" aria-label="Watch tutorials on YouTube (opens in a new tab)" className="group flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
-                  <div className="relative">
-                    <Play className="w-4 h-4 mr-2 text-red-400 transition-all duration-300" fill="none" stroke="currentColor" />
-                    <Play className="w-4 h-4 mr-2 text-red-400 transition-all duration-300 absolute top-0 left-0 opacity-0 group-hover:opacity-100" fill="currentColor" stroke="none" />
-                  </div>
-                  <span className="font-semibold">Tutorials</span>
-                </a>
-              </Button>
+                /tutorials
+                <ExternalLink className="w-3 h-3 ml-1 opacity-70" />
+              </a>
 
-              {/* GitHub Stars */}
-              <Button
-                variant="ghost"
-                className="group text-cyan-300 hover:text-cyan-200 bg-gradient-to-r from-cyan-900/20 via-blue-900/10 to-green-900/20 hover:from-cyan-800/40 hover:via-blue-800/30 hover:to-green-800/40 border border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-cyan-400/20 px-4 h-10 w-full justify-start"
+              {/* Mobile GitHub Starred Button */}
+              <div
+                className="flex items-center justify-center bg-white/10 border border-gray-400/30 rounded-lg px-4 py-2.5 backdrop-blur-sm hover:bg-white/15 hover:border-gray-300/50 transition-all duration-200 cursor-pointer mt-2"
                 onClick={() => { openGitHubRepo(); setIsMobileMenuOpen(false); }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { openGitHubRepo(); setIsMobileMenuOpen(false); } }}
+                aria-label="View GitHub repository and star count"
               >
-                <div className="relative">
-                  <Star className="w-4 h-4 mr-2 text-yellow-300 hover:text-yellow-200 transition-all duration-300" fill="none" stroke="currentColor" />
-                  <Star className="w-4 h-4 mr-2 text-yellow-300 hover:text-yellow-200 transition-all duration-300 absolute top-0 left-0 opacity-0 group-hover:opacity-100" fill="currentColor" stroke="none" />
-                </div>
-                <GitHubIcon className="w-4 h-4 mr-1 transition-all duration-300 hover:scale-110 hover:text-cyan-100" />
-                <span className="font-semibold bg-gradient-to-r from-cyan-200 to-green-200 bg-clip-text text-transparent hover:from-cyan-100 hover:to-green-100 transition-all duration-300">{getGitHubStarsValue()}</span>
-              </Button>
+                <Star className="w-4 h-4 text-amber-400 mr-2 fill-current" />
+                <span className="text-gray-200 font-medium text-sm mr-3">Starred</span>
+                <span className="bg-gray-500/40 text-gray-200 font-medium text-sm px-2 py-1 rounded">{getGitHubStarsValue()}</span>
+              </div>
             </div>
           </div>
         </div>

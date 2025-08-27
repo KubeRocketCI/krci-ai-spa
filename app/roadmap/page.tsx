@@ -13,7 +13,7 @@ export default function RoadmapPage() {
   const milestones = [
     {
       id: "start",
-      title: "Project Start",
+      title: "KubeRocketAI Project Start",
       date: "Jun 2025",
       status: "completed" as const,
       description: "KubeRocketAI framework development begins with initial research and prototype",
@@ -21,7 +21,7 @@ export default function RoadmapPage() {
     },
     {
       id: "mvp",
-      title: "MVP Complete",
+      title: "KubeRocketAI MVP Complete",
       date: "Aug 2025",
       status: "completed" as const,
       description: "Proven framework with 85% reduction in AI content adjustment time achieved",
