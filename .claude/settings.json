@@ -1,5 +1,15 @@
 {
   "hooks": {
-    "post-edit": "npm run format && npm run lint"
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read file_path; if echo \"$file_path\" | grep -q '\\.ts$'; then npx prettier --write \"$file_path\"; fi; }"
+          }
+        ]
+      }
+    ]
   }
 }
