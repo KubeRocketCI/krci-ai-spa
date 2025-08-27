@@ -1,0 +1,5 @@
+{
+  "hooks": {
+    "post-edit": "npm run format && npm run lint"
+  }
+}

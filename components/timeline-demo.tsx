@@ -1,12 +1,12 @@
-import React from "react";
-import { Timeline } from "@/components/ui/timeline";
-import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Rocket, Target } from "lucide-react";
+import React from 'react';
+import { Timeline } from '@/components/ui/timeline';
+import { Badge } from '@/components/ui/badge';
+import { CheckCircle, Rocket, Target } from 'lucide-react';
 
 export default function TimelineDemo() {
   const data = [
     {
-      title: "Jun-Aug 2025",
+      title: 'Jun-Aug 2025',
       content: (
         <div>
           <div className="mb-6 flex items-center space-x-4">
@@ -22,8 +22,8 @@ export default function TimelineDemo() {
             </div>
           </div>
           <p className="mb-8 text-sm font-normal text-slate-300 md:text-base">
-            Successfully delivered a proven framework with measurable impact on developer productivity
-            and AI-generated content quality across multiple development teams.
+            Successfully delivered a proven framework with measurable impact on developer
+            productivity and AI-generated content quality across multiple development teams.
           </p>
           <div className="space-y-3 mb-6">
             <div className="flex items-center gap-2 text-sm text-green-300">
@@ -43,7 +43,7 @@ export default function TimelineDemo() {
       ),
     },
     {
-      title: "Sep-Dec 2025",
+      title: 'Sep-Dec 2025',
       content: (
         <div>
           <div className="mb-6 flex items-center space-x-4">
@@ -53,13 +53,11 @@ export default function TimelineDemo() {
             <div>
               <h3 className="text-2xl font-bold text-white">KubeRocketCI Platform Integration</h3>
               <p className="text-slate-300 text-sm">Sep-Dec 2025</p>
-              <Badge className="mt-2 bg-cyan-900/30 text-cyan-300 border-cyan-700">
-                EXECUTING
-              </Badge>
+              <Badge className="mt-2 bg-cyan-900/30 text-cyan-300 border-cyan-700">EXECUTING</Badge>
             </div>
           </div>
           <p className="mb-8 text-sm font-normal text-slate-300 md:text-base">
-            Integrating KubeRocketAI directly into the{" "}
+            Integrating KubeRocketAI directly into the{' '}
             <a
               href="https://docs.kuberocketci.io"
               target="_blank"
@@ -92,7 +90,7 @@ export default function TimelineDemo() {
       ),
     },
     {
-      title: "Jan - Apr 2026",
+      title: 'Jan - Apr 2026',
       content: (
         <div>
           <div className="mb-6 flex items-center space-x-4">
@@ -108,8 +106,8 @@ export default function TimelineDemo() {
             </div>
           </div>
           <p className="mb-8 text-sm font-normal text-slate-300 md:text-base">
-            Full market deployment with enterprise-grade features, community adoption,
-            and strategic partnerships that establish KubeRocketAI as the industry standard.
+            Full market deployment with enterprise-grade features, community adoption, and strategic
+            partnerships that establish KubeRocketAI as the industry standard.
           </p>
           <div className="space-y-3 mb-6">
             <div className="flex items-center gap-2 text-sm text-slate-300">

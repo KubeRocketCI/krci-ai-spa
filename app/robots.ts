@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -11,5 +11,5 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: 'https://krci-ai.kuberocketci.io/sitemap.xml',
     host: 'https://krci-ai.kuberocketci.io',
-  }
+  };
 }

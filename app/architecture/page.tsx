@@ -1,25 +1,24 @@
-"use client"
+'use client';
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Terminal, GitBranch, Users, FileText, Settings, Layers, Network } from "lucide-react"
-import { DiagramCarousel } from "@/components/ui/diagram-carousel"
-import Link from "next/link"
-import Image from "next/image"
-import { SharedHeader } from "@/components/shared-header"
-import { SharedFooter } from "@/components/shared-footer"
-
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Terminal, GitBranch, Users, FileText, Settings, Layers, Network } from 'lucide-react';
+import { DiagramCarousel } from '@/components/ui/diagram-carousel';
+import Link from 'next/link';
+import Image from 'next/image';
+import { SharedHeader } from '@/components/shared-header';
+import { SharedFooter } from '@/components/shared-footer';
 
 export default function ArchitecturePage() {
-
   // Diagram data for carousel
   const diagramSlides = [
     {
-      id: "artifacts-dependency",
-      title: "SDLC Artifacts Dependency Flow",
-      description: "How artifacts depend on each other, forming a clear hierarchy from vision to implementation",
-      badge: "Artifact Flow",
+      id: 'artifacts-dependency',
+      title: 'SDLC Artifacts Dependency Flow',
+      description:
+        'How artifacts depend on each other, forming a clear hierarchy from vision to implementation',
+      badge: 'Artifact Flow',
       zoom: 1.25,
       diagram: `graph TD
     Idea([💡 Idea]) --> Brief[📄 Project Brief<br/>Vision & Strategy]
@@ -46,13 +45,13 @@ export default function ArchitecturePage() {
     style Arch fill:#e0f2f1,stroke:#06b6d4,color:#000
     style Code fill:#f1f8e9,stroke:#22c55e,color:#000
     style Test fill:#fff9c4,stroke:#facc15,color:#000
-    style MVP fill:#ffebee,stroke:#ef4444,color:#000`
+    style MVP fill:#ffebee,stroke:#ef4444,color:#000`,
     },
     {
-      id: "business-process-flow",
-      title: "Business Process Flow",
-      description: "Role-based collaboration flow showing how teams work together through the SDLC",
-      badge: "Team Flow",
+      id: 'business-process-flow',
+      title: 'Business Process Flow',
+      description: 'Role-based collaboration flow showing how teams work together through the SDLC',
+      badge: 'Team Flow',
       zoom: 1.25,
       diagram: `flowchart TD
     Idea([Idea]) -->|Market Research| PM[Product Manager]
@@ -78,14 +77,15 @@ export default function ArchitecturePage() {
     style Dev fill:#f1f8e9,stroke:#22c55e,color:#000
     style QA fill:#fff9c4,stroke:#facc15,color:#000
     style DevOps fill:#ffebee,stroke:#ef4444,color:#000
-    style MVP fill:#e1f5fe,stroke:#22d3ee,color:#000`
+    style MVP fill:#e1f5fe,stroke:#22d3ee,color:#000`,
     },
     {
-      id: "artifact-sequence",
-      title: "Artifact Transfer Sequence",
-      description: "Detailed sequence showing how artifacts are created and transferred between roles",
-      badge: "Sequence Flow",
-      scale: "compact" as const,
+      id: 'artifact-sequence',
+      title: 'Artifact Transfer Sequence',
+      description:
+        'Detailed sequence showing how artifacts are created and transferred between roles',
+      badge: 'Sequence Flow',
+      scale: 'compact' as const,
       diagram: `sequenceDiagram
     participant Stakeholder
     participant PM as Product Manager
@@ -126,15 +126,16 @@ export default function ArchitecturePage() {
         QA->>Dev: Test Results (Issues Found)
         Dev->>Dev: Fix Code Issues
         Dev->>QA: Updated Code
-    end`
+    end`,
     },
     {
-      id: "component-relationships",
-      title: "Framework Components Relationships",
-      description: "UML diagram showing the relationships and interactions between the four framework components",
-      badge: "Data Model",
+      id: 'component-relationships',
+      title: 'Framework Components Relationships',
+      description:
+        'UML diagram showing the relationships and interactions between the four framework components',
+      badge: 'Data Model',
       zoom: 2.75,
-      scale: "compact" as const,
+      scale: 'compact' as const,
       diagram: `classDiagram
     class Agent {
         +string name
@@ -169,14 +170,15 @@ export default function ArchitecturePage() {
     note for Agent "WHO<br/>Persona & Behavior<br/>Level 1: Core Identity"
     note for Task "WHAT<br/>Procedural Workflows<br/>Level 2: + Logic"
     note for Template "HOW<br/>Output Formatting<br/>Level 3: + Structure"
-    note for Data "REFERENCE<br/>Knowledge & Constraints<br/>Level 4: + Knowledge"`
+    note for Data "REFERENCE<br/>Knowledge & Constraints<br/>Level 4: + Knowledge"`,
     },
     {
-      id: "ide-integration",
-      title: "KubeRocketAI IDE Integration Flow",
-      description: "How KubeRocketAI integrates with IDEs using declarative AI-as-Code approach without plugins",
-      badge: "IDE Integration",
-      scale: "compact" as const,
+      id: 'ide-integration',
+      title: 'KubeRocketAI IDE Integration Flow',
+      description:
+        'How KubeRocketAI integrates with IDEs using declarative AI-as-Code approach without plugins',
+      badge: 'IDE Integration',
+      scale: 'compact' as const,
       zoom: 2.75,
       diagram: `graph TD
     Developer["👨‍💻 Developer<br/>Uses existing tools"]
@@ -199,70 +201,95 @@ export default function ArchitecturePage() {
     style GoldenRepo fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray: 5 5,color:#111
     style LocalFramework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
     style Developer fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
-    style TargetProject fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#111`
-    }
-  ]
+    style TargetProject fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#111`,
+    },
+  ];
 
   // Data
   const coreComponents = [
     {
-      icon: <Users className="w-8 h-8" aria-label="Users icon representing the 7+ SDLC agent personas" />,
-      title: "SDLC Agents",
-      count: "7+",
-      description: "Pre-configured agent personas covering complete software development lifecycle",
-      details: ["Product Manager", "Product Owner", "Business Analyst", "Software Architect", "Developer", "QA Engineer"]
+      icon: (
+        <Users
+          className="w-8 h-8"
+          aria-label="Users icon representing the 7+ SDLC agent personas"
+        />
+      ),
+      title: 'SDLC Agents',
+      count: '7+',
+      description: 'Pre-configured agent personas covering complete software development lifecycle',
+      details: [
+        'Product Manager',
+        'Product Owner',
+        'Business Analyst',
+        'Software Architect',
+        'Developer',
+        'QA Engineer',
+      ],
     },
     {
-      icon: <FileText className="w-8 h-8" aria-label="Document icon representing framework rules and templates" />,
-      title: "Framework Rules",
-      count: "30+",
-      description: "Reusable, extendable SDLC framework rules and templates",
-      details: ["Task Templates", "Documentation Patterns", "Code Standards", "Review Processes"]
+      icon: (
+        <FileText
+          className="w-8 h-8"
+          aria-label="Document icon representing framework rules and templates"
+        />
+      ),
+      title: 'Framework Rules',
+      count: '30+',
+      description: 'Reusable, extendable SDLC framework rules and templates',
+      details: ['Task Templates', 'Documentation Patterns', 'Code Standards', 'Review Processes'],
     },
     {
-      icon: <Settings className="w-8 h-8" aria-label="Settings icon representing CLI command interface" />,
-      title: "CLI Commands",
-      count: "10+",
-      description: "Comprehensive command-line interface for agent management",
-      details: ["Install & Setup", "Validation", "Bundling", "Token Analysis"]
+      icon: (
+        <Settings
+          className="w-8 h-8"
+          aria-label="Settings icon representing CLI command interface"
+        />
+      ),
+      title: 'CLI Commands',
+      count: '10+',
+      description: 'Comprehensive command-line interface for agent management',
+      details: ['Install & Setup', 'Validation', 'Bundling', 'Token Analysis'],
     },
     {
-      icon: <Network className="w-8 h-8" aria-label="Network icon representing universal IDE integration" />,
-      title: "IDE Integration",
-      count: "Universal",
-      description: "Works across all AI-powered IDEs without plugins",
-      details: ["Claude Code", "Cursor", "GitHub Copilot", "Any AI IDE"]
-    }
-  ]
+      icon: (
+        <Network
+          className="w-8 h-8"
+          aria-label="Network icon representing universal IDE integration"
+        />
+      ),
+      title: 'IDE Integration',
+      count: 'Universal',
+      description: 'Works across all AI-powered IDEs without plugins',
+      details: ['Claude Code', 'Cursor', 'GitHub Copilot', 'Any AI IDE'],
+    },
+  ];
 
   const architectureLayers = [
     {
-      layer: "1",
-      title: "User Interface Layer",
-      description: "IDE integration and command-line interface",
-      components: ["Claude Code Commands", "Cursor Integration", "CLI Tools", "Web Bundles"]
+      layer: '1',
+      title: 'User Interface Layer',
+      description: 'IDE integration and command-line interface',
+      components: ['Claude Code Commands', 'Cursor Integration', 'CLI Tools', 'Web Bundles'],
     },
     {
-      layer: "2",
-      title: "Agent Management Layer",
-      description: "AI agent orchestration and persona management",
-      components: ["Agent Router", "Persona Loader", "Context Manager", "Command Parser"]
+      layer: '2',
+      title: 'Agent Management Layer',
+      description: 'AI agent orchestration and persona management',
+      components: ['Agent Router', 'Persona Loader', 'Context Manager', 'Command Parser'],
     },
     {
-      layer: "3",
-      title: "Framework Rules Layer",
-      description: "SDLC framework rules and templates",
-      components: ["Task Templates", "Documentation Rules", "Code Standards", "Process Guidelines"]
+      layer: '3',
+      title: 'Framework Rules Layer',
+      description: 'SDLC framework rules and templates',
+      components: ['Task Templates', 'Documentation Rules', 'Code Standards', 'Process Guidelines'],
     },
     {
-      layer: "4",
-      title: "Data & Storage Layer",
-      description: "Version-controlled configurations and project context",
-      components: ["Git Repository", "Configuration Files", "Project Context", "Agent Definitions"]
-    }
-  ]
-
-
+      layer: '4',
+      title: 'Data & Storage Layer',
+      description: 'Version-controlled configurations and project context',
+      components: ['Git Repository', 'Configuration Files', 'Project Context', 'Agent Definitions'],
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-black text-slate-200 font-sans">
@@ -271,7 +298,9 @@ export default function ArchitecturePage() {
       {/* Hero Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto text-center max-w-4xl">
-          <Badge className="mb-6 bg-blue-900/30 text-blue-300 border-blue-700">System Architecture</Badge>
+          <Badge className="mb-6 bg-blue-900/30 text-blue-300 border-blue-700">
+            System Architecture
+          </Badge>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-300 via-cyan-300 to-green-300 bg-clip-text text-transparent">
             SDLC Framework
@@ -287,7 +316,10 @@ export default function ArchitecturePage() {
           {/* Core Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {coreComponents.map((component, index) => (
-              <Card key={index} className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
+              <Card
+                key={index}
+                className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors"
+              >
                 <CardContent className="p-4 text-center">
                   <div className="text-cyan-400 mb-2 flex justify-center">{component.icon}</div>
                   <div className="text-2xl font-bold text-green-300 mb-1">{component.count}</div>
@@ -303,11 +335,16 @@ export default function ArchitecturePage() {
       {/* Architecture Overview */}
       <section className="py-16 px-4 bg-gray-900/20">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">System Architecture Overview</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">
+            System Architecture Overview
+          </h2>
 
           <div className="space-y-6">
             {architectureLayers.map((layer, index) => (
-              <Card key={index} className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-all duration-300">
+              <Card
+                key={index}
+                className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-all duration-300"
+              >
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-green-300 flex items-center">
@@ -323,7 +360,10 @@ export default function ArchitecturePage() {
                 <CardContent>
                   <div className="grid md:grid-cols-4 gap-3">
                     {layer.components.map((component, idx) => (
-                      <div key={idx} className="bg-gray-900 border border-green-700/30 rounded p-3 text-center">
+                      <div
+                        key={idx}
+                        className="bg-gray-900 border border-green-700/30 rounded p-3 text-center"
+                      >
                         <div className="text-green-400 text-sm font-mono">{component}</div>
                       </div>
                     ))}
@@ -340,7 +380,9 @@ export default function ArchitecturePage() {
         <div className="container mx-auto max-w-6xl">
           {/* Agent Relations Table */}
           <div>
-            <h3 className="text-2xl font-bold text-center mb-8 text-green-400">SDLC Base Agents Relations & Responsibilities</h3>
+            <h3 className="text-2xl font-bold text-center mb-8 text-green-400">
+              SDLC Base Agents Relations & Responsibilities
+            </h3>
 
             <Card className="bg-black/50 border-green-700/30">
               <CardContent className="p-6">
@@ -350,8 +392,12 @@ export default function ArchitecturePage() {
                       <tr className="border-b border-green-700/30">
                         <th className="text-left py-3 px-4 text-cyan-300 font-semibold">Agent</th>
                         <th className="text-left py-3 px-4 text-cyan-300 font-semibold">Role</th>
-                        <th className="text-left py-3 px-4 text-cyan-300 font-semibold">Primary Responsibilities</th>
-                        <th className="text-left py-3 px-4 text-cyan-300 font-semibold">Collaborates With</th>
+                        <th className="text-left py-3 px-4 text-cyan-300 font-semibold">
+                          Primary Responsibilities
+                        </th>
+                        <th className="text-left py-3 px-4 text-cyan-300 font-semibold">
+                          Collaborates With
+                        </th>
                         <th className="text-left py-3 px-4 text-cyan-300 font-semibold">Outputs</th>
                       </tr>
                     </thead>
@@ -361,40 +407,58 @@ export default function ArchitecturePage() {
                         <td className="py-3 px-4 font-semibold">Product Manager</td>
                         <td className="py-3 px-4">Strategy, requirements, stakeholder alignment</td>
                         <td className="py-3 px-4 text-blue-300">PO, BA, Architect</td>
-                        <td className="py-3 px-4 text-purple-300">Project briefs, PRDs, roadmaps</td>
+                        <td className="py-3 px-4 text-purple-300">
+                          Project briefs, PRDs, roadmaps
+                        </td>
                       </tr>
                       <tr className="border-b border-gray-700/30 hover:bg-gray-800/20">
                         <td className="py-3 px-4 font-mono text-green-400">po</td>
                         <td className="py-3 px-4 font-semibold">Product Owner</td>
-                        <td className="py-3 px-4">User stories, backlog management, acceptance criteria</td>
+                        <td className="py-3 px-4">
+                          User stories, backlog management, acceptance criteria
+                        </td>
                         <td className="py-3 px-4 text-blue-300">PM, BA, Dev, QA</td>
                         <td className="py-3 px-4 text-purple-300">User stories, backlog items</td>
                       </tr>
                       <tr className="border-b border-gray-700/30 hover:bg-gray-800/20">
                         <td className="py-3 px-4 font-mono text-green-400">ba</td>
                         <td className="py-3 px-4 font-semibold">Business Analyst</td>
-                        <td className="py-3 px-4">Requirements gathering, process analysis, documentation</td>
+                        <td className="py-3 px-4">
+                          Requirements gathering, process analysis, documentation
+                        </td>
                         <td className="py-3 px-4 text-blue-300">PM, PO, Architect</td>
-                        <td className="py-3 px-4 text-purple-300">Requirements docs, process flows</td>
+                        <td className="py-3 px-4 text-purple-300">
+                          Requirements docs, process flows
+                        </td>
                       </tr>
                       <tr className="border-b border-gray-700/30 hover:bg-gray-800/20">
                         <td className="py-3 px-4 font-mono text-green-400">architect</td>
                         <td className="py-3 px-4 font-semibold">Software Architect</td>
-                        <td className="py-3 px-4">System design, architecture decisions, tech standards</td>
+                        <td className="py-3 px-4">
+                          System design, architecture decisions, tech standards
+                        </td>
                         <td className="py-3 px-4 text-blue-300">PM, BA, Dev</td>
-                        <td className="py-3 px-4 text-purple-300">Architecture docs, design patterns</td>
+                        <td className="py-3 px-4 text-purple-300">
+                          Architecture docs, design patterns
+                        </td>
                       </tr>
                       <tr className="border-b border-gray-700/30 hover:bg-gray-800/20">
                         <td className="py-3 px-4 font-mono text-green-400">dev</td>
                         <td className="py-3 px-4 font-semibold">Developer</td>
-                        <td className="py-3 px-4">Implementation, code review, technical solutions</td>
+                        <td className="py-3 px-4">
+                          Implementation, code review, technical solutions
+                        </td>
                         <td className="py-3 px-4 text-blue-300">Architect, PO, QA</td>
-                        <td className="py-3 px-4 text-purple-300">Code, components, technical docs</td>
+                        <td className="py-3 px-4 text-purple-300">
+                          Code, components, technical docs
+                        </td>
                       </tr>
                       <tr className="hover:bg-gray-800/20">
                         <td className="py-3 px-4 font-mono text-green-400">qa</td>
                         <td className="py-3 px-4 font-semibold">QA Engineer</td>
-                        <td className="py-3 px-4">Testing strategy, quality assurance, validation</td>
+                        <td className="py-3 px-4">
+                          Testing strategy, quality assurance, validation
+                        </td>
                         <td className="py-3 px-4 text-blue-300">PO, Dev, PM</td>
                         <td className="py-3 px-4 text-purple-300">Test plans, quality reports</td>
                       </tr>
@@ -410,13 +474,14 @@ export default function ArchitecturePage() {
       {/* SDLC Process Overview */}
       <section id="sdlc-workflow" className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">From Idea to Code: SDLC Agent Workflow</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">
+            From Idea to Code: SDLC Agent Workflow
+          </h2>
 
           {/* SDLC Diagrams Carousel */}
           <div className="mb-12">
             <DiagramCarousel slides={diagramSlides} />
           </div>
-
         </div>
       </section>
 
@@ -429,8 +494,8 @@ export default function ArchitecturePage() {
             <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
               <CardContent className="p-4 text-center">
                 <div className="text-cyan-400 mb-2 flex justify-center">
-                  <Image 
-                    src="/icons/ides/cursor.webp" 
+                  <Image
+                    src="/icons/ides/cursor.webp"
                     alt="Cursor IDE"
                     width={32}
                     height={32}
@@ -445,8 +510,8 @@ export default function ArchitecturePage() {
             <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
               <CardContent className="p-4 text-center">
                 <div className="text-cyan-400 mb-2 flex justify-center">
-                  <Image 
-                    src="/icons/ides/windsurf.svg" 
+                  <Image
+                    src="/icons/ides/windsurf.svg"
                     alt="Windsurf IDE"
                     width={32}
                     height={32}
@@ -461,8 +526,8 @@ export default function ArchitecturePage() {
             <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
               <CardContent className="p-4 text-center">
                 <div className="text-cyan-400 mb-2 flex justify-center">
-                  <Image 
-                    src="/icons/ides/copilot.png" 
+                  <Image
+                    src="/icons/ides/copilot.png"
                     alt="GitHub Copilot"
                     width={32}
                     height={32}
@@ -477,8 +542,8 @@ export default function ArchitecturePage() {
             <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
               <CardContent className="p-4 text-center">
                 <div className="text-cyan-400 mb-2 flex justify-center">
-                  <Image 
-                    src="/icons/ides/claude.ico" 
+                  <Image
+                    src="/icons/ides/claude.ico"
                     alt="Claude Code"
                     width={32}
                     height={32}
@@ -494,7 +559,9 @@ export default function ArchitecturePage() {
               <CardContent className="p-4 text-center">
                 <div className="text-cyan-400 mb-2 flex justify-center">
                   <div className="w-8 h-8 border-2 border-dashed border-cyan-400/50 rounded flex items-center justify-center group-hover:border-cyan-400 transition-colors">
-                    <span className="text-2xl text-cyan-400/70 group-hover:text-cyan-400 transition-colors">+</span>
+                    <span className="text-2xl text-cyan-400/70 group-hover:text-cyan-400 transition-colors">
+                      +
+                    </span>
                   </div>
                 </div>
                 <div className="text-sm font-semibold text-slate-200 mb-1">Your IDE</div>
@@ -515,7 +582,10 @@ export default function ArchitecturePage() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/quickstart">
-              <Button size="lg" className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8"
+              >
                 <Terminal className="w-4 h-4 mr-2" />
                 Quick Start Guide
               </Button>
@@ -526,7 +596,12 @@ export default function ArchitecturePage() {
               className="border-green-500 text-green-300 hover:bg-green-900/20 hover:text-green-100 bg-transparent"
               asChild
             >
-              <a href="https://github.com/KubeRocketCI/kuberocketai" target="_blank" rel="noopener noreferrer" aria-label="View KubeRocketAI source code on GitHub (opens in a new tab)">
+              <a
+                href="https://github.com/KubeRocketCI/kuberocketai"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View KubeRocketAI source code on GitHub (opens in a new tab)"
+              >
                 <GitBranch className="w-4 h-4 mr-2" aria-hidden="true" />
                 View Source Code
               </a>
@@ -538,5 +613,5 @@ export default function ArchitecturePage() {
       {/* Footer */}
       <SharedFooter />
     </div>
-  )
+  );
 }

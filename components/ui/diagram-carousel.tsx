@@ -1,59 +1,59 @@
-"use client"
+'use client';
 
-import { useState, useRef, useEffect, useCallback } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { MermaidDiagram } from "./mermaid-diagram"
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { MermaidDiagram } from './mermaid-diagram';
 
 interface DiagramSlide {
-  id: string
-  title: string
-  description: string
-  badge: string
-  diagram: string
-  scale?: "normal" | "compact"
+  id: string;
+  title: string;
+  description: string;
+  badge: string;
+  diagram: string;
+  scale?: 'normal' | 'compact';
   /** Optional zoom multiplier for this slide (1 = 100%). */
-  zoom?: number
+  zoom?: number;
 }
 
 interface DiagramCarouselProps {
-  slides: DiagramSlide[]
-  className?: string
+  slides: DiagramSlide[];
+  className?: string;
 }
 
-export function DiagramCarousel({ slides, className = "" }: DiagramCarouselProps) {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const carouselRef = useRef<HTMLDivElement>(null)
+export function DiagramCarousel({ slides, className = '' }: DiagramCarouselProps) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }, [slides.length])
+    setCurrentSlide(prev => (prev + 1) % slides.length);
+  }, [slides.length]);
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }, [slides.length])
+    setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
+  }, [slides.length]);
 
   const goToSlide = (index: number) => {
-    setCurrentSlide(index)
-  }
+    setCurrentSlide(index);
+  };
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'ArrowLeft') {
-        event.preventDefault()
-        prevSlide()
+        event.preventDefault();
+        prevSlide();
       } else if (event.key === 'ArrowRight') {
-        event.preventDefault()
-        nextSlide()
+        event.preventDefault();
+        nextSlide();
       }
-    }
+    };
 
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [prevSlide, nextSlide])
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [prevSlide, nextSlide]);
 
   // Auto-advance (optional - can be enabled with a prop)
   // useEffect(() => {
@@ -75,9 +75,7 @@ export function DiagramCarousel({ slides, className = "" }: DiagramCarouselProps
               <CardTitle className="text-green-300 text-xl">
                 {slides[currentSlide]?.title}
               </CardTitle>
-              <p className="text-slate-400 text-sm mt-2">
-                {slides[currentSlide]?.description}
-              </p>
+              <p className="text-slate-400 text-sm mt-2">{slides[currentSlide]?.description}</p>
             </div>
           </div>
 
@@ -87,10 +85,11 @@ export function DiagramCarousel({ slides, className = "" }: DiagramCarouselProps
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide
-                  ? 'bg-cyan-400 scale-125'
-                  : 'bg-slate-600 hover:bg-slate-500'
-                  }`}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentSlide
+                    ? 'bg-cyan-400 scale-125'
+                    : 'bg-slate-600 hover:bg-slate-500'
+                }`}
                 aria-label={`Go to diagram ${index + 1}`}
               />
             ))}
@@ -120,24 +119,21 @@ export function DiagramCarousel({ slides, className = "" }: DiagramCarouselProps
           </Button>
 
           {/* Carousel Container */}
-          <div
-            ref={carouselRef}
-            className="overflow-hidden rounded-lg"
-          >
+          <div ref={carouselRef} className="overflow-hidden rounded-lg">
             <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{
-                transform: `translateX(-${currentSlide * 100}%)`
+                transform: `translateX(-${currentSlide * 100}%)`,
               }}
             >
-              {slides.map((slide) => {
+              {slides.map(slide => {
                 return (
                   <div
                     key={slide.id}
                     className="w-full flex-shrink-0"
                     style={{
-                      minHeight: "auto",
-                      height: "auto"
+                      minHeight: 'auto',
+                      height: 'auto',
                     }}
                   >
                     {/* Enable horizontal scrolling for wide diagrams and center when it fits */}
@@ -146,13 +142,13 @@ export function DiagramCarousel({ slides, className = "" }: DiagramCarouselProps
                         <MermaidDiagram
                           diagram={slide.diagram}
                           className="rounded-lg p-2"
-                          scale={slide.scale ?? "normal"}
+                          scale={slide.scale ?? 'normal'}
                           zoom={slide.zoom}
                         />
                       </div>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -173,5 +169,5 @@ export function DiagramCarousel({ slides, className = "" }: DiagramCarouselProps
         </p>
       </div>
     </div>
-  )
+  );
 }

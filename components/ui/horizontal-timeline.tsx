@@ -1,38 +1,40 @@
-"use client"
+'use client';
 
-import { motion } from "motion/react"
-import { Badge } from "@/components/ui/badge"
-import { Rocket } from "lucide-react"
+import { motion } from 'motion/react';
+import { Badge } from '@/components/ui/badge';
+import { Rocket } from 'lucide-react';
 
 interface TimelineMilestone {
-  id: string
-  title: string
-  date: string
-  status: 'completed' | 'current' | 'upcoming'
-  description: string
-  icon: React.ReactNode
-  isKubeRocketCI?: boolean
+  id: string;
+  title: string;
+  date: string;
+  status: 'completed' | 'current' | 'upcoming';
+  description: string;
+  icon: React.ReactNode;
+  isKubeRocketCI?: boolean;
 }
 
 interface HorizontalTimelineProps {
-  milestones: TimelineMilestone[]
-  className?: string
+  milestones: TimelineMilestone[];
+  className?: string;
 }
 
-export function HorizontalTimeline({ milestones, className = "" }: HorizontalTimelineProps) {
+export function HorizontalTimeline({ milestones, className = '' }: HorizontalTimelineProps) {
   // Calculate current progress based on strategic timeline
   const calculateCurrentProgress = () => {
     // Since we're in Aug 2025 and MVP was completed in Aug 2025,
     // we're right at the transition to Platform Integration phase
     // Position rocket between MVP (Aug 2025) and KubeRocketCI Integration (Sep 2025)
-    return 35 // ~35% puts us right after MVP completion
-  }
+    return 35; // ~35% puts us right after MVP completion
+  };
 
-  const currentProgress = calculateCurrentProgress()
-  const currentDateLabel = "Aug 2025"
+  const currentProgress = calculateCurrentProgress();
+  const currentDateLabel = 'Aug 2025';
 
   return (
-    <div className={`w-full bg-black/50 border border-cyan-500/20 rounded-2xl p-4 sm:p-8 ${className}`}>
+    <div
+      className={`w-full bg-black/50 border border-cyan-500/20 rounded-2xl p-4 sm:p-8 ${className}`}
+    >
       <div className="relative pt-8">
         {/* Main timeline line - desktop only */}
         <div className="absolute top-4 left-4 right-4 h-0.5 bg-gradient-to-r from-slate-700 via-cyan-500/50 to-purple-500/50 hidden sm:block z-0"></div>
@@ -40,9 +42,9 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
         {/* Progress line - animated, desktop only */}
         <motion.div
           className="absolute top-4 left-4 h-0.5 bg-gradient-to-r from-green-400 via-cyan-400 to-blue-400 rounded-full hidden sm:block z-0"
-          initial={{ width: "0%" }}
+          initial={{ width: '0%' }}
           animate={{ width: `${currentProgress}%` }}
-          transition={{ duration: 2, ease: "easeInOut" }}
+          transition={{ duration: 2, ease: 'easeInOut' }}
         />
 
         {/* Current date rocket indicator - desktop horizontal position */}
@@ -58,12 +60,12 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
               className="bg-cyan-400 text-black p-2 rounded-full shadow-lg shadow-cyan-400/50"
               animate={{
                 y: [-2, 2, -2],
-                rotate: [0, 5, -5, 0]
+                rotate: [0, 5, -5, 0],
               }}
               transition={{
                 repeat: Infinity,
                 duration: 3,
-                ease: "easeInOut"
+                ease: 'easeInOut',
               }}
             >
               <Rocket className="w-4 h-4" />
@@ -76,13 +78,12 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
           </div>
         </motion.div>
 
-
         {/* Milestones - horizontal on desktop, vertical on mobile */}
         <div className="relative flex flex-col sm:flex-row sm:justify-between sm:items-start items-center pt-8 space-y-8 sm:space-y-0">
           {milestones.map((milestone, index) => {
-            const isCompleted = milestone.status === 'completed'
-            const isCurrent = milestone.status === 'current'
-            const isKubeRocketCI = milestone.isKubeRocketCI
+            const isCompleted = milestone.status === 'completed';
+            const isCurrent = milestone.status === 'current';
+            const isKubeRocketCI = milestone.isKubeRocketCI;
 
             return (
               <motion.div
@@ -93,25 +94,31 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
                 transition={{ delay: index * 0.2, duration: 0.5 }}
               >
                 {/* Milestone node */}
-                <div className={`
+                <div
+                  className={`
                   relative z-10 w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 sm:mb-0 mb-0 sm:mr-0 mr-4
-                  ${isCompleted
-                    ? 'bg-green-500/20 border-2 border-green-400'
-                    : isCurrent
-                      ? 'bg-cyan-500/20 border-2 border-cyan-400 shadow-lg shadow-cyan-400/30'
-                      : 'bg-slate-700/30 border-2 border-slate-500'
+                  ${
+                    isCompleted
+                      ? 'bg-green-500/20 border-2 border-green-400'
+                      : isCurrent
+                        ? 'bg-cyan-500/20 border-2 border-cyan-400 shadow-lg shadow-cyan-400/30'
+                        : 'bg-slate-700/30 border-2 border-slate-500'
                   }
                   ${isKubeRocketCI ? 'ring-4 ring-orange-400/40' : ''}
-                `}>
-                  <div className={`
-                    ${isCompleted
-                      ? 'text-green-400'
-                      : isCurrent
-                        ? 'text-cyan-400'
-                        : 'text-slate-400'
+                `}
+                >
+                  <div
+                    className={`
+                    ${
+                      isCompleted
+                        ? 'text-green-400'
+                        : isCurrent
+                          ? 'text-cyan-400'
+                          : 'text-slate-400'
                     }
                     ${isKubeRocketCI ? 'drop-shadow-[0_0_8px_rgba(251,146,60,0.8)]' : ''}
-                  `}>
+                  `}
+                  >
                     {milestone.icon}
                   </div>
 
@@ -129,29 +136,36 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
 
                 {/* Milestone info */}
                 <div className="sm:mt-4 mt-0 sm:text-center text-left sm:max-w-32 max-w-none flex-1">
-                  <div className={`text-sm font-semibold mb-1
-                    ${isCompleted
-                      ? 'text-green-300'
-                      : isCurrent
-                        ? 'text-cyan-300'
-                        : 'text-slate-400'
+                  <div
+                    className={`text-sm font-semibold mb-1
+                    ${
+                      isCompleted
+                        ? 'text-green-300'
+                        : isCurrent
+                          ? 'text-cyan-300'
+                          : 'text-slate-400'
                     }
-                  `}>
+                  `}
+                  >
                     {milestone.title}
                   </div>
-                  <div className="text-xs text-slate-400 mb-2">
-                    {milestone.date}
-                  </div>
-                  <Badge className={`text-xs
-                    ${isCompleted
-                      ? 'bg-green-900/30 text-green-300 border-green-700'
-                      : isCurrent
-                        ? 'bg-cyan-900/30 text-cyan-300 border-cyan-700'
-                        : 'bg-slate-800/30 text-slate-400 border-slate-600'
+                  <div className="text-xs text-slate-400 mb-2">{milestone.date}</div>
+                  <Badge
+                    className={`text-xs
+                    ${
+                      isCompleted
+                        ? 'bg-green-900/30 text-green-300 border-green-700'
+                        : isCurrent
+                          ? 'bg-cyan-900/30 text-cyan-300 border-cyan-700'
+                          : 'bg-slate-800/30 text-slate-400 border-slate-600'
                     }
-                  `}>
-                    {milestone.status === 'completed' ? 'COMPLETED' :
-                      milestone.status === 'current' ? 'EXECUTING' : 'PLANNED'}
+                  `}
+                  >
+                    {milestone.status === 'completed'
+                      ? 'COMPLETED'
+                      : milestone.status === 'current'
+                        ? 'EXECUTING'
+                        : 'PLANNED'}
                   </Badge>
 
                   {/* Description shown inline on mobile */}
@@ -169,10 +183,10 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
                   </div>
                 </div>
               </motion.div>
-            )
+            );
           })}
         </div>
       </div>
     </div>
-  )
+  );
 }

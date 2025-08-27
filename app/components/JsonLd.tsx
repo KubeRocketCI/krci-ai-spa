@@ -1,5 +1,5 @@
 interface JsonLdProps {
-  children: object
+  children: object;
 }
 
 export function JsonLd({ children }: JsonLdProps) {
@@ -8,5 +8,5 @@ export function JsonLd({ children }: JsonLdProps) {
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(children) }}
     />
-  )
+  );
 }

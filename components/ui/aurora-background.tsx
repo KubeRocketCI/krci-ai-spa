@@ -1,20 +1,16 @@
-"use client";
-import { cn } from "@/lib/utils";
-import React, { ReactNode } from "react";
+'use client';
+import { cn } from '@/lib/utils';
+import React, { ReactNode } from 'react';
 
 interface AuroraBackgroundProps extends React.HTMLProps<HTMLDivElement> {
   children: ReactNode;
 }
 
-export const AuroraBackground = ({
-  className,
-  children,
-  ...props
-}: AuroraBackgroundProps) => {
+export const AuroraBackground = ({ className, children, ...props }: AuroraBackgroundProps) => {
   return (
     <div
       className={cn(
-        "transition-bg relative flex flex-col items-center justify-center bg-black text-slate-200",
+        'transition-bg relative flex flex-col items-center justify-center bg-black text-slate-200',
         className,
       )}
       {...props}
@@ -23,18 +19,18 @@ export const AuroraBackground = ({
         className="absolute inset-0 overflow-hidden"
         style={
           {
-            "--aurora":
-              "repeating-linear-gradient(100deg,#06b6d4_10%,#10b981_15%,#3b82f6_20%,#06b6d4_25%,#10b981_30%)",
-            "--dark-gradient":
-              "repeating-linear-gradient(100deg,#000_0%,#000_7%,transparent_10%,transparent_12%,#000_16%)",
-            "--white-gradient":
-              "repeating-linear-gradient(100deg,#fff_0%,#fff_7%,transparent_10%,transparent_12%,#fff_16%)",
-            "--cyan-400": "#06b6d4",
-            "--green-400": "#10b981",
-            "--blue-400": "#3b82f6",
-            "--black": "#000",
-            "--white": "#fff",
-            "--transparent": "transparent",
+            '--aurora':
+              'repeating-linear-gradient(100deg,#06b6d4_10%,#10b981_15%,#3b82f6_20%,#06b6d4_25%,#10b981_30%)',
+            '--dark-gradient':
+              'repeating-linear-gradient(100deg,#000_0%,#000_7%,transparent_10%,transparent_12%,#000_16%)',
+            '--white-gradient':
+              'repeating-linear-gradient(100deg,#fff_0%,#fff_7%,transparent_10%,transparent_12%,#fff_16%)',
+            '--cyan-400': '#06b6d4',
+            '--green-400': '#10b981',
+            '--blue-400': '#3b82f6',
+            '--black': '#000',
+            '--white': '#fff',
+            '--transparent': 'transparent',
           } as React.CSSProperties
         }
       >
