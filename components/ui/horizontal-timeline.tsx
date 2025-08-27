@@ -32,22 +32,22 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
   const currentDateLabel = "Aug 2025"
 
   return (
-    <div className={`w-full bg-black/50 border border-cyan-500/20 rounded-2xl p-8 ${className}`}>
+    <div className={`w-full bg-black/50 border border-cyan-500/20 rounded-2xl p-4 sm:p-8 ${className}`}>
       <div className="relative pt-8">
-        {/* Main timeline line at top */}
-        <div className="absolute top-4 left-0 right-0 h-0.5 bg-gradient-to-r from-slate-700 via-cyan-500/50 to-purple-500/50"></div>
+        {/* Main timeline line - desktop only */}
+        <div className="absolute top-4 left-4 right-4 h-0.5 bg-gradient-to-r from-slate-700 via-cyan-500/50 to-purple-500/50 hidden sm:block z-0"></div>
 
-        {/* Progress line - animated */}
+        {/* Progress line - animated, desktop only */}
         <motion.div
-          className="absolute top-4 left-0 h-0.5 bg-gradient-to-r from-green-400 via-cyan-400 to-blue-400 rounded-full"
+          className="absolute top-4 left-4 h-0.5 bg-gradient-to-r from-green-400 via-cyan-400 to-blue-400 rounded-full hidden sm:block z-0"
           initial={{ width: "0%" }}
           animate={{ width: `${currentProgress}%` }}
           transition={{ duration: 2, ease: "easeInOut" }}
         />
 
-        {/* Current date rocket indicator */}
+        {/* Current date rocket indicator - desktop horizontal position */}
         <motion.div
-          className="absolute top-2 z-20"
+          className="absolute z-20 top-2 hidden sm:block"
           style={{ left: `${currentProgress}%` }}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -76,8 +76,9 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
           </div>
         </motion.div>
 
-        {/* Milestones */}
-        <div className="relative flex justify-between items-start pt-8">
+
+        {/* Milestones - horizontal on desktop, vertical on mobile */}
+        <div className="relative flex flex-col sm:flex-row sm:justify-between sm:items-start items-center pt-8 space-y-8 sm:space-y-0">
           {milestones.map((milestone, index) => {
             const isCompleted = milestone.status === 'completed'
             const isCurrent = milestone.status === 'current'
@@ -86,14 +87,14 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
             return (
               <motion.div
                 key={milestone.id}
-                className="relative flex flex-col items-center"
+                className="relative flex sm:flex-col flex-row sm:items-center items-start w-full sm:w-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
               >
                 {/* Milestone node */}
                 <div className={`
-                  relative z-10 w-12 h-12 rounded-full flex items-center justify-center
+                  relative z-10 w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 sm:mb-0 mb-0 sm:mr-0 mr-4
                   ${isCompleted
                     ? 'bg-green-500/20 border-2 border-green-400'
                     : isCurrent
@@ -127,7 +128,7 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
                 </div>
 
                 {/* Milestone info */}
-                <div className="mt-4 text-center max-w-32">
+                <div className="sm:mt-4 mt-0 sm:text-center text-left sm:max-w-32 max-w-none flex-1">
                   <div className={`text-sm font-semibold mb-1
                     ${isCompleted
                       ? 'text-green-300'
@@ -153,10 +154,16 @@ export function HorizontalTimeline({ milestones, className = "" }: HorizontalTim
                       milestone.status === 'current' ? 'EXECUTING' : 'PLANNED'}
                   </Badge>
 
+                  {/* Description shown inline on mobile */}
+                  <div className="sm:hidden block mt-2">
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      {milestone.description}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Description tooltip on hover */}
-                <div className="absolute top-16 left-1/2 transform -translate-x-1/2 opacity-0 hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
+                {/* Description tooltip on hover - desktop only */}
+                <div className="absolute top-16 left-1/2 transform -translate-x-1/2 opacity-0 hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none hidden sm:block">
                   <div className="bg-black/90 border border-cyan-500/30 rounded-lg p-3 text-xs text-slate-300 max-w-48 text-center backdrop-blur-sm">
                     {milestone.description}
                   </div>
