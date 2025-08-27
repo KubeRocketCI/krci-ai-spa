@@ -7,6 +7,7 @@ import { AuroraBackground } from '@/components/ui/aurora-background';
 import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
 import { GitHubIcon } from '@/components/github-icon';
+import { FRAMEWORK_METRICS } from '@/lib/constants';
 import {
   Copy,
   Check,
@@ -179,11 +180,11 @@ export default function HomePage() {
   ];
 
   const stats = [
-    { label: 'Integrated Codebases', value: '20+' },
-    { label: 'Agile SDLC Roles', value: '7+' },
-    { label: 'Baseline Tasks', value: '30+' },
-    { label: 'Supported IDEs', value: '4' },
-    { label: 'SDLC Framework', value: '1' },
+    { label: 'Integrated Codebases', value: FRAMEWORK_METRICS.INTEGRATED_CODEBASES.DISPLAY },
+    { label: 'Agile SDLC Roles', value: FRAMEWORK_METRICS.AGENTS.DISPLAY },
+    { label: 'Baseline Tasks', value: FRAMEWORK_METRICS.BASELINE_TASKS.DISPLAY },
+    { label: 'Supported IDEs', value: FRAMEWORK_METRICS.SUPPORTED_IDES.DISPLAY },
+    { label: 'SDLC Framework', value: FRAMEWORK_METRICS.FRAMEWORKS.DISPLAY },
   ];
 
   return (
@@ -303,7 +304,7 @@ export default function HomePage() {
                       key={index}
                       href="/architecture#agent-relations"
                       className="relative z-10 block cursor-pointer transition-all duration-200 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:opacity-80 focus:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-md"
-                      aria-label="View details about the 7+ SDLC agent roles and responsibilities"
+                      aria-label={`View details about the ${FRAMEWORK_METRICS.AGENTS.DISPLAY} SDLC agent roles and responsibilities`}
                     >
                       <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight [font-variant-numeric:tabular-nums] leading-tight md:leading-[1.1] mb-1 sm:mb-2 bg-gradient-to-r from-white via-cyan-200 to-green-200 bg-clip-text text-transparent">
                         {stat.value}
@@ -896,7 +897,7 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</code>
                 </div>
               </div>
               <p className="text-green-300/70 text-center mt-6 text-sm">
-                <strong className="text-cyan-300">7 specialized AI agents</strong> guide you through
+                <strong className="text-cyan-300">{FRAMEWORK_METRICS.AGENTS.DESCRIPTION}</strong> guide you through
                 proven agile workflows, ensuring consistent quality from initial idea to delivered
                 code.
               </p>

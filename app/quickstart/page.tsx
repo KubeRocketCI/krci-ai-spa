@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { FRAMEWORK_METRICS } from '@/lib/constants';
 import {
   Copy,
   Check,
@@ -67,7 +68,7 @@ export default function QuickStartPage() {
       icon: (
         <Users
           className="w-6 h-6"
-          aria-label="Users icon representing the 7+ SDLC agents available"
+          aria-label={`Users icon representing the ${FRAMEWORK_METRICS.AGENTS.DISPLAY} SDLC agents available`}
         />
       ),
       title: '7 Agents',

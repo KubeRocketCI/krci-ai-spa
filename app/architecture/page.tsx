@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { FRAMEWORK_METRICS } from '@/lib/constants';
 import { Terminal, GitBranch, Users, FileText, Settings, Layers, Network } from 'lucide-react';
 import { DiagramCarousel } from '@/components/ui/diagram-carousel';
 import Link from 'next/link';
@@ -211,11 +212,11 @@ export default function ArchitecturePage() {
       icon: (
         <Users
           className="w-8 h-8"
-          aria-label="Users icon representing the 7+ SDLC agent personas"
+          aria-label={`Users icon representing the ${FRAMEWORK_METRICS.AGENTS.DISPLAY} SDLC agent personas`}
         />
       ),
       title: 'SDLC Agents',
-      count: '7+',
+      count: FRAMEWORK_METRICS.AGENTS.DISPLAY,
       description: 'Pre-configured agent personas covering complete software development lifecycle',
       details: [
         'Product Manager',
