@@ -20,66 +20,189 @@ interface HorizontalTimelineProps {
 }
 
 export function HorizontalTimeline({ milestones, className = '' }: HorizontalTimelineProps) {
-  // Calculate current progress based on strategic timeline
+  // Calculate current progress based on systematic month-by-month approach
   const calculateCurrentProgress = () => {
-    // Since we're in Aug 2025 and MVP was completed in Aug 2025,
-    // we're right at the transition to Platform Integration phase
-    // Position rocket between MVP (Aug 2025) and KubeRocketCI Integration (Sep 2025)
-    return 35; // ~35% puts us right after MVP completion
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth(); // 0-based (0=Jan, 5=Jun, 7=Aug)
+    const currentDay = now.getDate();
+
+    // Timeline: June 2025 (month 0) to March 2026 (month 9) = 10 months total
+    // Each month gets exactly 10% of the timeline
+    const timelineMonths = [
+      { year: 2025, month: 5, name: 'Jun' }, // June 2025 = 0-10%
+      { year: 2025, month: 6, name: 'Jul' }, // July 2025 = 10-20%
+      { year: 2025, month: 7, name: 'Aug' }, // August 2025 = 20-30%
+      { year: 2025, month: 8, name: 'Sep' }, // September 2025 = 30-40%
+      { year: 2025, month: 9, name: 'Oct' }, // October 2025 = 40-50%
+      { year: 2025, month: 10, name: 'Nov' }, // November 2025 = 50-60%
+      { year: 2025, month: 11, name: 'Dec' }, // December 2025 = 60-70%
+      { year: 2026, month: 0, name: 'Jan' }, // January 2026 = 70-80%
+      { year: 2026, month: 1, name: 'Feb' }, // February 2026 = 80-90%
+      { year: 2026, month: 2, name: 'Mar' }, // March 2026 = 90-100%
+    ];
+
+    // Find which month we're in
+    let monthIndex = -1;
+    for (let i = 0; i < timelineMonths.length; i++) {
+      const tm = timelineMonths[i];
+      if (currentYear === tm.year && currentMonth === tm.month) {
+        monthIndex = i;
+        break;
+      }
+    }
+
+    // If before timeline, show at start (5%)
+    if (monthIndex === -1) {
+      const firstMonth = timelineMonths[0];
+      if (
+        currentYear < firstMonth.year ||
+        (currentYear === firstMonth.year && currentMonth < firstMonth.month)
+      ) {
+        return 5;
+      }
+      // Must be after timeline, show at end (95%)
+      return 95;
+    }
+
+    // Calculate position within the month
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const positionInMonth = currentDay / daysInMonth; // 0.0 to 1.0
+
+    // Use the SAME positioning system as month ticks
+    const timelineMargin = 5; // Same as month ticks
+    const monthSpacing = (100 - 2 * timelineMargin) / 9; // Same calculation as month ticks
+
+    // Position rocket using the same system as month ticks
+    const baseMonthPosition = timelineMargin + monthSpacing * monthIndex;
+    let finalPosition = baseMonthPosition + positionInMonth * monthSpacing;
+
+    // Manual adjustment for proper visual alignment
+    finalPosition = finalPosition + 5;
+
+    return finalPosition;
   };
 
+  // Generate monthly ticks from Jun 2025 to Mar 2026 (10 months total)
+  // Timeline has equal margins, Jun starts slightly after beginning, Mar ends slightly before end
+  const generateMonthTicks = () => {
+    const timelineMargin = 5; // 5% margin from each edge of timeline
+    const usableTimelineWidth = 100 - 2 * timelineMargin; // 90% usable width
+    const monthSpacing = usableTimelineWidth / 9; // 9 intervals between 10 months
+
+    const months = [
+      { name: 'Jun', fullName: 'June 2025', position: timelineMargin }, // Start after margin
+      { name: 'Jul', fullName: 'July 2025', position: timelineMargin + monthSpacing * 1 },
+      { name: 'Aug', fullName: 'August 2025', position: timelineMargin + monthSpacing * 2 },
+      { name: 'Sep', fullName: 'September 2025', position: timelineMargin + monthSpacing * 3 },
+      { name: 'Oct', fullName: 'October 2025', position: timelineMargin + monthSpacing * 4 },
+      { name: 'Nov', fullName: 'November 2025', position: timelineMargin + monthSpacing * 5 },
+      { name: 'Dec', fullName: 'December 2025', position: timelineMargin + monthSpacing * 6 },
+      { name: 'Jan', fullName: 'January 2026', position: timelineMargin + monthSpacing * 7 },
+      { name: 'Feb', fullName: 'February 2026', position: timelineMargin + monthSpacing * 8 },
+      { name: 'Mar', fullName: 'March 2026', position: timelineMargin + monthSpacing * 9 }, // End before margin
+    ];
+    return months;
+  };
+
+  // Generate current date label dynamically
+  const generateCurrentDateLabel = () => {
+    const now = new Date();
+    const monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    const month = monthNames[now.getMonth()];
+    const year = now.getFullYear();
+    return `${month} ${year}`;
+  };
+
+  const monthTicks = generateMonthTicks();
   const currentProgress = calculateCurrentProgress();
-  const currentDateLabel = 'Aug 2025';
+  const currentDateLabel = generateCurrentDateLabel();
 
   return (
     <div
       className={`w-full bg-black/50 border border-cyan-500/20 rounded-2xl p-4 sm:p-8 ${className}`}
     >
-      <div className="relative pt-8">
-        {/* Main timeline line - desktop only */}
-        <div className="absolute top-4 left-4 right-4 h-0.5 bg-gradient-to-r from-slate-700 via-cyan-500/50 to-purple-500/50 hidden sm:block z-0"></div>
-
-        {/* Progress line - animated, desktop only */}
-        <motion.div
-          className="absolute top-4 left-4 h-0.5 bg-gradient-to-r from-green-400 via-cyan-400 to-blue-400 rounded-full hidden sm:block z-0"
-          initial={{ width: '0%' }}
-          animate={{ width: `${currentProgress}%` }}
-          transition={{ duration: 2, ease: 'easeInOut' }}
-        />
-
-        {/* Current date rocket indicator - desktop horizontal position */}
-        <motion.div
-          className="absolute z-20 top-2 hidden sm:block"
-          style={{ left: `${currentProgress}%` }}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 2.5, duration: 0.5 }}
-        >
-          <div className="relative transform -translate-x-1/2">
+      <div className="relative pt-12">
+        {/* Month ticks - desktop only, aligned with timeline */}
+        <div className="absolute top-0 left-8 right-8 hidden sm:block z-10">
+          {monthTicks.map((month, index) => (
             <motion.div
-              className="bg-cyan-400 text-black p-2 rounded-full shadow-lg shadow-cyan-400/50"
-              animate={{
-                y: [-2, 2, -2],
-                rotate: [0, 5, -5, 0],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 3,
-                ease: 'easeInOut',
-              }}
+              key={month.name}
+              className="absolute flex flex-col items-center"
+              style={{ left: `${month.position}%` }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.3 }}
             >
-              <Rocket className="w-4 h-4" />
+              {/* Month name above the tick */}
+              <div className="text-xs text-slate-400 font-mono mb-1 transform -translate-x-1/2 whitespace-nowrap">
+                {month.name}
+              </div>
+              {/* Tick mark extending down to timeline */}
+              <div className="w-px h-4 bg-slate-400/60"></div>
             </motion.div>
-            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-center">
-              <div className="bg-black/90 border border-cyan-400/50 rounded-lg px-3 py-1 text-xs text-cyan-300 whitespace-nowrap">
-                {currentDateLabel} - Now
+          ))}
+        </div>
+
+        {/* Main timeline line - desktop only, with proper margins */}
+        <div className="absolute top-6 left-8 right-8 h-0.5 bg-gradient-to-r from-slate-700 via-cyan-500/50 to-purple-500/50 hidden sm:block z-0"></div>
+
+        {/* Progress line with rocket at the end - animated, desktop only */}
+        <motion.div
+          className="absolute top-6 left-8 h-0.5 bg-gradient-to-r from-green-400 via-cyan-400 to-blue-400 rounded-full hidden sm:block z-0"
+          initial={{ width: '0%' }}
+          animate={{ width: `${Math.max(0, currentProgress - 5)}%` }}
+          transition={{ duration: 2, ease: 'easeInOut' }}
+          style={{
+            right: `${100 - Math.max(0, currentProgress - 5)}%`,
+          }}
+        >
+          {/* Rocket icon positioned at the end of the progress line */}
+          <motion.div
+            className="absolute right-0 top-0 transform -translate-y-1/2"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 2.5, duration: 0.5 }}
+          >
+            <div className="relative">
+              <motion.div
+                className="bg-cyan-400 text-black p-2 rounded-full shadow-lg shadow-cyan-400/50"
+                animate={{
+                  y: [-2, 2, -2],
+                  rotate: [0, 5, -5, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 3,
+                  ease: 'easeInOut',
+                }}
+              >
+                <Rocket className="w-4 h-4" />
+              </motion.div>
+              <div className="absolute top-14 left-1/2 transform -translate-x-1/2 text-center">
+                <div className="bg-black/90 border border-cyan-400/50 rounded-lg px-3 py-1 text-xs text-cyan-300 whitespace-nowrap">
+                  {currentDateLabel} - Now
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Milestones - horizontal on desktop, vertical on mobile */}
-        <div className="relative flex flex-col sm:flex-row sm:justify-between sm:items-start items-center pt-8 space-y-8 sm:space-y-0">
+        <div className="relative flex flex-col sm:flex-row sm:justify-between sm:items-start items-center pt-10 space-y-8 sm:space-y-0">
           {milestones.map((milestone, index) => {
             const isCompleted = milestone.status === 'completed';
             const isCurrent = milestone.status === 'current';
