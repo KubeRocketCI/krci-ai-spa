@@ -229,6 +229,7 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
                 aria-label="Watch tutorials on YouTube (opens in a new tab)"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
+                <span className="mr-2 font-mono opacity-0">{'>'}</span>
                 /tutorials
                 <ExternalLink className="w-3 h-3 ml-1 opacity-70" />
               </a>
