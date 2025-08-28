@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Terminal, Send, Heart, ExternalLink, Globe } from 'lucide-react';
 import { GitHubIcon } from '@/components/github-icon';
 import { GITHUB_REPO_URL_EXPORT } from '@/lib/use-github-repo';
+import { CookieSettingsButton } from '@/components/ui/cookie-consent';
 import Link from 'next/link';
 
 interface SharedFooterProps {
@@ -147,10 +148,27 @@ export function SharedFooter({ className = '' }: SharedFooterProps) {
         {/* Bottom Section */}
         <div className="border-t border-green-800/30 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <div className="text-center md:text-left">
+            <div className="text-center md:text-left space-y-2">
               <p className="text-green-300/60 text-sm">
                 © 2025 KubeRocketCI. Open source project.
               </p>
+              <div className="flex items-center justify-center md:justify-start space-x-4 text-xs">
+                <Link
+                  href="/privacy"
+                  className="text-green-300/60 hover:text-green-300 transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+                <span className="text-green-800">•</span>
+                <Link
+                  href="/terms"
+                  className="text-green-300/60 hover:text-green-300 transition-colors"
+                >
+                  Terms
+                </Link>
+                <span className="text-green-800">•</span>
+                <CookieSettingsButton />
+              </div>
             </div>
 
             <div className="flex items-center space-x-6">

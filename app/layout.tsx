@@ -7,6 +7,9 @@ import {
   SoftwareApplicationSchema,
   WebsiteSchema,
 } from './components/StructuredData';
+import { ConsentProvider } from '@/lib/consent-context';
+import { CookieConsent } from '@/components/ui/cookie-consent';
+import { Analytics, GAScript } from '@/components/analytics';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -141,9 +144,14 @@ export default function RootLayout({
         <OrganizationSchema />
         <SoftwareApplicationSchema />
         <WebsiteSchema />
+        <GAScript />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans`}>
-        {children}
+        <ConsentProvider>
+          {children}
+          <CookieConsent />
+          <Analytics />
+        </ConsentProvider>
       </body>
     </html>
   );
