@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { FAQItem } from '@/lib/faq-data';
+import { CopyableCodeBlock, InlineCommand } from './copyable-code-block';
 
 interface FAQItemProps {
   faq: FAQItem;
@@ -29,77 +30,159 @@ export function FAQItemComponent({ faq, defaultExpanded = false, searchQuery }: 
     }
   }, [isExpanded]);
 
-  // Enhanced text processing with better markdown support
+  // Enhanced text processing with copyable code blocks and command support
   const processAnswerText = (text: string) => {
-    return text
-      .split('\n')
-      .map((line, index) => {
-        // Skip code block markers
-        if (line.trim().startsWith('```')) {
-          return null;
+    const lines = text.split('\n');
+    const elements: React.ReactElement[] = [];
+    let i = 0;
+
+    while (i < lines.length) {
+      const line = lines[i];
+
+      // Handle code blocks
+      if (line.trim().startsWith('```')) {
+        const language = line.trim().replace('```', '') || 'bash';
+        const codeLines: string[] = [];
+        i++; // Skip the opening ```
+
+        // Collect code lines until closing ```
+        while (i < lines.length && !lines[i].trim().startsWith('```')) {
+          codeLines.push(lines[i]);
+          i++;
         }
+        i++; // Skip the closing ```
 
-        // Empty line
-        if (line.trim() === '') {
-          return <div key={index} className="h-4" />;
-        }
-
-        // List items
-        if (line.trim().match(/^[-*]\s/)) {
-          const content = line.replace(/^[-*]\s/, '');
-          const processedContent = content
-            .replace(/\*\*(.*?)\*\*/g, '<strong class="text-slate-200 font-medium">$1</strong>')
-            .replace(
-              /`([^`]+)`/g,
-              '<code class="text-cyan-400 bg-slate-800 px-1 py-0.5 rounded font-mono text-xs">$1</code>',
-            )
-            .replace(
-              /\[([^\]]+)\]\(([^)]+)\)/g,
-              '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline transition-colors">$1</a>',
-            );
-
-          return (
-            <li
-              key={index}
-              className="mb-1 text-slate-400 leading-relaxed flex items-start text-sm"
-            >
-              <span className="text-slate-500 mr-2 mt-1 text-xs">•</span>
-              <span dangerouslySetInnerHTML={{ __html: processedContent }} />
-            </li>
-          );
-        }
-
-        // Headers (lines starting with **)
-        if (line.trim().match(/^\*\*(.*?)\*\*:?$/)) {
-          const headerText = line.replace(/^\*\*(.*?)\*\*:?$/, '$1');
-          return (
-            <h4 key={index} className="text-slate-300 font-medium text-base mb-2 mt-4 first:mt-0">
-              {headerText}
-            </h4>
-          );
-        }
-
-        // Regular paragraphs
-        const processedLine = line
-          .replace(/\*\*(.*?)\*\*/g, '<strong class="text-slate-200 font-medium">$1</strong>')
-          .replace(
-            /`([^`]+)`/g,
-            '<code class="text-cyan-400 bg-slate-800 px-1 py-0.5 rounded font-mono text-xs">$1</code>',
-          )
-          .replace(
-            /\[([^\]]+)\]\(([^)]+)\)/g,
-            '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline transition-colors">$1</a>',
-          );
-
-        return (
-          <p
-            key={index}
-            className="mb-2 last:mb-0 text-slate-400 leading-relaxed text-sm"
-            dangerouslySetInnerHTML={{ __html: processedLine }}
-          />
+        const codeContent = codeLines.join('\n');
+        elements.push(
+          <CopyableCodeBlock
+            key={elements.length}
+            code={codeContent}
+            language={language}
+            className="my-4"
+          />,
         );
-      })
-      .filter(Boolean);
+        continue;
+      }
+
+      // Empty line
+      if (line.trim() === '') {
+        elements.push(<div key={elements.length} className="h-4" />);
+        i++;
+        continue;
+      }
+
+      // List items
+      if (line.trim().match(/^[-*]\s/)) {
+        const content = line.replace(/^[-*]\s/, '');
+        const processedContent = processInlineContent(content);
+
+        elements.push(
+          <li
+            key={elements.length}
+            className="mb-1 text-slate-400 leading-relaxed flex items-start text-sm"
+          >
+            <span className="text-slate-500 mr-2 mt-1 text-xs">•</span>
+            <span className="flex-1">{processedContent}</span>
+          </li>,
+        );
+        i++;
+        continue;
+      }
+
+      // Headers (lines starting with **)
+      if (line.trim().match(/^\*\*(.*?)\*\*:?$/)) {
+        const headerText = line.replace(/^\*\*(.*?)\*\*:?$/, '$1');
+        elements.push(
+          <h4
+            key={elements.length}
+            className="text-slate-300 font-medium text-base mb-2 mt-4 first:mt-0"
+          >
+            {headerText}
+          </h4>,
+        );
+        i++;
+        continue;
+      }
+
+      // Regular paragraphs
+      const processedContent = processInlineContent(line);
+      elements.push(
+        <p key={elements.length} className="mb-2 last:mb-0 text-slate-400 leading-relaxed text-sm">
+          {processedContent}
+        </p>,
+      );
+      i++;
+    }
+
+    return elements;
+  };
+
+  // Helper function to process inline content (bold, links, commands)
+  const processInlineContent = (text: string): (string | React.ReactElement)[] => {
+    const parts: (string | React.ReactElement)[] = [];
+    let lastIndex = 0;
+    let partKey = 0;
+
+    // Process krci-ai commands first (they take priority)
+    const krciRegex = /`(krci-ai[^`]*)`/g;
+    let match;
+
+    while ((match = krciRegex.exec(text)) !== null) {
+      // Add text before the command
+      if (match.index > lastIndex) {
+        const beforeText = text.slice(lastIndex, match.index);
+        parts.push(...processBasicMarkdown(beforeText, partKey));
+        partKey += 100; // Leave room for nested elements
+      }
+
+      // Add the copyable command
+      parts.push(<InlineCommand key={partKey++} command={match[1]} />);
+
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Add remaining text
+    if (lastIndex < text.length) {
+      const remainingText = text.slice(lastIndex);
+      parts.push(...processBasicMarkdown(remainingText, partKey));
+    }
+
+    return parts;
+  };
+
+  // Helper function to process basic markdown (bold, links, other inline code)
+  const processBasicMarkdown = (
+    text: string,
+    startKey: number,
+  ): (string | React.ReactElement)[] => {
+    const parts: (string | React.ReactElement)[] = [];
+
+    // Handle bold text
+    let processedText = text.replace(/\*\*(.*?)\*\*/g, (_, content) => {
+      return `<strong class="text-slate-200 font-medium">${content}</strong>`;
+    });
+
+    // Handle links
+    processedText = processedText.replace(
+      /\[([^\]]+)\]\(([^)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline transition-colors">$1</a>',
+    );
+
+    // Handle other inline code (non-krci-ai commands)
+    processedText = processedText.replace(
+      /`([^`]+)`/g,
+      '<code class="text-cyan-400 bg-slate-800 px-1 py-0.5 rounded font-mono text-xs">$1</code>',
+    );
+
+    if (processedText !== text) {
+      // Return as HTML if we made changes
+      parts.push(<span key={startKey} dangerouslySetInnerHTML={{ __html: processedText }} />);
+    } else {
+      // Return as plain text if no changes
+      parts.push(text);
+    }
+
+    return parts;
   };
 
   // Highlight search terms
