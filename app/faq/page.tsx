@@ -7,6 +7,7 @@ import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
 import { FAQSearch } from '@/components/faq/faq-search';
 import { FAQList } from '@/components/faq/faq-list';
+import { CollapseAllButton, CollapseAllButtonMobile } from '@/components/faq/collapse-all-button';
 import { JsonLd } from '@/app/components/JsonLd';
 import { FAQ_DATA, FAQCategory, getFAQsByCategory } from '@/lib/faq-data';
 import { generateFAQSchema, getFAQMetaTags, getFAQBreadcrumbSchema } from '@/lib/faq-schema';
@@ -14,6 +15,7 @@ import { generateFAQSchema, getFAQMetaTags, getFAQBreadcrumbSchema } from '@/lib
 export default function FAQPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<FAQCategory | 'all'>('all');
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
   // Filter FAQs based on search and category
   const filteredFAQs = useMemo(() => {
@@ -36,6 +38,23 @@ export default function FAQPage() {
 
     return faqs;
   }, [searchQuery, selectedCategory]);
+
+  // Handlers for expand/collapse functionality
+  const toggleFAQExpanded = (faqId: string) => {
+    setExpandedIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(faqId)) {
+        newSet.delete(faqId);
+      } else {
+        newSet.add(faqId);
+      }
+      return newSet;
+    });
+  };
+
+  const collapseAll = () => {
+    setExpandedIds(new Set());
+  };
 
   // Generate structured data for all FAQs (for rich results)
   const faqSchema = generateFAQSchema(FAQ_DATA);
@@ -90,8 +109,32 @@ export default function FAQPage() {
               />
             </div>
 
+            {/* Collapse All - Mobile Version */}
+            <div className="block md:hidden">
+              <CollapseAllButtonMobile
+                onCollapseAll={collapseAll}
+                expandedCount={expandedIds.size}
+                isVisible={expandedIds.size > 0}
+              />
+            </div>
+
             {/* Two Column FAQ List */}
-            <FAQList faqs={filteredFAQs} searchQuery={searchQuery} showNoResults={true} />
+            <FAQList
+              faqs={filteredFAQs}
+              searchQuery={searchQuery}
+              showNoResults={true}
+              expandedIds={expandedIds}
+              onToggleExpanded={toggleFAQExpanded}
+            />
+
+            {/* Collapse All - Desktop Version (Fixed Position) */}
+            <div className="hidden md:block">
+              <CollapseAllButton
+                onCollapseAll={collapseAll}
+                expandedCount={expandedIds.size}
+                isVisible={expandedIds.size > 0}
+              />
+            </div>
           </div>
         </section>
 

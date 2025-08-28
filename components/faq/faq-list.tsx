@@ -7,9 +7,17 @@ interface FAQListProps {
   faqs: FAQItem[];
   showNoResults?: boolean;
   searchQuery?: string;
+  expandedIds?: Set<string>;
+  onToggleExpanded?: (faqId: string) => void;
 }
 
-export function FAQList({ faqs, showNoResults = true, searchQuery }: FAQListProps) {
+export function FAQList({
+  faqs,
+  showNoResults = true,
+  searchQuery,
+  expandedIds,
+  onToggleExpanded,
+}: FAQListProps) {
   if (faqs.length === 0 && showNoResults) {
     return (
       <div className="py-12 text-center">
@@ -30,7 +38,13 @@ export function FAQList({ faqs, showNoResults = true, searchQuery }: FAQListProp
   return (
     <div className="grid md:grid-cols-2 gap-x-12 gap-y-0">
       {faqs.map(faq => (
-        <FAQItemComponent key={faq.id} faq={faq} searchQuery={searchQuery} />
+        <FAQItemComponent
+          key={faq.id}
+          faq={faq}
+          searchQuery={searchQuery}
+          isExpanded={expandedIds?.has(faq.id) || false}
+          onToggleExpanded={onToggleExpanded ? () => onToggleExpanded(faq.id) : undefined}
+        />
       ))}
     </div>
   );

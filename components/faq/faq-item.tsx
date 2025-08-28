@@ -9,14 +9,29 @@ interface FAQItemProps {
   faq: FAQItem;
   defaultExpanded?: boolean;
   searchQuery?: string;
+  isExpanded?: boolean;
+  onToggleExpanded?: () => void;
 }
 
-export function FAQItemComponent({ faq, defaultExpanded = false, searchQuery }: FAQItemProps) {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+export function FAQItemComponent({
+  faq,
+  defaultExpanded = false,
+  searchQuery,
+  isExpanded: externalIsExpanded,
+  onToggleExpanded,
+}: FAQItemProps) {
+  const [internalIsExpanded, setInternalIsExpanded] = useState(defaultExpanded);
   const answerRef = useRef<HTMLDivElement>(null);
 
+  // Use external state if provided, otherwise use internal state
+  const isExpanded = externalIsExpanded !== undefined ? externalIsExpanded : internalIsExpanded;
+
   const toggleExpanded = () => {
-    setIsExpanded(!isExpanded);
+    if (onToggleExpanded) {
+      onToggleExpanded();
+    } else {
+      setInternalIsExpanded(!internalIsExpanded);
+    }
   };
 
   // Smooth height animation
