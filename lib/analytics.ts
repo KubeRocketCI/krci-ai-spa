@@ -1,5 +1,3 @@
-import ReactGA from 'react-ga4';
-
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 const isProduction = () => {
@@ -17,15 +15,6 @@ const isProduction = () => {
 };
 
 export const initGA = () => {
-  // Debug environment variables
-  console.log('Environment check:', {
-    NODE_ENV: process.env.NODE_ENV,
-    VERCEL_ENV: process.env.VERCEL_ENV,
-    GA_ID_defined: !!GA_MEASUREMENT_ID,
-    GA_ID_value: GA_MEASUREMENT_ID ? 'Set' : 'Missing',
-    isProduction: isProduction(),
-  });
-
   if (!GA_MEASUREMENT_ID) {
     if (!isProduction()) {
       console.log('GA_MEASUREMENT_ID not defined - this is expected in development');
@@ -45,14 +34,8 @@ export const initGA = () => {
     return; // Don't initialize in non-production environments
   }
 
-  try {
-    ReactGA.initialize(GA_MEASUREMENT_ID, {
-      testMode: false,
-    });
-    console.log('Google Analytics initialized for production');
-  } catch (error) {
-    console.error('Failed to initialize Google Analytics:', error);
-  }
+  // GA is already initialized by the GAScript component in layout
+  console.log('Google Analytics tracking enabled');
 };
 
 export const trackPageView = (path: string, title?: string) => {
@@ -61,14 +44,15 @@ export const trackPageView = (path: string, title?: string) => {
     return; // Don't track in non-production
   }
 
-  try {
-    ReactGA.send({
-      hitType: 'pageview',
-      page: path,
-      title: title || document.title,
-    });
-  } catch (error) {
-    console.error('Failed to track page view:', error);
+  if (typeof window !== 'undefined' && window.gtag && GA_MEASUREMENT_ID) {
+    try {
+      window.gtag('config', GA_MEASUREMENT_ID, {
+        page_path: path,
+        page_title: title || document.title,
+      });
+    } catch (error) {
+      console.error('Failed to track page view:', error);
+    }
   }
 };
 
@@ -78,15 +62,16 @@ export const trackEvent = (action: string, category: string, label?: string, val
     return; // Don't track in non-production
   }
 
-  try {
-    ReactGA.event({
-      action,
-      category,
-      label,
-      value,
-    });
-  } catch (error) {
-    console.error('Failed to track event:', error);
+  if (typeof window !== 'undefined' && window.gtag) {
+    try {
+      window.gtag('event', action, {
+        event_category: category,
+        event_label: label,
+        value: value,
+      });
+    } catch (error) {
+      console.error('Failed to track event:', error);
+    }
   }
 };
 
