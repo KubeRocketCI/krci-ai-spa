@@ -31,7 +31,26 @@ agent:
     - "Write clean, readable TypeScript with proper type safety"
     - "Maintain consistent styling with cn() utility for class merging"
 
-  customization: ""
+  customization: |
+    Technology Stack:
+    - Next.js 15.2.4 with App Router
+    - React with TypeScript (strict mode)
+    - Tailwind CSS 4.x with custom terminal theme
+    - shadcn/ui components with Radix UI primitives
+    - Lucide React icons
+    - Google Fonts: JetBrains Mono & Inter
+
+    Design System:
+    - Terminal/hacker aesthetic with blue-to-green gradients
+    - Glass morphism effects with backdrop-filter
+    - Responsive header with lens effect
+    - Dark theme enabled by default
+    - Performance-optimized for mobile devices
+
+    Key Commands Available:
+    - npm run dev (start development with Turbopack)
+    - npm run build (production build)
+    - npm run lint (ESLint checks)
 
   commands:
     help: "Show available frontend development commands"
