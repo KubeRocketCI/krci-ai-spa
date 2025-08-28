@@ -3,10 +3,12 @@ import ReactGA from 'react-ga4';
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 const isProduction = () => {
+  // Server-side check
   if (typeof window === 'undefined') {
-    return process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV === 'production';
+    return process.env.NODE_ENV === 'production';
   }
 
+  // Client-side check - only allow production domains
   return (
     process.env.NODE_ENV === 'production' &&
     (window.location.hostname === 'krci-ai.kuberocketci.io' ||

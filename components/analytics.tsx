@@ -30,8 +30,7 @@ export function Analytics() {
 
 export function GAScript() {
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  const isProduction =
-    process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV === 'production';
+  const isProduction = process.env.NODE_ENV === 'production';
 
   // Only load GA script in production environment
   if (!GA_MEASUREMENT_ID || !isProduction) {
