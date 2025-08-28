@@ -33,6 +33,7 @@ import { GITHUB_REPO_URL_EXPORT } from '@/lib/use-github-repo';
 import Link from 'next/link';
 import InlineVideo, { AutoplayMode } from '@/components/ui/inline-video';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { FAQPreview } from '@/components/faq/faq-preview';
 
 // Constants
 const HERO_COMMAND = 'brew tap KubeRocketCI/homebrew-tap && brew install krci-ai';
@@ -618,6 +619,20 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</code>
             </TabsContent>
           </Tabs>
 
+          {/* Installation Help */}
+          <div className="text-center mt-6">
+            <p className="text-slate-400 text-sm">
+              Having installation issues?{' '}
+              <Link
+                href="/faq"
+                className="text-cyan-400 hover:text-cyan-300 underline transition-colors"
+              >
+                Check our FAQ
+              </Link>{' '}
+              for troubleshooting help.
+            </p>
+          </div>
+
           {/* Quick Start section remains below tabs */}
           <div className="mt-8 sm:mt-12">
             <div className="bg-gray-900 border border-green-700/30 rounded-lg p-4 sm:p-6">
@@ -897,9 +912,9 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</code>
                 </div>
               </div>
               <p className="text-green-300/70 text-center mt-6 text-sm">
-                <strong className="text-cyan-300">{FRAMEWORK_METRICS.AGENTS.DESCRIPTION}</strong> guide you through
-                proven agile workflows, ensuring consistent quality from initial idea to delivered
-                code.
+                <strong className="text-cyan-300">{FRAMEWORK_METRICS.AGENTS.DESCRIPTION}</strong>{' '}
+                guide you through proven agile workflows, ensuring consistent quality from initial
+                idea to delivered code.
               </p>
             </div>
           </div>
@@ -1000,15 +1015,28 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</code>
         </div>
       </section>
 
+      {/* FAQ Preview */}
+      <FAQPreview />
+
       {/* CTA */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center max-w-2xl">
           <h2 className="text-4xl font-bold mb-6 text-cyan-400">
             Ready to Transform Your AI Workflow?
           </h2>
-          <p className="text-xl text-green-300/80 mb-8">
+          <p className="text-xl text-green-300/80 mb-6">
             Join the next evolution of DevOps practices. Start managing your AI agents like
             infrastructure.
+          </p>
+          <p className="text-sm text-slate-400 mb-8">
+            Questions about implementation or adoption?{' '}
+            <Link
+              href="/faq"
+              className="text-cyan-400 hover:text-cyan-300 underline transition-colors"
+            >
+              View our FAQ
+            </Link>{' '}
+            for detailed answers.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button

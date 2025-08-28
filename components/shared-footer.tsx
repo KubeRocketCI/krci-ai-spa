@@ -57,6 +57,12 @@ export function SharedFooter({ className = '' }: SharedFooterProps) {
               >
                 Roadmap
               </Link>
+              <Link
+                href="/faq"
+                className="block text-green-300/80 hover:text-green-200 text-sm transition-colors"
+              >
+                FAQ
+              </Link>
               <a
                 href="https://www.youtube.com/@theplatformteam"
                 target="_blank"

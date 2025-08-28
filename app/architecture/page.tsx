@@ -10,6 +10,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
+import { FAQPreview } from '@/components/faq/faq-preview';
+import { getArchitectureFAQs } from '@/lib/faq-data';
 
 export default function ArchitecturePage() {
   // Diagram data for carousel
@@ -558,15 +560,22 @@ export default function ArchitecturePage() {
 
             <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors cursor-pointer group">
               <CardContent className="p-4 text-center">
-                <div className="text-cyan-400 mb-2 flex justify-center">
-                  <div className="w-8 h-8 border-2 border-dashed border-cyan-400/50 rounded flex items-center justify-center group-hover:border-cyan-400 transition-colors">
-                    <span className="text-2xl text-cyan-400/70 group-hover:text-cyan-400 transition-colors">
-                      +
-                    </span>
+                <a
+                  href="https://github.com/KubeRocketCI/kuberocketai/issues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="text-cyan-400 mb-2 flex justify-center">
+                    <div className="w-8 h-8 border-2 border-dashed border-cyan-400/50 rounded flex items-center justify-center group-hover:border-cyan-400 transition-colors">
+                      <span className="text-2xl text-cyan-400/70 group-hover:text-cyan-400 transition-colors">
+                        +
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="text-sm font-semibold text-slate-200 mb-1">Your IDE</div>
-                <div className="text-xs text-slate-400">Add your favorite</div>
+                  <div className="text-sm font-semibold text-slate-200 mb-1">Your IDE</div>
+                  <div className="text-xs text-slate-400">Add your favorite</div>
+                </a>
               </CardContent>
             </Card>
           </div>
@@ -610,6 +619,9 @@ export default function ArchitecturePage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Preview */}
+      <FAQPreview faqs={getArchitectureFAQs()} />
 
       {/* Footer */}
       <SharedFooter />

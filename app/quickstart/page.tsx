@@ -19,6 +19,8 @@ import {
 import Link from 'next/link';
 import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
+import { FAQPreview } from '@/components/faq/faq-preview';
+import { getQuickstartFAQs } from '@/lib/faq-data';
 
 // Constants
 const INSTALL_COMMANDS = {
@@ -483,105 +485,11 @@ Usage instructions:
               </CardContent>
             </Card>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold px-8"
-              asChild
-            >
-              <Link href="/" aria-label="Explore the framework homepage">
-                <Terminal className="w-4 h-4 mr-2" aria-hidden="true" />
-                Explore Framework
-              </Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-green-500 text-green-300 hover:bg-green-900/20 hover:text-green-100 bg-transparent"
-              asChild
-            >
-              <a
-                href="https://github.com/KubeRocketCI/kuberocketai"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View KubeRocketAI on GitHub (opens in a new tab)"
-              >
-                <GitBranch className="w-4 h-4 mr-2" aria-hidden="true" />
-                View on GitHub
-              </a>
-            </Button>
-          </div>
         </div>
       </section>
 
-      {/* Troubleshooting */}
-      <section className="py-16 px-4 bg-gray-900/20">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">Troubleshooting</h2>
-
-          <div className="space-y-4">
-            <Card className="bg-black/50 border-yellow-700/30">
-              <CardContent className="p-6">
-                <h3 className="text-yellow-400 font-semibold mb-2">Validate your installation</h3>
-                <div className="bg-black rounded p-3 mb-2">
-                  <code className="text-green-400 text-sm">krci-ai validate -v</code>
-                </div>
-                <p className="text-slate-400 text-sm">
-                  Run verbose validation to diagnose setup issues
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-black/50 border-cyan-700/30">
-              <CardContent className="p-6">
-                <h3 className="text-cyan-400 font-semibold mb-2">Update to latest version</h3>
-                <div className="bg-black rounded p-3 mb-2">
-                  <code className="text-green-400 text-sm">brew upgrade krci-ai</code>
-                  <span className="text-green-300/60 ml-4"># macOS</span>
-                </div>
-                <p className="text-slate-400 text-sm">
-                  Keep your installation up to date for the best experience
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="text-center mt-8">
-            <p className="text-slate-400 text-sm mb-4">Need more help?</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                variant="outline"
-                className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent"
-                asChild
-              >
-                <a
-                  href="https://github.com/KubeRocketCI/kuberocketai/issues"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open GitHub Issues (opens in a new tab)"
-                >
-                  GitHub Issues
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent"
-                asChild
-              >
-                <a
-                  href="https://github.com/KubeRocketCI/kuberocketai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open KubeRocketAI documentation hub (opens in a new tab)"
-                >
-                  Documentation Hub
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* FAQ Preview */}
+      <FAQPreview faqs={getQuickstartFAQs()} />
 
       {/* Footer */}
       <SharedFooter />

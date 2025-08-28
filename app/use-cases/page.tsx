@@ -7,6 +7,8 @@ import { Terminal, GitBranch, Users, Settings, Network } from 'lucide-react';
 import Link from 'next/link';
 import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
+import { FAQPreview } from '@/components/faq/faq-preview';
+import { getUseCasesFAQs } from '@/lib/faq-data';
 
 export default function UseCasesPage() {
   // User profiles data
@@ -263,6 +265,9 @@ export default function UseCasesPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Preview */}
+      <FAQPreview faqs={getUseCasesFAQs()} />
 
       {/* Footer */}
       <SharedFooter />

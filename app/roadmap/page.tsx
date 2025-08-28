@@ -2,6 +2,8 @@
 
 import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
+import { FAQPreview } from '@/components/faq/faq-preview';
+import { getRoadmapFAQs } from '@/lib/faq-data';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { HorizontalTimeline } from '@/components/ui/horizontal-timeline';
@@ -185,6 +187,9 @@ export default function RoadmapPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Preview */}
+      <FAQPreview faqs={getRoadmapFAQs()} />
 
       {/* Footer */}
       <SharedFooter />

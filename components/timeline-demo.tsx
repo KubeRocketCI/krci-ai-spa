@@ -34,7 +34,8 @@ export default function TimelineDemo() {
               ✅ 15+ KubeRocketCI repositories with agent deployment
             </div>
             <div className="flex items-center gap-2 text-sm text-green-300">
-              ✅ {FRAMEWORK_METRICS.AGENTS.DISPLAY} core agents (PM, Architect, Developer, QA, BA, PMM) fully operational
+              ✅ {FRAMEWORK_METRICS.AGENTS.DISPLAY} core agents (PM, Architect, Developer, QA, BA,
+              PMM) fully operational
             </div>
             <div className="flex items-center gap-2 text-sm text-green-300">
               ✅ 85% reduction in AI-generated content adjustment time achieved
