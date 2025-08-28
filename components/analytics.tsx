@@ -47,7 +47,7 @@ export function GAScript() {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-XCYVD6LRC0');
+            gtag('config', '${GA_MEASUREMENT_ID}');
           `,
         }}
       />
