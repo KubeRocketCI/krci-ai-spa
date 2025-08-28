@@ -15,11 +15,22 @@ const isProduction = () => {
 };
 
 export const initGA = () => {
+  // Debug environment variables
+  console.log('Environment check:', {
+    NODE_ENV: process.env.NODE_ENV,
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    GA_ID_defined: !!GA_MEASUREMENT_ID,
+    GA_ID_value: GA_MEASUREMENT_ID ? 'Set' : 'Missing',
+    isProduction: isProduction(),
+  });
+
   if (!GA_MEASUREMENT_ID) {
     if (!isProduction()) {
       console.log('GA_MEASUREMENT_ID not defined - this is expected in development');
     } else {
-      console.warn('GA_MEASUREMENT_ID is not defined in production');
+      console.warn(
+        'GA_MEASUREMENT_ID is not defined in production. Check NEXT_PUBLIC_GA_MEASUREMENT_ID in Vercel environment variables.',
+      );
     }
     return;
   }
