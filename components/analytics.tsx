@@ -46,20 +46,8 @@ export function GAScript() {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            
-            // Additional production domain verification
-            const isVercelProduction = location.hostname === 'krci-ai.kuberocketci.io' ||
-                                     location.hostname.includes('vercel.app');
-            
-            if (isVercelProduction) {
-              gtag('config', '${GA_MEASUREMENT_ID}', {
-                page_title: document.title,
-                send_page_view: false
-              });
-              console.log('Google Analytics loaded for production');
-            } else {
-              console.log('Google Analytics blocked - not on production domain');
-            }
+
+            gtag('config', 'G-XCYVD6LRC0');
           `,
         }}
       />
