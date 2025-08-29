@@ -2,6 +2,7 @@
 
 import { FAQItem } from '@/lib/faq-data';
 import { FAQItemComponent } from './faq-item';
+import { ThemedFAQNoResults } from '@/components/ui/themed-faq-search';
 
 interface FAQListProps {
   faqs: FAQItem[];
@@ -20,18 +21,18 @@ export function FAQList({
 }: FAQListProps) {
   if (faqs.length === 0 && showNoResults) {
     return (
-      <div className="py-12 text-center">
-        <p className="text-slate-400 mb-4">
-          {searchQuery ? (
-            <>No questions found for &ldquo;{searchQuery}&rdquo;</>
-          ) : (
-            <>No questions available.</>
-          )}
-        </p>
-        {searchQuery && (
-          <p className="text-sm text-slate-500">Try different keywords or browse all categories.</p>
+      <ThemedFAQNoResults>
+        {searchQuery ? (
+          <>No questions found for &ldquo;{searchQuery}&rdquo;</>
+        ) : (
+          <>No questions available.</>
         )}
-      </div>
+        {searchQuery && (
+          <p className="text-sm text-slate-500 dark:text-slate-500 mt-2">
+            Try different keywords or browse all categories.
+          </p>
+        )}
+      </ThemedFAQNoResults>
     );
   }
 

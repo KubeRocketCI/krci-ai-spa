@@ -2,8 +2,16 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Search, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ThemedButton } from '@/components/ui/themed-button';
 import { FAQCategory, FAQ_CATEGORY_LABELS } from '@/lib/faq-data';
+import {
+  ThemedFAQSearchContainer,
+  ThemedFAQSearchInput,
+  ThemedFAQSearchField,
+  ThemedFAQCategoryContainer,
+  ThemedFAQCategoryButton,
+  ThemedFAQResultsCount,
+} from '@/components/ui/themed-faq-search';
 
 interface FAQSearchProps {
   searchQuery: string;
@@ -60,11 +68,11 @@ export function FAQSearch({
   const categories = Object.entries(FAQ_CATEGORY_LABELS) as [FAQCategory, string][];
 
   return (
-    <div className="space-y-4">
+    <ThemedFAQSearchContainer>
       {/* Simple Search Input */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-        <input
+      <ThemedFAQSearchInput>
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-600 dark:text-slate-400" />
+        <ThemedFAQSearchField
           ref={searchInputRef}
           type="text"
           placeholder="Search questions..."
@@ -72,53 +80,44 @@ export function FAQSearch({
           onChange={e => setLocalQuery(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className="w-full pl-10 pr-10 py-2 bg-black border border-slate-700 rounded text-slate-200 placeholder-slate-500 focus:outline-none focus:border-slate-500 transition-colors"
         />
         {hasActiveFilters && (
-          <Button
+          <ThemedButton
             variant="ghost"
             size="sm"
             onClick={clearSearch}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-200 h-6 w-6 p-0"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-slate-600 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 h-6 w-6 p-0"
           >
             <X className="w-4 h-4" />
-          </Button>
+          </ThemedButton>
         )}
-      </div>
+      </ThemedFAQSearchInput>
 
       {/* Simple Category Filter */}
-      <div className="flex flex-wrap gap-2">
-        <button
+      <ThemedFAQCategoryContainer>
+        <ThemedFAQCategoryButton
           onClick={() => onCategoryChange('all')}
-          className={`px-3 py-1 text-sm rounded transition-colors ${
-            selectedCategory === 'all'
-              ? 'bg-slate-700 text-slate-200'
-              : 'text-slate-400 hover:text-slate-300'
-          }`}
+          isActive={selectedCategory === 'all'}
         >
           All
-        </button>
+        </ThemedFAQCategoryButton>
         {categories.map(([category, label]) => (
-          <button
+          <ThemedFAQCategoryButton
             key={category}
             onClick={() => onCategoryChange(category)}
-            className={`px-3 py-1 text-sm rounded transition-colors ${
-              selectedCategory === category
-                ? 'bg-slate-700 text-slate-200'
-                : 'text-slate-400 hover:text-slate-300'
-            }`}
+            isActive={selectedCategory === category}
           >
             {label}
-          </button>
+          </ThemedFAQCategoryButton>
         ))}
-      </div>
+      </ThemedFAQCategoryContainer>
 
       {/* Results count */}
       {hasActiveFilters && (
-        <div className="text-sm text-slate-500">
+        <ThemedFAQResultsCount>
           {resultsCount} result{resultsCount !== 1 ? 's' : ''}
-        </div>
+        </ThemedFAQResultsCount>
       )}
-    </div>
+    </ThemedFAQSearchContainer>
   );
 }

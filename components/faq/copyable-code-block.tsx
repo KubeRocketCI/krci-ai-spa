@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ThemedCodeBlock } from '@/components/ui/themed-code-block';
+import { ThemedInlineCode } from '@/components/ui/themed-inline-code';
 
 interface CopyableCodeBlockProps {
   code: string;
@@ -28,30 +30,32 @@ export function CopyableCodeBlock({
   };
 
   return (
-    <div
-      className={`bg-gray-900 border border-green-700/30 rounded-lg overflow-hidden ${className}`}
-    >
-      {/* Header with language and copy button */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-800/50 border-b border-green-700/30">
-        <span className="text-green-400 text-xs font-mono uppercase tracking-wide">{language}</span>
-        <Button
-          size="sm"
-          variant="ghost"
-          onClick={copyToClipboard}
-          className="text-cyan-300 hover:text-cyan-200 h-6 px-2"
-          aria-label="Copy command to clipboard"
-        >
-          {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-        </Button>
-      </div>
+    <ThemedCodeBlock variant="terminal" className={className}>
+      <div className="relative">
+        {/* Header with language and copy button */}
+        <div className="flex items-center justify-between px-4 py-2 bg-black/20 dark:bg-gray-800/50 border-b border-green-300/20 dark:border-green-700/30">
+          <span className="text-green-600 dark:text-green-400 text-xs font-mono uppercase tracking-wide">
+            {language}
+          </span>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={copyToClipboard}
+            className="text-cyan-600 hover:text-cyan-500 dark:text-cyan-300 dark:hover:text-cyan-200 h-6 px-2"
+            aria-label="Copy command to clipboard"
+          >
+            {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+          </Button>
+        </div>
 
-      {/* Code content */}
-      <div className="p-4">
-        <pre className="text-green-400 text-sm font-mono whitespace-pre-wrap overflow-x-auto">
-          <code>{code.trim()}</code>
-        </pre>
+        {/* Code content */}
+        <div className="p-4">
+          <pre className="text-sm font-mono whitespace-pre-wrap overflow-x-auto">
+            <code>{code.trim()}</code>
+          </pre>
+        </div>
       </div>
-    </div>
+    </ThemedCodeBlock>
   );
 }
 
@@ -74,8 +78,9 @@ export function InlineCommand({ command, className = '' }: InlineCommandProps) {
   };
 
   return (
-    <span
-      className={`inline-flex items-center gap-1 bg-slate-800 hover:bg-slate-700 text-cyan-400 px-2 py-1 rounded font-mono text-xs cursor-pointer transition-colors group ${className}`}
+    <ThemedInlineCode
+      variant="command"
+      className={`group ${className}`}
       onClick={copyToClipboard}
       role="button"
       tabIndex={0}
@@ -89,8 +94,12 @@ export function InlineCommand({ command, className = '' }: InlineCommandProps) {
     >
       <code>{command}</code>
       <span className="opacity-0 group-hover:opacity-100 transition-opacity">
-        {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3" />}
+        {copied ? (
+          <Check className="w-3 h-3 text-green-600 dark:text-green-400" />
+        ) : (
+          <Copy className="w-3 h-3" />
+        )}
       </span>
-    </span>
+    </ThemedInlineCode>
   );
 }

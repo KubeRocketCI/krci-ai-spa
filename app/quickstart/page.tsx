@@ -1,9 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { FRAMEWORK_METRICS } from '@/lib/constants';
 import {
   Copy,
@@ -16,11 +13,28 @@ import {
   CheckCircle,
   ShieldCheck,
 } from 'lucide-react';
-import Link from 'next/link';
 import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
 import { FAQPreview } from '@/components/faq/faq-preview';
 import { getQuickstartFAQs } from '@/lib/faq-data';
+import { ThemedHeading } from '@/components/ui/themed-heading';
+import { ThemedText } from '@/components/ui/themed-text';
+import { ThemedButton } from '@/components/ui/themed-button';
+import { ThemedCard, ThemedCardHeader, ThemedCardTitle } from '@/components/ui/themed-card';
+import { ThemedBadge } from '@/components/ui/themed-badge';
+import { ThemedLink } from '@/components/ui/themed-link';
+import { ThemedBackground } from '@/components/ui/themed-background';
+import {
+  ThemedInstallationTitle,
+  ThemedInstallationCodeBlock,
+  ThemedInstallationCommand,
+  ThemedInstallationComment,
+} from '@/components/ui/themed-installation';
+import {
+  ThemedFeatureIcon,
+  ThemedFeatureTitle,
+  ThemedFeatureDescription,
+} from '@/components/ui/themed-feature';
 
 // Constants
 const INSTALL_COMMANDS = {
@@ -217,41 +231,40 @@ Usage instructions:
   ];
 
   return (
-    <div className="min-h-screen bg-black text-slate-200 font-sans">
+    <ThemedBackground variant="main" className="min-h-screen font-sans">
       <SharedHeader currentPage="quickstart" />
 
       {/* Hero Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto text-center max-w-4xl">
-          <Badge className="mb-6 bg-green-900/30 text-green-300 border-green-700">
+          <ThemedBadge variant="primary" className="mb-6">
             Quick Start Guide
-          </Badge>
+          </ThemedBadge>
 
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
+          <ThemedHeading level={1} variant="hero" className="mb-6">
             Get Running in
             <br />
             <span className="text-5xl md:text-7xl">3 Minutes</span>
-          </h1>
+          </ThemedHeading>
 
-          <p className="text-xl text-slate-300/80 mb-8 max-w-2xl mx-auto">
+          <ThemedText variant="lead" size="xl" className="mb-8 max-w-2xl mx-auto block">
             From zero to AI agent management with KubeRocketAI. No plugins, no complex setup—just
             pure developer productivity.
-          </p>
+          </ThemedText>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {features.map((feature, index) => (
-              <Card
-                key={index}
-                className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors"
-              >
-                <CardContent className="p-4 text-center">
-                  <div className="text-cyan-400 mb-2 flex justify-center">{feature.icon}</div>
-                  <div className="text-2xl font-bold text-green-300 mb-1">{feature.highlight}</div>
-                  <div className="text-sm font-semibold text-slate-200 mb-1">{feature.title}</div>
-                  <div className="text-xs text-slate-400">{feature.description}</div>
-                </CardContent>
-              </Card>
+              <ThemedCard key={index} variant="highlight">
+                <div className="p-4 text-center">
+                  <ThemedFeatureIcon>{feature.icon}</ThemedFeatureIcon>
+                  <div className="text-2xl font-bold text-emerald-700 dark:text-green-300 mb-1">
+                    {feature.highlight}
+                  </div>
+                  <ThemedFeatureTitle>{feature.title}</ThemedFeatureTitle>
+                  <ThemedFeatureDescription>{feature.description}</ThemedFeatureDescription>
+                </div>
+              </ThemedCard>
             ))}
           </div>
         </div>
@@ -260,230 +273,253 @@ Usage instructions:
       {/* Installation */}
       <section id="install" className="py-16 px-4">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold text-center mb-12 text-cyan-400">
+          <ThemedHeading level={2} variant="section" className="text-center mb-12">
             Install KubeRocketAI
-          </h2>
+          </ThemedHeading>
 
           <div className="space-y-6">
             {/* macOS - Homebrew (Recommended) */}
-            <Card className="bg-gray-900/50 border-green-700/30">
-              <CardHeader>
-                <CardTitle className="text-green-300 flex items-center">
+            <ThemedCard variant="terminal">
+              <ThemedCardHeader variant="terminal">
+                <ThemedInstallationTitle className="flex items-center">
                   <Terminal className="w-5 h-5 mr-2" />
                   macOS (Recommended)
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-black rounded-lg p-4 flex items-start justify-between font-mono">
-                  <pre className="text-green-400 text-sm">
-                    <code>{INSTALL_COMMANDS.macos}</code>
-                  </pre>
-                  <Button
+                </ThemedInstallationTitle>
+              </ThemedCardHeader>
+              <div className="p-6 pt-4">
+                <ThemedInstallationCodeBlock>
+                  <div className="flex-1 mr-2">
+                    <ThemedInstallationCommand>{INSTALL_COMMANDS.macos}</ThemedInstallationCommand>
+                  </div>
+                  <ThemedButton
                     size="sm"
-                    variant="ghost"
+                    variant="copy"
                     onClick={() => copyToClipboard(INSTALL_COMMANDS.macos, 'macos')}
-                    className="text-cyan-300 hover:text-cyan-200 ml-4"
+                    className="flex-shrink-0"
+                    aria-label="Copy macOS install commands"
                   >
                     {copiedCommand === 'macos' ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
                     )}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                  </ThemedButton>
+                </ThemedInstallationCodeBlock>
+              </div>
+            </ThemedCard>
 
             {/* Linux/Windows */}
-            <Card className="bg-gray-900/50 border-green-700/30">
-              <CardHeader>
-                <CardTitle className="text-green-300 flex items-center">
+            <ThemedCard variant="terminal">
+              <ThemedCardHeader variant="terminal">
+                <ThemedInstallationTitle className="flex items-center">
                   <Code className="w-5 h-5 mr-2" />
                   Linux/Windows
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-black rounded-lg p-4 flex items-start justify-between font-mono">
-                  <pre className="text-green-400 text-sm whitespace-pre-wrap">
-                    <code>{INSTALL_COMMANDS.linux}</code>
-                  </pre>
-                  <Button
+                </ThemedInstallationTitle>
+              </ThemedCardHeader>
+              <div className="p-6 pt-4">
+                <ThemedInstallationCodeBlock>
+                  <div className="flex-1 mr-2">
+                    <ThemedInstallationCommand>{INSTALL_COMMANDS.linux}</ThemedInstallationCommand>
+                  </div>
+                  <ThemedButton
                     size="sm"
-                    variant="ghost"
+                    variant="copy"
                     onClick={() => copyToClipboard(INSTALL_COMMANDS.linux, 'linux')}
-                    className="text-cyan-300 hover:text-cyan-200 ml-4"
+                    className="flex-shrink-0"
+                    aria-label="Copy Linux install commands"
                   >
                     {copiedCommand === 'linux' ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
                     )}
-                  </Button>
-                </div>
-                <p className="text-green-300/60 text-sm mt-2">
-                  Windows users: Download from
-                  <a
+                  </ThemedButton>
+                </ThemedInstallationCodeBlock>
+                <ThemedInstallationComment className="mt-2">
+                  Windows users: Download from{' '}
+                  <ThemedLink
                     href="https://github.com/KubeRocketCI/kuberocketai/releases/latest"
-                    className="text-cyan-400 hover:text-cyan-300 ml-1"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    variant="primary"
+                    external
+                    className="ml-1"
                   >
                     releases page
-                  </a>
-                </p>
-              </CardContent>
-            </Card>
+                  </ThemedLink>
+                </ThemedInstallationComment>
+              </div>
+            </ThemedCard>
           </div>
         </div>
       </section>
 
       {/* Your First 3 Minutes */}
-      <section id="agents" className="py-16 px-4 bg-gray-900/20">
-        <div className="container mx-auto max-w-5xl">
-          <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">Start in 3 Minutes</h2>
+      <section id="agents" className="py-16 px-4">
+        <ThemedBackground variant="section" className="py-16 px-4 -mx-4">
+          <div className="container mx-auto max-w-5xl">
+            <ThemedHeading level={2} variant="section" className="text-center mb-12">
+              Start in 3 Minutes
+            </ThemedHeading>
 
-          <div className="space-y-8">
-            {quickstartSteps.map((stepData, index) => (
-              <Card
-                key={index}
-                className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-all duration-300"
-              >
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-green-300 flex items-center">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold flex items-center justify-center mr-3">
-                        {stepData.step}
-                      </div>
-                      {stepData.title}
-                      <Badge className="ml-3 bg-green-900/30 text-green-300 border-green-700">
-                        {stepData.time}
-                      </Badge>
-                    </CardTitle>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleStepComplete(index)}
-                      className={`${completedSteps.includes(index) ? 'text-green-400' : 'text-slate-400'} hover:text-green-300`}
-                    >
-                      <CheckCircle className="w-5 h-5" />
-                    </Button>
-                  </div>
-                  <p className="text-slate-400 ml-11">{stepData.description}</p>
-                </CardHeader>
-                <CardContent>
-                  {/* Command */}
-                  <div className="bg-gray-900 border border-green-700/30 rounded-lg p-4 mb-4 font-mono">
-                    <div className="flex items-center mb-2">
-                      <div className="flex space-x-2" aria-hidden="true">
-                        <div
-                          className="w-3 h-3 bg-red-500 rounded-full"
-                          title="Close button (decorative)"
-                        ></div>
-                        <div
-                          className="w-3 h-3 bg-yellow-500 rounded-full"
-                          title="Minimize button (decorative)"
-                        ></div>
-                        <div
-                          className="w-3 h-3 bg-green-500 rounded-full"
-                          title="Maximize button (decorative)"
-                        ></div>
-                      </div>
-                      <span className="ml-4 text-green-400 text-sm">terminal</span>
-                    </div>
+            <div className="space-y-8">
+              {quickstartSteps.map((stepData, index) => (
+                <ThemedCard key={index} variant="highlight">
+                  <ThemedCardHeader variant="step">
                     <div className="flex items-center justify-between">
-                      <div className="text-green-400">
-                        <span className="text-blue-400">$ </span>
-                        {stepData.command}
-                      </div>
-                      <Button
-                        size="sm"
+                      <ThemedCardTitle variant="step" className="flex items-center">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold flex items-center justify-center mr-3">
+                          {stepData.step}
+                        </div>
+                        {stepData.title}
+                        <ThemedBadge variant="success" className="ml-3">
+                          {stepData.time}
+                        </ThemedBadge>
+                      </ThemedCardTitle>
+                      <ThemedButton
                         variant="ghost"
-                        onClick={() => copyToClipboard(stepData.command, `step-${index}`)}
-                        className="text-cyan-300 hover:text-cyan-200"
+                        size="sm"
+                        onClick={() => toggleStepComplete(index)}
+                        className={`${completedSteps.includes(index) ? 'text-green-600 dark:text-green-400' : 'text-slate-600 dark:text-slate-400'} hover:text-green-600 dark:hover:text-green-300`}
                       >
-                        {copiedCommand === `step-${index}` ? (
-                          <Check className="w-4 h-4" />
-                        ) : (
-                          <Copy className="w-4 h-4" />
-                        )}
-                      </Button>
+                        <CheckCircle className="w-5 h-5" />
+                      </ThemedButton>
+                    </div>
+                    <ThemedText variant="muted" className="ml-11">
+                      {stepData.description}
+                    </ThemedText>
+                  </ThemedCardHeader>
+                  <div className="p-6 pt-4">
+                    {/* Command */}
+                    <div className="bg-gray-100/90 dark:bg-gray-900 border border-yellow-200 dark:border-green-700/30 rounded-lg p-4 mb-4 font-mono">
+                      <div className="flex items-center mb-2">
+                        <div className="flex space-x-2" aria-hidden="true">
+                          <div
+                            className="w-3 h-3 bg-red-500 rounded-full"
+                            title="Close button (decorative)"
+                          ></div>
+                          <div
+                            className="w-3 h-3 bg-yellow-500 rounded-full"
+                            title="Minimize button (decorative)"
+                          ></div>
+                          <div
+                            className="w-3 h-3 bg-green-500 rounded-full"
+                            title="Maximize button (decorative)"
+                          ></div>
+                        </div>
+                        <span className="ml-4 text-emerald-700 dark:text-green-400 text-sm">
+                          terminal
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="text-emerald-700 dark:text-green-400">
+                          <span className="text-blue-600 dark:text-blue-400">$ </span>
+                          {stepData.command}
+                        </div>
+                        <ThemedButton
+                          size="sm"
+                          variant="copy"
+                          onClick={() => copyToClipboard(stepData.command, `step-${index}`)}
+                          className="flex-shrink-0"
+                          aria-label={`Copy step ${stepData.step} command`}
+                        >
+                          {copiedCommand === `step-${index}` ? (
+                            <Check className="w-4 h-4" />
+                          ) : (
+                            <Copy className="w-4 h-4" />
+                          )}
+                        </ThemedButton>
+                      </div>
+                    </div>
+
+                    {/* Output */}
+                    <div className="bg-gray-50 dark:bg-black rounded-lg p-4 font-mono">
+                      <div className="text-emerald-700 dark:text-green-400 text-sm mb-2 opacity-60">
+                        Output:
+                      </div>
+                      <pre className="text-slate-700 dark:text-green-300 text-sm whitespace-pre-wrap">
+                        {stepData.output}
+                      </pre>
                     </div>
                   </div>
-
-                  {/* Output */}
-                  <div className="bg-black rounded-lg p-4 font-mono">
-                    <div className="text-green-400 text-sm mb-2 opacity-60">Output:</div>
-                    <pre className="text-green-300 text-sm whitespace-pre-wrap">
-                      {stepData.output}
-                    </pre>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                </ThemedCard>
+              ))}
+            </div>
           </div>
-        </div>
+        </ThemedBackground>
       </section>
 
       {/* Next Steps */}
       <section id="usage" className="py-16 px-4">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-6 text-cyan-400">🎯 You&apos;re Ready!</h2>
-          <p className="text-lg text-green-300/80 mb-8">
+          <ThemedHeading level={2} variant="section" className="mb-6">
+            🎯 You&apos;re Ready!
+          </ThemedHeading>
+          <ThemedText variant="body" size="lg" className="mb-8 block">
             Your agents are ready to be customized with project context using reusable SDLC
             framework rules.
-          </p>
+          </ThemedText>
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
-              <CardContent className="p-6 text-center flex flex-col h-full">
-                <Code className="w-8 h-8 text-cyan-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-green-300 mb-2">Core Concepts</h3>
-                <p className="text-slate-400 text-sm mb-4 flex-grow">
+            <ThemedCard variant="highlight" className="border-cyan-500/30 hover:border-cyan-400/60">
+              <div className="p-6 text-center flex flex-col h-full">
+                <ThemedFeatureIcon>
+                  <Code className="w-8 h-8" />
+                </ThemedFeatureIcon>
+                <ThemedFeatureTitle className="text-lg mb-2">Core Concepts</ThemedFeatureTitle>
+                <ThemedFeatureDescription className="text-sm mb-4 flex-grow">
                   Understand framework fundamentals and principles
-                </p>
-                <Button
-                  variant="outline"
-                  className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent mt-auto"
-                >
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
+                </ThemedFeatureDescription>
+                <ThemedButton variant="outline" className="mt-auto" asChild>
+                  <ThemedLink
+                    href="https://www.youtube.com/@theplatformteam/shorts"
+                    variant="button"
+                    external
+                  >
+                    Learn More
+                  </ThemedLink>
+                </ThemedButton>
+              </div>
+            </ThemedCard>
 
-            <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
-              <CardContent className="p-6 text-center flex flex-col h-full">
-                <GitBranch className="w-8 h-8 text-blue-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-green-300 mb-2">Architecture</h3>
-                <p className="text-slate-400 text-sm mb-4 flex-grow">
+            <ThemedCard variant="highlight" className="border-blue-500/30 hover:border-blue-400/60">
+              <div className="p-6 text-center flex flex-col h-full">
+                <ThemedFeatureIcon>
+                  <GitBranch className="w-8 h-8" />
+                </ThemedFeatureIcon>
+                <ThemedFeatureTitle className="text-lg mb-2">Architecture</ThemedFeatureTitle>
+                <ThemedFeatureDescription className="text-sm mb-4 flex-grow">
                   See how components work together seamlessly
-                </p>
-                <Button
-                  variant="outline"
-                  className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent mt-auto"
-                  asChild
-                >
-                  <Link href="/architecture" aria-label="View system architecture">
+                </ThemedFeatureDescription>
+                <ThemedButton variant="outline" className="mt-auto" asChild>
+                  <ThemedLink href="/architecture" variant="button">
                     View Architecture
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+                  </ThemedLink>
+                </ThemedButton>
+              </div>
+            </ThemedCard>
 
-            <Card className="bg-black/50 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
-              <CardContent className="p-6 text-center flex flex-col h-full">
-                <Users className="w-8 h-8 text-green-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-green-300 mb-2">Contributing</h3>
-                <p className="text-slate-400 text-sm mb-4 flex-grow">
+            <ThemedCard
+              variant="highlight"
+              className="border-green-500/30 hover:border-green-400/60"
+            >
+              <div className="p-6 text-center flex flex-col h-full">
+                <ThemedFeatureIcon>
+                  <Users className="w-8 h-8" />
+                </ThemedFeatureIcon>
+                <ThemedFeatureTitle className="text-lg mb-2">Contributing</ThemedFeatureTitle>
+                <ThemedFeatureDescription className="text-sm mb-4 flex-grow">
                   Customize and extend the framework rules
-                </p>
-                <Button
-                  variant="outline"
-                  className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent mt-auto"
-                >
-                  Contribute
-                </Button>
-              </CardContent>
-            </Card>
+                </ThemedFeatureDescription>
+                <ThemedButton variant="outline" className="mt-auto" asChild>
+                  <ThemedLink
+                    href="https://github.com/KubeRocketCI/kuberocketai/blob/main/CONTRIBUTING.md"
+                    variant="button"
+                    external
+                  >
+                    Contribute
+                  </ThemedLink>
+                </ThemedButton>
+              </div>
+            </ThemedCard>
           </div>
         </div>
       </section>
@@ -493,6 +529,6 @@ Usage instructions:
 
       {/* Footer */}
       <SharedFooter />
-    </div>
+    </ThemedBackground>
   );
 }

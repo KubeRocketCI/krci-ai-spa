@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import Link from 'next/link';
 import Head from 'next/head';
 import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
+import { ThemedHeading } from '@/components/ui/themed-heading';
+import { ThemedBackground } from '@/components/ui/themed-background';
+import { ThemedLink } from '@/components/ui/themed-link';
 import { FAQSearch } from '@/components/faq/faq-search';
 import { FAQList } from '@/components/faq/faq-list';
 import { CollapseAllButton, CollapseAllButtonMobile } from '@/components/faq/collapse-all-button';
@@ -82,13 +84,15 @@ export default function FAQPage() {
       <JsonLd>{faqSchema}</JsonLd>
       <JsonLd>{breadcrumbSchema}</JsonLd>
 
-      <div className="min-h-screen bg-black text-slate-200 font-sans">
+      <ThemedBackground variant="main" className="min-h-screen font-sans">
         <SharedHeader currentPage="faq" />
 
         {/* Clean Header */}
         <section className="py-8 px-4">
           <div className="container mx-auto max-w-6xl">
-            <h1 className="text-3xl font-bold text-slate-200 mb-2">Frequently asked questions</h1>
+            <ThemedHeading level={1} variant="hero" className="mb-2 !text-3xl">
+              Frequently asked questions
+            </ThemedHeading>
             <p className="text-slate-400">
               Find answers to common questions about installation, implementation, and usage.
             </p>
@@ -139,31 +143,25 @@ export default function FAQPage() {
         </section>
 
         {/* Simple Help Section */}
-        <section className="py-8 px-4 border-t border-slate-700/30 bg-slate-900/10">
+        <section className="py-8 px-4 border-t border-slate-300/30 dark:border-slate-700/30 bg-slate-200/10 dark:bg-slate-900/10">
           <div className="container mx-auto max-w-6xl text-center">
             <p className="text-slate-400 mb-4">
               Still have questions? Check the{' '}
-              <Link href="/quickstart" className="text-cyan-400 hover:text-cyan-300 underline">
+              <ThemedLink href="/quickstart" variant="primary">
                 Quick Start Guide
-              </Link>{' '}
+              </ThemedLink>{' '}
               or visit our{' '}
-              <a
+              <ThemedLink
                 href="https://github.com/KubeRocketCI/kuberocketai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-400 hover:text-cyan-300 underline"
+                variant="primary"
+                external
               >
                 documentation
-              </a>
+              </ThemedLink>
               . Need fast feedback?{' '}
-              <a
-                href="https://t.me/kuberocketai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-400 hover:text-cyan-300 underline"
-              >
+              <ThemedLink href="https://t.me/kuberocketai" variant="primary" external>
                 Join Telegram
-              </a>
+              </ThemedLink>
               .
             </p>
           </div>
@@ -171,7 +169,7 @@ export default function FAQPage() {
 
         {/* Footer */}
         <SharedFooter />
-      </div>
+      </ThemedBackground>
     </>
   );
 }
