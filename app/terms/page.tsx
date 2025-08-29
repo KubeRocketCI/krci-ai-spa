@@ -45,9 +45,9 @@ export default function TermsPage() {
             <h2 className="font-semibold text-blue-400 mb-2">🚀 Project Notice</h2>
             <p>
               KubeRocketAI is developed by KubeRocketCI team members in their spare time as an
-              open-source initiative. This is open-source software provided "AS IS" with NO
-              commercial backing, warranties, or formal support. We're sharing our AI-as-Code tools
-              with the developer community as an open-source contribution!
+              open-source initiative. This is open-source software provided &quot;AS IS&quot; with
+              NO commercial backing, warranties, or formal support. We&apos;re sharing our
+              AI-as-Code tools with the developer community as an open-source contribution!
             </p>
           </div>
 
@@ -87,8 +87,8 @@ export default function TermsPage() {
             <h3 className="text-lg font-medium text-gray-200 mb-2">1.2 Updates to Terms</h3>
             <p>
               We may revise these terms from time to time. The most current version will always be
-              posted on this page. For significant changes, we'll notify users via email or website
-              banner. Continued use after changes constitutes acceptance of new terms.
+              posted on this page. For significant changes, we&apos;ll notify users via email or
+              website banner. Continued use after changes constitutes acceptance of new terms.
             </p>
           </section>
 
@@ -132,9 +132,9 @@ export default function TermsPage() {
 
             <h3 className="text-lg font-medium text-gray-200 mb-2">2.2 Framework Disclaimers</h3>
             <p className="mb-3 uppercase font-semibold">
-              THE FRAMEWORK SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-              IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-              PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+              THE FRAMEWORK SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+              EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+              FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
             </p>
 
             <h3 className="text-lg font-medium text-gray-200 mb-2">2.3 User Responsibilities</h3>
@@ -208,8 +208,8 @@ export default function TermsPage() {
             <h3 className="text-lg font-medium text-gray-200 mb-2">4.1 Service Disclaimers</h3>
             <p className="mb-3 uppercase font-semibold">IMPORTANT: READ CAREFULLY</p>
             <p className="mb-3">
-              Our website and services are provided "AS IS" and "AS AVAILABLE" without warranties of
-              any kind, either express or implied, including:
+              Our website and services are provided &quot;AS IS&quot; and &quot;AS AVAILABLE&quot;
+              without warranties of any kind, either express or implied, including:
             </p>
             <ul className="list-disc list-inside ml-4 space-y-1 mb-4">
               <li>Merchantability, fitness for particular purpose, or non-infringement</li>
@@ -237,7 +237,7 @@ export default function TermsPage() {
                 legal theory
               </li>
               <li>
-                These limitations apply even if we've been advised of the possibility of such
+                These limitations apply even if we&apos;ve been advised of the possibility of such
                 damages
               </li>
             </ul>
@@ -279,7 +279,8 @@ export default function TermsPage() {
             <h3 className="text-lg font-medium text-gray-200 mb-2">6.1 Age Restrictions</h3>
             <p className="mb-4">
               You must be at least 13 years old to use this Service. If you are under 18, you
-              represent that you have your parent's or guardian's permission to use the Service.
+              represent that you have your parent&apos;s or guardian&apos;s permission to use the
+              Service.
             </p>
 
             <h3 className="text-lg font-medium text-gray-200 mb-2">6.2 Indemnification</h3>
@@ -323,7 +324,7 @@ export default function TermsPage() {
                 <li>Ukrainian civil and commercial law applies</li>
                 <li>Consumer protection under Ukrainian law where applicable</li>
                 <li>
-                  Compliance efforts with EU-aligned standards as part of Ukraine's European
+                  Compliance efforts with EU-aligned standards as part of Ukraine&apos;s European
                   integration
                 </li>
                 <li>
@@ -338,8 +339,8 @@ export default function TermsPage() {
               If You have any concern or dispute about the Service, You agree to first try to
               resolve the dispute informally by contacting us through our community channels (GitHub
               issues, Telegram, or email). Given the open-source nature of this project and current
-              Ukrainian circumstances, we'll make reasonable efforts to address concerns through
-              community channels, but formal dispute resolution processes may be limited. We
+              Ukrainian circumstances, we&apos;ll make reasonable efforts to address concerns
+              through community channels, but formal dispute resolution processes may be limited. We
               prioritize community-based resolution of issues.
             </p>
           </section>

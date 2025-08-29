@@ -45,9 +45,9 @@ export default function PrivacyPage() {
             <h2 className="font-semibold text-blue-400 mb-2">Project Notice</h2>
             <p>
               KubeRocketAI is developed by KubeRocketCI team members in their spare time as an
-              open-source initiative. This is NOT a commercial service - we're building open-source
-              tools for the AI-as-Code community! We collect only essential data and prioritize
-              privacy as fellow developers who understand data protection concerns.
+              open-source initiative. This is NOT a commercial service - we&apos;re building
+              open-source tools for the AI-as-Code community! We collect only essential data and
+              prioritize privacy as fellow developers who understand data protection concerns.
             </p>
           </div>
 
@@ -99,7 +99,9 @@ export default function PrivacyPage() {
               4:
             </p>
             <ul className="list-disc list-inside ml-4 space-y-1 mb-4">
-              <li>Your Device's Internet Protocol address (IP address, anonymized by Google)</li>
+              <li>
+                Your Device&apos;s Internet Protocol address (IP address, anonymized by Google)
+              </li>
               <li>Browser type and version</li>
               <li>Pages of our Service that you visit</li>
               <li>Time and date of your visit</li>
@@ -222,7 +224,7 @@ export default function PrivacyPage() {
 
             <h3 className="text-lg font-medium text-gray-200 mb-2">5.2 Data Retention</h3>
             <ul className="list-disc list-inside ml-4 space-y-1 mb-4">
-              <li>Usage Data (Google Analytics): 26 months (Google's default)</li>
+              <li>Usage Data (Google Analytics): 26 months (Google&apos;s default)</li>
               <li>Email Addresses: Until you unsubscribe or request deletion</li>
               <li>Early Adopter Information: 2 years or until program completion</li>
               <li>Community Contributions: As long as relevant to the project</li>
@@ -232,8 +234,8 @@ export default function PrivacyPage() {
             <p>
               Your information may be processed in countries outside Ukraine, including United
               States (Google Analytics, GitHub, Vercel servers) and European Union. We ensure
-              appropriate safeguards including Google's EU-US Data Privacy Framework compliance and
-              standard contractual clauses.
+              appropriate safeguards including Google&apos;s EU-US Data Privacy Framework compliance
+              and standard contractual clauses.
             </p>
           </section>
 
@@ -249,7 +251,7 @@ export default function PrivacyPage() {
 
             <h3 className="text-lg font-medium text-gray-200 mb-2">6.2 Your Control Over Data</h3>
             <p className="mb-3">
-              Since we don't store personal data on our servers, your data control is
+              Since we don&apos;t store personal data on our servers, your data control is
               straightforward:
             </p>
             <ul className="list-disc list-inside ml-4 space-y-1 mb-4">
@@ -277,9 +279,9 @@ export default function PrivacyPage() {
 
             <div className="bg-slate-800/50 border border-slate-600/30 p-3 rounded">
               <p className="text-gray-300 text-sm">
-                <strong>Simple Truth:</strong> We don't store your personal data on our servers.
-                Third-party services (Google Analytics, GitHub, Telegram) manage their own data
-                according to their privacy policies.
+                <strong>Simple Truth:</strong> We don&apos;t store your personal data on our
+                servers. Third-party services (Google Analytics, GitHub, Telegram) manage their own
+                data according to their privacy policies.
               </p>
             </div>
           </section>
@@ -306,9 +308,9 @@ export default function PrivacyPage() {
             <h3 className="text-lg font-medium text-gray-200 mb-2">7.2 Policy Updates</h3>
             <p className="mb-3">We may update this privacy policy from time to time. When we do:</p>
             <ul className="list-disc list-inside ml-4 space-y-1 mb-4">
-              <li>We'll post the updated policy on this page</li>
-              <li>We'll update the "Last Updated" date at the top</li>
-              <li>For significant changes, we'll notify through community channels</li>
+              <li>We&apos;ll post the updated policy on this page</li>
+              <li>We&apos;ll update the &quot;Last Updated&quot; date at the top</li>
+              <li>For significant changes, we&apos;ll notify through community channels</li>
               <li>Your continued use constitutes acceptance of the updated policy</li>
             </ul>
 
@@ -330,7 +332,7 @@ export default function PrivacyPage() {
             <p>
               As an open-source project from Ukraine, we believe in transparency and global
               developer collaboration. Our privacy practices align with our commitment to open
-              development, minimal data collection, and respect for fellow developers' privacy
+              development, minimal data collection, and respect for fellow developers&apos; privacy
               worldwide.
             </p>
           </section>
