@@ -1,9 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { getTopFAQs, FAQItem } from '@/lib/faq-data';
 import { FAQItemComponent } from './faq-item';
+import { ThemedFAQSection } from '@/components/ui/themed-faq-section';
+import { ThemedButton } from '@/components/ui/themed-button';
 
 interface FAQPreviewProps {
   count?: number;
@@ -14,11 +15,13 @@ export function FAQPreview({ count = 4, faqs }: FAQPreviewProps) {
   const topFAQs = faqs || getTopFAQs(count);
 
   return (
-    <section className="py-16 px-4 bg-gray-900/10">
+    <ThemedFAQSection variant="preview">
       <div className="container mx-auto max-w-6xl">
         {/* Compact Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-cyan-400">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold text-cyan-600 dark:text-cyan-400">
+            Frequently Asked Questions
+          </h2>
         </div>
 
         {/* Two-column FAQ Grid */}
@@ -30,16 +33,11 @@ export function FAQPreview({ count = 4, faqs }: FAQPreviewProps) {
 
         {/* Simplified View All Button */}
         <div className="text-center">
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-cyan-500 text-cyan-300 hover:bg-cyan-900/20 hover:text-cyan-100 bg-transparent px-8"
-            asChild
-          >
+          <ThemedButton variant="outline" size="lg" className="px-8" asChild>
             <Link href="/faq">View All FAQ</Link>
-          </Button>
+          </ThemedButton>
         </div>
       </div>
-    </section>
+    </ThemedFAQSection>
   );
 }

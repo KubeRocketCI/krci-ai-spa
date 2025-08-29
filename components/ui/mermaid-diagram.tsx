@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTheme } from 'next-themes';
 
 interface MermaidDiagramProps {
   diagram: string;
@@ -17,6 +18,7 @@ export function MermaidDiagram({
   zoom = 1,
 }: MermaidDiagramProps) {
   const diagramRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const initializeMermaid = async () => {
@@ -29,19 +31,21 @@ export function MermaidDiagram({
 
         // Initialize with terminal styling and scale-based sizing
         const isCompact = scale === 'compact';
+        // Configure Mermaid with dynamic theme based on current theme
+        const isDark = theme === 'dark';
         await mermaid.default.initialize({
           startOnLoad: false,
-          theme: 'dark',
+          theme: isDark ? 'dark' : 'base',
           themeVariables: {
-            darkMode: true,
+            darkMode: isDark,
             // Make diagram canvas fully transparent
             background: 'transparent',
             primaryColor: '#22d3ee', // cyan-400
-            primaryTextColor: '#ffffff',
+            primaryTextColor: isDark ? '#ffffff' : '#000000',
             primaryBorderColor: '#06b6d4', // cyan-500
             lineColor: '#10b981', // emerald-500
-            secondaryColor: '#1f2937', // gray-800
-            tertiaryColor: '#374151', // gray-700
+            secondaryColor: isDark ? '#1f2937' : '#f3f4f6', // gray-800 / gray-100
+            tertiaryColor: isDark ? '#374151' : '#e5e7eb', // gray-700 / gray-200
             cScale0: '#22d3ee',
             cScale1: '#10b981',
             cScale2: '#3b82f6',
@@ -53,6 +57,18 @@ export function MermaidDiagram({
             cScale8: '#84cc16',
             cScale9: '#f97316',
             fontSize: isCompact ? '10px' : '18px',
+            // Sequence diagram specific colors
+            actorBkg: isDark ? '#1f2937' : '#f9fafb',
+            actorTextColor: isDark ? '#ffffff' : '#000000',
+            actorLineColor: '#06b6d4',
+            signalColor: isDark ? '#ffffff' : '#000000',
+            signalTextColor: isDark ? '#ffffff' : '#000000',
+            labelBoxBkgColor: isDark ? '#374151' : '#e5e7eb',
+            labelTextColor: isDark ? '#ffffff' : '#000000',
+            loopTextColor: isDark ? '#ffffff' : '#000000',
+            noteBkgColor: isDark ? '#1f2937' : '#fef3c7',
+            noteTextColor: isDark ? '#ffffff' : '#000000',
+            activationBkgColor: '#10b981',
           },
           fontFamily: '"JetBrains Mono", "Fira Code", "Consolas", monospace',
           flowchart: {
@@ -135,7 +151,7 @@ export function MermaidDiagram({
     };
 
     initializeMermaid();
-  }, [diagram, scale, zoom]);
+  }, [diagram, scale, zoom, theme]);
 
   return (
     <div

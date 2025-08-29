@@ -8,8 +8,9 @@ import {
   WebsiteSchema,
 } from './components/StructuredData';
 import { ConsentProvider } from '@/lib/consent-context';
-import { CookieConsent } from '@/components/ui/cookie-consent';
+import { ThemedCookieConsent } from '@/components/ui/themed-cookie-consent';
 import { Analytics, GAScript } from '@/components/analytics';
+import { ThemeProvider } from '@/components/theme/theme-provider';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -139,7 +140,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <OrganizationSchema />
         <SoftwareApplicationSchema />
@@ -147,11 +148,13 @@ export default function RootLayout({
         <GAScript />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans`}>
-        <ConsentProvider>
-          {children}
-          <CookieConsent />
-          <Analytics />
-        </ConsentProvider>
+        <ThemeProvider>
+          <ConsentProvider>
+            {children}
+            <ThemedCookieConsent />
+            <Analytics />
+          </ConsentProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

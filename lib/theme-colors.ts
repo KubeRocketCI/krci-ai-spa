@@ -1,0 +1,60 @@
+/**
+ * Centralized theme color constants
+ * Eliminates duplication across 35+ themed components
+ */
+
+export const THEME_COLORS = {
+  // Text colors - most frequently used
+  text: {
+    primary: 'text-slate-900 dark:text-white',
+    secondary: 'text-slate-700 dark:text-slate-300',
+    muted: 'text-slate-600 dark:text-slate-400',
+    subtle: 'text-slate-500 dark:text-slate-400',
+  },
+
+  // Accent colors - brand consistency
+  accent: {
+    primary: 'text-cyan-700 dark:text-cyan-300',
+    secondary: 'text-cyan-600 dark:text-cyan-400',
+    tertiary: 'text-emerald-700 dark:text-green-400',
+  },
+
+  // Background colors - layout consistency
+  background: {
+    card: 'bg-white dark:bg-black/50',
+    cardHover: 'hover:bg-slate-50 dark:hover:bg-black/80',
+    section: 'bg-gray-50/50 dark:bg-gray-900/20',
+  },
+
+  // Border colors - visual consistency
+  border: {
+    default: 'border-slate-200 dark:border-slate-600',
+    hover: 'hover:border-slate-300 dark:hover:border-slate-500',
+    accent: 'border border-cyan-600 hover:border-cyan-700 dark:border-cyan-500 dark:hover:border-cyan-400', // Button styles
+    card: 'border-cyan-300 dark:border-cyan-700', // Card-specific borders
+  },
+
+  // Gradients - hero elements
+  gradient: {
+    hero: 'bg-gradient-to-r from-cyan-700 via-blue-700 to-emerald-700 dark:from-cyan-300 dark:via-blue-300 dark:to-emerald-300',
+    button:
+      'bg-gradient-to-r from-cyan-600 via-blue-600 to-emerald-600 dark:from-cyan-400 dark:via-blue-500 dark:to-emerald-400',
+  },
+} as const;
+
+/**
+ * Variant style generator utilities
+ * Reduces boilerplate in component files
+ */
+export const createTextVariants = (baseClass = '') => ({
+  primary: `${THEME_COLORS.text.primary} ${baseClass}`,
+  secondary: `${THEME_COLORS.text.secondary} ${baseClass}`,
+  muted: `${THEME_COLORS.text.muted} ${baseClass}`,
+  accent: `${THEME_COLORS.accent.primary} ${baseClass}`,
+});
+
+export const createCardVariants = (baseClass = '') => ({
+  default: `${THEME_COLORS.background.card} ${THEME_COLORS.border.default} ${baseClass}`,
+  hover: `${THEME_COLORS.background.cardHover} ${THEME_COLORS.border.hover} ${baseClass}`,
+  accent: `${THEME_COLORS.background.card} ${THEME_COLORS.border.card} ${baseClass}`,
+});

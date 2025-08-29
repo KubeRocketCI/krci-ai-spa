@@ -1,9 +1,14 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { ThemedButton } from '@/components/ui/themed-button';
+import {
+  ThemedCard,
+  ThemedCardContent,
+  ThemedCardHeader,
+  ThemedCardTitle,
+} from '@/components/ui/themed-card';
+import { ThemedBadge } from '@/components/ui/themed-badge';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { MermaidDiagram } from './mermaid-diagram';
 
@@ -65,17 +70,25 @@ export function DiagramCarousel({ slides, className = '' }: DiagramCarouselProps
 
   return (
     <div className={`relative w-full max-w-6xl mx-auto ${className}`}>
-      <Card className="bg-black/30 border-cyan-700/30 hover:border-cyan-600/50 transition-colors">
-        <CardHeader className="pb-2">
+      <ThemedCard
+        variant="terminal"
+        className="bg-white/30 dark:bg-black/30 border-cyan-600/30 dark:border-cyan-700/30 hover:border-cyan-500/50 dark:hover:border-cyan-600/50 transition-colors"
+      >
+        <ThemedCardHeader variant="terminal" className="pb-2">
           <div className="flex items-center justify-between">
             <div className="text-center flex-1">
-              <Badge className="mb-2 bg-cyan-900/30 text-cyan-300 border-cyan-700">
+              <ThemedBadge variant="primary" className="mb-2">
                 {slides[currentSlide]?.badge}
-              </Badge>
-              <CardTitle className="text-green-300 text-xl">
+              </ThemedBadge>
+              <ThemedCardTitle
+                variant="terminal"
+                className="text-green-600 dark:text-green-300 text-xl"
+              >
                 {slides[currentSlide]?.title}
-              </CardTitle>
-              <p className="text-slate-400 text-sm mt-2">{slides[currentSlide]?.description}</p>
+              </ThemedCardTitle>
+              <p className="text-slate-600 dark:text-slate-400 text-sm mt-2">
+                {slides[currentSlide]?.description}
+              </p>
             </div>
           </div>
 
@@ -87,18 +100,18 @@ export function DiagramCarousel({ slides, className = '' }: DiagramCarouselProps
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   index === currentSlide
-                    ? 'bg-cyan-400 scale-125'
-                    : 'bg-slate-600 hover:bg-slate-500'
+                    ? 'bg-cyan-600 dark:bg-cyan-400 scale-125'
+                    : 'bg-slate-400 dark:bg-slate-600 hover:bg-slate-300 dark:hover:bg-slate-500'
                 }`}
                 aria-label={`Go to diagram ${index + 1}`}
               />
             ))}
           </div>
-        </CardHeader>
+        </ThemedCardHeader>
 
-        <CardContent className="p-4 relative">
+        <ThemedCardContent className="p-4 relative">
           {/* Navigation Arrows */}
-          <Button
+          <ThemedButton
             variant="ghost"
             size="icon"
             onClick={prevSlide}
@@ -106,9 +119,9 @@ export function DiagramCarousel({ slides, className = '' }: DiagramCarouselProps
             aria-label="Previous diagram"
           >
             <ChevronLeft className="w-5 h-5" />
-          </Button>
+          </ThemedButton>
 
-          <Button
+          <ThemedButton
             variant="ghost"
             size="icon"
             onClick={nextSlide}
@@ -116,7 +129,7 @@ export function DiagramCarousel({ slides, className = '' }: DiagramCarouselProps
             aria-label="Next diagram"
           >
             <ChevronRight className="w-5 h-5" />
-          </Button>
+          </ThemedButton>
 
           {/* Carousel Container */}
           <div ref={carouselRef} className="overflow-hidden rounded-lg">
@@ -155,12 +168,15 @@ export function DiagramCarousel({ slides, className = '' }: DiagramCarouselProps
 
           {/* Slide Counter */}
           <div className="flex justify-center mt-2">
-            <Badge className="bg-gray-800/50 text-slate-300 border-gray-600">
+            <ThemedBadge
+              variant="outline"
+              className="bg-gray-800/50 text-slate-300 border-gray-600"
+            >
               {currentSlide + 1} / {slides.length}
-            </Badge>
+            </ThemedBadge>
           </div>
-        </CardContent>
-      </Card>
+        </ThemedCardContent>
+      </ThemedCard>
 
       {/* Keyboard Navigation Hint */}
       <div className="text-center mt-4">

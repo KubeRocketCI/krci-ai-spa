@@ -112,4 +112,5 @@ The homepage (`app/page.tsx`) demonstrates:
 
 When working on this project, maintain the terminal/developer aesthetic, follow the established component patterns, and ensure all new features align with the KubeRocketAI showcase objectives.
 
-- to memorize
+- add next-theme support with dark/light
+- Ensure we use existing custom elements created for themes support. Propose create custom one if required

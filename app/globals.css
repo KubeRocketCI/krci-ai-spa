@@ -45,39 +45,40 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* Light theme optimized for KubeRocketAI terminal aesthetic */
+  --background: oklch(1 0 0); /* Pure white background */
+  --foreground: oklch(0.145 0 0); /* Slate-900: High contrast text */
+  --card: oklch(1 0 0); /* White cards */
+  --card-foreground: oklch(0.145 0 0); /* Slate-900: Card text */
+  --popover: oklch(1 0 0); /* White popover background */
+  --popover-foreground: oklch(0.145 0 0); /* Slate-900: Popover text */
+  --primary: oklch(0.65 0.15 220); /* Cyan-600: Professional cyan primary */
+  --primary-foreground: oklch(1 0 0); /* White text on primary */
+  --secondary: oklch(0.98 0 0); /* Slate-50: Light secondary background */
+  --secondary-foreground: oklch(0.32 0 0); /* Slate-700: Secondary text */
+  --muted: oklch(0.96 0 0); /* Slate-100: Muted background */
+  --muted-foreground: oklch(0.5 0 0); /* Slate-500: Muted text */
+  --accent: oklch(0.65 0.15 220); /* Cyan-600: Accent color */
+  --accent-foreground: oklch(1 0 0); /* White text on accent */
+  --destructive: oklch(0.65 0.2 25); /* Red-600: Error states */
+  --destructive-foreground: oklch(1 0 0); /* White text on destructive */
+  --border: oklch(0.89 0 0); /* Slate-200: Light borders */
+  --input: oklch(0.89 0 0); /* Slate-200: Input borders */
+  --ring: oklch(0.65 0.15 220); /* Cyan-600: Focus rings */
+  --chart-1: oklch(0.6 0.15 220); /* Cyan-based chart colors */
+  --chart-2: oklch(0.55 0.15 240); /* Blue-based chart colors */
+  --chart-3: oklch(0.5 0.15 160); /* Green-based chart colors */
+  --chart-4: oklch(0.65 0.15 280); /* Purple-based chart colors */
+  --chart-5: oklch(0.7 0.15 60); /* Yellow-based chart colors */
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.98 0 0); /* Slate-50: Light sidebar */
+  --sidebar-foreground: oklch(0.145 0 0); /* Slate-900: Sidebar text */
+  --sidebar-primary: oklch(0.65 0.15 220); /* Cyan-600: Sidebar primary */
+  --sidebar-primary-foreground: oklch(1 0 0); /* White sidebar primary text */
+  --sidebar-accent: oklch(0.96 0 0); /* Slate-100: Sidebar accent */
+  --sidebar-accent-foreground: oklch(0.32 0 0); /* Slate-700: Sidebar accent text */
+  --sidebar-border: oklch(0.89 0 0); /* Slate-200: Sidebar borders */
+  --sidebar-ring: oklch(0.65 0.15 220); /* Cyan-600: Sidebar focus rings */
 }
 
 .dark {
@@ -127,6 +128,11 @@
 
 /* Terminal-specific styles */
 .terminal-window {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+.dark .terminal-window {
   background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
   box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
 }
@@ -152,7 +158,16 @@ header > div {
   will-change: backdrop-filter;
   transform: translateZ(0);
   /* Force GPU acceleration */
-  /* Enhanced lens visibility with subtle glow */
+  /* Light theme: Enhanced lens visibility with professional shadow */
+  box-shadow:
+    0 2px 8px rgba(8, 145, 178, 0.12),
+    0 8px 24px rgba(16, 185, 129, 0.06),
+    inset 0 1px 0 rgba(8, 145, 178, 0.15),
+    0 0 40px rgba(8, 145, 178, 0.03);
+}
+
+/* Dark theme glass lens effect */
+.dark header > div {
   box-shadow:
     0 2px 8px rgba(6, 182, 212, 0.15),
     0 8px 24px rgba(34, 197, 94, 0.08),
@@ -164,7 +179,16 @@ header > div {
 @media (max-width: 768px) {
   header > div {
     will-change: auto;
-    /* Maintain lens visibility on mobile with reduced glow */
+    /* Light theme: Maintain lens visibility on mobile with reduced glow */
+    box-shadow:
+      0 1px 4px rgba(8, 145, 178, 0.1),
+      0 4px 16px rgba(16, 185, 129, 0.04),
+      inset 0 1px 0 rgba(8, 145, 178, 0.12),
+      0 0 20px rgba(8, 145, 178, 0.02);
+  }
+
+  /* Dark theme mobile optimization */
+  .dark header > div {
     box-shadow:
       0 1px 4px rgba(6, 182, 212, 0.12),
       0 4px 16px rgba(59, 130, 246, 0.06),
@@ -223,15 +247,29 @@ header > div {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00aa00;
+  background: #10b981;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
+
+/* Dark theme scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #00aa00;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #00ff41;
 }
 
