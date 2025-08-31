@@ -37,8 +37,7 @@ export function ThemedCard({ children, variant = 'feature', className, onClick }
   const variantStyles = {
     feature: `
       ${THEME_COLORS.background.card} ${THEME_COLORS.background.cardHover}
-      ${THEME_COLORS.border.default} ${THEME_COLORS.border.hover}
-      dark:hover:border-cyan-400/60
+      border ${THEME_COLORS.border.default} ${THEME_COLORS.border.hover}
       transition-all duration-300
       backdrop-blur-sm
       rounded-lg
@@ -47,15 +46,14 @@ export function ThemedCard({ children, variant = 'feature', className, onClick }
     stats: `
       bg-gradient-to-br from-slate-50 to-white
       dark:from-slate-900/50 dark:to-black/50
-      ${THEME_COLORS.border.default} dark:border-slate-700/50
+      border ${THEME_COLORS.border.default}
       rounded-lg
       shadow-sm
       backdrop-blur-sm
     `,
     highlight: `
       ${THEME_COLORS.background.card} ${THEME_COLORS.background.cardHover}
-      ${THEME_COLORS.border.default} hover:border-cyan-300
-      dark:border-cyan-500/30 dark:hover:border-cyan-400/60
+      border ${THEME_COLORS.border.default} ${THEME_COLORS.border.hover}
       transition-all duration-300
       rounded-lg
       shadow-sm hover:shadow-md
@@ -77,10 +75,11 @@ export function ThemedCard({ children, variant = 'feature', className, onClick }
       shadow-lg
     `,
     interactive: `
-      ${THEME_COLORS.background.card} ${THEME_COLORS.background.cardHover}
-      ${THEME_COLORS.border.default} hover:border-cyan-300
-      dark:border-white/20 dark:hover:border-cyan-600/50
-      transition-all duration-300 transition-colors
+      bg-white/90 hover:bg-gray-50
+      dark:bg-black/50 dark:hover:bg-black/80
+      border border-slate-300/60 hover:border-cyan-400/80
+      dark:border-white/20 dark:hover:border-cyan-400/60
+      transition-all duration-300
       backdrop-blur-sm
       rounded-lg
       shadow-sm hover:shadow-md

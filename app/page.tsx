@@ -494,7 +494,7 @@ export default function HomePage() {
                   <ThemedCard
                     key={index}
                     variant="interactive"
-                    className="group relative overflow-hidden"
+                    className="group relative overflow-hidden hover:scale-[1.02] active:scale-[0.98] transform transition-transform duration-200"
                     onClick={() => toggleFeatureExpansion(index)}
                   >
                     {/* Mobile tap indicator - only visible on small screens */}

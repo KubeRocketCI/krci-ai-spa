@@ -21,17 +21,20 @@ export const THEME_COLORS = {
 
   // Background colors - layout consistency
   background: {
-    card: 'bg-white dark:bg-black/50',
-    cardHover: 'hover:bg-slate-50 dark:hover:bg-black/80',
+    card: 'bg-white/90 dark:bg-black/50',
+    cardHover: 'hover:bg-gray-50 dark:hover:bg-black/80',
     section: 'bg-gray-50/50 dark:bg-gray-900/20',
   },
 
   // Border colors - visual consistency
   border: {
-    default: 'border-slate-200 dark:border-slate-600',
-    hover: 'hover:border-slate-300 dark:hover:border-slate-500',
-    accent: 'border border-cyan-600 hover:border-cyan-700 dark:border-cyan-500 dark:hover:border-cyan-400', // Button styles
+    default: 'border-slate-300/60 dark:border-white/20',
+    hover: 'hover:border-cyan-400/80 dark:hover:border-cyan-400/60',
+    accent:
+      'border border-cyan-600 hover:border-cyan-700 dark:border-cyan-500 dark:hover:border-cyan-400', // Button styles
     card: 'border-cyan-300 dark:border-cyan-700', // Card-specific borders
+    feature:
+      'border-slate-300/60 hover:border-cyan-400/80 dark:border-white/20 dark:hover:border-cyan-400/60', // Feature card borders
   },
 
   // Gradients - hero elements
