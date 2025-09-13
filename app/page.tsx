@@ -337,6 +337,18 @@ export default function HomePage() {
             </h3>
             <div className="grid grid-cols-5 gap-2 sm:gap-4 md:gap-6 text-center">
               {stats.map((stat, index) => {
+                // Make Integrated Codebases stat clickable in new tab
+                if (stat.label === 'Integrated Codebases') {
+                  return (
+                    <ThemedStatCard
+                      key={index}
+                      value={stat.value}
+                      label={stat.label}
+                      variant="gradient"
+                      href="https://github.com/topics/kuberocketai"
+                    />
+                  );
+                }
                 // Make the "Agile SDLC Roles" stat clickable
                 if (stat.label === 'Agile SDLC Roles') {
                   return (
