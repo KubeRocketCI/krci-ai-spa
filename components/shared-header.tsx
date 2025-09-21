@@ -14,7 +14,7 @@ import { ThemeToggle } from '@/components/theme';
 import type { JSX } from 'react';
 
 interface SharedHeaderProps {
-  currentPage?: 'home' | 'quickstart' | 'architecture' | 'use-cases' | 'faq' | 'roadmap';
+  currentPage?: 'home' | 'quickstart' | 'architecture' | 'agents' | 'use-cases' | 'faq' | 'roadmap';
 }
 
 export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
@@ -60,14 +60,17 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
               </Link>
             )}
           </div>
-          <div className="flex items-center space-x-8">
-            {/* Clean Text Navigation */}
+          <div className="flex items-center justify-center flex-1">
+            {/* Clean Text Navigation - Centered */}
             <ThemedNavigation>
               <ThemedNavLink href="/quickstart" isActive={currentPage === 'quickstart'}>
                 /quickstart
               </ThemedNavLink>
               <ThemedNavLink href="/architecture" isActive={currentPage === 'architecture'}>
                 /architecture
+              </ThemedNavLink>
+              <ThemedNavLink href="/agents" isActive={currentPage === 'agents'}>
+                /agents
               </ThemedNavLink>
               <ThemedNavLink href="/use-cases" isActive={currentPage === 'use-cases'}>
                 /use-cases
@@ -82,7 +85,9 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
                 /tutorials
               </ThemedNavLink>
             </ThemedNavigation>
+          </div>
 
+          <div className="flex items-center space-x-8">
             {/* GitHub Starred Button */}
             <div
               className="flex items-center bg-slate-200/10 border border-slate-400/30 hover:bg-slate-200/15 hover:border-slate-300/50 dark:bg-white/10 dark:border-gray-400/30 rounded-lg px-3 py-1.5 backdrop-blur-sm dark:hover:bg-white/15 dark:hover:border-gray-300/50 transition-all duration-200 cursor-pointer"
@@ -175,6 +180,14 @@ export function SharedHeader({ currentPage = 'home' }: SharedHeaderProps) {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 /architecture
+              </ThemedMobileNavLink>
+
+              <ThemedMobileNavLink
+                href="/agents"
+                isActive={currentPage === 'agents'}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                /agents
               </ThemedMobileNavLink>
 
               <ThemedMobileNavLink

@@ -90,7 +90,7 @@ export function ThemedFAQCategoryContainer({
   children,
   className,
 }: ThemedFAQCategoryContainerProps) {
-  return <div className={cn('flex flex-wrap gap-2', className)}>{children}</div>;
+  return <div className={cn('flex flex-wrap gap-2 sm:gap-3', className)}>{children}</div>;
 }
 
 interface ThemedFAQCategoryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

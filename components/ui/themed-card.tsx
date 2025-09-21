@@ -20,6 +20,7 @@ interface ThemedCardTitleProps {
   children: ReactNode;
   variant?: 'default' | 'terminal' | 'feature' | 'step';
   className?: string;
+  id?: string;
 }
 
 interface ThemedCardContentProps {
@@ -135,6 +136,7 @@ export function ThemedCardTitle({
   children,
   variant = 'default',
   className,
+  id,
 }: ThemedCardTitleProps) {
   const variantStyles = {
     default: 'text-lg font-semibold text-slate-900 dark:text-white',
@@ -143,7 +145,11 @@ export function ThemedCardTitle({
     step: 'text-lg font-semibold text-green-600 dark:text-green-300',
   };
 
-  return <h3 className={cn(variantStyles[variant], className)}>{children}</h3>;
+  return (
+    <h3 id={id} className={cn(variantStyles[variant], className)}>
+      {children}
+    </h3>
+  );
 }
 
 /**

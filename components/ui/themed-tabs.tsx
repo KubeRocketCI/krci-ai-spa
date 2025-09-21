@@ -62,11 +62,7 @@ export function ThemedTabsList({ children, variant = 'default', className }: The
 
   return (
     <TabsList
-      className={cn(
-        'grid w-full grid-cols-3 mb-8 sm:mb-10 max-w-[320px] sm:max-w-lg mx-auto',
-        variantStyles[variant],
-        className,
-      )}
+      className={cn('grid w-full mb-8 sm:mb-10 mx-auto', variantStyles[variant], className)}
     >
       {children}
     </TabsList>
