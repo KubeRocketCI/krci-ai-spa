@@ -1,0 +1,256 @@
+{
+  "templates": [
+    {
+      "id": "business-rules",
+      "path": ".krci-ai/templates/business-rules.md",
+      "name": "Business Rules",
+      "description": "Business rules documentation and specification template",
+      "categories": ["Analysis"]
+    },
+    {
+      "id": "process-map",
+      "path": ".krci-ai/templates/process-map.md",
+      "name": "Process Map",
+      "description": "Business process mapping and workflow documentation template",
+      "categories": ["Analysis"]
+    },
+    {
+      "id": "requirements-doc",
+      "path": ".krci-ai/templates/requirements-doc.md",
+      "name": "Requirements Document",
+      "description": "Comprehensive requirements documentation template",
+      "categories": ["Analysis"]
+    },
+    {
+      "id": "user-journey",
+      "path": ".krci-ai/templates/user-journey.md",
+      "name": "User Journey",
+      "description": "User experience journey mapping and analysis template",
+      "categories": ["Analysis"]
+    },
+    {
+      "id": "architecture-review",
+      "path": ".krci-ai/templates/architecture-review.md",
+      "name": "Architecture Review",
+      "description": "Technical architecture review and assessment template",
+      "categories": ["Architecture"]
+    },
+    {
+      "id": "sad-template",
+      "path": ".krci-ai/templates/sad-template.md",
+      "name": "Software Architecture Document",
+      "description": "Comprehensive software architecture documentation template",
+      "categories": ["Architecture"]
+    },
+    {
+      "id": "core-template-template",
+      "path": ".krci-ai/templates/krci-ai/core-template-template.md",
+      "name": "Core",
+      "description": "Meta-template for creating new framework templates",
+      "categories": ["Framework Core"]
+    },
+    {
+      "id": "core-agent-template",
+      "path": ".krci-ai/templates/krci-ai/core-agent-template.yaml",
+      "name": "Core Agent",
+      "description": "YAML template for creating new KubeRocketAI framework agents",
+      "categories": ["Framework Core"]
+    },
+    {
+      "id": "core-data-template",
+      "path": ".krci-ai/templates/krci-ai/core-data-template.md",
+      "name": "Core Data",
+      "description": "Template for creating framework data files and standards",
+      "categories": ["Framework Core"]
+    },
+    {
+      "id": "core-task-template",
+      "path": ".krci-ai/templates/krci-ai/core-task-template.md",
+      "name": "Core Task",
+      "description": "Template for creating framework tasks and automation workflows",
+      "categories": ["Framework Core"]
+    },
+    {
+      "id": "demo-script-template",
+      "path": ".krci-ai/templates/demo-script-template.md",
+      "name": "Demo Script",
+      "description": "Create compelling product demonstrations with structured flow and key messaging points",
+      "categories": ["Marketing"]
+    },
+    {
+      "id": "launch-materials-template",
+      "path": ".krci-ai/templates/launch-materials-template.md",
+      "name": "Launch Materials",
+      "description": "Comprehensive template for product launch campaigns and go-to-market materials",
+      "categories": ["Marketing"]
+    },
+    {
+      "id": "marketing-brief-template",
+      "path": ".krci-ai/templates/marketing-brief-template.md",
+      "name": "Marketing Brief",
+      "description": "Strategic marketing brief template for campaign planning and execution",
+      "categories": ["Marketing"]
+    },
+    {
+      "id": "pitch-deck-template",
+      "path": ".krci-ai/templates/pitch-deck-template.md",
+      "name": "Pitch Deck",
+      "description": "Professional pitch presentation template for investor and stakeholder presentations",
+      "categories": ["Marketing"]
+    },
+    {
+      "id": "sales-enablement-template",
+      "path": ".krci-ai/templates/sales-enablement-template.md",
+      "name": "Sales Enablement",
+      "description": "Sales team enablement materials and training resources template",
+      "categories": ["Marketing"]
+    },
+    {
+      "id": "visual-identity-template",
+      "path": ".krci-ai/templates/visual-identity-template.md",
+      "name": "Visual Identity",
+      "description": "Brand visual identity guidelines and design system documentation",
+      "categories": ["Marketing"]
+    },
+    {
+      "id": "epic",
+      "path": ".krci-ai/templates/epic.md",
+      "name": "Epic",
+      "description": "Agile epic documentation template for large feature sets",
+      "categories": ["Product"]
+    },
+    {
+      "id": "story",
+      "path": ".krci-ai/templates/story.md",
+      "name": "User Story",
+      "description": "Agile user story template with acceptance criteria",
+      "categories": ["Product"]
+    },
+    {
+      "id": "project-brief-template-advanced",
+      "path": ".krci-ai/templates/project-brief-template-advanced.md",
+      "name": "Advanced Project Brief",
+      "description": "Detailed project brief template for complex initiatives and enterprise projects",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "assumption-tracker-template",
+      "path": ".krci-ai/templates/assumption-tracker-template.md",
+      "name": "Assumption Tracker",
+      "description": "Track and validate project assumptions throughout development lifecycle",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "context-gathering-guide-template",
+      "path": ".krci-ai/templates/context-gathering-guide-template.md",
+      "name": "Context Gathering Guide",
+      "description": "Structured approach to gathering project context and requirements",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "prd-template",
+      "path": ".krci-ai/templates/prd-template.md",
+      "name": "Product Requirements Document",
+      "description": "Comprehensive PRD template for defining product features and specifications",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "project-brief-template",
+      "path": ".krci-ai/templates/project-brief-template.md",
+      "name": "Project Brief",
+      "description": "Standard project brief template for project initiation and scope definition",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "project-charter-template",
+      "path": ".krci-ai/templates/project-charter-template.md",
+      "name": "Project Charter",
+      "description": "Formal project charter template for project authorization and scope",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "project-plan-template",
+      "path": ".krci-ai/templates/project-plan-template.md",
+      "name": "Project Plan",
+      "description": "Comprehensive project planning template with timeline and resource allocation",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "risk-register-template",
+      "path": ".krci-ai/templates/risk-register-template.md",
+      "name": "Risk Register",
+      "description": "Risk identification, assessment, and mitigation planning template",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "sow-template",
+      "path": ".krci-ai/templates/sow-template.md",
+      "name": "Statement of Work",
+      "description": "Professional SOW template for project deliverables and terms",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "status-report-template",
+      "path": ".krci-ai/templates/status-report-template.md",
+      "name": "Status Report",
+      "description": "Regular project status reporting template for stakeholder communication",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "validation-report-template",
+      "path": ".krci-ai/templates/validation-report-template.md",
+      "name": "Validation Report",
+      "description": "Template for documenting validation results and findings",
+      "categories": ["Project Management"]
+    },
+    {
+      "id": "defect-report",
+      "path": ".krci-ai/templates/defect-report.md",
+      "name": "Defect Report",
+      "description": "Standardized defect reporting template for bug tracking and resolution",
+      "categories": ["Testing"]
+    },
+    {
+      "id": "test-cases",
+      "path": ".krci-ai/templates/test-cases.md",
+      "name": "Test Cases",
+      "description": "Comprehensive test case documentation template for quality assurance",
+      "categories": ["Testing"]
+    },
+    {
+      "id": "test-plan",
+      "path": ".krci-ai/templates/test-plan.md",
+      "name": "Test Plan",
+      "description": "Strategic test planning template for project testing approach",
+      "categories": ["Testing"]
+    },
+    {
+      "id": "test-report",
+      "path": ".krci-ai/templates/test-report.md",
+      "name": "Test Report",
+      "description": "Test execution results and findings documentation template",
+      "categories": ["Testing"]
+    },
+    {
+      "id": "testing-readme",
+      "path": ".krci-ai/templates/testing-readme.md",
+      "name": "Testing README",
+      "description": "Testing setup and configuration documentation template",
+      "categories": ["Testing"]
+    }
+  ],
+  "metadata": {
+    "totalTemplates": 34,
+    "categories": [
+      "Analysis",
+      "Architecture",
+      "Framework Core",
+      "Marketing",
+      "Product",
+      "Project Management",
+      "Testing"
+    ],
+    "generatedAt": "2025-09-21",
+    "version": "1.0.0"
+  }
+}

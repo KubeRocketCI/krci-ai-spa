@@ -3,7 +3,7 @@
     {
       "id": "go-developer-v1",
       "filename": "go-dev",
-      "name": "Go Developer",
+      "name": "Golan Gopher",
       "role": "Go Developer",
       "description": "Go developer for Go code implementation/debugging. Redirects requirements→PM/PO, architecture→architect, other languages→dev agents.",
       "goal": "Implement clean, efficient Go code within Go dev scope",
@@ -285,8 +285,16 @@
   ],
   "metadata": {
     "totalAgents": 12,
-    "specializations": ["Management", "Analysis", "Help", "Development", "Marketing", "Quality", "Documentation"],
-    "generatedAt": "2025-09-20T20:19:55.994793Z",
+    "specializations": [
+      "Development",
+      "Management",
+      "Marketing",
+      "Analysis",
+      "Documentation",
+      "Help",
+      "Quality"
+    ],
+    "generatedAt": "2025-09-21T21:41:46.880450Z",
     "version": "1.0.0"
   }
 }

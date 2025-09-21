@@ -1,5 +1,9 @@
 'use client';
 
+/**
+ * Agent card component - preserves original agent-specific styling
+ */
+
 import { memo } from 'react';
 import {
   ThemedCard,
@@ -8,7 +12,7 @@ import {
   ThemedCardTitle,
 } from '@/components/ui/themed-card';
 import { ThemedBadge } from '@/components/ui/themed-badge';
-import { InlineCommand } from '@/components/faq/copyable-code-block';
+import { AgentCardContent } from './agent-card-content';
 import {
   getAgentCardClasses,
   getAgentTextClasses,
@@ -18,12 +22,21 @@ import type { Agent } from '@/lib/agents';
 
 interface AgentCardProps {
   agent: Agent;
+  variant?: 'compact' | 'detailed' | 'feature';
   className?: string;
+  onClick?: (agent: Agent) => void;
 }
 
-export const AgentCard = memo(function AgentCard({ agent, className }: AgentCardProps) {
+export const AgentCard = memo(function AgentCard({
+  agent,
+  variant = 'feature',
+  className,
+  onClick,
+}: AgentCardProps) {
   const cardClasses = getAgentCardClasses();
   const textClasses = getAgentTextClasses();
+
+  const handleClick = onClick ? () => onClick(agent) : undefined;
 
   return (
     <article
@@ -34,6 +47,7 @@ export const AgentCard = memo(function AgentCard({ agent, className }: AgentCard
       <ThemedCard
         variant={AGENTS_DESIGN_TOKENS.variants.card}
         className={`${cardClasses.container} ${className || ''}`}
+        onClick={handleClick}
       >
         {/* Version Badge - Top Right Corner */}
         <div className={cardClasses.versionBadge}>
@@ -56,79 +70,16 @@ export const AgentCard = memo(function AgentCard({ agent, className }: AgentCard
           >
             {agent.role}
           </ThemedCardTitle>
-          <div className={cardClasses.personaName}>
-            {agent.name !== agent.role && <p className={textClasses.persona}>{agent.name}</p>}
-          </div>
         </ThemedCardHeader>
 
         <ThemedCardContent
           variant={AGENTS_DESIGN_TOKENS.variants.cardContent}
           className={cardClasses.content}
         >
-          <div className={cardClasses.goalSection}>
-            <p id={`agent-goal-${agent.id}`} className={textClasses.goal} title={agent.goal}>
-              <span
-                className={`block ${AGENTS_DESIGN_TOKENS.content.lineHeight.goal} ${AGENTS_DESIGN_TOKENS.content.maxHeight.goal}`}
-                style={{
-                  display: '-webkit-box',
-                  WebkitLineClamp: AGENTS_DESIGN_TOKENS.content.lineClamp.goal,
-                  WebkitBoxOrient: 'vertical' as const,
-                  overflow: 'hidden',
-                }}
-              >
-                &ldquo;{agent.goal}&rdquo;
-              </span>
-            </p>
-          </div>
+          {/* Agent-specific content using original component */}
+          <AgentCardContent agent={agent} variant={variant} />
 
-          <div
-            className={cardClasses.specializationsSection}
-            aria-label={`Specializations: ${agent.specializations.join(', ')}`}
-          >
-            {agent.specializations.map(spec => (
-              <ThemedBadge
-                key={spec}
-                variant={AGENTS_DESIGN_TOKENS.variants.badge.specialization}
-                size={AGENTS_DESIGN_TOKENS.variants.size.badge}
-              >
-                {spec}
-              </ThemedBadge>
-            ))}
-          </div>
-
-          <div className={cardClasses.whenToUseSection}>
-            <p className={textClasses.whenToUseText} title={`When to use: ${agent.whenToUse}`}>
-              <span
-                className={`block ${AGENTS_DESIGN_TOKENS.content.lineHeight.whenToUse} ${AGENTS_DESIGN_TOKENS.content.maxHeight.whenToUse}`}
-                style={{
-                  display: '-webkit-box',
-                  WebkitLineClamp: AGENTS_DESIGN_TOKENS.content.lineClamp.whenToUse,
-                  WebkitBoxOrient: 'vertical' as const,
-                  overflow: 'hidden',
-                }}
-              >
-                <span className={textClasses.whenToUseLabel} aria-label="When to use this agent">
-                  WHEN TO USE:
-                </span>{' '}
-                {agent.whenToUse}
-              </span>
-            </p>
-          </div>
-
-          {/* Installation Command */}
-          <div className={cardClasses.installSection}>
-            <div className="flex items-center gap-2">
-              <span className={textClasses.installLabel} aria-label="Installation command">
-                INSTALL:
-              </span>
-              <InlineCommand
-                command={`krci-ai install --agent ${agent.filename}`}
-                className="flex-1 text-xs"
-                aria-label={`Copy installation command for ${agent.role} agent`}
-              />
-            </div>
-          </div>
-
+          {/* Agent Statistics */}
           <div
             className={cardClasses.statsSection}
             aria-label={`Agent statistics: ${agent.commandCount} commands and ${agent.taskCount} tasks available`}

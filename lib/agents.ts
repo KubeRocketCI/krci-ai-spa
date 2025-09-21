@@ -1,4 +1,5 @@
 import agentsData from '@/public/data/agents.json';
+import { BaseContentAdapter, type BaseContentItem } from './content-types';
 
 export interface Agent {
   id: string;
@@ -14,8 +15,58 @@ export interface Agent {
   taskCount: number;
   commands: Record<string, string>;
   version: string;
-  whenToUse?: string; // Will be populated by our processing script
+  whenToUse: string; // Required field - all agents must have usage guidance
 }
+
+// Agent as BaseContentItem - explicit compatibility interface
+export interface AgentContentItem extends BaseContentItem {
+  // Override optional fields from BaseContentItem that are required for agents
+  filename: string; // Required for agents (YAML filename)
+
+  // Agent-specific fields that extend BaseContentItem
+  role: string;
+  goal: string;
+  icon: string;
+  specializations: string[];
+  scope: string;
+  commandCount: number;
+  taskCount: number;
+  commands: Record<string, string>;
+  whenToUse: string;
+}
+
+/**
+ * Adapter to transform Agent domain objects to BaseContentItem format
+ */
+export class AgentContentAdapter extends BaseContentAdapter<Agent, AgentContentItem> {
+  adapt(agent: Agent): AgentContentItem {
+    return {
+      // BaseContentItem required fields
+      id: agent.id,
+      name: agent.role, // Use role as display name for cards
+      description: agent.goal, // Use goal as primary description
+
+      // BaseContentItem optional fields
+      tags: agent.specializations, // Use specializations as tags
+      version: agent.version,
+      filename: agent.filename,
+
+      // Agent-specific fields
+      role: agent.role,
+      goal: agent.goal,
+      icon: agent.icon,
+      specializations: agent.specializations,
+      scope: agent.scope,
+      commandCount: agent.commandCount,
+      taskCount: agent.taskCount,
+      commands: agent.commands,
+      whenToUse: agent.whenToUse,
+    };
+  }
+}
+
+// Singleton adapter instance for reuse
+export const agentContentAdapter = new AgentContentAdapter();
 
 export interface AgentsData {
   agents: Agent[];
@@ -45,8 +96,8 @@ export function getAgents(): AgentsData {
     }
 
     return data;
-  } catch (error) {
-    console.error('Error loading agents data:', error);
+  } catch (err) {
+    console.error('Error loading agents data:', err);
     throw new Error('Failed to load agents data');
   }
 }
@@ -62,14 +113,9 @@ export function getAgentsBySpecialization(specialization: string): Agent[] {
     }
 
     const { agents } = getAgents();
-    return agents.filter(
-      agent =>
-        agent.specializations &&
-        Array.isArray(agent.specializations) &&
-        agent.specializations.includes(specialization),
-    );
-  } catch (error) {
-    console.error('Error filtering agents by specialization:', error);
+    return agents.filter(agent => agent.specializations.includes(specialization));
+  } catch (err) {
+    console.error('Error filtering agents by specialization:', err);
     return [];
   }
 }
@@ -86,8 +132,8 @@ export function getAgentById(id: string): Agent | undefined {
 
     const { agents } = getAgents();
     return agents.find(agent => agent.id === id);
-  } catch (error) {
-    console.error('Error finding agent by ID:', error);
+  } catch (err) {
+    console.error('Error finding agent by ID:', err);
     return undefined;
   }
 }
@@ -105,25 +151,8 @@ export function getSpecializations(): string[] {
     }
 
     return metadata.specializations;
-  } catch (error) {
-    console.error('Error getting specializations:', error);
+  } catch (err) {
+    console.error('Error getting specializations:', err);
     return [];
-  }
-}
-
-/**
- * Fallback "when to use" message for agents without manual descriptions
- */
-export function getFallbackWhenToUse(agent: Agent): string {
-  try {
-    if (!agent || !agent.role) {
-      console.warn('Invalid agent for fallback whenToUse:', agent);
-      return 'Consult with this agent for specialized tasks and expert guidance';
-    }
-
-    return `Consult with ${agent.role} for specialized tasks and expert guidance`;
-  } catch (error) {
-    console.error('Error generating fallback whenToUse:', error);
-    return 'Consult with this agent for specialized tasks and expert guidance';
   }
 }
