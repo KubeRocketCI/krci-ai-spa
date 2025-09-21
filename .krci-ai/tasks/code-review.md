@@ -283,24 +283,28 @@ Perform comprehensive code review for frontend changes in the KubeRocketAI showc
 <design_review_criteria>
 
 **Color System Validation:**
+
 - Count total colors used (must be 3-5 maximum)
 - Verify WCAG AA contrast compliance (4.5:1 for text)
 - Check color consistency across light/dark themes
 - Validate accessibility with color blindness simulation
 
 **Typography Review:**
+
 - Confirm maximum 2 font families are used
 - Check font weight distribution (headings vs body)
 - Validate responsive typography scaling
 - Ensure proper line-height and spacing
 
 **Mobile-First Assessment:**
+
 - Verify mobile (320px) design comes first
 - Check tablet (768px) and desktop (1024px+) enhancements
 - Validate touch targets are minimum 44px
 - Test responsive breakpoint behavior
 
 **Code Quality Standards:**
+
 - File naming follows kebab-case convention
 - Change comments used for modifications
 - Existing code patterns preserved with `// ... existing code ...`
