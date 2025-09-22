@@ -91,7 +91,7 @@ export const TEMPLATES_DESIGN_TOKENS = {
     cardContent: 'terminal',
     cardTitle: 'terminal',
     badge: {
-      category: 'outline',
+      category: 'primary',
     },
     size: {
       badge: 'sm',

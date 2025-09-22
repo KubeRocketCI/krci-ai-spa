@@ -5,7 +5,6 @@
  */
 
 import { memo } from 'react';
-import { ThemedBadge } from '@/components/ui/themed-badge';
 import { InlineCommand } from '@/components/faq/copyable-code-block';
 import {
   getAgentCardClasses,
@@ -28,8 +27,6 @@ export const AgentCardContent = memo(function AgentCardContent({
 
   // Variant-specific content filtering
   const shouldShowInstallCommand = variant !== 'compact';
-  const shouldShowFullSpecializations = variant === 'feature';
-  const maxSpecializations = variant === 'compact' ? 2 : agent.specializations.length;
 
   return (
     <>
@@ -45,33 +42,9 @@ export const AgentCardContent = memo(function AgentCardContent({
               overflow: 'hidden',
             }}
           >
-            &ldquo;{agent.goal}&rdquo;
+            {agent.goal}
           </span>
         </p>
-      </div>
-
-      {/* Specializations - variant-aware display */}
-      <div
-        className={cardClasses.specializationsSection}
-        aria-label={`Specializations: ${agent.specializations.slice(0, maxSpecializations).join(', ')}`}
-      >
-        {agent.specializations.slice(0, maxSpecializations).map(spec => (
-          <ThemedBadge
-            key={spec}
-            variant={AGENTS_DESIGN_TOKENS.variants.badge.specialization}
-            size={AGENTS_DESIGN_TOKENS.variants.size.badge}
-          >
-            {spec}
-          </ThemedBadge>
-        ))}
-        {!shouldShowFullSpecializations && agent.specializations.length > maxSpecializations && (
-          <ThemedBadge
-            variant={AGENTS_DESIGN_TOKENS.variants.badge.specialization}
-            size={AGENTS_DESIGN_TOKENS.variants.size.badge}
-          >
-            +{agent.specializations.length - maxSpecializations}
-          </ThemedBadge>
-        )}
       </div>
 
       {/* When to Use */}

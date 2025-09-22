@@ -14,7 +14,7 @@ import type { HighlightConfig } from './search-highlight-utils';
  * ```typescript
  * interface Agent extends BaseSearchableItem {
  *   role: string;
- *   specializations: string[];
+ *   categories: string[];
  * }
  * ```
  */
@@ -31,8 +31,6 @@ export interface BaseSearchableItem {
   tags?: string[];
   /** Categories for templates and general content */
   categories?: string[];
-  /** Specializations specifically for agents */
-  specializations?: string[];
 }
 
 /**
@@ -44,7 +42,7 @@ export interface BaseSearchableItem {
  * ```typescript
  * const agentSearchConfig: SearchConfig<Agent> = {
  *   searchFields: ['name', 'role', 'description'],
- *   categoryField: 'specializations',
+ *   categoryField: 'categories',
  *   placeholder: 'Search agents...',
  *   debounceMs: 300
  * };

@@ -9,7 +9,7 @@ export interface Agent {
   description: string;
   goal: string;
   icon: string;
-  specializations: string[];
+  categories: string[];
   scope: string;
   commandCount: number;
   taskCount: number;
@@ -27,7 +27,7 @@ export interface AgentContentItem extends BaseContentItem {
   role: string;
   goal: string;
   icon: string;
-  specializations: string[];
+  categories: string[];
   scope: string;
   commandCount: number;
   taskCount: number;
@@ -47,7 +47,7 @@ export class AgentContentAdapter extends BaseContentAdapter<Agent, AgentContentI
       description: agent.goal, // Use goal as primary description
 
       // BaseContentItem optional fields
-      tags: agent.specializations, // Use specializations as tags
+      tags: agent.categories, // Use categories as tags
       version: agent.version,
       filename: agent.filename,
 
@@ -55,7 +55,7 @@ export class AgentContentAdapter extends BaseContentAdapter<Agent, AgentContentI
       role: agent.role,
       goal: agent.goal,
       icon: agent.icon,
-      specializations: agent.specializations,
+      categories: agent.categories,
       scope: agent.scope,
       commandCount: agent.commandCount,
       taskCount: agent.taskCount,
@@ -72,7 +72,7 @@ export interface AgentsData {
   agents: Agent[];
   metadata: {
     totalAgents: number;
-    specializations: string[];
+    categories: string[];
     generatedAt: string;
     version: string;
   };
@@ -103,19 +103,19 @@ export function getAgents(): AgentsData {
 }
 
 /**
- * Get agents filtered by specialization
+ * Get agents filtered by category
  */
-export function getAgentsBySpecialization(specialization: string): Agent[] {
+export function getAgentsByCategory(category: string): Agent[] {
   try {
-    if (!specialization || typeof specialization !== 'string') {
-      console.warn('Invalid specialization parameter:', specialization);
+    if (!category || typeof category !== 'string') {
+      console.warn('Invalid category parameter:', category);
       return [];
     }
 
     const { agents } = getAgents();
-    return agents.filter(agent => agent.specializations.includes(specialization));
+    return agents.filter(agent => agent.categories.includes(category));
   } catch (err) {
-    console.error('Error filtering agents by specialization:', err);
+    console.error('Error filtering agents by category:', err);
     return [];
   }
 }
@@ -139,20 +139,20 @@ export function getAgentById(id: string): Agent | undefined {
 }
 
 /**
- * Get all available specializations
+ * Get all available categories
  */
-export function getSpecializations(): string[] {
+export function getCategories(): string[] {
   try {
     const { metadata } = getAgents();
 
-    if (!metadata.specializations || !Array.isArray(metadata.specializations)) {
-      console.warn('Invalid specializations in metadata');
+    if (!metadata.categories || !Array.isArray(metadata.categories)) {
+      console.warn('Invalid categories in metadata');
       return [];
     }
 
-    return metadata.specializations;
+    return metadata.categories;
   } catch (err) {
-    console.error('Error getting specializations:', err);
+    console.error('Error getting categories:', err);
     return [];
   }
 }

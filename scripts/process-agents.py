@@ -19,11 +19,11 @@ def extract_agent_persona(agent_data: Dict[str, Any], existing_agent: Dict[str, 
     tasks = agent_data.get("tasks", [])
     principles = agent_data.get("principles", [])
 
-    # Preserve existing specializations or set placeholder for new agents
-    if existing_agent and "specializations" in existing_agent:
-        specializations = existing_agent["specializations"]
+    # Preserve existing categories or set placeholder for new agents
+    if existing_agent and "categories" in existing_agent:
+        categories = existing_agent["categories"]
     else:
-        specializations = ["To be defined"]
+        categories = ["To be defined"]
     
     # Preserve existing whenToUse or set placeholder for new agents
     if existing_agent and "whenToUse" in existing_agent:
@@ -49,7 +49,7 @@ def extract_agent_persona(agent_data: Dict[str, Any], existing_agent: Dict[str, 
         "description": description,
         "goal": identity.get("goal", ""),
         "icon": identity.get("icon", "🤖"),
-        "specializations": specializations,
+        "categories": categories,
         "scope": scope,
         "whenToUse": when_to_use,
         "commandCount": len(
@@ -136,11 +136,11 @@ def process_agents_directory(agents_dir: str, output_file: str) -> None:
                 "agents": agents_data,
                 "metadata": {
                     "totalAgents": len(agents_data),
-                    "specializations": list(
+                    "categories": list(
                         set(
-                            spec
+                            category
                             for agent in agents_data
-                            for spec in agent["specializations"]
+                            for category in agent["categories"]
                         )
                     ),
                     "generatedAt": datetime.now().isoformat() + "Z",
@@ -154,7 +154,7 @@ def process_agents_directory(agents_dir: str, output_file: str) -> None:
 
     print(f"\n✅ Generated {output_file} with {len(agents_data)} agents")
     print(
-        f"📊 Specializations found: {', '.join(set(spec for agent in agents_data for spec in agent['specializations']))}"
+        f"📊 Categories found: {', '.join(set(category for agent in agents_data for category in agent['categories']))}"
     )
 
 

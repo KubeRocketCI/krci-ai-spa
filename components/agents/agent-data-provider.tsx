@@ -17,7 +17,7 @@ function transformAgentsToContentCollection(agentsData: AgentsData): ContentColl
     items: agentsData.agents,
     metadata: {
       totalItems: agentsData.metadata.totalAgents,
-      categories: agentsData.metadata.specializations,
+      categories: agentsData.metadata.categories,
       generatedAt: agentsData.metadata.generatedAt,
       version: agentsData.metadata.version,
     },

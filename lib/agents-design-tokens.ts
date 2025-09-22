@@ -22,7 +22,7 @@ export const AGENTS_DESIGN_TOKENS = {
         role: 'min-h-[2.5rem]',
         persona: 'h-4',
         goal: 'h-10',
-        specializations: 'min-h-[1.5rem]',
+        categories: 'min-h-[1.5rem]',
         whenToUse: 'h-12',
       },
       padding: {
@@ -42,7 +42,7 @@ export const AGENTS_DESIGN_TOKENS = {
   typography: {
     role: 'text-lg font-semibold',
     persona: 'text-xs font-mono',
-    goal: 'text-sm italic',
+    goal: 'text-sm',
     whenToUse: 'text-xs',
     install: 'text-xs font-mono',
     stats: 'text-xs',
@@ -100,8 +100,7 @@ export const AGENTS_DESIGN_TOKENS = {
     cardContent: 'terminal',
     cardTitle: 'terminal',
     badge: {
-      version: 'outline',
-      specialization: 'primary',
+      category: 'primary',
     },
     size: {
       badge: 'sm',
@@ -114,16 +113,16 @@ export const AGENTS_DESIGN_TOKENS = {
 export const getAgentCardClasses = () => ({
   container: `group h-full flex flex-col relative`,
   grid: `${AGENTS_DESIGN_TOKENS.layout.grid.columns.mobile} ${AGENTS_DESIGN_TOKENS.layout.grid.columns.tablet} ${AGENTS_DESIGN_TOKENS.layout.grid.columns.desktop} ${AGENTS_DESIGN_TOKENS.layout.grid.gap}`,
-  versionBadge: `${AGENTS_DESIGN_TOKENS.layout.badge.position} ${AGENTS_DESIGN_TOKENS.typography.install} ${AGENTS_DESIGN_TOKENS.colors.background.badge} backdrop-blur-sm`,
+  categoryBadge: `${AGENTS_DESIGN_TOKENS.layout.badge.position} ${AGENTS_DESIGN_TOKENS.typography.install} ${AGENTS_DESIGN_TOKENS.colors.background.badge} backdrop-blur-sm`,
   header: `flex-shrink-0 ${AGENTS_DESIGN_TOKENS.layout.card.padding.header}`,
   content: `flex-1 flex flex-col ${AGENTS_DESIGN_TOKENS.layout.card.padding.section}`,
   roleTitle: `${AGENTS_DESIGN_TOKENS.layout.card.minHeight.role} flex items-center`,
   personaName: `${AGENTS_DESIGN_TOKENS.layout.card.minHeight.persona} flex items-center`,
   goalSection: `${AGENTS_DESIGN_TOKENS.layout.card.minHeight.goal} flex items-center`,
-  specializationsSection: `flex flex-wrap ${AGENTS_DESIGN_TOKENS.layout.badge.spacing} ${AGENTS_DESIGN_TOKENS.layout.card.minHeight.specializations}`,
+  categoriesSection: `flex flex-wrap ${AGENTS_DESIGN_TOKENS.layout.badge.spacing} ${AGENTS_DESIGN_TOKENS.layout.card.minHeight.categories}`,
   whenToUseSection: `${AGENTS_DESIGN_TOKENS.layout.card.minHeight.whenToUse} flex items-start`,
   installSection: `${AGENTS_DESIGN_TOKENS.layout.card.padding.install} ${AGENTS_DESIGN_TOKENS.colors.border.default} border-t`,
-  statsSection: `flex justify-between ${AGENTS_DESIGN_TOKENS.layout.card.padding.stats} ${AGENTS_DESIGN_TOKENS.colors.border.accent.green} border-t mt-auto`,
+  statsSection: `flex justify-between items-center ${AGENTS_DESIGN_TOKENS.layout.card.padding.stats} ${AGENTS_DESIGN_TOKENS.colors.border.default} border-t mt-auto`,
 });
 
 export const getAgentTextClasses = () => ({

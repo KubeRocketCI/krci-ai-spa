@@ -75,7 +75,7 @@ export function filterItems<T extends BaseSearchableItem>(
  *
  * @example
  * ```typescript
- * const categories = extractCategories(agents, 'specializations');
+ * const categories = extractCategories(agents, 'categories');
  * // Returns: ['backend', 'frontend', 'fullstack']
  * ```
  */

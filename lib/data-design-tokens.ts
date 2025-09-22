@@ -93,7 +93,7 @@ export const DATA_DESIGN_TOKENS = {
     cardContent: 'terminal',
     cardTitle: 'terminal',
     badge: {
-      category: 'outline',
+      category: 'primary',
       primary: 'default',
     },
     size: {

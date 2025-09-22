@@ -46,13 +46,13 @@ export const AgentCard = memo(function AgentCard({
         variant={AGENTS_DESIGN_TOKENS.variants.card}
         className={`${cardClasses.container} cursor-default ${className || ''}`}
       >
-        {/* Version Badge - Top Right Corner */}
-        <div className={cardClasses.versionBadge}>
+        {/* Category Badge - Top Right Corner */}
+        <div className={cardClasses.categoryBadge}>
           <ThemedBadge
-            variant={AGENTS_DESIGN_TOKENS.variants.badge.version}
+            variant={AGENTS_DESIGN_TOKENS.variants.badge.category}
             size={AGENTS_DESIGN_TOKENS.variants.size.badge}
           >
-            {agent.version}
+            {agent.categories?.[0] || 'Agent'}
           </ThemedBadge>
         </div>
 
@@ -81,15 +81,18 @@ export const AgentCard = memo(function AgentCard({
             className={cardClasses.statsSection}
             aria-label={`Agent statistics: ${agent.commandCount} commands and ${agent.taskCount} tasks available`}
           >
-            <span
-              className={textClasses.stats}
-              aria-label={`${agent.commandCount} commands available`}
-            >
-              {agent.commandCount} commands
-            </span>
-            <span className={textClasses.stats} aria-label={`${agent.taskCount} tasks available`}>
-              {agent.taskCount} tasks
-            </span>
+            <div className="flex items-center gap-2">
+              <span
+                className={textClasses.stats}
+                aria-label={`${agent.commandCount} commands available`}
+              >
+                {agent.commandCount} commands
+              </span>
+              <span className={textClasses.stats}>|</span>
+              <span className={textClasses.stats} aria-label={`${agent.taskCount} tasks available`}>
+                {agent.taskCount} tasks
+              </span>
+            </div>
           </div>
         </ThemedCardContent>
       </ThemedCard>

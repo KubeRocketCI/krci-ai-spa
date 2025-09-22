@@ -4,7 +4,7 @@ import { TechArticleSchema, BreadcrumbSchema } from '../components/StructuredDat
 export const metadata: Metadata = {
   title: 'AI Agents Directory - Meet Your Development Team',
   description:
-    'Discover the specialized AI agents that power the KubeRocketAI framework. Each agent brings unique expertise to accelerate your development workflow across different specializations.',
+    'Discover the specialized AI agents that power the KubeRocketAI framework. Each agent brings unique expertise to accelerate your development workflow across different categories.',
   keywords: [
     'AI agents',
     'AI team',

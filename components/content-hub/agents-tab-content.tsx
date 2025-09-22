@@ -14,7 +14,7 @@ interface AgentsTabContentProps {
 // Agent search configuration - moved outside component to avoid re-creation
 const agentSearchConfig = {
   searchFields: ['name', 'role', 'description', 'goal', 'whenToUse'] as (keyof Agent)[],
-  categoryField: 'specializations' as keyof Agent,
+  categoryField: 'categories' as keyof Agent,
 };
 
 /**
@@ -68,7 +68,7 @@ export function AgentsTabContent({
           selectedSpecialization={selectedSpecialization}
           onSpecializationChange={handleSpecializationChange}
           resultsCount={filteredAgents.length}
-          availableSpecializations={agentsData.metadata.specializations}
+          availableSpecializations={agentsData.metadata.categories}
         />
       </section>
 

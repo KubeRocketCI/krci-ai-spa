@@ -30,7 +30,7 @@ export const AgentsFilter = memo(function AgentsFilter({
   // Agent search configuration - single place to define agent search behavior
   const agentSearchConfig = {
     searchFields: ['name', 'role', 'description', 'goal', 'whenToUse'] as (keyof Agent)[],
-    categoryField: 'specializations' as keyof Agent,
+    categoryField: 'categories' as keyof Agent,
     placeholder: 'Search agents by name, role, description, or specialization...',
     debounceMs: 300,
   };

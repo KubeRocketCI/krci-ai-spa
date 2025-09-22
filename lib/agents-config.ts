@@ -15,7 +15,7 @@ export const AGENTS_PAGE_CONFIG: ContentPageConfig<Agent> = {
   searchConfig: {
     placeholder: 'Search agents by name, role, description, or specialization...',
     searchFields: ['name', 'role', 'description', 'goal', 'whenToUse'],
-    categoryField: 'specializations',
+    categoryField: 'categories',
     debounceMs: 300,
   },
   cardConfig: {
