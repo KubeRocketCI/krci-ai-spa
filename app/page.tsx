@@ -357,7 +357,7 @@ export default function HomePage() {
                       value={stat.value}
                       label={stat.label}
                       variant="gradient"
-                      href="/architecture#agent-relations"
+                      href="/agents"
                     />
                   );
                 }
