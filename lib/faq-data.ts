@@ -1,9 +1,15 @@
-export interface FAQItem {
+import type { BaseSearchableItem, SearchConfig } from './search-types';
+
+export interface FAQItem extends BaseSearchableItem {
   id: string;
   question: string;
   answer: string;
   category: FAQCategory;
+  categories?: string[]; // For compatibility with unified search utilities
   tags: string[];
+  // BaseSearchableItem compatibility
+  name?: string;
+  description?: string;
 }
 
 export enum FAQCategory {
@@ -921,4 +927,37 @@ export const getUseCasesFAQs = (): FAQItem[] => {
         ['adoption', 'workflow', 'team', 'value', 'benefits'].includes(tag.toLowerCase()),
       ),
   ).slice(0, 4); // Show 4 items to match main page
+};
+
+// Transform FAQ data to include categories array for unified search compatibility
+const transformFAQForSearch = (
+  faq: Omit<FAQItem, 'categories' | 'name' | 'description'>,
+): FAQItem => ({
+  ...faq,
+  categories: [faq.category], // Convert single category to array
+  name: faq.question, // Use question as searchable name
+  description: faq.answer, // Use answer as searchable description
+});
+
+// Export transformed FAQ data compatible with unified search utilities
+export const FAQ_DATA_SEARCHABLE: FAQItem[] = FAQ_DATA.map(transformFAQForSearch);
+
+// Helper to get available FAQ categories for filtering
+export const getFAQCategories = (): string[] => {
+  return Object.values(FAQCategory);
+};
+
+// Search configuration for FAQ items using generic SearchFilter
+export const FAQ_SEARCH_CONFIG: SearchConfig<FAQItem> = {
+  searchFields: ['question', 'answer', 'name', 'description'],
+  categoryField: 'categories',
+  placeholder: 'Search questions...',
+  debounceMs: 300,
+  highlightConfig: {
+    enabled: true,
+    highlightClass:
+      'bg-cyan-200 dark:bg-cyan-900/40 px-1 rounded text-cyan-900 dark:text-cyan-100 font-medium',
+    caseSensitive: false,
+    maxHighlights: 5,
+  },
 };

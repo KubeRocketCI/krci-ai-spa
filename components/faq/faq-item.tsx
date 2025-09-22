@@ -196,14 +196,15 @@ export function FAQItemComponent({
     return parts;
   };
 
-  // Highlight search terms
+  // Highlight search terms using improved highlighting
   const highlightSearchQuery = (text: string) => {
     if (!searchQuery || searchQuery.trim() === '') return text;
 
+    // Use consistent highlighting with improved styling
     const regex = new RegExp(`(${searchQuery.trim()})`, 'gi');
     return text.replace(
       regex,
-      '<mark class="bg-yellow-300/30 text-yellow-800 dark:bg-yellow-400/30 dark:text-yellow-200 px-1 rounded">$1</mark>',
+      '<mark class="bg-cyan-200 dark:bg-cyan-900/40 px-1 rounded text-cyan-900 dark:text-cyan-100 font-medium">$1</mark>',
     );
   };
 

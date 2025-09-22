@@ -7,39 +7,37 @@ import { SharedFooter } from '@/components/shared-footer';
 import { ThemedHeading } from '@/components/ui/themed-heading';
 import { ThemedBackground } from '@/components/ui/themed-background';
 import { ThemedLink } from '@/components/ui/themed-link';
-import { FAQSearch } from '@/components/faq/faq-search';
+import { SearchFilter } from '@/components/ui/search-filter';
 import { FAQList } from '@/components/faq/faq-list';
 import { CollapseAllButton, CollapseAllButtonMobile } from '@/components/faq/collapse-all-button';
 import { JsonLd } from '@/app/components/JsonLd';
-import { FAQ_DATA, FAQCategory, getFAQsByCategory } from '@/lib/faq-data';
+import { FAQ_DATA, FAQ_DATA_SEARCHABLE, getFAQCategories } from '@/lib/faq-data';
 import { generateFAQSchema, getFAQMetaTags, getFAQBreadcrumbSchema } from '@/lib/faq-schema';
+import { filterItems } from '@/lib/search-utils';
+import type { FAQItem } from '@/lib/faq-data';
+
+// FAQ search configuration - moved outside component to avoid re-creation
+const faqSearchConfig = {
+  searchFields: ['question', 'answer', 'tags'] as (keyof FAQItem)[],
+  categoryField: 'categories' as keyof FAQItem,
+  placeholder: 'Search questions, answers, or tags...',
+  debounceMs: 300,
+};
 
 export default function FAQPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<FAQCategory | 'all'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string | 'all'>('all');
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
-  // Filter FAQs based on search and category
+  // Filter FAQs using unified search utilities
   const filteredFAQs = useMemo(() => {
-    let faqs = FAQ_DATA;
-
-    // Apply category filter
-    if (selectedCategory !== 'all') {
-      faqs = getFAQsByCategory(selectedCategory);
-    }
-
-    // Apply search filter
-    if (searchQuery.trim()) {
-      faqs = faqs.filter(
-        faq =>
-          faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          faq.answer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          faq.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())),
-      );
-    }
-
-    return faqs;
+    return filterItems(FAQ_DATA_SEARCHABLE, searchQuery, selectedCategory, faqSearchConfig);
   }, [searchQuery, selectedCategory]);
+
+  // Get available FAQ categories for filtering
+  const availableCategories = useMemo(() => {
+    return getFAQCategories();
+  }, []);
 
   // Handlers for expand/collapse functionality
   const toggleFAQExpanded = (faqId: string) => {
@@ -104,12 +102,14 @@ export default function FAQPage() {
           <div className="container mx-auto max-w-6xl">
             {/* Simple Search */}
             <div className="mb-8">
-              <FAQSearch
+              <SearchFilter<FAQItem>
                 searchQuery={searchQuery}
                 onSearchChange={setSearchQuery}
                 selectedCategory={selectedCategory}
                 onCategoryChange={setSelectedCategory}
+                availableCategories={availableCategories}
                 resultsCount={filteredFAQs.length}
+                searchConfig={faqSearchConfig}
               />
             </div>
 
