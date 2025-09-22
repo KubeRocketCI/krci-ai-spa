@@ -21,18 +21,16 @@ interface TemplateCardProps {
   template: Template;
   variant?: 'compact' | 'detailed' | 'feature';
   className?: string;
-  onClick?: (template: Template) => void;
 }
 
 export const TemplateCard = memo(function TemplateCard({
   template,
   variant = 'feature',
   className,
-  onClick,
 }: TemplateCardProps) {
   const cardClasses = getTemplateCardClasses();
 
-  const handleClick = onClick ? () => onClick(template) : undefined;
+  // No click handler to avoid cursor pointer
 
   return (
     <article
@@ -42,8 +40,7 @@ export const TemplateCard = memo(function TemplateCard({
     >
       <ThemedCard
         variant={TEMPLATES_DESIGN_TOKENS.variants.card}
-        className={`${cardClasses.container} ${className || ''}`}
-        onClick={handleClick}
+        className={`${cardClasses.container} cursor-default ${className || ''}`}
       >
         {/* Category Badge - Top Right Corner */}
         <div className={cardClasses.categoryBadge}>

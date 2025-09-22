@@ -90,7 +90,11 @@ export default function AgentsPage() {
 
           {/* Data Tab */}
           <ThemedTabsContent value="data" className="focus:outline-none">
-            <DataTabContent />
+            <DataTabContent
+              dataFilesResult={contentHubData.dataFiles}
+              searchQuery={unifiedSearch.searchQuery}
+              onSearchChange={unifiedSearch.handleSearchChange}
+            />
           </ThemedTabsContent>
         </ThemedTabs>
       </main>

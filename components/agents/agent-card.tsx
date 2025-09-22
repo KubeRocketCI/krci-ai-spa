@@ -24,19 +24,17 @@ interface AgentCardProps {
   agent: Agent;
   variant?: 'compact' | 'detailed' | 'feature';
   className?: string;
-  onClick?: (agent: Agent) => void;
 }
 
 export const AgentCard = memo(function AgentCard({
   agent,
   variant = 'feature',
   className,
-  onClick,
 }: AgentCardProps) {
   const cardClasses = getAgentCardClasses();
   const textClasses = getAgentTextClasses();
 
-  const handleClick = onClick ? () => onClick(agent) : undefined;
+  // No click handler to avoid cursor pointer
 
   return (
     <article
@@ -46,8 +44,7 @@ export const AgentCard = memo(function AgentCard({
     >
       <ThemedCard
         variant={AGENTS_DESIGN_TOKENS.variants.card}
-        className={`${cardClasses.container} ${className || ''}`}
-        onClick={handleClick}
+        className={`${cardClasses.container} cursor-default ${className || ''}`}
       >
         {/* Version Badge - Top Right Corner */}
         <div className={cardClasses.versionBadge}>
