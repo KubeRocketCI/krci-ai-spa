@@ -2,13 +2,20 @@ import { useState, useMemo, useCallback } from 'react';
 import { AgentsFilter, type AgentSpecialization } from '@/components/agents/agents-filter';
 import { AgentCard } from '@/components/agents/agent-card';
 import { getAgentCardClasses } from '@/lib/agents-design-tokens';
-import type { AgentsData } from '@/lib/agents';
+import { filterItems } from '@/lib/search-utils';
+import type { AgentsData, Agent } from '@/lib/agents';
 
 interface AgentsTabContentProps {
   agentsData: AgentsData | null;
   searchQuery: string;
   onSearchChange: (query: string) => void;
 }
+
+// Agent search configuration - moved outside component to avoid re-creation
+const agentSearchConfig = {
+  searchFields: ['name', 'role', 'description', 'goal', 'whenToUse'] as (keyof Agent)[],
+  categoryField: 'specializations' as keyof Agent,
+};
 
 /**
  * Agents tab content component
@@ -33,29 +40,9 @@ export function AgentsTabContent({
     return agentsData.agents;
   }, [agentsData]);
 
-  // Filter agents - data is reliable, no defensive coding needed
+  // Filter agents using unified search utilities
   const filteredAgents = useMemo(() => {
-    let filtered = processedAgents;
-
-    // Filter by search query
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(
-        agent =>
-          agent.name.toLowerCase().includes(query) ||
-          agent.role.toLowerCase().includes(query) ||
-          agent.description.toLowerCase().includes(query) ||
-          agent.goal.toLowerCase().includes(query) ||
-          agent.whenToUse.toLowerCase().includes(query),
-      );
-    }
-
-    // Filter by specialization
-    if (selectedSpecialization !== 'all') {
-      filtered = filtered.filter(agent => agent.specializations.includes(selectedSpecialization));
-    }
-
-    return filtered;
+    return filterItems(processedAgents, searchQuery, selectedSpecialization, agentSearchConfig);
   }, [processedAgents, searchQuery, selectedSpecialization]);
 
   const cardClasses = getAgentCardClasses();

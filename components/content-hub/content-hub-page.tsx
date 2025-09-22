@@ -4,7 +4,7 @@
  * Generic content hub page component
  */
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
 import { ThemedStatCard } from '@/components/ui/themed-stat-card';
@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/themed-tabs';
 import { SearchFilter } from '@/components/ui/search-filter';
 import { ContentGrid } from './content-grid';
-import { filterItems, extractCategories } from '@/lib/search-utils';
+import { useProcessedTabs } from '@/hooks/use-processed-tabs';
 import { CONTENT_DESIGN_TOKENS } from '@/lib/content-design-tokens';
 import type { BaseContentItem, ContentPageConfig, ContentCollection } from '@/lib/content-types';
 import type { ReactNode } from 'react';
@@ -49,7 +49,7 @@ export function ContentHubPage<T extends BaseContentItem>({
 }: ContentHubPageProps<T>) {
   // Search and filter state - single responsibility
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState<Record<string, string | 'all'>>(
+  const [selectedCategories, setSelectedCategories] = useState<Record<string, string | 'all'>>(() =>
     tabs.reduce((acc, tab) => ({ ...acc, [tab.id]: 'all' }), {}),
   );
 
@@ -65,42 +65,8 @@ export function ContentHubPage<T extends BaseContentItem>({
     [],
   );
 
-  // Process tab data - memoized for performance
-  const processedTabs = useMemo(
-    () =>
-      tabs.map(tab => {
-        if (!tab.data?.items) {
-          return {
-            ...tab,
-            filteredItems: [],
-            availableCategories: [],
-            stats: { total: 0, categories: 0 },
-          };
-        }
-
-        const availableCategories = tab.config.searchConfig.categoryField
-          ? extractCategories(tab.data.items, tab.config.searchConfig.categoryField)
-          : [];
-
-        const filteredItems = filterItems(
-          tab.data.items,
-          searchQuery,
-          selectedCategories[tab.id] || 'all',
-          tab.config.searchConfig,
-        );
-
-        return {
-          ...tab,
-          filteredItems,
-          availableCategories,
-          stats: {
-            total: tab.data.items.length,
-            categories: availableCategories.length,
-          },
-        };
-      }),
-    [tabs, searchQuery, selectedCategories],
-  );
+  // Process tab data using custom hook
+  const processedTabs = useProcessedTabs(tabs, searchQuery, selectedCategories);
 
   return (
     <>
@@ -176,6 +142,7 @@ export function ContentHubPage<T extends BaseContentItem>({
                       onCategoryChange={handleCategoryChange(tab.id)}
                       availableCategories={tab.availableCategories}
                       resultsCount={tab.filteredItems.length}
+                      totalCount={tab.stats.total}
                       searchConfig={tab.config.searchConfig}
                     />
                   </section>

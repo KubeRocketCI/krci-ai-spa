@@ -6,6 +6,8 @@
 
 import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { Search, X } from 'lucide-react';
+import { useSearchKeyboard } from '@/hooks/use-search-keyboard';
+import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import { ThemedButton } from '@/components/ui/themed-button';
 import {
   ThemedSearchContainer,
@@ -14,6 +16,7 @@ import {
   ThemedCategoryContainer,
   ThemedCategoryButton,
   ThemedResultsCount,
+  ThemedSearchLoading,
 } from '@/components/ui/themed-search';
 import type { BaseSearchableItem, SearchFilterProps } from '@/lib/search-types';
 
@@ -24,8 +27,10 @@ function SearchFilterComponent<T extends BaseSearchableItem>({
   onCategoryChange,
   availableCategories,
   resultsCount = 0,
+  totalCount,
   searchConfig,
   className,
+  isLoading = false,
 }: SearchFilterProps<T>) {
   const [localQuery, setLocalQuery] = useState(searchQuery);
   const [isFocused, setIsFocused] = useState(false);
@@ -34,29 +39,12 @@ function SearchFilterComponent<T extends BaseSearchableItem>({
   const debounceMs = searchConfig.debounceMs || 300;
   const placeholder = searchConfig.placeholder || 'Search...';
 
+  // Use the custom debounce hook instead of manual debouncing
+  const debouncedQuery = useDebouncedValue(localQuery, debounceMs);
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      onSearchChange(localQuery);
-    }, debounceMs);
-
-    return () => clearTimeout(timer);
-  }, [localQuery, onSearchChange, debounceMs]);
-
-  // Keyboard shortcuts - single responsibility
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        searchInputRef.current?.focus();
-      }
-      if (e.key === 'Escape' && isFocused) {
-        searchInputRef.current?.blur();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isFocused]);
+    onSearchChange(debouncedQuery);
+  }, [debouncedQuery, onSearchChange]);
 
   const clearFilters = useCallback(() => {
     setLocalQuery('');
@@ -64,6 +52,12 @@ function SearchFilterComponent<T extends BaseSearchableItem>({
     onCategoryChange('all');
     searchInputRef.current?.focus();
   }, [onSearchChange, onCategoryChange]);
+
+  // Keyboard shortcuts management using custom hook
+  useSearchKeyboard(searchInputRef, {
+    isFocused,
+    onClearFilters: clearFilters,
+  });
 
   const hasActiveFilters = localQuery.trim() !== '' || selectedCategory !== 'all';
 
@@ -122,15 +116,22 @@ function SearchFilterComponent<T extends BaseSearchableItem>({
         </div>
       )}
 
-      {/* Results count */}
-      {hasActiveFilters && (
+      {/* Results count or loading state */}
+      {isLoading && hasActiveFilters && (
+        <div role="status" aria-live="polite" aria-label="Searching...">
+          <ThemedSearchLoading />
+        </div>
+      )}
+
+      {!isLoading && hasActiveFilters && (
         <div
           role="status"
           aria-live="polite"
-          aria-label={`Showing ${resultsCount} result${resultsCount !== 1 ? 's' : ''} matching your criteria`}
+          aria-label={`Showing ${resultsCount} ${totalCount ? `of ${totalCount}` : ''} result${resultsCount !== 1 ? 's' : ''} matching your criteria`}
         >
-          <ThemedResultsCount>
-            {resultsCount} result{resultsCount !== 1 ? 's' : ''}
+          <ThemedResultsCount isLoading={isLoading}>
+            {resultsCount} {totalCount ? `of ${totalCount}` : ''} result
+            {resultsCount !== 1 ? 's' : ''}
           </ThemedResultsCount>
         </div>
       )}
@@ -138,6 +139,17 @@ function SearchFilterComponent<T extends BaseSearchableItem>({
       {/* Hidden keyboard shortcut hint for screen readers */}
       <div id="search-shortcut" className="sr-only">
         Press Ctrl+K or Cmd+K to focus search, Escape to clear focus
+      </div>
+
+      {/* Screen reader announcements for search completion */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {hasActiveFilters && (
+          <span>
+            Search completed. {resultsCount} {totalCount ? `of ${totalCount}` : ''} results found
+            {selectedCategory !== 'all' && ` in ${selectedCategory} category`}
+            {searchQuery.trim() && ` for "${searchQuery}"`}.
+          </span>
+        )}
       </div>
     </ThemedSearchContainer>
   );
