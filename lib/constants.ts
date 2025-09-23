@@ -95,73 +95,6 @@ export const STAT_SPECIAL_CONFIG: Record<StatLabel, { href?: string; icon?: stri
 };
 
 // ==========================================
-// UI COMPONENT VARIANTS
-// ==========================================
-
-/** Component size variants */
-export enum ComponentSize {
-  COMPACT = 'compact',
-  DEFAULT = 'default',
-  LARGE = 'large',
-}
-
-/** Component visual variants */
-export enum ComponentVariant {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  TERTIARY = 'tertiary',
-  SUCCESS = 'success',
-  WARNING = 'warning',
-  ERROR = 'error',
-  INFO = 'info',
-}
-
-/** Layout variants for sections and containers */
-export enum LayoutVariant {
-  HERO = 'hero',
-  FEATURE = 'feature',
-  STATS = 'stats',
-  CTA = 'cta',
-  NOTICE = 'notice',
-  DEFAULT = 'default',
-}
-
-/** Card display variants */
-export enum CardVariant {
-  COMPACT = 'compact',
-  DEFAULT = 'default',
-  DETAILED = 'detailed',
-}
-
-// ==========================================
-// THEME AND ENVIRONMENT
-// ==========================================
-
-/** Theme mode values */
-export enum ThemeMode {
-  LIGHT = 'light',
-  DARK = 'dark',
-}
-
-/** Environment values */
-export enum Environment {
-  DEVELOPMENT = 'development',
-  PRODUCTION = 'production',
-  TEST = 'test',
-}
-
-/** Keyboard keys for consistency */
-export enum KeyboardKey {
-  ENTER = 'Enter',
-  SPACE = ' ',
-  ESCAPE = 'Escape',
-  ARROW_LEFT = 'ArrowLeft',
-  ARROW_RIGHT = 'ArrowRight',
-  K = 'k',
-  SHIFT_K = 'K',
-}
-
-// ==========================================
 // CONTENT TYPE DETECTION
 // ==========================================
 
@@ -177,18 +110,6 @@ export const CONTENT_PATH_PATTERNS = {
 export type ContentPathPattern = (typeof CONTENT_PATH_PATTERNS)[keyof typeof CONTENT_PATH_PATTERNS];
 
 // ==========================================
-// STATUS AND STATE VALUES
-// ==========================================
-
-/** Timeline/milestone status values */
-export enum MilestoneStatus {
-  COMPLETED = 'completed',
-  CURRENT = 'current',
-  PENDING = 'pending',
-  ACHIEVED = 'achieved',
-}
-
-// ==========================================
 // ANALYTICS AND TRACKING
 // ==========================================
 
@@ -202,21 +123,3 @@ export const BASE_URL =
   process.env.NODE_ENV === 'production'
     ? `https://${ANALYTICS_HOSTS.PRODUCTION}`
     : 'http://localhost:3000';
-
-// ==========================================
-// UTILITY TYPE HELPERS
-// ==========================================
-
-/** Extract the values from a const object as a union type */
-export type ValueOf<T> = T[keyof T];
-
-/** Make specific properties required while keeping others optional */
-export type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
-
-/** Create a type-safe enum checker */
-export function isEnumValue<T extends Record<string, string>>(
-  enumObject: T,
-  value: unknown,
-): value is T[keyof T] {
-  return typeof value === 'string' && Object.values(enumObject).includes(value as T[keyof T]);
-}

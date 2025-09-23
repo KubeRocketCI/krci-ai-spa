@@ -55,9 +55,3 @@ export const createTextVariants = (baseClass = '') => ({
   muted: `${THEME_COLORS.text.muted} ${baseClass}`,
   accent: `${THEME_COLORS.accent.primary} ${baseClass}`,
 });
-
-export const createCardVariants = (baseClass = '') => ({
-  default: `${THEME_COLORS.background.card} ${THEME_COLORS.border.default} ${baseClass}`,
-  hover: `${THEME_COLORS.background.cardHover} ${THEME_COLORS.border.hover} ${baseClass}`,
-  accent: `${THEME_COLORS.background.card} ${THEME_COLORS.border.card} ${baseClass}`,
-});
