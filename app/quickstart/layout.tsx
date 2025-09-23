@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { TechArticleSchema, HowToSchema, BreadcrumbSchema } from '../components/StructuredData';
+import { BASE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Quick Start Guide - Install in 3 Minutes',
   description:
-    'Get started with KubeRocketAI in just 3 minutes. Complete installation guide, CLI commands, and step-by-step instructions for macOS, Linux, and Windows developers.',
+    'Step-by-step guide to install and use KubeRocketAI. Get started in 3 minutes with our AI-as-Code framework for enhanced development workflows.',
   keywords: [
     'KubeRocketAI quickstart',
     'installation guide',
@@ -21,9 +22,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'KubeRocketAI Quick Start Guide - Install in 3 Minutes',
     description:
-      'Complete installation guide for KubeRocketAI. Get your AI-as-Code framework running in 3 minutes with step-by-step instructions.',
-    url: 'https://krci-ai.kuberocketci.io/quickstart',
-    type: 'article',
+      'Step-by-step guide to install and use KubeRocketAI. Get started in 3 minutes with our AI-as-Code framework.',
+    url: `${BASE_URL}/quickstart`,
+    type: 'website',
     images: [
       {
         url: '/social.png',
@@ -37,11 +38,11 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'KubeRocketAI Quick Start - Install in 3 Minutes',
     description:
-      'Complete installation guide for KubeRocketAI. Get your AI-as-Code framework running quickly.',
+      'Step-by-step guide to install and use KubeRocketAI. Get started in 3 minutes with our AI-as-Code framework.',
     images: ['/social.png'],
   },
   alternates: {
-    canonical: 'https://krci-ai.kuberocketci.io/quickstart',
+    canonical: `${BASE_URL}/quickstart`,
   },
 };
 
@@ -49,16 +50,16 @@ export default function QuickstartLayout({ children }: { children: React.ReactNo
   return (
     <>
       <TechArticleSchema
-        title="KubeRocketAI Quick Start Guide - Install in 3 Minutes"
-        description="Complete installation guide for KubeRocketAI. Get your AI-as-Code framework running in 3 minutes with step-by-step instructions."
-        url="https://krci-ai.kuberocketci.io/quickstart"
-        keywords={['quickstart', 'installation', 'CLI', 'tutorial', 'AI-as-Code']}
+        title="KubeRocketAI Quick Start Guide"
+        description="Step-by-step guide to install and use KubeRocketAI in 3 minutes. Your journey to AI-as-Code starts here."
+        url={`${BASE_URL}/quickstart`}
+        keywords={['KubeRocketAI', 'quick start', 'installation', 'AI-as-Code', 'development']}
       />
       <HowToSchema />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://krci-ai.kuberocketci.io' },
-          { name: 'Quick Start Guide', url: 'https://krci-ai.kuberocketci.io/quickstart' },
+          { name: 'Home', url: BASE_URL },
+          { name: 'Quick Start Guide', url: `${BASE_URL}/quickstart` },
         ]}
       />
       {children}

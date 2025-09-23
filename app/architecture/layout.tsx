@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { TechArticleSchema, BreadcrumbSchema } from '../components/StructuredData';
+import { BASE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'SDLC Framework Architecture - System Design',
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     title: 'KubeRocketAI SDLC Framework Architecture',
     description:
       "Deep dive into the system architecture of KubeRocketAI's SDLC framework. Learn how AI-as-Code principles enable scalable agent management.",
-    url: 'https://krci-ai.kuberocketci.io/architecture',
+    url: `${BASE_URL}/architecture`,
     type: 'article',
     images: [
       {
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     images: ['/social.png'],
   },
   alternates: {
-    canonical: 'https://krci-ai.kuberocketci.io/architecture',
+    canonical: `${BASE_URL}/architecture`,
   },
 };
 
@@ -49,15 +50,15 @@ export default function ArchitectureLayout({ children }: { children: React.React
   return (
     <>
       <TechArticleSchema
-        title="KubeRocketAI SDLC Framework Architecture"
-        description="Deep dive into the system architecture of KubeRocketAI's SDLC framework. Learn how AI-as-Code principles enable scalable agent management."
-        url="https://krci-ai.kuberocketci.io/architecture"
-        keywords={['architecture', 'SDLC', 'system design', 'AI-as-Code', 'framework']}
+        title="KubeRocketAI Technical Architecture"
+        description="High-level overview of the KubeRocketAI framework, including our technology stack, data models, and component architecture."
+        url={`${BASE_URL}/architecture`}
+        keywords={['architecture', 'technology stack', 'data models', 'AI-as-Code']}
       />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://krci-ai.kuberocketci.io' },
-          { name: 'Architecture', url: 'https://krci-ai.kuberocketci.io/architecture' },
+          { name: 'Home', url: BASE_URL },
+          { name: 'Architecture', url: `${BASE_URL}/architecture` },
         ]}
       />
       {children}

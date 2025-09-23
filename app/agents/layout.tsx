@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { TechArticleSchema, BreadcrumbSchema } from '../components/StructuredData';
+import { BASE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'AI Agents Directory - Meet Your Development Team',
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     title: 'KubeRocketAI AI Agents Directory',
     description:
       'Meet the specialized AI agents that power the KubeRocketAI framework. Discover agents for development, architecture, quality assurance, and more.',
-    url: 'https://krci-ai.kuberocketci.io/agents',
+    url: `${BASE_URL}/agents`,
     type: 'website',
     images: [
       {
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
     images: ['/social.png'],
   },
   alternates: {
-    canonical: 'https://krci-ai.kuberocketci.io/agents',
+    canonical: `${BASE_URL}/agents`,
   },
 };
 
@@ -55,7 +56,7 @@ export default function AgentsLayout({ children }: { children: React.ReactNode }
       <TechArticleSchema
         title="KubeRocketAI AI Agents Directory"
         description="Discover the specialized AI agents that power the KubeRocketAI framework. Each agent brings unique expertise to accelerate your development workflow."
-        url="https://krci-ai.kuberocketci.io/agents"
+        url={`${BASE_URL}/agents`}
         keywords={[
           'AI agents',
           'development team',
@@ -66,8 +67,8 @@ export default function AgentsLayout({ children }: { children: React.ReactNode }
       />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://krci-ai.kuberocketci.io' },
-          { name: 'Agents', url: 'https://krci-ai.kuberocketci.io/agents' },
+          { name: 'Home', url: BASE_URL },
+          { name: 'Agents', url: `${BASE_URL}/agents` },
         ]}
       />
       {children}

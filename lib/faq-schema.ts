@@ -1,4 +1,5 @@
 import { FAQItem } from './faq-data';
+import { BASE_URL } from '@/lib/constants';
 
 /**
  * Generate JSON-LD structured data for FAQ Rich Results
@@ -71,7 +72,7 @@ export function getFAQMetaTags() {
       description:
         'Get answers about KubeRocketAI installation, IDE integration, platform features, and more.',
       type: 'website',
-      url: 'https://krci-ai.kuberocketci.io/faq',
+      url: `${BASE_URL}/faq`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -94,13 +95,13 @@ export function getFAQBreadcrumbSchema() {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://krci-ai.kuberocketci.io',
+        item: BASE_URL,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'FAQ',
-        item: 'https://krci-ai.kuberocketci.io/faq',
+        item: `${BASE_URL}/faq`,
       },
     ],
   };

@@ -1,4 +1,5 @@
 import { JsonLd } from './JsonLd';
+import { BASE_URL } from '@/lib/constants';
 
 // Organization Schema
 export const OrganizationSchema = () => (
@@ -8,8 +9,8 @@ export const OrganizationSchema = () => (
       '@type': 'Organization',
       name: 'KubeRocketCI',
       legalName: 'KubeRocketCI',
-      url: 'https://krci-ai.kuberocketci.io',
-      logo: 'https://krci-ai.kuberocketci.io/logo.svg',
+      url: BASE_URL,
+      logo: `${BASE_URL}/logo.svg`,
       description: 'Open-source platform for AI-as-Code principles and AI agent management',
       foundingDate: '2024',
       contactPoint: {
@@ -34,7 +35,7 @@ export const SoftwareApplicationSchema = () => (
       operatingSystem: ['macOS', 'Linux', 'Windows'],
       description:
         'AI-as-Code framework for development teams. Apply Pipeline-as-Code principles to AI agent management with version-controlled, project-aware AI agents.',
-      url: 'https://krci-ai.kuberocketci.io',
+      url: BASE_URL,
       downloadUrl: 'https://github.com/KubeRocketCI/kuberocketai/releases',
       releaseNotes: 'https://github.com/KubeRocketCI/kuberocketai/releases',
       softwareVersion: 'latest',
@@ -69,7 +70,7 @@ export const WebsiteSchema = () => (
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'KubeRocketAI',
-      url: 'https://krci-ai.kuberocketci.io',
+      url: BASE_URL,
       description:
         'AI-as-Code for Development Teams - Apply Pipeline-as-Code principles to AI agent management',
       publisher: {
@@ -78,7 +79,7 @@ export const WebsiteSchema = () => (
       },
       potentialAction: {
         '@type': 'SearchAction',
-        target: 'https://krci-ai.kuberocketci.io/search?q={search_term_string}',
+        target: `${BASE_URL}/search?q={search_term_string}`,
         'query-input': 'required name=search_term_string',
       },
     }}
@@ -189,22 +190,22 @@ export const HowToSchema = () => (
           position: 1,
           name: 'Install Framework',
           text: 'Run the installation command for your operating system',
-          url: 'https://krci-ai.kuberocketci.io/quickstart#install',
-          image: 'https://krci-ai.kuberocketci.io/social.png',
+          url: `${BASE_URL}/quickstart#install`,
+          image: `${BASE_URL}/social.png`,
         },
         {
           '@type': 'HowToStep',
           position: 2,
           name: 'Discover Agents',
           text: 'List available AI agents using krci-ai list agents',
-          url: 'https://krci-ai.kuberocketci.io/quickstart#agents',
+          url: `${BASE_URL}/quickstart#agents`,
         },
         {
           '@type': 'HowToStep',
           position: 3,
           name: 'Start Using',
           text: 'Begin using agents in your IDE with the installed commands',
-          url: 'https://krci-ai.kuberocketci.io/quickstart#usage',
+          url: `${BASE_URL}/quickstart#usage`,
         },
       ],
     }}

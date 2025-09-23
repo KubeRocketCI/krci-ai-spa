@@ -198,6 +198,11 @@ export const ANALYTICS_HOSTS = {
   VERCEL: 'vercel.app',
 } as const;
 
+export const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? `https://${ANALYTICS_HOSTS.PRODUCTION}`
+    : 'http://localhost:3000';
+
 // ==========================================
 // UTILITY TYPE HELPERS
 // ==========================================

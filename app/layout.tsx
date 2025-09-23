@@ -10,6 +10,7 @@ import {
 import { ConsentProvider } from '@/lib/consent-context';
 import { ThemedCookieConsent } from '@/components/ui/themed-cookie-consent';
 import { Analytics, GAScript } from '@/components/analytics';
+import { BASE_URL } from '@/lib/constants';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 
 const jetbrainsMono = JetBrains_Mono({
@@ -27,15 +28,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://krci-ai.kuberocketci.io'),
   title: {
     default: 'KubeRocketAI - AI-as-Code for Development Teams',
     template: '%s | KubeRocketAI',
   },
   description:
-    'Apply Pipeline-as-Code principles to AI agent management. Version-controlled, project-aware AI agents that understand your codebase and team conventions.',
+    'Apply Pipeline-as-Code principles to AI agent management. KubeRocketAI provides a simple, version-controlled, and project-aware framework for enterprise development teams.',
+  metadataBase: new URL(BASE_URL),
   keywords: [
-    'AI',
+    'AI-as-Code',
     'Pipeline-as-Code',
     'CLI',
     'Developer Tools',
@@ -51,6 +52,7 @@ export const metadata: Metadata = {
     'Agent Management',
     'Version Control',
     'KubeRocketCI',
+    'AI agent management',
   ],
   alternates: {
     // Default canonical for the homepage; child routes override as needed
@@ -67,10 +69,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://krci-ai.kuberocketci.io',
+    url: BASE_URL,
     title: 'KubeRocketAI - AI-as-Code for Development Teams',
     description:
-      'Apply Pipeline-as-Code principles to AI agent management. Version-controlled, project-aware AI agents that understand your codebase.',
+      'A simple, version-controlled, and project-aware AI-as-Code framework for enterprise development teams.',
     siteName: 'KubeRocketAI',
     images: [
       {
@@ -86,7 +88,8 @@ export const metadata: Metadata = {
     title: 'KubeRocketAI - AI-as-Code for Development Teams',
     description:
       'Apply Pipeline-as-Code principles to AI agent management. Version-controlled, project-aware AI agents.',
-    creator: '@KubeRocketCI',
+    creator: '@kuberocketci',
+    site: '@kuberocketci',
     images: ['/social.png'],
   },
   robots: {
@@ -106,7 +109,7 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
     other: {
-      me: ['https://github.com/KubeRocketCI', 'https://krci-ai.kuberocketci.io'],
+      me: ['https://github.com/KubeRocketCI', BASE_URL],
     },
   },
   applicationName: 'KubeRocketAI',
