@@ -19,6 +19,7 @@ import {
   AGENTS_DESIGN_TOKENS,
 } from '@/lib/agents-design-tokens';
 import type { Agent } from '@/lib/agents';
+import { cn } from '@/lib/utils';
 
 interface AgentCardProps {
   agent: Agent;
@@ -44,7 +45,7 @@ export const AgentCard = memo(function AgentCard({
     >
       <ThemedCard
         variant={AGENTS_DESIGN_TOKENS.variants.card}
-        className={`${cardClasses.container} cursor-default ${className || ''}`}
+        className={cn(cardClasses.container, 'cursor-default', className)}
       >
         {/* Category Badge - Top Right Corner */}
         <div className={cardClasses.categoryBadge}>

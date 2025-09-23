@@ -51,13 +51,13 @@ export default function AgentsPage() {
               <Bot size={18} />
               Agents
             </ThemedTabsTrigger>
-            <ThemedTabsTrigger value="templates" className="flex items-center gap-2">
-              <Package size={18} />
-              Templates
-            </ThemedTabsTrigger>
             <ThemedTabsTrigger value="tasks" className="flex items-center gap-2">
               <Zap size={18} />
               Tasks
+            </ThemedTabsTrigger>
+            <ThemedTabsTrigger value="templates" className="flex items-center gap-2">
+              <Package size={18} />
+              Templates
             </ThemedTabsTrigger>
             <ThemedTabsTrigger value="data" className="flex items-center gap-2">
               <Database size={18} />
@@ -85,7 +85,11 @@ export default function AgentsPage() {
 
           {/* Tasks Tab */}
           <ThemedTabsContent value="tasks" className="focus:outline-none">
-            <TasksTabContent />
+            <TasksTabContent
+              tasksResult={contentHubData.tasks}
+              searchQuery={unifiedSearch.searchQuery}
+              onSearchChange={unifiedSearch.handleSearchChange}
+            />
           </ThemedTabsContent>
 
           {/* Data Tab */}

@@ -2,11 +2,13 @@ import { useMemo } from 'react';
 import { getAgents, type AgentsData } from '@/lib/agents';
 import { useTemplatesData } from '@/components/templates/template-data-provider';
 import { useDataFiles } from '@/components/data/data-data-provider';
+import { useTasksData } from '@/components/tasks/task-data-provider';
 
 export interface ContentHubData {
   agents: AgentsData | null;
   templates: ReturnType<typeof useTemplatesData>;
   dataFiles: ReturnType<typeof useDataFiles>;
+  tasks: ReturnType<typeof useTasksData>;
   loading: boolean;
   error: string | null;
 }
@@ -32,8 +34,11 @@ export function useContentHubData(): ContentHubData {
   // Load data files
   const dataFilesResult = useDataFiles();
 
+  // Load tasks
+  const tasksResult = useTasksData();
+
   // Compute overall loading state
-  const loading = templatesResult.loading || dataFilesResult.loading;
+  const loading = templatesResult.loading || dataFilesResult.loading || tasksResult.loading;
 
   // Compute overall error state
   const error = useMemo(() => {
@@ -46,13 +51,17 @@ export function useContentHubData(): ContentHubData {
     if (dataFilesResult.error) {
       return dataFilesResult.error;
     }
+    if (tasksResult.error) {
+      return tasksResult.error;
+    }
     return null;
-  }, [agentsData, templatesResult.error, dataFilesResult.error]);
+  }, [agentsData, templatesResult.error, dataFilesResult.error, tasksResult.error]);
 
   return {
     agents: agentsData,
     templates: templatesResult,
     dataFiles: dataFilesResult,
+    tasks: tasksResult,
     loading,
     error,
   };

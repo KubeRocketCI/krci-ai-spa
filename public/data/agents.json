@@ -10,7 +10,7 @@
       "icon": "🧪",
       "categories": ["Testing"],
       "scope": "Testing/quality assurance + reviews for testability",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Create test plans, automate testing, or ensure quality standards",
       "commandCount": 5,
       "taskCount": 4,
       "commands": {
@@ -32,7 +32,7 @@
       "icon": "🎯",
       "categories": ["Project Management"],
       "scope": "",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Plan projects, coordinate teams, or manage deliverables",
       "commandCount": 11,
       "taskCount": 10,
       "commands": {
@@ -60,7 +60,7 @@
       "icon": "📊",
       "categories": ["Analysis"],
       "scope": "Requirements/process analysis only",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Gather requirements, analyze business processes, or document user journeys",
       "commandCount": 5,
       "taskCount": 4,
       "commands": {
@@ -82,7 +82,7 @@
       "icon": "🏛️",
       "categories": ["Architecture"],
       "scope": "System design/architecture + reviews for technical feasibility",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Design system architecture, define technical patterns, or review designs",
       "commandCount": 5,
       "taskCount": 4,
       "commands": {
@@ -104,7 +104,7 @@
       "icon": "💻",
       "categories": ["Development"],
       "scope": "Code implementation/testing + reviews for technical clarity",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Implement features, review code, or debug technical issues",
       "commandCount": 4,
       "taskCount": 3,
       "commands": {
@@ -125,7 +125,7 @@
       "icon": "🎯",
       "categories": ["Framework Core"],
       "scope": "Framework component creation, validation, and maintenance",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Create or review agents, tasks, templates, or validate framework compliance",
       "commandCount": 9,
       "taskCount": 8,
       "commands": {
@@ -151,7 +151,7 @@
       "icon": "💻",
       "categories": ["Development"],
       "scope": "Go code implementation + Go code reviews",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Implement Go applications, review Go code, or build Kubernetes resources",
       "commandCount": 3,
       "taskCount": 2,
       "commands": {
@@ -171,7 +171,7 @@
       "icon": "🚀",
       "categories": ["Marketing"],
       "scope": "Marketing/GTM/sales materials only",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Manage product strategy, coordinate development, or track deliverables",
       "commandCount": 7,
       "taskCount": 6,
       "commands": {
@@ -195,7 +195,7 @@
       "icon": "📈",
       "categories": ["Product"],
       "scope": "Strategy/PRD/roadmap creation only",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Manage product strategy, coordinate development, or track deliverables",
       "commandCount": 14,
       "taskCount": 13,
       "commands": {
@@ -226,7 +226,7 @@
       "icon": "📋",
       "categories": ["Product"],
       "scope": "Epic/story/backlog management only",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Define product requirements, prioritize features, or manage backlog",
       "commandCount": 6,
       "taskCount": 5,
       "commands": {
@@ -249,7 +249,7 @@
       "icon": "🧪",
       "categories": ["Testing"],
       "scope": "Testing/quality assurance + reviews for testability",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Create test plans, automate testing, or ensure quality standards",
       "commandCount": 6,
       "taskCount": 4,
       "commands": {
@@ -272,7 +272,7 @@
       "icon": "📝",
       "categories": ["Documentation"],
       "scope": "Technical writing + documentation",
-      "whenToUse": "Specialized assistance for development tasks",
+      "whenToUse": "Create documentation, write technical content, or improve clarity",
       "commandCount": 3,
       "taskCount": 2,
       "commands": {
@@ -296,7 +296,7 @@
       "Project Management",
       "Testing"
     ],
-    "generatedAt": "2025-09-23T12:06:34.359407Z",
+    "generatedAt": "2025-09-23T16:58:53.970344Z",
     "version": "1.0.0"
   }
 }

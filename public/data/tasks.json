@@ -1,0 +1,475 @@
+{
+  "tasks": [
+    {
+      "id": "analyze-processes",
+      "name": "Analyze Processes",
+      "description": "Analyze business processes and identify improvements.",
+      "categories": ["Analysis"],
+      "path": ".krci-ai/tasks/analyze-processes.md"
+    },
+    {
+      "id": "core-create-agent",
+      "name": "Core Create Agent",
+      "description": "Create a new framework-compliant agent definition.",
+      "categories": ["Framework Core"],
+      "path": ".krci-ai/tasks/krci-ai/core-create-agent.md"
+    },
+    {
+      "id": "core-create-data",
+      "name": "Core Create Data",
+      "description": "Create a new framework-compliant data file.",
+      "categories": ["Framework Core"],
+      "path": ".krci-ai/tasks/krci-ai/core-create-data.md"
+    },
+    {
+      "id": "core-create-task",
+      "name": "Core Create Task",
+      "description": "Create a new framework-compliant task with proper structure.",
+      "categories": ["Framework Core"],
+      "path": ".krci-ai/tasks/krci-ai/core-create-task.md"
+    },
+    {
+      "id": "core-create-template",
+      "name": "Core Create Template",
+      "description": "Create a new framework-compliant template with variables.",
+      "categories": ["Framework Core"],
+      "path": ".krci-ai/tasks/krci-ai/core-create-template.md"
+    },
+    {
+      "id": "core-review-agent",
+      "name": "Core Review Agent",
+      "description": "Review an agent for framework compliance and quality.",
+      "categories": ["Framework Core"],
+      "path": ".krci-ai/tasks/krci-ai/core-review-agent.md"
+    },
+    {
+      "id": "core-review-task",
+      "name": "Core Review Task",
+      "description": "Review a task for framework compliance and clarity.",
+      "categories": ["Framework Core"],
+      "path": ".krci-ai/tasks/krci-ai/core-review-task.md"
+    },
+    {
+      "id": "core-review-template",
+      "name": "Core Review Template",
+      "description": "Review a template for variables and consistency.",
+      "categories": ["Framework Core"],
+      "path": ".krci-ai/tasks/krci-ai/core-review-template.md"
+    },
+    {
+      "id": "core-validate-framework",
+      "name": "Core Validate Framework",
+      "description": "Validate the framework and report remediation guidance.",
+      "categories": ["Framework Core"],
+      "path": ".krci-ai/tasks/krci-ai/core-validate-framework.md"
+    },
+    {
+      "id": "create-demo-script",
+      "name": "Create Demo Script",
+      "description": "Create an engaging product demo script.",
+      "categories": ["Marketing"],
+      "path": ".krci-ai/tasks/create-demo-script.md"
+    },
+    {
+      "id": "create-epic",
+      "name": "Create Epic",
+      "description": "Create a well-scoped epic with clear value and outcomes.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/create-epic.md"
+    },
+    {
+      "id": "create-launch-materials",
+      "name": "Create Launch Materials",
+      "description": "Create coordinated materials for product launch.",
+      "categories": ["Marketing"],
+      "path": ".krci-ai/tasks/create-launch-materials.md"
+    },
+    {
+      "id": "create-marketing-brief",
+      "name": "Create Marketing Brief",
+      "description": "Create a go-to-market marketing brief.",
+      "categories": ["Marketing"],
+      "path": ".krci-ai/tasks/create-marketing-brief.md"
+    },
+    {
+      "id": "create-pitch-deck",
+      "name": "Create Pitch Deck",
+      "description": "Create a compelling pitch deck for stakeholders.",
+      "categories": ["Marketing"],
+      "path": ".krci-ai/tasks/create-pitch-deck.md"
+    },
+    {
+      "id": "create-prd",
+      "name": "Create Prd",
+      "description": "Create a comprehensive product requirements document (PRD).",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/create-prd.md"
+    },
+    {
+      "id": "create-project-brief",
+      "name": "Create Project Brief",
+      "description": "Create a concise project brief outlining goals and scope.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/create-project-brief.md"
+    },
+    {
+      "id": "create-project-brief-advanced",
+      "name": "Create Project Brief Advanced",
+      "description": "Create an evidence-based advanced project brief.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/create-project-brief-advanced.md"
+    },
+    {
+      "id": "create-project-charter",
+      "name": "Create Project Charter",
+      "description": "Create a project charter defining vision and authority.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/create-project-charter.md"
+    },
+    {
+      "id": "create-project-plan",
+      "name": "Create Project Plan",
+      "description": "Create a project plan with timeline and milestones.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/create-project-plan.md"
+    },
+    {
+      "id": "create-risk-register",
+      "name": "Create Risk Register",
+      "description": "Create a risk register capturing risks and mitigations.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/create-risk-register.md"
+    },
+    {
+      "id": "create-sad",
+      "name": "Create Sad",
+      "description": "Create a Software Architecture Document (SAD).",
+      "categories": ["Architecture"],
+      "path": ".krci-ai/tasks/create-sad.md"
+    },
+    {
+      "id": "create-sales-enablement",
+      "name": "Create Sales Enablement",
+      "description": "Create sales enablement assets with proof points.",
+      "categories": ["Marketing"],
+      "path": ".krci-ai/tasks/create-sales-enablement.md"
+    },
+    {
+      "id": "create-sow",
+      "name": "Create Sow",
+      "description": "Create a scope of work (SOW) document.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/create-sow.md"
+    },
+    {
+      "id": "create-status-report",
+      "name": "Create Status Report",
+      "description": "Create a structured project status report.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/create-status-report.md"
+    },
+    {
+      "id": "create-story",
+      "name": "Create Story",
+      "description": "Create a user story with clear acceptance criteria.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/create-story.md"
+    },
+    {
+      "id": "create-test-plan",
+      "name": "Create Test Plan",
+      "description": "Create a test plan and strategy.",
+      "categories": ["Testing"],
+      "path": ".krci-ai/tasks/create-test-plan.md"
+    },
+    {
+      "id": "create-visual-identity",
+      "name": "Create Visual Identity",
+      "description": "Create brand visual identity and guidelines.",
+      "categories": ["Marketing"],
+      "path": ".krci-ai/tasks/create-visual-identity.md"
+    },
+    {
+      "id": "doc-review",
+      "name": "Doc Review",
+      "description": "Review documentation for clarity and completeness.",
+      "categories": ["Documentation"],
+      "path": ".krci-ai/tasks/doc-review.md"
+    },
+    {
+      "id": "document-business-rules",
+      "name": "Document Business Rules",
+      "description": "Document business rules and decision logic.",
+      "categories": ["Analysis"],
+      "path": ".krci-ai/tasks/document-business-rules.md"
+    },
+    {
+      "id": "edit-testing-settings",
+      "name": "Edit Testing Settings",
+      "description": "Edit test configuration settings.",
+      "categories": ["Testing"],
+      "path": ".krci-ai/tasks/edit-testing-settings.md"
+    },
+    {
+      "id": "enhance-project-brief",
+      "name": "Enhance Project Brief",
+      "description": "Enhance a standard brief to the advanced validation flow.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/enhance-project-brief.md"
+    },
+    {
+      "id": "execute-testing",
+      "name": "Execute Testing",
+      "description": "Execute test cases and record results.",
+      "categories": ["Testing"],
+      "path": ".krci-ai/tasks/execute-testing.md"
+    },
+    {
+      "id": "finalize-project-brief",
+      "name": "Finalize Project Brief",
+      "description": "Finalize the project brief after validations are satisfied.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/finalize-project-brief.md"
+    },
+    {
+      "id": "gather-project-context",
+      "name": "Gather Project Context",
+      "description": "Gather structured project context and inputs.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/gather-project-context.md"
+    },
+    {
+      "id": "gather-requirements",
+      "name": "Gather Requirements",
+      "description": "Gather and structure business requirements.",
+      "categories": ["Analysis"],
+      "path": ".krci-ai/tasks/gather-requirements.md"
+    },
+    {
+      "id": "generate-auto-test-cases",
+      "name": "Generate Auto Test Cases",
+      "description": "Generate Gherkin test scenarios automatically.",
+      "categories": ["Testing"],
+      "path": ".krci-ai/tasks/generate-auto-test-cases.md"
+    },
+    {
+      "id": "generate-test-cases",
+      "name": "Generate Test Cases",
+      "description": "Generate detailed test cases and scenarios.",
+      "categories": ["Testing"],
+      "path": ".krci-ai/tasks/generate-test-cases.md"
+    },
+    {
+      "id": "go-dev-implement-new-cr",
+      "name": "Go Dev Implement New Cr",
+      "description": "Implement a Kubernetes Custom Resource in Go.",
+      "categories": ["Development"],
+      "path": ".krci-ai/tasks/go-dev-implement-new-cr.md"
+    },
+    {
+      "id": "go-dev-review-code",
+      "name": "Go Dev Review Code",
+      "description": "Review Go code for quality and best practices.",
+      "categories": ["Development"],
+      "path": ".krci-ai/tasks/go-dev-review-code.md"
+    },
+    {
+      "id": "implement-feature",
+      "name": "Implement Feature",
+      "description": "Implement a new feature according to requirements.",
+      "categories": ["Development"],
+      "path": ".krci-ai/tasks/implement-feature.md"
+    },
+    {
+      "id": "map-user-journeys",
+      "name": "Map User Journeys",
+      "description": "Map user journeys and key experience flows.",
+      "categories": ["Analysis"],
+      "path": ".krci-ai/tasks/map-user-journeys.md"
+    },
+    {
+      "id": "onboard-testing",
+      "name": "Onboard Testing",
+      "description": "Onboard an existing Gherkin test suite.",
+      "categories": ["Testing"],
+      "path": ".krci-ai/tasks/onboard-testing.md"
+    },
+    {
+      "id": "plan-story-implementation",
+      "name": "Plan Story Implementation",
+      "description": "Plan technical implementation for a user story.",
+      "categories": ["Development"],
+      "path": ".krci-ai/tasks/plan-story-implementation.md"
+    },
+    {
+      "id": "ppt-review",
+      "name": "Ppt Review",
+      "description": "Review a presentation for structure and messaging.",
+      "categories": ["Documentation"],
+      "path": ".krci-ai/tasks/ppt-review.md"
+    },
+    {
+      "id": "refine-project-brief",
+      "name": "Refine Project Brief",
+      "description": "Refine Project Brief.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/refine-project-brief.md"
+    },
+    {
+      "id": "report-defects",
+      "name": "Report Defects",
+      "description": "Report defects with clear reproduction steps.",
+      "categories": ["Testing"],
+      "path": ".krci-ai/tasks/report-defects.md"
+    },
+    {
+      "id": "review-sad",
+      "name": "Review Sad",
+      "description": "Review a SAD for completeness and quality.",
+      "categories": ["Architecture"],
+      "path": ".krci-ai/tasks/review-sad.md"
+    },
+    {
+      "id": "review-story-architect",
+      "name": "Review Story Architect",
+      "description": "Review a story for architectural implications.",
+      "categories": ["Architecture"],
+      "path": ".krci-ai/tasks/review-story-architect.md"
+    },
+    {
+      "id": "review-story-dev",
+      "name": "Review Story Dev",
+      "description": "Review a story for technical feasibility and clarity.",
+      "categories": ["Development"],
+      "path": ".krci-ai/tasks/review-story-dev.md"
+    },
+    {
+      "id": "review-story-po",
+      "name": "Review Story Po",
+      "description": "Review a story for product alignment and completeness.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/review-story-po.md"
+    },
+    {
+      "id": "setup-testing",
+      "name": "Setup Testing",
+      "description": "Set up the testing workspace and structure.",
+      "categories": ["Testing"],
+      "path": ".krci-ai/tasks/setup-testing.md"
+    },
+    {
+      "id": "update-epic",
+      "name": "Update Epic",
+      "description": "Update an existing epic with refined scope or details.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/update-epic.md"
+    },
+    {
+      "id": "update-prd",
+      "name": "Update Prd",
+      "description": "Update an existing PRD with the latest requirements.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/update-prd.md"
+    },
+    {
+      "id": "update-project-brief",
+      "name": "Update Project Brief",
+      "description": "Update the project brief with new insights and decisions.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/update-project-brief.md"
+    },
+    {
+      "id": "update-project-charter",
+      "name": "Update Project Charter",
+      "description": "Update the project charter with new constraints.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/update-project-charter.md"
+    },
+    {
+      "id": "update-project-plan",
+      "name": "Update Project Plan",
+      "description": "Update the project plan with changes and risks.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/update-project-plan.md"
+    },
+    {
+      "id": "update-risk-register",
+      "name": "Update Risk Register",
+      "description": "Update the risk register with latest status.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/update-risk-register.md"
+    },
+    {
+      "id": "update-sad",
+      "name": "Update Sad",
+      "description": "Update a Software Architecture Document (SAD).",
+      "categories": ["Architecture"],
+      "path": ".krci-ai/tasks/update-sad.md"
+    },
+    {
+      "id": "update-sow",
+      "name": "Update Sow",
+      "description": "Update a scope of work (SOW) document.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/update-sow.md"
+    },
+    {
+      "id": "update-status-report",
+      "name": "Update Status Report",
+      "description": "Update a project status report with current progress.",
+      "categories": ["Project Management"],
+      "path": ".krci-ai/tasks/update-status-report.md"
+    },
+    {
+      "id": "update-story",
+      "name": "Update Story",
+      "description": "Update a user story based on feedback or findings.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/update-story.md"
+    },
+    {
+      "id": "validate-business-value",
+      "name": "Validate Business Value",
+      "description": "Validate business value with the Value Proposition Canvas.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/validate-business-value.md"
+    },
+    {
+      "id": "validate-problem-statement",
+      "name": "Validate Problem Statement",
+      "description": "Validate the problem statement using proven frameworks.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/validate-problem-statement.md"
+    },
+    {
+      "id": "validate-success-metrics",
+      "name": "Validate Success Metrics",
+      "description": "Validate success metrics using SMART/OKR alignment.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/validate-success-metrics.md"
+    },
+    {
+      "id": "validate-target-users",
+      "name": "Validate Target Users",
+      "description": "Validate target users with Jobs-to-be-Done analysis.",
+      "categories": ["Product"],
+      "path": ".krci-ai/tasks/validate-target-users.md"
+    }
+  ],
+  "metadata": {
+    "totalTasks": 65,
+    "categories": [
+      "Analysis",
+      "Architecture",
+      "Development",
+      "Documentation",
+      "Framework Core",
+      "Marketing",
+      "Product",
+      "Project Management",
+      "Testing"
+    ],
+    "generatedAt": "2025-09-23T16:18:22.278096Z",
+    "version": "1.0.0"
+  }
+}

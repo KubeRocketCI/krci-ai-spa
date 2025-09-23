@@ -16,6 +16,7 @@ import { ThemedBadge } from '@/components/ui/themed-badge';
 import { DataCardContent } from './data-card-content';
 import { getDataCardClasses, DATA_DESIGN_TOKENS } from '@/lib/data-design-tokens';
 import type { DataFile } from '@/lib/data';
+import { cn } from '@/lib/utils';
 
 interface DataCardProps {
   dataFile: DataFile;
@@ -40,7 +41,7 @@ export const DataCard = memo(function DataCard({
     >
       <ThemedCard
         variant={DATA_DESIGN_TOKENS.variants.card}
-        className={`${cardClasses.container} cursor-default ${className || ''}`}
+        className={cn(cardClasses.container, 'cursor-default', className)}
       >
         {/* Category Badge - Top Right Corner */}
         <div className={cardClasses.categoryBadge}>

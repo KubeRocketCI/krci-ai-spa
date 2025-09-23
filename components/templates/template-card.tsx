@@ -16,6 +16,7 @@ import { ThemedBadge } from '@/components/ui/themed-badge';
 import { TemplateCardContent } from './template-card-content';
 import { getTemplateCardClasses, TEMPLATES_DESIGN_TOKENS } from '@/lib/templates-design-tokens';
 import type { Template } from '@/lib/templates';
+import { cn } from '@/lib/utils';
 
 interface TemplateCardProps {
   template: Template;
@@ -40,7 +41,7 @@ export const TemplateCard = memo(function TemplateCard({
     >
       <ThemedCard
         variant={TEMPLATES_DESIGN_TOKENS.variants.card}
-        className={`${cardClasses.container} cursor-default ${className || ''}`}
+        className={cn(cardClasses.container, 'cursor-default', className)}
       >
         {/* Category Badge - Top Right Corner */}
         <div className={cardClasses.categoryBadge}>
