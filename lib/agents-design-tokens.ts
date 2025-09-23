@@ -27,8 +27,8 @@ export const AGENTS_DESIGN_TOKENS = {
       },
       padding: {
         header: 'pr-16', // Space for version badge
-        section: 'space-y-2',
-        install: 'pt-1.5',
+        section: 'space-y-1',
+        install: 'pt-1',
         stats: 'pt-2',
       },
     },
