@@ -27,8 +27,8 @@ export const AGENTS_DESIGN_TOKENS = {
       },
       padding: {
         header: 'pr-16', // Space for version badge
-        section: 'space-y-4',
-        install: 'mt-2 pt-1.5',
+        section: 'space-y-2',
+        install: 'pt-1.5',
         stats: 'pt-2',
       },
     },
@@ -118,7 +118,7 @@ export const getAgentCardClasses = () => ({
   content: `flex-1 flex flex-col ${AGENTS_DESIGN_TOKENS.layout.card.padding.section}`,
   roleTitle: `${AGENTS_DESIGN_TOKENS.layout.card.minHeight.role} flex items-center`,
   personaName: `${AGENTS_DESIGN_TOKENS.layout.card.minHeight.persona} flex items-center`,
-  goalSection: `${AGENTS_DESIGN_TOKENS.layout.card.minHeight.goal} flex items-center`,
+  goalSection: `${AGENTS_DESIGN_TOKENS.layout.card.minHeight.goal} flex items-start`,
   categoriesSection: `flex flex-wrap ${AGENTS_DESIGN_TOKENS.layout.badge.spacing} ${AGENTS_DESIGN_TOKENS.layout.card.minHeight.categories}`,
   whenToUseSection: `${AGENTS_DESIGN_TOKENS.layout.card.minHeight.whenToUse} flex items-start`,
   installSection: `${AGENTS_DESIGN_TOKENS.layout.card.padding.install} ${AGENTS_DESIGN_TOKENS.colors.border.default} border-t`,
