@@ -188,13 +188,6 @@ export enum MilestoneStatus {
   ACHIEVED = 'achieved',
 }
 
-/** Validation severity levels */
-export enum ValidationSeverity {
-  ERROR = 'error',
-  WARNING = 'warning',
-  INFO = 'info',
-}
-
 // ==========================================
 // ANALYTICS AND TRACKING
 // ==========================================

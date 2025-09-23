@@ -95,7 +95,7 @@
       "id": "quality-metrics",
       "name": "Quality Metrics",
       "description": "Quality metrics and measurement framework focusing on test coverage and quality assessment dimensions",
-      "categories": ["Project Management", "Testing"],
+      "categories": ["Testing"],
       "path": ".krci-ai/data/quality-metrics.md"
     },
     {
