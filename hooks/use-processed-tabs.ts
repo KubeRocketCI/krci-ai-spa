@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { filterItems, extractCategories } from '@/lib/search-utils';
+import { CATEGORY_ALL_VALUE, type CategoryFilterValue } from '@/lib/constants';
 import type { BaseContentItem, ContentPageConfig, ContentCollection } from '@/lib/content-types';
 import type { ReactNode } from 'react';
 
@@ -18,7 +19,7 @@ interface ContentTab<T extends BaseContentItem> {
   /** Content data collection, null if not loaded */
   data: ContentCollection<T> | null;
   /** Configuration for search and display behavior */
-  config: ContentPageConfig<T>;
+  config: ContentPageConfig;
   /** Function to render individual content items */
   renderCard: (item: T) => ReactNode;
   /** Whether the tab is currently loading */
@@ -64,14 +65,14 @@ interface ProcessedTab<T extends BaseContentItem> extends ContentTab<T> {
  * const processedTabs = useProcessedTabs(
  *   contentTabs,
  *   'development',
- *   { agents: 'frontend', templates: 'all' }
+ *   { agents: 'frontend', templates: CATEGORY_ALL_VALUE }
  * );
  * ```
  */
 export function useProcessedTabs<T extends BaseContentItem>(
   tabs: ContentTab<T>[],
   searchQuery: string,
-  selectedCategories: Record<string, string | 'all'>,
+  selectedCategories: Record<string, CategoryFilterValue>,
 ): ProcessedTab<T>[] {
   return useMemo(
     () =>
@@ -92,7 +93,7 @@ export function useProcessedTabs<T extends BaseContentItem>(
         const filteredItems = filterItems(
           tab.data.items,
           searchQuery,
-          selectedCategories[tab.id] || 'all',
+          selectedCategories[tab.id] || CATEGORY_ALL_VALUE,
           tab.config.searchConfig,
         );
 

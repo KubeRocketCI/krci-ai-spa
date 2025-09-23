@@ -36,20 +36,6 @@
       "path": ".krci-ai/data/coding-standards.md"
     },
     {
-      "id": "design-patterns",
-      "name": "Design Patterns",
-      "description": "Architectural design patterns including microservices, event-driven architecture, and system decomposition",
-      "categories": ["Architecture"],
-      "path": ".krci-ai/data/design-patterns.md"
-    },
-    {
-      "id": "go-coding-standards",
-      "name": "Go Coding Standards",
-      "description": "Go development instructions following idiomatic practices, Effective Go, and Google's style guide",
-      "categories": ["Development"],
-      "path": ".krci-ai/data/go-coding-standards.md"
-    },
-    {
       "id": "core-framework-standards",
       "name": "Core Framework Standards",
       "description": "Comprehensive KubeRocketAI framework requirements, constraints, and validation standards for component creation",
@@ -71,6 +57,20 @@
       "path": ".krci-ai/data/krci-ai/core-validation-checklist.md"
     },
     {
+      "id": "design-patterns",
+      "name": "Design Patterns",
+      "description": "Architectural design patterns including microservices, event-driven architecture, and system decomposition",
+      "categories": ["Architecture"],
+      "path": ".krci-ai/data/design-patterns.md"
+    },
+    {
+      "id": "go-coding-standards",
+      "name": "Go Coding Standards",
+      "description": "Go development instructions following idiomatic practices, Effective Go, and Google's style guide",
+      "categories": ["Development"],
+      "path": ".krci-ai/data/go-coding-standards.md"
+    },
+    {
       "id": "operator-best-practices",
       "name": "Operator Best Practices",
       "description": "Kubernetes operator development best practices following UNIX principles for single-purpose applications",
@@ -88,14 +88,14 @@
       "id": "project-management-methodology",
       "name": "Project Management Methodology",
       "description": "Project management methodology based on PMBoK 7th Edition principles for KubeRocketAI framework projects",
-      "categories": ["Management"],
+      "categories": ["Project Management"],
       "path": ".krci-ai/data/project-management-methodology.md"
     },
     {
       "id": "quality-metrics",
       "name": "Quality Metrics",
       "description": "Quality metrics and measurement framework focusing on test coverage and quality assessment dimensions",
-      "categories": ["Testing", "Management"],
+      "categories": ["Project Management", "Testing"],
       "path": ".krci-ai/data/quality-metrics.md"
     },
     {
@@ -128,17 +128,17 @@
     }
   ],
   "metadata": {
-    "totalDataFiles": 18,
+    "totalDatafiles": 18,
     "categories": [
       "Analysis",
       "Architecture",
       "Development",
       "Framework Core",
-      "Management",
       "Product",
+      "Project Management",
       "Testing"
     ],
-    "generatedAt": "2025-09-22T16:50:33.300286Z",
+    "generatedAt": "2025-09-23T12:06:54.502517Z",
     "version": "1.0.0"
   }
 }

@@ -1,7 +1,7 @@
 import dataFilesData from '@/public/data/data.json';
-import { BaseSearchableItem } from './search-types';
+import type { BaseContentItem } from './content-types';
 
-export interface DataFile extends BaseSearchableItem {
+export interface DataFile extends BaseContentItem {
   id: string;
   name: string;
   description: string;

@@ -5,9 +5,8 @@
 import { Bot } from 'lucide-react';
 import { createElement } from 'react';
 import type { ContentPageConfig } from '@/lib/content-types';
-import type { Agent } from '@/lib/agents';
 
-export const AGENTS_PAGE_CONFIG: ContentPageConfig<Agent> = {
+export const AGENTS_PAGE_CONFIG: ContentPageConfig = {
   title: 'AI Agents Directory',
   description:
     'Discover specialized AI agents for development, architecture, QA, and more. Each agent brings unique expertise to your workflow.',

@@ -5,9 +5,8 @@
 import { Package } from 'lucide-react';
 import { createElement } from 'react';
 import type { ContentPageConfig } from '@/lib/content-types';
-import type { Template } from '@/lib/templates';
 
-export const TEMPLATES_PAGE_CONFIG: ContentPageConfig<Template> = {
+export const TEMPLATES_PAGE_CONFIG: ContentPageConfig = {
   title: 'Template Library',
   description:
     'Access project templates and configurations for KubeRocketAI development. Streamline your workflow with pre-built templates.',

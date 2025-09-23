@@ -19,6 +19,7 @@ import { ContentGrid } from './content-grid';
 import { useProcessedTabs } from '@/hooks/use-processed-tabs';
 import { CONTENT_DESIGN_TOKENS } from '@/lib/content-design-tokens';
 import type { BaseContentItem, ContentPageConfig, ContentCollection } from '@/lib/content-types';
+import { CATEGORY_ALL_VALUE, type CategoryFilterValue } from '@/lib/constants';
 import type { ReactNode } from 'react';
 
 interface ContentTab<T extends BaseContentItem> {
@@ -26,7 +27,7 @@ interface ContentTab<T extends BaseContentItem> {
   label: string;
   icon: ReactNode;
   data: ContentCollection<T> | null;
-  config: ContentPageConfig<T>;
+  config: ContentPageConfig;
   renderCard: (item: T) => ReactNode;
   loading?: boolean;
   error?: string | null;
@@ -49,8 +50,8 @@ export function ContentHubPage<T extends BaseContentItem>({
 }: ContentHubPageProps<T>) {
   // Search and filter state - single responsibility
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState<Record<string, string | 'all'>>(() =>
-    tabs.reduce((acc, tab) => ({ ...acc, [tab.id]: 'all' }), {}),
+  const [selectedCategories, setSelectedCategories] = useState<Record<string, CategoryFilterValue>>(
+    () => tabs.reduce((acc, tab) => ({ ...acc, [tab.id]: CATEGORY_ALL_VALUE }), {}),
   );
 
   // Memoized handlers - performance optimization
@@ -59,7 +60,7 @@ export function ContentHubPage<T extends BaseContentItem>({
   }, []);
 
   const handleCategoryChange = useCallback(
-    (tabId: string) => (category: string | 'all') => {
+    (tabId: string) => (category: CategoryFilterValue) => {
       setSelectedCategories(prev => ({ ...prev, [tabId]: category }));
     },
     [],
@@ -135,10 +136,10 @@ export function ContentHubPage<T extends BaseContentItem>({
                     className="mb-8"
                     aria-label={`Filter and search ${tab.label.toLowerCase()}`}
                   >
-                    <SearchFilter<T>
+                    <SearchFilter
                       searchQuery={searchQuery}
                       onSearchChange={handleSearchChange}
-                      selectedCategory={selectedCategories[tab.id] || 'all'}
+                      selectedCategory={selectedCategories[tab.id] || CATEGORY_ALL_VALUE}
                       onCategoryChange={handleCategoryChange(tab.id)}
                       availableCategories={tab.availableCategories}
                       resultsCount={tab.filteredItems.length}

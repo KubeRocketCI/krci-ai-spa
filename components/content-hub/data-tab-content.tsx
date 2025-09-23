@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { SearchFilter } from '@/components/ui/search-filter';
 import { DataCard } from '@/components/data/data-card';
-import { filterItems, extractCategories } from '@/lib/search-utils';
-import type { DataFile } from '@/lib/data';
+import { CategoryManager } from '@/lib/category-management';
+import { CATEGORY_ALL_VALUE } from '@/lib/constants';
+import { DATA_SEARCH_CONFIG } from '@/lib/search-configs';
 import type { ContentHubData } from '@/hooks/use-content-hub-data';
 
 interface DataTabContentProps {
@@ -12,29 +13,57 @@ interface DataTabContentProps {
 }
 
 /**
- * Data tab content component
- * Used by: Content hub main page
+ * Enhanced Data tab content component
  */
 export function DataTabContent({
   dataFilesResult,
   searchQuery,
   onSearchChange,
 }: DataTabContentProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORY_ALL_VALUE);
+
+  const handleCategoryChange = useCallback((category: string) => {
+    setSelectedCategory(category);
+  }, []);
 
   const filteredDataFiles = useMemo(() => {
     if (!dataFilesResult.data?.items) return [];
 
-    return filterItems(dataFilesResult.data.items, searchQuery, selectedCategory, {
-      searchFields: ['name', 'description'] as (keyof DataFile)[],
-      categoryField: 'categories' as keyof DataFile,
-    });
+    let filtered = dataFilesResult.data.items;
+
+    // Apply text search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(dataFile => {
+        // Search across data file specific fields
+        const searchableFields = ['name', 'description'] as const;
+        return searchableFields.some(field => {
+          const value = dataFile[field];
+          return value && typeof value === 'string' && value.toLowerCase().includes(query);
+        });
+      });
+    }
+
+    // Apply category filter using CategoryManager
+    filtered = CategoryManager.filterByCategory(filtered, selectedCategory);
+
+    return filtered;
   }, [dataFilesResult.data?.items, searchQuery, selectedCategory]);
 
-  const categories = useMemo(() => {
-    if (!dataFilesResult.data?.items) return [];
-    return extractCategories(dataFilesResult.data.items, 'categories');
-  }, [dataFilesResult.data?.items]);
+  // Get data file categories - prefer pre-computed metadata, fallback to extraction
+  const availableCategories = useMemo(() => {
+    // First try to get from metadata (pre-computed)
+    if (dataFilesResult.data?.metadata?.categories) {
+      return dataFilesResult.data.metadata.categories;
+    }
+
+    // Fallback to runtime extraction if metadata not available
+    if (dataFilesResult.data?.items) {
+      return CategoryManager.extractCategories(dataFilesResult.data.items);
+    }
+
+    return [];
+  }, [dataFilesResult.data]);
 
   return (
     <div className="space-y-8">
@@ -42,15 +71,13 @@ export function DataTabContent({
         searchQuery={searchQuery}
         onSearchChange={onSearchChange}
         selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
-        availableCategories={categories}
+        onCategoryChange={handleCategoryChange}
+        availableCategories={availableCategories}
         resultsCount={filteredDataFiles.length}
-        searchConfig={{
-          searchFields: ['name', 'description'],
-          categoryField: 'categories',
-          placeholder: 'Search data files...',
-          debounceMs: 300,
-        }}
+        totalCount={dataFilesResult.data?.items?.length}
+        searchConfig={DATA_SEARCH_CONFIG}
+        isLoading={dataFilesResult.loading}
+        error={dataFilesResult.error}
       />
 
       {dataFilesResult.loading ? (

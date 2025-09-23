@@ -4,7 +4,13 @@ import { AuroraBackground } from '@/components/ui/aurora-background';
 import { SharedHeader } from '@/components/shared-header';
 import { SharedFooter } from '@/components/shared-footer';
 import { GitHubIcon } from '@/components/github-icon';
-import { FRAMEWORK_METRICS } from '@/lib/constants';
+import {
+  FRAMEWORK_METRICS,
+  CopyCommandId,
+  type CopyCommandType,
+  StatLabel,
+  STAT_SPECIAL_CONFIG,
+} from '@/lib/constants';
 import {
   Copy,
   Check,
@@ -97,7 +103,7 @@ const HERO_COMMAND = 'brew tap KubeRocketCI/homebrew-tap && brew install krci-ai
 const VIDEO_AUTOPLAY_MODE: AutoplayMode = 'onView';
 
 export default function HomePage() {
-  const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
+  const [copiedCommand, setCopiedCommand] = useState<CopyCommandType>(null);
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
   const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
@@ -129,7 +135,7 @@ export default function HomePage() {
   }, []);
 
   // Helper functions
-  const copyToClipboard = async (text: string, command: string): Promise<void> => {
+  const copyToClipboard = async (text: string, command: CopyCommandId): Promise<void> => {
     await navigator.clipboard.writeText(text);
     setCopiedCommand(command);
     setTimeout(() => setCopiedCommand(null), 2000);
@@ -282,9 +288,9 @@ export default function HomePage() {
               variant="primary"
               size="lg"
               className="px-8 h-12 text-base transform hover:scale-105"
-              onClick={() => copyToClipboard(HERO_COMMAND, 'brew')}
+              onClick={() => copyToClipboard(HERO_COMMAND, CopyCommandId.BREW)}
             >
-              {copiedCommand === 'brew' ? (
+              {copiedCommand === CopyCommandId.BREW ? (
                 <Check className="w-4 h-4 mr-2" />
               ) : (
                 <Copy className="w-4 h-4 mr-2" />
@@ -337,51 +343,16 @@ export default function HomePage() {
             </h3>
             <div className="grid grid-cols-5 gap-2 sm:gap-4 md:gap-6 text-center">
               {stats.map((stat, index) => {
-                // Make Integrated Codebases stat clickable in new tab
-                if (stat.label === 'Integrated Codebases') {
+                // Check if this stat has special configuration
+                const specialConfig = STAT_SPECIAL_CONFIG[stat.label as StatLabel];
+                if (specialConfig) {
                   return (
                     <ThemedStatCard
                       key={index}
                       value={stat.value}
                       label={stat.label}
                       variant="gradient"
-                      href="https://github.com/topics/kuberocketai"
-                    />
-                  );
-                }
-                // Make the "Agile SDLC Roles" stat clickable
-                if (stat.label === 'Agile SDLC Roles') {
-                  return (
-                    <ThemedStatCard
-                      key={index}
-                      value={stat.value}
-                      label={stat.label}
-                      variant="gradient"
-                      href="/agents"
-                    />
-                  );
-                }
-                // Make the "Supported IDEs" stat clickable
-                else if (stat.label === 'Supported IDEs') {
-                  return (
-                    <ThemedStatCard
-                      key={index}
-                      value={stat.value}
-                      label={stat.label}
-                      variant="gradient"
-                      href="/architecture#supported-ides"
-                    />
-                  );
-                }
-                // Make the "SDLC Framework" stat clickable
-                else if (stat.label === 'SDLC Framework') {
-                  return (
-                    <ThemedStatCard
-                      key={index}
-                      value={stat.value}
-                      label={stat.label}
-                      variant="gradient"
-                      href="/architecture#sdlc-workflow"
+                      href={specialConfig.href}
                     />
                   );
                 } else {
@@ -568,13 +539,13 @@ brew install krci-ai`}</ThemedInstallationCommand>
                     onClick={() =>
                       copyToClipboard(
                         `brew tap KubeRocketCI/homebrew-tap\nbrew install krci-ai`,
-                        'macos',
+                        CopyCommandId.MACOS,
                       )
                     }
                     className="flex-shrink-0"
                     aria-label="Copy macOS Homebrew install commands"
                   >
-                    {copiedCommand === 'macos' ? (
+                    {copiedCommand === CopyCommandId.MACOS ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
@@ -618,13 +589,13 @@ sudo mv krci-ai /usr/local/bin/`}</ThemedInstallationCommand>
                     onClick={() =>
                       copyToClipboard(
                         `curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz\nchmod +x krci-ai\nsudo mv krci-ai /usr/local/bin/`,
-                        'linux',
+                        CopyCommandId.LINUX,
                       )
                     }
                     className="flex-shrink-0"
                     aria-label="Copy Linux install commands"
                   >
-                    {copiedCommand === 'linux' ? (
+                    {copiedCommand === CopyCommandId.LINUX ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
@@ -672,13 +643,13 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</ThemedInstall
                     onClick={() =>
                       copyToClipboard(
                         `curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Windows_x86_64.zip" -o krci-ai.zip\nExpand-Archive -Path krci-ai.zip -DestinationPath .\nMove-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`,
-                        'windows',
+                        CopyCommandId.WINDOWS,
                       )
                     }
                     className="flex-shrink-0"
                     aria-label="Copy Windows install commands"
                   >
-                    {copiedCommand === 'windows' ? (
+                    {copiedCommand === CopyCommandId.WINDOWS ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
@@ -722,11 +693,13 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</ThemedInstall
                   <ThemedButton
                     size="sm"
                     variant="copy"
-                    onClick={() => copyToClipboard('krci-ai install --ide=cursor', 'quickstart-1')}
+                    onClick={() =>
+                      copyToClipboard('krci-ai install --ide=cursor', CopyCommandId.QUICKSTART_1)
+                    }
                     className="flex-shrink-0"
                     aria-label="Copy install command"
                   >
-                    {copiedCommand === 'quickstart-1' ? (
+                    {copiedCommand === CopyCommandId.QUICKSTART_1 ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
@@ -748,11 +721,11 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</ThemedInstall
                   <ThemedButton
                     size="sm"
                     variant="copy"
-                    onClick={() => copyToClipboard('krci-ai validate', 'quickstart-2')}
+                    onClick={() => copyToClipboard('krci-ai validate', CopyCommandId.QUICKSTART_2)}
                     className="flex-shrink-0"
                     aria-label="Copy validate command"
                   >
-                    {copiedCommand === 'quickstart-2' ? (
+                    {copiedCommand === CopyCommandId.QUICKSTART_2 ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
@@ -774,11 +747,13 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</ThemedInstall
                   <ThemedButton
                     size="sm"
                     variant="copy"
-                    onClick={() => copyToClipboard('krci-ai bundle --agent po', 'quickstart-3')}
+                    onClick={() =>
+                      copyToClipboard('krci-ai bundle --agent po', CopyCommandId.QUICKSTART_3)
+                    }
                     className="flex-shrink-0"
                     aria-label="Copy bundle command"
                   >
-                    {copiedCommand === 'quickstart-3' ? (
+                    {copiedCommand === CopyCommandId.QUICKSTART_3 ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
@@ -798,11 +773,13 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</ThemedInstall
                   <ThemedButton
                     size="sm"
                     variant="copy"
-                    onClick={() => copyToClipboard('krci-ai list agents', 'quickstart-4')}
+                    onClick={() =>
+                      copyToClipboard('krci-ai list agents', CopyCommandId.QUICKSTART_4)
+                    }
                     className="flex-shrink-0"
                     aria-label="Copy list agents command"
                   >
-                    {copiedCommand === 'quickstart-4' ? (
+                    {copiedCommand === CopyCommandId.QUICKSTART_4 ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
@@ -824,11 +801,13 @@ Move-Item krci-ai.exe "C:\\Program Files\\krci-ai\\krci-ai.exe"`}</ThemedInstall
                   <ThemedButton
                     size="sm"
                     variant="copy"
-                    onClick={() => copyToClipboard('krci-ai install --all', 'quickstart-5')}
+                    onClick={() =>
+                      copyToClipboard('krci-ai install --all', CopyCommandId.QUICKSTART_5)
+                    }
                     className="flex-shrink-0"
                     aria-label="Copy install all command"
                   >
-                    {copiedCommand === 'quickstart-5' ? (
+                    {copiedCommand === CopyCommandId.QUICKSTART_5 ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />

@@ -14,6 +14,7 @@ import { JsonLd } from '@/app/components/JsonLd';
 import { FAQ_DATA, FAQ_DATA_SEARCHABLE, getFAQCategories } from '@/lib/faq-data';
 import { generateFAQSchema, getFAQMetaTags, getFAQBreadcrumbSchema } from '@/lib/faq-schema';
 import { filterItems } from '@/lib/search-utils';
+import { CATEGORY_ALL_VALUE, type CategoryFilterValue } from '@/lib/constants';
 import type { FAQItem } from '@/lib/faq-data';
 
 // FAQ search configuration - moved outside component to avoid re-creation
@@ -26,7 +27,7 @@ const faqSearchConfig = {
 
 export default function FAQPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string | 'all'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<CategoryFilterValue>(CATEGORY_ALL_VALUE);
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
   // Filter FAQs using unified search utilities
@@ -102,7 +103,7 @@ export default function FAQPage() {
           <div className="container mx-auto max-w-6xl">
             {/* Simple Search */}
             <div className="mb-8">
-              <SearchFilter<FAQItem>
+              <SearchFilter
                 searchQuery={searchQuery}
                 onSearchChange={setSearchQuery}
                 selectedCategory={selectedCategory}

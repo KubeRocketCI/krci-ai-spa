@@ -42,3 +42,7 @@ next-env.d.ts
 
 .claude/settings.local.json
 .playwright-mcp
+
+# python cache
+__pycache__/
+*.pyc

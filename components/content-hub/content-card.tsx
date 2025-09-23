@@ -94,7 +94,6 @@ function ContentCardComponent<T extends BaseContentItem>({
         </ThemedCardHeader>
 
         <ThemedCardContent className={cardClasses.content}>
-          {/* Custom content rendered by parent - dependency inversion */}
           {renderContent(item)}
 
           {/* Tags Section */}

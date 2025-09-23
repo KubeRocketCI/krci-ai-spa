@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FRAMEWORK_METRICS } from '@/lib/constants';
+import { FRAMEWORK_METRICS, CopyCommandId, type CopyCommandType } from '@/lib/constants';
 import {
   Copy,
   Check,
@@ -51,11 +51,14 @@ chmod +x krci-ai && sudo mv krci-ai /usr/local/bin/`,
 };
 
 export default function QuickStartPage() {
-  const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
+  const [copiedCommand, setCopiedCommand] = useState<CopyCommandType>(null);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
   // Helper functions
-  const copyToClipboard = async (text: string, command: string): Promise<void> => {
+  const copyToClipboard = async (
+    text: string,
+    command: CopyCommandId | `step-${number}`,
+  ): Promise<void> => {
     await navigator.clipboard.writeText(text);
     setCopiedCommand(command);
     setTimeout(() => setCopiedCommand(null), 2000);
@@ -294,11 +297,11 @@ Usage instructions:
                   <ThemedButton
                     size="sm"
                     variant="copy"
-                    onClick={() => copyToClipboard(INSTALL_COMMANDS.macos, 'macos')}
+                    onClick={() => copyToClipboard(INSTALL_COMMANDS.macos, CopyCommandId.MACOS)}
                     className="flex-shrink-0"
                     aria-label="Copy macOS install commands"
                   >
-                    {copiedCommand === 'macos' ? (
+                    {copiedCommand === CopyCommandId.MACOS ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />
@@ -324,11 +327,11 @@ Usage instructions:
                   <ThemedButton
                     size="sm"
                     variant="copy"
-                    onClick={() => copyToClipboard(INSTALL_COMMANDS.linux, 'linux')}
+                    onClick={() => copyToClipboard(INSTALL_COMMANDS.linux, CopyCommandId.LINUX)}
                     className="flex-shrink-0"
                     aria-label="Copy Linux install commands"
                   >
-                    {copiedCommand === 'linux' ? (
+                    {copiedCommand === CopyCommandId.LINUX ? (
                       <Check className="w-4 h-4" />
                     ) : (
                       <Copy className="w-4 h-4" />

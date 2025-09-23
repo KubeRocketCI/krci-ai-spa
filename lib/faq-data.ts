@@ -1,15 +1,21 @@
-import type { BaseSearchableItem, SearchConfig } from './search-types';
+import type { SearchConfig } from './search-types';
+import type { BaseContentItem } from './content-types';
 
-export interface FAQItem extends BaseSearchableItem {
+// Internal FAQ item structure
+interface FAQItemRaw {
   id: string;
   question: string;
   answer: string;
   category: FAQCategory;
-  categories?: string[]; // For compatibility with unified search utilities
   tags: string[];
-  // BaseSearchableItem compatibility
-  name?: string;
-  description?: string;
+}
+
+// Public FAQ item interface extending BaseContentItem
+export interface FAQItem extends BaseContentItem {
+  question: string;
+  answer: string;
+  category: FAQCategory;
+  tags: string[]; // Required field from BaseContentItem
 }
 
 export enum FAQCategory {
@@ -28,7 +34,7 @@ export const FAQ_CATEGORY_LABELS: Record<FAQCategory, string> = {
   [FAQCategory.PLATFORM_EVOLUTION]: 'Platform Evolution',
 };
 
-export const FAQ_DATA: FAQItem[] = [
+const FAQ_DATA_RAW: FAQItemRaw[] = [
   // Getting Started Category (25%)
   {
     id: 'installation-time',
@@ -929,10 +935,8 @@ export const getUseCasesFAQs = (): FAQItem[] => {
   ).slice(0, 4); // Show 4 items to match main page
 };
 
-// Transform FAQ data to include categories array for unified search compatibility
-const transformFAQForSearch = (
-  faq: Omit<FAQItem, 'categories' | 'name' | 'description'>,
-): FAQItem => ({
+// Transform raw FAQ data to BaseContentItem-compatible format
+const transformFAQForSearch = (faq: FAQItemRaw): FAQItem => ({
   ...faq,
   categories: [faq.category], // Convert single category to array
   name: faq.question, // Use question as searchable name
@@ -940,7 +944,8 @@ const transformFAQForSearch = (
 });
 
 // Export transformed FAQ data compatible with unified search utilities
-export const FAQ_DATA_SEARCHABLE: FAQItem[] = FAQ_DATA.map(transformFAQForSearch);
+export const FAQ_DATA: FAQItem[] = FAQ_DATA_RAW.map(transformFAQForSearch);
+export const FAQ_DATA_SEARCHABLE: FAQItem[] = FAQ_DATA;
 
 // Helper to get available FAQ categories for filtering
 export const getFAQCategories = (): string[] => {
@@ -948,7 +953,7 @@ export const getFAQCategories = (): string[] => {
 };
 
 // Search configuration for FAQ items using generic SearchFilter
-export const FAQ_SEARCH_CONFIG: SearchConfig<FAQItem> = {
+export const FAQ_SEARCH_CONFIG: SearchConfig = {
   searchFields: ['question', 'answer', 'name', 'description'],
   categoryField: 'categories',
   placeholder: 'Search questions...',

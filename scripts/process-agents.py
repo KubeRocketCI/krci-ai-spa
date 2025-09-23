@@ -1,167 +1,160 @@
 #!/usr/bin/env python3
 """
 Process KubeRocketAI agent YAML files into JSON format for Next.js consumption.
-Extracts key persona information for the Agents Hub landing page.
+Refactored to use base processor following DRY and SOLID principles.
 """
 
-import yaml
-import json
-from datetime import datetime
+import sys
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, List
+
+# Add the scripts directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
+
+from base_processor import YAMLBasedProcessor, ProcessingError
 
 
-def extract_agent_persona(agent_data: Dict[str, Any], existing_agent: Dict[str, Any] = None) -> Dict[str, Any]:
-    """Extract key persona information from agent YAML structure."""
-
-    identity = agent_data.get("identity", {})
-    commands = agent_data.get("commands", {})
-    tasks = agent_data.get("tasks", [])
-    principles = agent_data.get("principles", [])
-
-    # Preserve existing categories or set placeholder for new agents
-    if existing_agent and "categories" in existing_agent:
-        categories = existing_agent["categories"]
-    else:
-        categories = ["To be defined"]
+class AgentProcessor(YAMLBasedProcessor):
+    """
+    Agent-specific content processor.
     
-    # Preserve existing whenToUse or set placeholder for new agents
-    if existing_agent and "whenToUse" in existing_agent:
-        when_to_use = existing_agent["whenToUse"]
-    else:
-        when_to_use = "To be populated manually"
+    Follows SOLID principles:
+    - Single Responsibility: Handles only agent processing logic
+    - Open/Closed: Extends base processor without modifying it
+    - Liskov Substitution: Can be used wherever BaseContentProcessor is expected
+    - Interface Segregation: Implements only required abstract methods
+    - Dependency Inversion: Depends on base abstractions
+    """
     
-    description = identity.get("description", "")
-
-    # Extract scope from first principle if available
-    scope = ""
-    if principles and len(principles) > 0:
-        first_principle = principles[0]
-        if "SCOPE:" in first_principle:
-            scope = first_principle.split("SCOPE:")[1].split(".")[0].strip()
-
-
-    return {
-        "id": identity.get("id", ""),
-        "filename": "",  # Will be set by the calling function
-        "name": identity.get("name", ""),
-        "role": identity.get("role", ""),
-        "description": description,
-        "goal": identity.get("goal", ""),
-        "icon": identity.get("icon", "🤖"),
-        "categories": categories,
-        "scope": scope,
-        "whenToUse": when_to_use,
-        "commandCount": len(
-            [cmd for cmd in commands.keys() if cmd not in ["help", "exit"]]
-        ),
-        "taskCount": len(tasks),
-        "commands": {
-            key: value
+    def __init__(self):
+        """Initialize agent processor."""
+        super().__init__(content_type="agents", source_extensions=[".yaml", ".yml"])
+    
+    def find_source_directory(self, project_root: Path = None) -> Path:
+        """Find the agents source directory."""
+        if project_root is None:
+            project_root = Path.cwd()
+        
+        # Search for agents directory in common locations
+        search_paths = [
+            project_root / "krci-input" / ".krci-ai" / "agents",
+            project_root / ".krci-ai" / "agents",
+            project_root / "agents"
+        ]
+        
+        for path in search_paths:
+            if path.exists() and path.is_dir():
+                return path
+        
+        raise ProcessingError(f"Could not find agents directory in: {search_paths}")
+    
+    def process_file(self, file_path: Path, existing_data: Dict[str, Any] = None) -> Dict[str, Any]:
+        """Process a single agent YAML file."""
+        agent_yaml = self.load_yaml_file(file_path)
+        
+        if "agent" not in agent_yaml:
+            raise ProcessingError(f"No 'agent' key found in {file_path.name}")
+        
+        agent_data = agent_yaml["agent"]
+        filename = file_path.stem
+        
+        return self.extract_agent_persona(agent_data, existing_data, filename)
+    
+    def extract_agent_persona(self, agent_data: Dict[str, Any], existing_agent: Dict[str, Any] = None, filename: str = "") -> Dict[str, Any]:
+        """Extract key persona information from agent YAML structure."""
+        identity = agent_data.get("identity", {})
+        commands = agent_data.get("commands", {})
+        tasks = agent_data.get("tasks", [])
+        principles = agent_data.get("principles", [])
+        
+        # Preserve existing categories or set default
+        if existing_agent and "categories" in existing_agent:
+            categories = existing_agent["categories"]
+        else:
+            categories = ["To be defined"]
+        
+        # Preserve existing whenToUse or set default
+        if existing_agent and "whenToUse" in existing_agent:
+            when_to_use = existing_agent["whenToUse"]
+        else:
+            when_to_use = "Specialized assistance for development tasks"
+        
+        # Extract scope from first principle if available
+        scope = self.extract_scope_from_principles(principles)
+        
+        # Generate ID if not present
+        agent_id = identity.get("id") or self.generate_id(identity.get("name", filename))
+        
+        return {
+            "id": agent_id,
+            "filename": filename,
+            "name": self.safe_string(identity.get("name"), filename.replace("-", " ").title()),
+            "role": self.safe_string(identity.get("role"), "AI Assistant"),
+            "description": self.safe_string(identity.get("description")),
+            "goal": self.safe_string(identity.get("goal")),
+            "icon": self.safe_string(identity.get("icon"), "🤖"),
+            "categories": self.category_manager.normalize_categories(categories),
+            "scope": scope,
+            "whenToUse": when_to_use,
+            "commandCount": self.count_commands(commands),
+            "taskCount": len(self.safe_list(tasks)),
+            "commands": self.filter_commands(commands),
+            "version": self.safe_string(identity.get("version"), "1.0.0"),
+        }
+    
+    def extract_scope_from_principles(self, principles: List[str]) -> str:
+        """Extract scope from principles list."""
+        if not principles:
+            return ""
+        
+        for principle in principles:
+            if isinstance(principle, str) and "SCOPE:" in principle:
+                scope_part = principle.split("SCOPE:")[1]
+                # Extract until first period or end of string
+                scope = scope_part.split(".")[0].strip()
+                return scope
+        
+        return ""
+    
+    def count_commands(self, commands: Dict[str, Any]) -> int:
+        """Count relevant commands (excluding help/exit)."""
+        if not isinstance(commands, dict):
+            return 0
+        
+        excluded_commands = {"help", "exit"}
+        return len([cmd for cmd in commands.keys() if cmd not in excluded_commands])
+    
+    def filter_commands(self, commands: Dict[str, Any]) -> Dict[str, str]:
+        """Filter out system commands and return user commands."""
+        if not isinstance(commands, dict):
+            return {}
+        
+        excluded_commands = {"help", "exit"}
+        return {
+            key: str(value)
             for key, value in commands.items()
-            if key not in ["help", "exit"]  # Exclude common commands
-        },
-        "version": identity.get("version", "1.0.0"),
-    }
-
-
-def load_existing_agents(output_file: str) -> Dict[str, Dict[str, Any]]:
-    """Load existing agents data to preserve manual fields."""
-    existing_agents = {}
-    output_path = Path(output_file)
+            if key not in excluded_commands
+        }
     
-    if output_path.exists():
-        try:
-            with open(output_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                for agent in data.get("agents", []):
-                    filename = agent.get("filename", "")
-                    if filename:
-                        existing_agents[filename] = agent
-            print(f"📖 Loaded existing data for {len(existing_agents)} agents")
-        except Exception as e:
-            print(f"⚠ Could not load existing file: {e}")
+    def get_output_structure(self, items: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Create the agents JSON output structure."""
+        return {
+            "agents": items,
+            "metadata": self.create_metadata(items)
+        }
     
-    return existing_agents
-
-
-def process_agents_directory(agents_dir: str, output_file: str) -> None:
-    """Process all YAML files in agents directory and output JSON."""
-
-    agents_path = Path(agents_dir)
-    agents_data = []
-
-    if not agents_path.exists():
-        print(f"Error: Directory {agents_dir} does not exist")
-        return
+    def get_required_fields(self) -> List[str]:
+        """Get required fields for agent validation."""
+        return ["id", "filename", "name", "role", "description", "goal", "categories"]
     
-    # Load existing agents to preserve manual fields
-    existing_agents = load_existing_agents(output_file)
-
-    # Process each YAML file
-    for yaml_file in agents_path.glob("*.yaml"):
-        try:
-            with open(yaml_file, "r", encoding="utf-8") as f:
-                agent_data = yaml.safe_load(f)
-
-            if "agent" in agent_data:
-                filename = yaml_file.stem
-                existing_agent = existing_agents.get(filename)
-                
-                persona = extract_agent_persona(agent_data["agent"], existing_agent)
-                # Set filename (without .yaml extension) as the agent identifier
-                persona["filename"] = filename
-                agents_data.append(persona)
-                
-                status = "updated" if existing_agent else "new"
-                print(
-                    f"✓ Processed {yaml_file.name}: {persona['name']} ({status})"
-                )
-            else:
-                print(f"⚠ Skipped {yaml_file.name}: No 'agent' key found")
-
-        except Exception as e:
-            print(f"✗ Error processing {yaml_file.name}: {e}")
-
-    # Sort agents by role for consistent ordering
-    agents_data.sort(key=lambda x: (x["role"], x["name"]))
-
-    # Write output JSON
-    output_path = Path(output_file)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {
-                "agents": agents_data,
-                "metadata": {
-                    "totalAgents": len(agents_data),
-                    "categories": list(
-                        set(
-                            category
-                            for agent in agents_data
-                            for category in agent["categories"]
-                        )
-                    ),
-                    "generatedAt": datetime.now().isoformat() + "Z",
-                    "version": "1.0.0",
-                },
-            },
-            f,
-            indent=2,
-            ensure_ascii=False,
-        )
-
-    print(f"\n✅ Generated {output_file} with {len(agents_data)} agents")
-    print(
-        f"📊 Categories found: {', '.join(set(category for agent in agents_data for category in agent['categories']))}"
-    )
+    def extract_item_id(self, item: Dict[str, Any]) -> str:
+        """Extract item ID from agent item."""
+        return item.get("filename") or item.get("id") or ""
 
 
 if __name__ == "__main__":
     # Default paths relative to project root
-    agents_directory = "./krci-input/.krci-ai/agents"
-    output_file = "./public/data/agents.json"
-
-    print("🚀 Processing KubeRocketAI agents...")
-    process_agents_directory(agents_directory, output_file)
+    output_file = Path("./public/data/agents.json")
+    
+    processor = AgentProcessor()
+    processor.process_all(output_file)

@@ -1,9 +1,11 @@
 import { useState, useMemo, useCallback } from 'react';
-import { AgentsFilter, type AgentSpecialization } from '@/components/agents/agents-filter';
+import { SearchFilter } from '@/components/ui/search-filter';
 import { AgentCard } from '@/components/agents/agent-card';
 import { getAgentCardClasses } from '@/lib/agents-design-tokens';
-import { filterItems } from '@/lib/search-utils';
-import type { AgentsData, Agent } from '@/lib/agents';
+import { CategoryManager } from '@/lib/category-management';
+import { CATEGORY_ALL_VALUE } from '@/lib/constants';
+import { AGENT_SEARCH_CONFIG } from '@/lib/search-configs';
+import type { AgentsData } from '@/lib/agents';
 
 interface AgentsTabContentProps {
   agentsData: AgentsData | null;
@@ -11,27 +13,18 @@ interface AgentsTabContentProps {
   onSearchChange: (query: string) => void;
 }
 
-// Agent search configuration - moved outside component to avoid re-creation
-const agentSearchConfig = {
-  searchFields: ['name', 'role', 'description', 'goal', 'whenToUse'] as (keyof Agent)[],
-  categoryField: 'categories' as keyof Agent,
-};
-
 /**
- * Agents tab content component
- * Used by: Content hub main page
+ * Enhanced Agents tab content component
  */
 export function AgentsTabContent({
   agentsData,
   searchQuery,
   onSearchChange,
 }: AgentsTabContentProps) {
-  const [selectedSpecialization, setSelectedSpecialization] = useState<AgentSpecialization | 'all'>(
-    'all',
-  );
+  const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORY_ALL_VALUE);
 
-  const handleSpecializationChange = useCallback((specialization: AgentSpecialization | 'all') => {
-    setSelectedSpecialization(specialization);
+  const handleCategoryChange = useCallback((category: string) => {
+    setSelectedCategory(category);
   }, []);
 
   // Process agents - data is complete, no processing needed
@@ -40,10 +33,33 @@ export function AgentsTabContent({
     return agentsData.agents;
   }, [agentsData]);
 
-  // Filter agents using unified search utilities
+  // Filter agents using enhanced CategoryManager
   const filteredAgents = useMemo(() => {
-    return filterItems(processedAgents, searchQuery, selectedSpecialization, agentSearchConfig);
-  }, [processedAgents, searchQuery, selectedSpecialization]);
+    let filtered = processedAgents;
+
+    // Apply text search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(agent => {
+        // Search across agent-specific fields
+        const searchableFields = ['name', 'role', 'description', 'goal', 'whenToUse'] as const;
+        return searchableFields.some(field => {
+          const value = agent[field];
+          return value && typeof value === 'string' && value.toLowerCase().includes(query);
+        });
+      });
+    }
+
+    // Apply category filter using CategoryManager
+    filtered = CategoryManager.filterByCategory(filtered, selectedCategory);
+
+    return filtered;
+  }, [processedAgents, searchQuery, selectedCategory]);
+
+  // Get available categories from metadata (pre-computed)
+  const availableCategories = useMemo(() => {
+    return agentsData?.metadata.categories || [];
+  }, [agentsData?.metadata.categories]);
 
   const cardClasses = getAgentCardClasses();
 
@@ -62,13 +78,17 @@ export function AgentsTabContent({
   return (
     <div className="space-y-8">
       <section className="mb-8" aria-label="Filter and search agents">
-        <AgentsFilter
+        <SearchFilter
           searchQuery={searchQuery}
           onSearchChange={onSearchChange}
-          selectedSpecialization={selectedSpecialization}
-          onSpecializationChange={handleSpecializationChange}
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
+          availableCategories={availableCategories}
           resultsCount={filteredAgents.length}
-          availableSpecializations={agentsData.metadata.categories}
+          totalCount={processedAgents.length}
+          searchConfig={AGENT_SEARCH_CONFIG}
+          isLoading={false}
+          error={null}
         />
       </section>
 

@@ -2,8 +2,9 @@ import { useState, useMemo, useCallback } from 'react';
 import { SearchFilter } from '@/components/ui/search-filter';
 import { TemplateCard } from '@/components/templates/template-card';
 import { getTemplateCardClasses } from '@/lib/templates-design-tokens';
-import { filterItems, extractCategories } from '@/lib/search-utils';
-import type { Template } from '@/lib/templates';
+import { CategoryManager } from '@/lib/category-management';
+import { CATEGORY_ALL_VALUE } from '@/lib/constants';
+import { TEMPLATE_SEARCH_CONFIG } from '@/lib/search-configs';
 import type { ContentHubData } from '@/hooks/use-content-hub-data';
 
 interface TemplatesTabContentProps {
@@ -13,42 +14,58 @@ interface TemplatesTabContentProps {
 }
 
 /**
- * Templates tab content component
- * Used by: Content hub main page
+ * Enhanced Templates tab content component
  */
 export function TemplatesTabContent({
   templatesResult,
   searchQuery,
   onSearchChange,
 }: TemplatesTabContentProps) {
-  const [selectedTemplateCategory, setSelectedTemplateCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>(CATEGORY_ALL_VALUE);
 
-  const handleTemplateCategoryChange = useCallback((category: string) => {
-    setSelectedTemplateCategory(category);
+  const handleCategoryChange = useCallback((category: string) => {
+    setSelectedCategory(category);
   }, []);
 
-  // Filter templates
+  // Filter templates using enhanced CategoryManager
   const filteredTemplates = useMemo(() => {
     if (!templatesResult.data?.items) return [];
 
-    const searchConfig = {
-      searchFields: ['name', 'description'] as (keyof Template)[],
-      categoryField: 'categories' as keyof Template,
-    };
+    let filtered = templatesResult.data.items;
 
-    return filterItems(
-      templatesResult.data.items,
-      searchQuery,
-      selectedTemplateCategory,
-      searchConfig,
-    );
-  }, [templatesResult.data?.items, searchQuery, selectedTemplateCategory]);
+    // Apply text search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(template => {
+        // Search across template-specific fields
+        const searchableFields = ['name', 'description'] as const;
+        return searchableFields.some(field => {
+          const value = template[field];
+          return value && typeof value === 'string' && value.toLowerCase().includes(query);
+        });
+      });
+    }
 
-  // Get template categories
-  const templateCategories = useMemo(() => {
-    if (!templatesResult.data?.items) return [];
-    return extractCategories(templatesResult.data.items, 'categories');
-  }, [templatesResult.data?.items]);
+    // Apply category filter using CategoryManager
+    filtered = CategoryManager.filterByCategory(filtered, selectedCategory);
+
+    return filtered;
+  }, [templatesResult.data?.items, searchQuery, selectedCategory]);
+
+  // Get template categories - prefer pre-computed metadata, fallback to extraction
+  const availableCategories = useMemo(() => {
+    // First try to get from metadata (pre-computed)
+    if (templatesResult.data?.metadata?.categories) {
+      return templatesResult.data.metadata.categories;
+    }
+
+    // Fallback to runtime extraction if metadata not available
+    if (templatesResult.data?.items) {
+      return CategoryManager.extractCategories(templatesResult.data.items);
+    }
+
+    return [];
+  }, [templatesResult.data]);
 
   const templateCardClasses = getTemplateCardClasses();
 
@@ -58,16 +75,14 @@ export function TemplatesTabContent({
         <SearchFilter
           searchQuery={searchQuery}
           onSearchChange={onSearchChange}
-          selectedCategory={selectedTemplateCategory}
-          onCategoryChange={handleTemplateCategoryChange}
-          availableCategories={templateCategories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
+          availableCategories={availableCategories}
           resultsCount={filteredTemplates.length}
-          searchConfig={{
-            searchFields: ['name', 'description'],
-            categoryField: 'categories',
-            placeholder: 'Search templates by name, description...',
-            debounceMs: 300,
-          }}
+          totalCount={templatesResult.data?.items?.length}
+          searchConfig={TEMPLATE_SEARCH_CONFIG}
+          isLoading={templatesResult.loading}
+          error={templatesResult.error}
         />
       </section>
 
