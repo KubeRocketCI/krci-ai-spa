@@ -49,10 +49,6 @@ export { createEmptyCollection } from '@/lib/content-types';
 export type { ContentProvider, UseContentResult } from '@/lib/content-types';
 
 // Category management re-exports
-export type {
-  Categorizable,
-  CategoryMetadata,
-  CategoryValidationResult,
-} from '@/lib/category-management';
+export type { Categorizable, CategoryMetadata } from '@/lib/category-management';
 
 export { CategoryManager } from '@/lib/category-management';
