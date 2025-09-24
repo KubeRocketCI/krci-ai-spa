@@ -156,7 +156,7 @@ export function DiagramCarousel({ slides, className = '' }: DiagramCarouselProps
                           diagram={slide.diagram}
                           className="rounded-lg p-2"
                           scale={slide.scale ?? 'normal'}
-                          zoom={slide.zoom}
+                          {...(slide.zoom !== undefined ? { zoom: slide.zoom } : {})}
                         />
                       </div>
                     </div>

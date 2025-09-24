@@ -11,7 +11,7 @@ import { SearchFilter } from '@/components/ui/search-filter';
 import { FAQList } from '@/components/faq/faq-list';
 import { CollapseAllButton, CollapseAllButtonMobile } from '@/components/faq/collapse-all-button';
 import { JsonLd } from '@/app/components/JsonLd';
-import { FAQ_DATA, FAQ_DATA_SEARCHABLE, getFAQCategories } from '@/lib/faq-data';
+import { FAQ_DATA, getFAQCategories } from '@/lib/faq-data';
 import { generateFAQSchema, getFAQMetaTags, getFAQBreadcrumbSchema } from '@/lib/faq-schema';
 import { filterItems } from '@/lib/search-utils';
 import { CATEGORY_ALL_VALUE, type CategoryFilterValue } from '@/lib/constants';
@@ -32,7 +32,7 @@ export default function FAQPage() {
 
   // Filter FAQs using unified search utilities
   const filteredFAQs = useMemo(() => {
-    return filterItems(FAQ_DATA_SEARCHABLE, searchQuery, selectedCategory, faqSearchConfig);
+    return filterItems(FAQ_DATA, searchQuery, selectedCategory, faqSearchConfig);
   }, [searchQuery, selectedCategory]);
 
   // Get available FAQ categories for filtering

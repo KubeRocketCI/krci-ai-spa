@@ -85,23 +85,4 @@ export function ThemedCTACard({
   return <div className={cn(variantStyles[variant], className)}>{children}</div>;
 }
 
-interface ThemedCTAButtonProps {
-  children: React.ReactNode;
-  variant?: 'purple' | 'green';
-  className?: string;
-}
-
-export function ThemedCTAButton({
-  children,
-  variant = 'purple',
-  className = '',
-}: ThemedCTAButtonProps) {
-  const variantStyles = {
-    purple:
-      'border-purple-600 text-purple-700 hover:bg-purple-100 hover:text-purple-800 dark:border-purple-500 dark:text-purple-300 dark:hover:bg-purple-900/20 dark:hover:text-purple-100',
-    green:
-      'border-green-600 text-green-700 hover:bg-green-100 hover:text-green-800 dark:border-green-500 dark:text-green-300 dark:hover:bg-green-900/20 dark:hover:text-green-100',
-  };
-
-  return <span className={cn(variantStyles[variant], className)}>{children}</span>;
-}
+// Removed ThemedCTAButton (unused)

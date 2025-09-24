@@ -56,25 +56,6 @@ export const trackPageView = (path: string, title?: string) => {
   }
 };
 
-export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
-  if (!isProduction()) {
-    console.log('Event (test mode):', { action, category, label, value });
-    return; // Don't track in non-production
-  }
-
-  if (typeof window !== 'undefined' && window.gtag) {
-    try {
-      window.gtag('event', action, {
-        event_category: category,
-        event_label: label,
-        value: value,
-      });
-    } catch (error) {
-      console.error('Failed to track event:', error);
-    }
-  }
-};
-
 declare global {
   interface Window {
     dataLayer: unknown[];

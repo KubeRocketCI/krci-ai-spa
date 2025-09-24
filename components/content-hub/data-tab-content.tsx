@@ -4,6 +4,7 @@ import { DataCard } from '@/components/data/data-card';
 import { CategoryManager } from '@/lib/category-management';
 import { CATEGORY_ALL_VALUE } from '@/lib/constants';
 import { DATA_SEARCH_CONFIG } from '@/lib/search-configs';
+import type { DataFile } from '@/lib/data';
 import type { ContentHubData } from '@/hooks/use-content-hub-data';
 
 interface DataTabContentProps {
@@ -29,12 +30,12 @@ export function DataTabContent({
   const filteredDataFiles = useMemo(() => {
     if (!dataFilesResult.data?.items) return [];
 
-    let filtered = dataFilesResult.data.items;
+    let filtered: DataFile[] = dataFilesResult.data.items;
 
     // Apply text search filter
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(dataFile => {
+      filtered = filtered.filter((dataFile: DataFile) => {
         // Search across data file specific fields
         const searchableFields = ['name', 'description'] as const;
         return searchableFields.some(field => {

@@ -53,4 +53,4 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+export { Button }; // Removed buttonVariants export (unused externally)

@@ -36,4 +36,4 @@ function Badge({
   );
 }
 
-export { Badge, badgeVariants };
+export { Badge }; // Removed badgeVariants export (unused externally)

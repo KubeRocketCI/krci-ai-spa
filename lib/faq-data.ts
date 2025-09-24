@@ -1,4 +1,3 @@
-import type { SearchConfig } from './search-types';
 import type { BaseContentItem } from './content-types';
 
 // Internal FAQ item structure
@@ -25,14 +24,6 @@ export enum FAQCategory {
   BUSINESS_VALUE = 'business-value',
   PLATFORM_EVOLUTION = 'platform-evolution',
 }
-
-export const FAQ_CATEGORY_LABELS: Record<FAQCategory, string> = {
-  [FAQCategory.GETTING_STARTED]: 'Getting Started',
-  [FAQCategory.IMPLEMENTATION]: 'Implementation',
-  [FAQCategory.ARCHITECTURE]: 'Architecture',
-  [FAQCategory.BUSINESS_VALUE]: 'Business Value',
-  [FAQCategory.PLATFORM_EVOLUTION]: 'Platform Evolution',
-};
 
 const FAQ_DATA_RAW: FAQItemRaw[] = [
   // Getting Started Category (25%)
@@ -873,22 +864,6 @@ export const getTopFAQs = (count: number = 4): FAQItem[] => {
   return FAQ_DATA.slice(0, count);
 };
 
-export const getFAQsByCategory = (category: FAQCategory): FAQItem[] => {
-  return FAQ_DATA.filter(faq => faq.category === category);
-};
-
-export const searchFAQs = (query: string): FAQItem[] => {
-  const searchTerm = query.toLowerCase().trim();
-  if (!searchTerm) return FAQ_DATA;
-
-  return FAQ_DATA.filter(
-    faq =>
-      faq.question.toLowerCase().includes(searchTerm) ||
-      faq.answer.toLowerCase().includes(searchTerm) ||
-      faq.tags.some(tag => tag.toLowerCase().includes(searchTerm)),
-  );
-};
-
 export const getQuickstartFAQs = (): FAQItem[] => {
   // Return FAQs most relevant to quickstart/installation
   return FAQ_DATA.filter(
@@ -945,7 +920,7 @@ const transformFAQForSearch = (faq: FAQItemRaw): FAQItem => ({
 
 // Export transformed FAQ data compatible with unified search utilities
 export const FAQ_DATA: FAQItem[] = FAQ_DATA_RAW.map(transformFAQForSearch);
-export const FAQ_DATA_SEARCHABLE: FAQItem[] = FAQ_DATA;
+// FAQ_DATA itself is already in a searchable, normalized form – removed redundant FAQ_DATA_SEARCHABLE alias
 
 // Helper to get available FAQ categories for filtering
 export const getFAQCategories = (): string[] => {
@@ -953,16 +928,3 @@ export const getFAQCategories = (): string[] => {
 };
 
 // Search configuration for FAQ items using generic SearchFilter
-export const FAQ_SEARCH_CONFIG: SearchConfig = {
-  searchFields: ['question', 'answer', 'name', 'description'],
-  categoryField: 'categories',
-  placeholder: 'Search questions...',
-  debounceMs: 300,
-  highlightConfig: {
-    enabled: true,
-    highlightClass:
-      'bg-cyan-200 dark:bg-cyan-900/40 px-1 rounded text-cyan-900 dark:text-cyan-100 font-medium',
-    caseSensitive: false,
-    maxHighlights: 5,
-  },
-};

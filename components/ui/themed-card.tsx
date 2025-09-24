@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { THEME_COLORS } from '@/lib/theme-colors';
-import { BaseThemedProps } from '@/lib/component-types';
+import type { BaseThemedProps } from '@/lib/component-types';
 import type { ReactNode } from 'react';
 
 interface ThemedCardProps extends BaseThemedProps {

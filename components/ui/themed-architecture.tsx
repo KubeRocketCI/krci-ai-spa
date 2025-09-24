@@ -48,7 +48,7 @@ export function ThemedArchitectureLayer({
   className,
 }: ThemedArchitectureLayerProps) {
   return (
-    <ThemedCard variant="highlight" className={className}>
+    <ThemedCard variant="highlight" {...(className ? { className } : {})}>
       <ThemedCardHeader>
         <div className="flex items-center justify-between">
           <ThemedCardTitle className="text-slate-800 dark:text-green-300 flex items-center">
@@ -91,7 +91,7 @@ export function ThemedComponentStat({
   className,
 }: ThemedComponentStatProps) {
   return (
-    <ThemedCard variant="highlight" className={className}>
+    <ThemedCard variant="highlight" {...(className ? { className } : {})}>
       <div className="p-4 text-center">
         <div className="${THEME_COLORS.accent.secondary} mb-2 flex justify-center">{icon}</div>
         <div className="text-2xl font-bold text-emerald-700 dark:text-green-300 mb-1">{count}</div>
@@ -108,7 +108,7 @@ export function ThemedComponentStat({
  */
 export function ThemedArchitectureTable({ children, className }: ThemedArchitectureTableProps) {
   return (
-    <ThemedCard variant="highlight" className={className}>
+    <ThemedCard variant="highlight" {...(className ? { className } : {})}>
       <div className="p-6">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">{children}</table>

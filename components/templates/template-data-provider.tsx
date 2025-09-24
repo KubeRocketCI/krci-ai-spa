@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { getTemplates, getFallbackTemplateDescription } from '@/lib/templates';
+import { getTemplates } from '@/lib/templates';
 import type { Template } from '@/lib/templates';
 import type { UseContentResult, ContentCollection } from '@/lib/content-types';
 
@@ -24,10 +24,9 @@ export function useTemplatesData(): UseContentResult<Template> {
       // Process templates to ensure BaseContentItem compatibility
       const processedTemplates = templatesData.templates.map(template => ({
         ...template,
-        description: template.description || getFallbackTemplateDescription(template),
-        // Ensure BaseContentItem compatibility
-        name: template.name, // Use template name as display name
-        tags: template.categories, // Use categories as tags
+        // Fallback helper removed—assume description already present; leave as-is
+        name: template.name,
+        tags: template.categories,
       }));
 
       const contentCollection: ContentCollection<Template> = {

@@ -1,4 +1,4 @@
-import { FAQItem } from './faq-data';
+import type { FAQItem } from './faq-data';
 import { BASE_URL } from '@/lib/constants';
 
 /**

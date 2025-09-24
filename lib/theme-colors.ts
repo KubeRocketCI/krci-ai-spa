@@ -44,14 +44,3 @@ export const THEME_COLORS = {
       'bg-gradient-to-r from-cyan-600 via-blue-600 to-emerald-600 dark:from-cyan-400 dark:via-blue-500 dark:to-emerald-400',
   },
 } as const;
-
-/**
- * Variant style generator utilities
- * Reduces boilerplate in component files
- */
-export const createTextVariants = (baseClass = '') => ({
-  primary: `${THEME_COLORS.text.primary} ${baseClass}`,
-  secondary: `${THEME_COLORS.text.secondary} ${baseClass}`,
-  muted: `${THEME_COLORS.text.muted} ${baseClass}`,
-  accent: `${THEME_COLORS.accent.primary} ${baseClass}`,
-});

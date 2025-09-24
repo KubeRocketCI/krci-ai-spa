@@ -16,15 +16,7 @@ export function useDataFiles(): UseContentResult<DataFile> {
       setError(null);
 
       const dataFilesData = getDataFiles();
-      setData({
-        items: dataFilesData.dataFiles,
-        metadata: {
-          totalItems: dataFilesData.metadata.totalDataFiles,
-          categories: dataFilesData.metadata.categories,
-          generatedAt: dataFilesData.metadata.generatedAt,
-          version: dataFilesData.metadata.version,
-        },
-      });
+      setData(dataFilesData);
     } catch {
       setError('Failed to load data files');
     } finally {

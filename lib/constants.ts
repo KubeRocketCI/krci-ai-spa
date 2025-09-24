@@ -94,32 +94,7 @@ export const STAT_SPECIAL_CONFIG: Record<StatLabel, { href?: string; icon?: stri
   },
 };
 
-// ==========================================
-// CONTENT TYPE DETECTION
-// ==========================================
-
-/** Path patterns for content type detection */
-export const CONTENT_PATH_PATTERNS = {
-  TEMPLATES: 'templates',
-  DATA: 'data',
-  AGENTS: 'agents',
-  TASKS: 'tasks',
-} as const;
-
-/** Type for content path pattern values */
-export type ContentPathPattern = (typeof CONTENT_PATH_PATTERNS)[keyof typeof CONTENT_PATH_PATTERNS];
-
-// ==========================================
-// ANALYTICS AND TRACKING
-// ==========================================
-
-/** Analytics environment hostnames */
-export const ANALYTICS_HOSTS = {
-  PRODUCTION: 'krci-ai.kuberocketci.io',
-  VERCEL: 'vercel.app',
-} as const;
-
 export const BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? `https://${ANALYTICS_HOSTS.PRODUCTION}`
+    ? 'https://krci-ai.kuberocketci.io'
     : 'http://localhost:3000';

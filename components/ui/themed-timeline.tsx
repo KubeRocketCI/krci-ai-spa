@@ -18,7 +18,7 @@ interface TimelineMilestone {
 
 interface ThemedHorizontalTimelineProps {
   milestones: TimelineMilestone[];
-  className?: string;
+  className?: string | undefined;
 }
 
 // Themed Container Component
@@ -321,7 +321,7 @@ export function ThemedHorizontalTimeline({
     let monthIndex = -1;
     for (let i = 0; i < timelineMonths.length; i++) {
       const tm = timelineMonths[i];
-      if (currentYear === tm.year && currentMonth === tm.month) {
+      if (tm && currentYear === tm.year && currentMonth === tm.month) {
         monthIndex = i;
         break;
       }
@@ -331,8 +331,9 @@ export function ThemedHorizontalTimeline({
     if (monthIndex === -1) {
       const firstMonth = timelineMonths[0];
       if (
-        currentYear < firstMonth.year ||
-        (currentYear === firstMonth.year && currentMonth < firstMonth.month)
+        firstMonth &&
+        (currentYear < firstMonth.year ||
+          (currentYear === firstMonth.year && currentMonth < firstMonth.month))
       ) {
         return 5;
       }

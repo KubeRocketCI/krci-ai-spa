@@ -1,0 +1,5 @@
+{
+  "$schema": "https://unpkg.com/knip/schema.json",
+  "ignore": ["lib/faq-data.ts", "lib/use-github-repo.ts"],
+  "ignoreDependencies": ["eslint", "eslint-config-next"]
+}

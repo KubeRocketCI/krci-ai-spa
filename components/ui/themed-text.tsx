@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { THEME_COLORS } from '@/lib/theme-colors';
-import { BaseThemedProps, CommonVariant } from '@/lib/component-types';
+import type { BaseThemedProps, CommonVariant } from '@/lib/component-types';
 
 interface ThemedTextProps extends BaseThemedProps {
   variant?:

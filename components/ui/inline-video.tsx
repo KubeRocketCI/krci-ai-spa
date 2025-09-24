@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 export type AutoplayMode = 'onView' | 'onLoad' | 'none';
 
-export interface InlineVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
+interface InlineVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src: string;
   poster?: string;
   title?: string;
@@ -16,7 +16,8 @@ export interface InlineVideoProps extends React.VideoHTMLAttributes<HTMLVideoEle
   intersectionThreshold?: number; // 0..1
 }
 
-export function InlineVideo({
+// Single default export – removed duplicate named+default pattern to shrink surface
+export default function InlineVideo({
   src,
   poster,
   title,
@@ -87,5 +88,3 @@ export function InlineVideo({
     </div>
   );
 }
-
-export default InlineVideo;

@@ -10,7 +10,7 @@ interface ThemedStatCardProps {
   variant?: 'gradient' | 'simple' | 'accent';
   className?: string;
   onClick?: () => void;
-  href?: string;
+  href?: string | undefined;
 }
 
 /**

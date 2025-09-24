@@ -8,16 +8,16 @@ import type { ReactNode } from 'react';
 
 interface ThemedNavigationProps {
   children: ReactNode;
-  className?: string;
+  className?: string | undefined;
 }
 
 interface ThemedNavLinkProps {
   children: ReactNode;
   href: string;
-  isActive?: boolean;
-  external?: boolean;
-  onClick?: () => void;
-  className?: string;
+  isActive?: boolean | undefined;
+  external?: boolean | undefined;
+  onClick?: (() => void) | undefined;
+  className?: string | undefined;
 }
 
 /**
@@ -91,7 +91,11 @@ export function ThemedNavLink({
   }
 
   return (
-    <Link href={href} className={cn(baseStyles, activeStyles, className)} onClick={onClick}>
+    <Link
+      href={href}
+      className={cn(baseStyles, activeStyles, className)}
+      {...(onClick ? { onClick } : {})}
+    >
       {linkContent}
     </Link>
   );
@@ -154,7 +158,11 @@ export function ThemedMobileNavLink({
   }
 
   return (
-    <Link href={href} className={cn(baseStyles, activeStyles, className)} onClick={onClick}>
+    <Link
+      href={href}
+      className={cn(baseStyles, activeStyles, className)}
+      {...(onClick ? { onClick } : {})}
+    >
       {linkContent}
     </Link>
   );

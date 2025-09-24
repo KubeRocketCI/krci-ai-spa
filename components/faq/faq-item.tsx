@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { FAQItem } from '@/lib/faq-data';
+import type { FAQItem } from '@/lib/faq-data';
 import { CopyableCodeBlock, InlineCommand } from './copyable-code-block';
 import {
   ThemedFAQItem,
@@ -62,6 +62,10 @@ export function FAQItemComponent({
 
     while (i < lines.length) {
       const line = lines[i];
+      if (line === undefined) {
+        i++;
+        continue;
+      }
 
       // Handle code blocks
       if (line.trim().startsWith('```')) {
@@ -70,8 +74,8 @@ export function FAQItemComponent({
         i++; // Skip the opening ```
 
         // Collect code lines until closing ```
-        while (i < lines.length && !lines[i].trim().startsWith('```')) {
-          codeLines.push(lines[i]);
+        while (i < lines.length && lines[i] !== undefined && !lines[i]!.trim().startsWith('```')) {
+          codeLines.push(lines[i]!);
           i++;
         }
         i++; // Skip the closing ```
@@ -147,7 +151,9 @@ export function FAQItemComponent({
       }
 
       // Add the copyable command
-      parts.push(<InlineCommand key={partKey++} command={match[1]} />);
+      if (match[1]) {
+        parts.push(<InlineCommand key={partKey++} command={match[1]} />);
+      }
 
       lastIndex = match.index + match[0].length;
     }

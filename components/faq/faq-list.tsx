@@ -1,8 +1,8 @@
 'use client';
 
-import { FAQItem } from '@/lib/faq-data';
+import type { FAQItem } from '@/lib/faq-data';
 import { FAQItemComponent } from './faq-item';
-import { ThemedFAQNoResults } from '@/components/ui/themed-faq-search';
+import { ThemedNoResults } from '@/components/ui/themed-search';
 
 interface FAQListProps {
   faqs: FAQItem[];
@@ -21,7 +21,7 @@ export function FAQList({
 }: FAQListProps) {
   if (faqs.length === 0 && showNoResults) {
     return (
-      <ThemedFAQNoResults>
+      <ThemedNoResults>
         {searchQuery ? (
           <>No questions found for &ldquo;{searchQuery}&rdquo;</>
         ) : (
@@ -32,7 +32,7 @@ export function FAQList({
             Try different keywords or browse all categories.
           </p>
         )}
-      </ThemedFAQNoResults>
+      </ThemedNoResults>
     );
   }
 
@@ -42,9 +42,9 @@ export function FAQList({
         <FAQItemComponent
           key={faq.id}
           faq={faq}
-          searchQuery={searchQuery}
+          {...(searchQuery !== undefined ? { searchQuery } : {})}
           isExpanded={expandedIds?.has(faq.id) || false}
-          onToggleExpanded={onToggleExpanded ? () => onToggleExpanded(faq.id) : undefined}
+          {...(onToggleExpanded ? { onToggleExpanded: () => onToggleExpanded(faq.id) } : {})}
         />
       ))}
     </div>

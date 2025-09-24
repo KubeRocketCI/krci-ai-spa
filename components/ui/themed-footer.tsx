@@ -8,22 +8,22 @@ import type { ReactNode } from 'react';
 
 interface ThemedFooterProps {
   children: ReactNode;
-  className?: string;
+  className?: string | undefined;
 }
 
 interface ThemedFooterSectionProps {
   children: ReactNode;
-  title?: string;
-  className?: string;
+  title?: string | undefined;
+  className?: string | undefined;
 }
 
 interface ThemedFooterLinkProps {
   children: ReactNode;
   href: string;
-  external?: boolean;
-  icon?: ReactNode;
-  onClick?: () => void;
-  className?: string;
+  external?: boolean | undefined;
+  icon?: ReactNode | undefined;
+  onClick?: (() => void) | undefined;
+  className?: string | undefined;
 }
 
 interface ThemedFooterButtonProps {
@@ -101,7 +101,7 @@ export function ThemedFooterLink({
   }
 
   return (
-    <Link href={href} className={cn(baseStyles, className)} onClick={onClick}>
+    <Link href={href} className={cn(baseStyles, className)} {...(onClick ? { onClick } : {})}>
       {linkContent}
     </Link>
   );

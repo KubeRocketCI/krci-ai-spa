@@ -16,15 +16,7 @@ export function useTasksData(): UseContentResult<Task> {
       setError(null);
 
       const tasksData = getTasks();
-      setData({
-        items: tasksData.tasks,
-        metadata: {
-          totalItems: tasksData.metadata.totalTasks,
-          categories: tasksData.metadata.categories,
-          generatedAt: tasksData.metadata.generatedAt,
-          version: tasksData.metadata.version,
-        },
-      });
+      setData(tasksData);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load tasks');
     } finally {

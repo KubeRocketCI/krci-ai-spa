@@ -4,7 +4,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { THEME_COLORS } from '@/lib/theme-colors';
-import { BaseThemedProps, SizeVariant } from '@/lib/component-types';
+import type { BaseThemedProps, SizeVariant } from '@/lib/component-types';
 
 interface ThemedButtonProps extends BaseThemedProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'terminal' | 'success' | 'copy';
@@ -100,7 +100,7 @@ export function ThemedButton({
       className={cn(variantStyles[variant], className)}
       onClick={onClick}
       disabled={disabled}
-      asChild={asChild}
+      {...(asChild ? { asChild } : {})}
       title={title}
       aria-label={ariaLabel}
     >

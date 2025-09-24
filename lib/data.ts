@@ -1,5 +1,5 @@
 import dataFilesData from '@/public/data/data.json';
-import type { BaseContentItem } from './content-types';
+import type { BaseContentItem, ContentCollection } from './content-types';
 
 export interface DataFile extends BaseContentItem {
   id: string;
@@ -9,16 +9,23 @@ export interface DataFile extends BaseContentItem {
   path: string;
 }
 
-export interface DataFilesData {
-  dataFiles: DataFile[];
-  metadata: {
-    totalDataFiles: number;
-    categories: string[];
-    generatedAt: string;
-    version: string;
+export function getDataFiles(): ContentCollection<DataFile> {
+  const raw = dataFilesData as unknown as {
+    dataFiles: DataFile[];
+    metadata: {
+      totalDatafiles: number;
+      categories: string[];
+      generatedAt: string;
+      version: string;
+    };
   };
-}
-
-export function getDataFiles(): DataFilesData {
-  return dataFilesData as unknown as DataFilesData;
+  return {
+    items: raw.dataFiles,
+    metadata: {
+      totalItems: raw.metadata.totalDatafiles, // Fix field name (lowercase 'f' in JSON)
+      categories: raw.metadata.categories,
+      generatedAt: raw.metadata.generatedAt,
+      version: raw.metadata.version,
+    },
+  };
 }

@@ -33,7 +33,7 @@ import {
   NotebookText,
 } from 'lucide-react';
 import { GITHUB_REPO_URL_EXPORT } from '@/lib/use-github-repo';
-import InlineVideo, { AutoplayMode } from '@/components/ui/inline-video';
+import InlineVideo, { type AutoplayMode } from '@/components/ui/inline-video';
 import { FAQPreview } from '@/components/faq/faq-preview';
 import { ThemedHeading } from '@/components/ui/themed-heading';
 import { ThemedText } from '@/components/ui/themed-text';

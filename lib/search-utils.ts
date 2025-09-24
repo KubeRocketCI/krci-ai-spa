@@ -7,7 +7,6 @@
 
 import type { SearchConfig } from './search-types';
 import type { BaseContentItem } from './content-types';
-import { CategoryManager } from './category-management';
 import { CATEGORY_ALL_VALUE, type CategoryFilterValue } from './constants';
 
 /**
@@ -63,30 +62,4 @@ export function filterItems<T extends BaseContentItem>(
   }
 
   return filtered;
-}
-
-/**
- * Extract unique categories from a collection of items
- *
- * Processes the specified category field from all items and returns
- * a sorted array of unique category values.
- *
- * @template T - Type that extends BaseSearchableItem
- * @param items - Array of items to extract categories from
- * @param categoryField - Field name containing category data
- * @returns Sorted array of unique category strings
- *
- * @example
- * ```typescript
- * const categories = extractCategories(agents, 'categories');
- * // Returns: ['backend', 'frontend', 'fullstack']
- * ```
- */
-export function extractCategories<T extends BaseContentItem>(
-  items: T[],
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _categoryField: string, // Parameter kept for backward compatibility but not used
-): string[] {
-  // Use the new CategoryManager for consistent extraction
-  return CategoryManager.extractCategories(items);
 }

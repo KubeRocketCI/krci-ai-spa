@@ -6,7 +6,7 @@ import { useState, useCallback } from 'react';
  * Provides search state and handlers for managing search functionality
  * across multiple content tabs.
  */
-export interface UnifiedSearch {
+interface UnifiedSearch {
   /** Current search query string */
   searchQuery: string;
   /** Direct setter for search query (use sparingly) */

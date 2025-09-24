@@ -5,14 +5,6 @@ export interface Categorizable {
   categories: string[];
 }
 
-// Retained because extended elsewhere (e.g., ContentMetadata)
-export interface CategoryMetadata {
-  totalItems: number;
-  categories: string[];
-  generatedAt: string;
-  version: string;
-}
-
 // Lightweight manager with only the functions actually used in the codebase
 export class CategoryManager {
   static extractCategories<T extends Categorizable>(items: T[]): string[] {

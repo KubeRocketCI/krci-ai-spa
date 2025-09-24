@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { getTopFAQs, FAQItem } from '@/lib/faq-data';
+import { getTopFAQs } from '@/lib/faq-data';
+import type { FAQItem } from '@/lib/faq-data';
 import { FAQItemComponent } from './faq-item';
 import { ThemedFAQSection } from '@/components/ui/themed-faq-section';
 import { ThemedButton } from '@/components/ui/themed-button';

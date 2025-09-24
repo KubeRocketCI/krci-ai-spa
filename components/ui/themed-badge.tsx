@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { THEME_COLORS } from '@/lib/theme-colors';
-import { BaseThemedProps, SizeVariant, StateVariant } from '@/lib/component-types';
+import type { BaseThemedProps, SizeVariant, StateVariant } from '@/lib/component-types';
 
 interface ThemedBadgeProps extends BaseThemedProps {
   variant?: 'primary' | 'secondary' | 'accent' | StateVariant | 'outline';

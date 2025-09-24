@@ -128,13 +128,21 @@ export function MermaidDiagram({
               // Guard zoom to a sane range
               const z = Math.min(Math.max(zoom || 1, 0.25), 4);
               const factor = base * z;
-              const width = Math.round(viewWidth * factor);
-              const height = Math.round(viewHeight * factor);
+              if (
+                typeof viewWidth === 'number' &&
+                typeof viewHeight === 'number' &&
+                !Number.isNaN(viewWidth) &&
+                !Number.isNaN(viewHeight)
+              ) {
+                const width = Math.round(viewWidth * factor!);
+                const height = Math.round(viewHeight * factor!);
 
-              svgElement.style.width = `${width}px`;
-              svgElement.style.height = `${height}px`;
-              svgElement.style.maxWidth = 'none';
-              svgElement.style.maxHeight = 'none';
+                svgElement.style.width = `${width}px`;
+                svgElement.style.height = `${height}px`;
+                svgElement.style.maxWidth = 'none';
+                svgElement.style.maxHeight = 'none';
+              }
+              // If viewBox parsing failed, allow browser to size naturally
             }
           }
         }

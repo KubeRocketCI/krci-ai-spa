@@ -36,7 +36,6 @@ function SearchFilterComponent({
   className,
   isLoading = false,
   error = null,
-  showAdvancedOptions = false,
 }: SearchFilterProps) {
   const [localQuery, setLocalQuery] = useState(searchQuery);
   const [isFocused, setIsFocused] = useState(false);
@@ -70,7 +69,7 @@ function SearchFilterComponent({
   const shouldShowResults = localQuery.length >= minQueryLength;
 
   return (
-    <ThemedSearchContainer className={className}>
+    <ThemedSearchContainer {...(className ? { className } : {})}>
       {/* Error Display */}
       {error && (
         <div
@@ -186,21 +185,7 @@ function SearchFilterComponent({
         </div>
       )}
 
-      {/* Advanced Options (if enabled) */}
-      {showAdvancedOptions && (
-        <details className="mt-4">
-          <summary className="text-sm text-slate-600 dark:text-slate-400 cursor-pointer hover:text-slate-800 dark:hover:text-slate-200">
-            Advanced Search Options
-          </summary>
-          <div className="mt-2 p-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-md">
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Search across: {searchConfig.searchFields.join(', ')}
-              {searchConfig.fuzzySearch && ' • Fuzzy search enabled'}
-              {searchConfig.enableAnalytics && ' • Analytics enabled'}
-            </p>
-          </div>
-        </details>
-      )}
+      {/* Advanced search UI removed with config simplification */}
 
       {/* Hidden accessibility helpers */}
       <div id="search-shortcut" className="sr-only">

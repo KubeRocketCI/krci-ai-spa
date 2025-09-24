@@ -11,7 +11,7 @@ import { ConsentProvider } from '@/lib/consent-context';
 import { ThemedCookieConsent } from '@/components/ui/themed-cookie-consent';
 import { Analytics, GAScript } from '@/components/analytics';
 import { BASE_URL } from '@/lib/constants';
-import { ThemeProvider } from '@/components/theme/theme-provider';
+import { ThemeProvider } from '@/components/theme';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
