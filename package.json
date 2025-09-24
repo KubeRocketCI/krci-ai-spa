@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run quality && next build",
+    "build:raw": "next build",
     "start": "next start",
     "lint": "next lint",
+    "deadcode": "knip",
+    "quality": "npm run lint && npm run deadcode",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -31,6 +34,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "knip": "^5.30.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "prettier": "^3.6.2",
