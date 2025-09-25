@@ -7,321 +7,165 @@ dependencies:
 
 # Code Review Task
 
-## Task Definition
+## Execution Workflow
 
-Perform a comprehensive code review for frontend changes in the KubeRocketAI showcase website.
+### Step 0: User Clarification (MANDATORY)
 
-## Overview
+<user_clarification>
+EXECUTE: Ask user "What specific code should I review?" Accept: files, commits, directories, or PR numbers
+EXECUTE: Ask user "What type of review?" Options: quick scan, standard review, deep audit
+EXECUTE: Ask user "What is the context?" Options: pre-merge, bug investigation, performance, security, architecture
 
-<instructions>
-Perform comprehensive code review for frontend changes in the KubeRocketAI showcase website. Review can target specific git commits, file changes, or folder modifications. Focus on Next.js 15, React, TypeScript, and shadcn/ui best practices.
-</instructions>
+CONDITIONAL: IF user provides vague instructions THEN ask for specific scope using above questions
+HALT: Do not proceed without explicit answers to all three questions
+</user_clarification>
 
-## Prerequisites
+### Step 1: Pre-Review Research
 
-<requirements>
-- Access to git repository and commit history
-- Understanding of Next.js 15 App Router patterns
-- Knowledge of shadcn/ui component architecture
-- TypeScript and React best practices
-- Tailwind CSS and theming standards
-</requirements>
+<research_phase>
+EXECUTE IN ORDER:
 
-## Review Scope Options
+1. Use Read tool on all files being modified to understand current state
+2. Use Grep/Glob tools to search for related components/patterns that might be affected
+3. Use Read tool on package.json, tsconfig.json to understand project architecture
+4. Use Bash tool to run "git log --oneline -10" for recent commits context
+5. HALT if unable to complete context research - report blocker to user
+</research_phase>
 
-### 1. Git Commit Review
+### Step 2: Code Analysis & Review
 
-<commit_review>
+Execute review focusing on these areas:
 
-- Analyze specific git commit hash
-- Review all files changed in the commit
-- Check commit message quality and conventions
-- Validate changes against project standards
-- Identify potential breaking changes
-- Review for security implications
-</commit_review>
+- Next.js 15 App Router patterns and Server/Client Component separation
+- TypeScript strict mode compliance and type safety
+- React patterns: proper hooks usage, component structure, performance
+- shadcn/ui and Radix UI component architecture and theming
+- Tailwind CSS usage and responsive design implementation
+- Accessibility: WCAG 2.1 AA compliance, ARIA attributes, keyboard navigation
 
-### 2. File/Folder Review
+### Step 3: Standards Validation
 
-<file_review>
+Verify compliance with project standards:
 
-- Review specific files or directories
-- Analyze component architecture and patterns
-- Check TypeScript type safety
-- Validate styling and theme integration
-- Review accessibility compliance
-- Check performance implications
-</file_review>
+- File naming follows kebab-case convention
+- Mobile-first responsive design (320px → 768px → 1024px+)
+- Color system constraints (3-5 colors maximum)
+- Typography limits (maximum 2 font families)
+- Terminal/hacker aesthetic maintained
+- Performance optimizations applied
+- Security best practices followed
+- Error handling implemented
 
-### 3. Change Comparison Review
+### Step 4: Issue Documentation
 
-<change_review>
+Document each finding with:
 
-- Compare before/after states
-- Identify regression risks
-- Validate improvement claims
-- Check for unintended side effects
-- Review testing implications
-- Analyze impact on existing functionality
-</change_review>
+- Severity: Critical, High, Medium, Low
+- Category: Quality, Security, Performance, Accessibility, Architecture
+- File: Specific file path and line numbers
+- Issue: Clear description of the problem
+- Solution: Actionable recommendation with code examples
+- Impact: Risk assessment and affected areas
 
-## Review Criteria
+### Step 5: Final Report & QA
 
-### 1. Code Quality Standards
+EXECUTE IN ORDER:
 
-<code_quality>
+1. Use Bash tool to run validation commands from "Commands to Execute" section
+2. Generate report using exact "Output Format" template below
+3. CONDITIONAL: IF any validation commands fail THEN report failure details in summary
+4. Mark task complete when all Success Criteria requirements met
+
+## Commands to Execute
+
+<commands>
+Research phase:
+git log --oneline -10
+find . -name "*.tsx" -newer target_file.tsx
+grep -r "import.*ComponentName" src/
+
+Validation phase:
+npm run lint
+npm run type-check
+npm run build
+</commands>
+
+Optional project-specific commands:
+
+```
+npm run test
+npm run audit
+```
+
+## Review Validation Checklist
+
+Code Quality requirements:
 
 - TypeScript strict mode compliance
 - Proper type definitions and interfaces
 - Clean, readable code structure
 - Consistent naming conventions
-- Appropriate use of React patterns
-- Proper error handling implementation
+- Appropriate React patterns and hooks
+- Error handling implementation
 - Code reusability and maintainability
-</code_quality>
 
-### 2. Architecture Compliance
+Architecture & Performance requirements:
 
-<architecture_review>
-
-- Next.js 15 App Router usage
-- Proper Server/Client Component separation
-- shadcn/ui component patterns
-- Radix UI primitive integration
-- Theme system integration
-- Proper file organization and structure
-- Import/export conventions
-</architecture_review>
-
-### 3. Performance Considerations
-
-<performance_review>
-
-- Bundle size impact analysis
-- Component rendering optimization
-- Image and asset optimization
-- Cache strategy implementation
-- Loading state handling
+- Next.js 15 best practices adherence
+- Proper Server/Client Component usage
+- Bundle size impact considered
+- Loading states and caching implemented
 - Memory leak prevention
-- Core Web Vitals impact
-</performance_review>
+- Core Web Vitals optimization
 
-### 4. Accessibility Compliance
-
-<accessibility_review>
-
-- WCAG 2.1 AA standard compliance
-- Proper ARIA attributes usage
-- Keyboard navigation support
-- Screen reader compatibility
-- Color contrast validation
-- Focus management
-- Semantic HTML structure
-</accessibility_review>
-
-### 5. Security Assessment
-
-<security_review>
+Security & Accessibility requirements:
 
 - Input validation and sanitization
 - XSS prevention measures
-- Secure data handling
-- Third-party dependency security
-- Environment variable usage
-- API endpoint security
-- Content Security Policy compliance
-</security_review>
+- WCAG 2.1 AA standard compliance
+- Keyboard navigation support
+- Screen reader compatibility
+- Color contrast validation (4.5:1 minimum)
 
-## Implementation Steps
+Design System Compliance requirements:
 
-### 1. Pre-Review Research (REQUIRED)
+- shadcn/ui component patterns followed
+- Theme system integration correct
+- Responsive breakpoints implemented
+- Touch targets minimum 44px (mobile)
+- Glass morphism and terminal aesthetics maintained
 
-<research_requirements>
+## Output Format
 
-- ALWAYS search/explore codebase before reviewing changes
-- Read all files being modified to understand current state
-- Search for related components/patterns that might be affected
-- Understand project architecture and existing conventions
-- Review recent commits for context and change patterns
-- NEVER review code without first understanding the broader context
-</research_requirements>
+Generate summary assessment with:
 
-### 2. Change Analysis
+- Overall Rating: Approved/Needs Changes/Rejected
+- Critical Issues: Count and brief description
+- Risk Level: Low/Medium/High
+- Next Steps: Required actions before approval
 
-<analysis_steps>
+<output_template>
+[SEVERITY] Category: Issue Title
+File: path/to/file.tsx:line
+Problem: Description of the issue
+Solution: Recommended fix with code example
+Impact: Affected areas and risk assessment
+</output_template>
 
-- Identify scope of changes (files, components, features)
-- Understand the purpose and context of changes
-- Map dependencies and affected areas
-- Review related documentation updates
-- Check for breaking changes
-- Assess testing coverage impact
-</analysis_steps>
-
-### 3. Code Review Process
-
-<review_process>
-
-- Examine code structure and organization
-- Validate TypeScript types and interfaces
-- Check React component patterns
-- Review styling and theme integration
-- Analyze performance implications
-- Verify accessibility compliance
-- Check security considerations
-</review_process>
-
-### 4. Standards Validation
-
-<standards_validation>
-
-- Next.js 15 best practices adherence
-- shadcn/ui pattern compliance
-- Tailwind CSS usage standards
-- Component architecture guidelines
-- File naming conventions (kebab-case required)
-- Mobile-first design implementation
-- Color system constraints (3-5 colors maximum)
-- Typography limits (maximum 2 font families)
-- Change comment usage for code modifications
-- Testing strategy alignment
-- Documentation requirements
-- Build and deployment considerations
-</standards_validation>
-
-### 5. Issue Identification
-
-<issue_identification>
-
-- Code quality concerns
-- Performance bottlenecks
-- Accessibility violations
-- Security vulnerabilities
-- Breaking change risks
-- Maintainability issues
-- Integration problems
-</issue_identification>
-
-## Review Output Format
-
-### 1. Summary Assessment
-
-<summary_format>
-
-- Overall code quality rating
-- Major findings summary
-- Risk assessment level
-- Recommendation priority
-- Approval status
-- Next steps required
-</summary_format>
-
-### 2. Detailed Findings
-
-<findings_format>
-
-- Issue category and severity
-- Specific file and line references
-- Problem description
-- Recommended solution
-- Code examples when helpful
-- Impact assessment
-- Priority level
-</findings_format>
-
-### 3. Positive Highlights
-
-<positive_highlights>
+Include positive highlights:
 
 - Well-implemented patterns
 - Performance improvements
 - Good accessibility practices
 - Clean code examples
-- Innovative solutions
-- Best practice adherence
-</positive_highlights>
-
-## Quality Assurance
-
-<qa_requirements>
-
-- Run linting and type checking
-- Verify build success
-- Test functionality in both themes
-- Check responsive behavior
-- Validate accessibility tools
-- Performance impact measurement
-- Security scan completion
-</qa_requirements>
-
-## Expected Deliverables
-
-<deliverables>
-1. Comprehensive review report
-2. Issue categorization with priorities
-3. Specific improvement recommendations
-4. Code quality assessment
-5. Security and accessibility findings
-6. Performance impact analysis
-7. Action items with clear next steps
-</deliverables>
 
 ## Success Criteria
 
-<success_metrics>
+Mark task complete when:
 
-- All critical issues identified
-- Clear, actionable feedback provided
+- All critical issues identified and documented
+- Clear, actionable feedback provided with file:line references
 - Standards compliance validated
-- Risk assessment completed
-- Improvement suggestions documented
-- Approval/rejection decision made
-- Follow-up actions defined
-</success_metrics>
-
-## Design System Review Criteria
-
-<design_review_criteria>
-
-**Color System Validation:**
-
-- Count total colors used (must be 3-5 maximum)
-- Verify WCAG AA contrast compliance (4.5:1 for text)
-- Check color consistency across light/dark themes
-- Validate accessibility with color blindness simulation
-
-**Typography Review:**
-
-- Confirm maximum 2 font families are used
-- Check font weight distribution (headings vs body)
-- Validate responsive typography scaling
-- Ensure proper line-height and spacing
-
-**Mobile-First Assessment:**
-
-- Verify mobile (320px) design comes first
-- Check tablet (768px) and desktop (1024px+) enhancements
-- Validate touch targets are minimum 44px
-- Test responsive breakpoint behavior
-
-**Code Quality Standards:**
-
-- File naming follows kebab-case convention
-- Change comments used for modifications
-- Existing code patterns preserved with `// ... existing code ...`
-- Search-first methodology followed before changes
-</design_review_criteria>
-
-## Review Templates
-
-<review_templates>
-
-- High priority issues requiring immediate attention
-- Medium priority improvements for next iteration
-- Low priority enhancements for future consideration
-- Code examples demonstrating correct patterns
-- Resource links for learning and improvement
-- Testing recommendations for validation
-- Design system compliance checklist
-- Mobile-first implementation verification
-</review_templates>
+- Build and lint commands executed successfully
+- Approval/rejection decision made with reasoning
+- Next steps clearly defined for the developer
