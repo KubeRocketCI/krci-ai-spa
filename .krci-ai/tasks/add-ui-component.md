@@ -1,7 +1,7 @@
 ---
 dependencies:
   data:
-    - code-baseline.md
+    - engineering-principles.md
 ---
 
 # Add UI Component Task
