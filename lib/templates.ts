@@ -1,6 +1,5 @@
 import templatesData from '@/public/data/templates.json';
 
-// Internal minimal typing (not exported) to avoid 'any' while keeping public surface tiny.
 export interface Template {
   id: string;
   path: string;
@@ -8,7 +7,6 @@ export interface Template {
   description: string;
   categories: string[];
   tags?: string[];
-  version?: string;
 }
 
 interface TemplatesDataInternal {
@@ -44,5 +42,3 @@ export function getTemplates(): TemplatesDataInternal {
     throw new Error('Failed to load templates data');
   }
 }
-
-// Pruned unused template helper exports (filename extraction, filtering, id/category lookups, fallback description)

@@ -5,34 +5,7 @@
 import type { CategoryFilterValue } from './constants';
 
 /**
- * Base interface that all searchable items must implement
- * Now extends BaseContentItem for unified type system
- *
- * @deprecated Use BaseContentItem from content-types instead
- */
-
-/**
- * Enhanced searchable item interface
- * Integrates with unified content type system
- */
-
-/**
- * Search highlight interface for displaying search results
- */
-
-/**
- * Search result with metadata
- */
-
-/**
- * Search filter criteria
- */
-
-/**
  * Enhanced search configuration
- * Supports both legacy BaseSearchableItem and new BaseContentItem
- *
- * @template T - Type that extends BaseContentItem or BaseSearchableItem
  *
  * @example
  * ```typescript
@@ -41,7 +14,6 @@ import type { CategoryFilterValue } from './constants';
  *   categoryField: 'categories',
  *   placeholder: 'Search agents...',
  *   debounceMs: 300,
- *   contentType: ContentType.AGENT
  * };
  * ```
  */
@@ -57,9 +29,6 @@ export interface SearchConfig {
 
 /**
  * Enhanced props interface for the SearchFilter component
- * Supports both legacy and new content type systems
- *
- * @template T - Type that extends BaseContentItem or BaseSearchableItem
  *
  * @example
  * ```typescript
@@ -98,33 +67,4 @@ export interface SearchFilterProps {
   isLoading?: boolean;
   /** Error state for search operations */
   error?: string | null;
-  // Advanced criteria removed
 }
-
-/**
- * Search provider interface
- */
-
-/**
- * Search analytics interface
- */
-
-/**
- * Search hook interface for React components
- */
-
-/**
- * Search context interface for providing search state
- */
-
-/**
- * Utility type for extracting searchable fields from a type
- */
-
-/**
- * Type-safe search field configuration
- */
-
-/**
- * Search state management interface
- */
