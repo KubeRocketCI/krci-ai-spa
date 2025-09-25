@@ -40,7 +40,6 @@ export const AGENTS_DESIGN_TOKENS = {
 
   // Typography
   typography: {
-    role: 'text-lg font-semibold',
     persona: 'text-xs font-mono',
     goal: 'text-sm',
     whenToUse: 'text-xs',
@@ -56,25 +55,17 @@ export const AGENTS_DESIGN_TOKENS = {
       muted: THEME_COLORS.text.muted,
       accent: {
         cyan: THEME_COLORS.accent.secondary,
-        green: THEME_COLORS.accent.tertiary,
       },
     },
     border: {
       default: THEME_COLORS.border.default,
       accent: {
         cyan: 'border-cyan-500/30',
-        green: 'border-green-500/20',
       },
     },
     background: {
       badge: 'bg-slate-100/80 dark:bg-slate-800/80',
     },
-  },
-
-  // Interactive States
-  states: {
-    hover: 'hover:text-slate-800 dark:hover:text-slate-200',
-    focus: 'focus:outline-none focus:ring-2 focus:ring-cyan-400/50',
   },
 
   // Content Constraints
@@ -104,7 +95,6 @@ export const AGENTS_DESIGN_TOKENS = {
     },
     size: {
       badge: 'sm',
-      button: 'sm',
     },
   },
 } as const;

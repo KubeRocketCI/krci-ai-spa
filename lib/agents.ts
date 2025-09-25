@@ -8,13 +8,9 @@ export interface Agent {
   role: string;
   description: string;
   goal: string;
-  icon: string;
   categories: string[];
-  scope: string;
   commandCount: number;
   taskCount: number;
-  commands: Record<string, string>;
-  version: string;
   whenToUse: string; // Required field - all agents must have usage guidance
 }
 
@@ -25,8 +21,6 @@ export interface AgentsData {
   metadata: {
     totalAgents: number;
     categories: string[];
-    generatedAt: string;
-    version: string;
   };
 }
 

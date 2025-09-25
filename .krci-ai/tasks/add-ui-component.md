@@ -2,6 +2,7 @@
 dependencies:
   data:
     - engineering-principles.md
+    - principles-core.md
 ---
 
 # Add UI Component Task
