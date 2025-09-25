@@ -24,13 +24,9 @@ export function useDataFiles(): UseContentResult<DataFile> {
     }
   }, []);
 
-  const refresh = useCallback(async () => {
-    await loadData();
-  }, [loadData]);
-
   useEffect(() => {
     loadData();
   }, [loadData]);
 
-  return { data, loading, error, refresh };
+  return { data, loading, error };
 }

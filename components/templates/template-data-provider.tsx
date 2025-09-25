@@ -32,10 +32,7 @@ export function useTemplatesData(): UseContentResult<Template> {
       const contentCollection: ContentCollection<Template> = {
         items: processedTemplates,
         metadata: {
-          totalItems: templatesData.metadata.totalTemplates,
           categories: templatesData.metadata.categories,
-          generatedAt: templatesData.metadata.generatedAt,
-          version: templatesData.metadata.version,
         },
       };
 
@@ -48,13 +45,9 @@ export function useTemplatesData(): UseContentResult<Template> {
     }
   }, []);
 
-  const refresh = useCallback(async () => {
-    await loadData();
-  }, [loadData]);
-
   useEffect(() => {
     loadData();
   }, [loadData]);
 
-  return { data, loading, error, refresh };
+  return { data, loading, error };
 }

@@ -22,10 +22,7 @@ export function getDataFiles(): ContentCollection<DataFile> {
   return {
     items: raw.dataFiles,
     metadata: {
-      totalItems: raw.metadata.totalDatafiles, // Fix field name (lowercase 'f' in JSON)
       categories: raw.metadata.categories,
-      generatedAt: raw.metadata.generatedAt,
-      version: raw.metadata.version,
     },
   };
 }

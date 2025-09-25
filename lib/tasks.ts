@@ -26,10 +26,7 @@ export function getTasks(): ContentCollection<Task> {
   return {
     items: raw.tasks,
     metadata: {
-      totalItems: raw.metadata.totalTasks, // Fix field name mapping
       categories: raw.metadata.categories,
-      generatedAt: raw.metadata.generatedAt,
-      version: raw.metadata.version,
     },
   };
 }
