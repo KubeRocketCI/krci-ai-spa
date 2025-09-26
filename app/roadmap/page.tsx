@@ -9,7 +9,7 @@ import { getRoadmapFAQs } from '@/lib/faq-data';
 import { ThemedCard } from '@/components/ui/themed-card';
 import { ThemedBadge } from '@/components/ui/themed-badge';
 import { ThemedHorizontalTimeline } from '@/components/ui/themed-timeline';
-import TimelineDemo from '@/components/timeline-demo';
+import { RoadmapTimeline } from '@/components/timeline-demo';
 import {
   ThemedRoadmapDescription,
   ThemedRoadmapMetricCard,
@@ -139,7 +139,7 @@ export default function RoadmapPage() {
 
       {/* Timeline Section */}
       <section className="py-12">
-        <TimelineDemo />
+        <RoadmapTimeline />
       </section>
 
       {/* Success Metrics */}
