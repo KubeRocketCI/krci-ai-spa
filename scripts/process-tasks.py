@@ -66,8 +66,8 @@ class TaskProcessor(FileBasedProcessor):
         """Create a new task entry with minimal safe defaults."""
         name = self._humanize(task_id)
 
-        # Leave description empty to keep tasks.json as source of truth
-        description = ""
+        # Set placeholder description for new tasks to pass validation
+        description = "to be populated"
 
         # Do NOT auto-infer categories for tasks; start empty and allow manual curation later
         categories: List[str] = []
