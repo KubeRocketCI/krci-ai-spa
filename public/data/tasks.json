@@ -78,6 +78,13 @@
       "path": ".krci-ai/tasks/create-epic.md"
     },
     {
+      "id": "create-gitlabci-component",
+      "name": "Create Gitlabci Component",
+      "description": "Create a reusable GitLab CI/CD component.",
+      "categories": ["Devops"],
+      "path": ".krci-ai/tasks/devops/create-gitlabci-component.md"
+    },
+    {
       "id": "create-launch-materials",
       "name": "Create Launch Materials",
       "description": "Create coordinated materials for product launch.",
@@ -457,11 +464,12 @@
     }
   ],
   "metadata": {
-    "totalTasks": 65,
+    "totalTasks": 66,
     "categories": [
       "Analysis",
       "Architecture",
       "Development",
+      "Devops",
       "Documentation",
       "Framework Core",
       "Marketing",
@@ -469,7 +477,7 @@
       "Project Management",
       "Testing"
     ],
-    "generatedAt": "2025-09-23T16:18:22.278096Z",
+    "generatedAt": "2025-10-06T11:44:35.141601Z",
     "version": "1.0.0"
   }
 }

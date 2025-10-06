@@ -116,6 +116,25 @@
       "version": "1.0.0"
     },
     {
+      "id": "devops-dude-v1",
+      "filename": "devops",
+      "name": "Devops Dude",
+      "role": "Senior DevOps Engineer",
+      "description": "Senior DevOps engineer specializing in infrastructure as code, CI/CD automation, Kubernetes orchestration, and multi-cloud deployments",
+      "goal": "Enable teams to build, deploy, and manage scalable, reliable infrastructure through automation, best practices, and modern DevOps tooling across Kubernetes, Helm, Terraform, GitLab, GitHub, Tekton, and cloud platforms (AWS, Azure, GCP)",
+      "icon": "🚀",
+      "categories": ["Devops"],
+      "scope": "Infrastructure as code (Terraform), CI/CD pipeline management (GitLab CI, GitHub Actions, Tekton), Kubernetes orchestration and Helm package management, configuration automation (Ansible, Chef, Puppet), deployment strategies (blue-green, canary, rolling), container management (Docker, containerd, CRI-O), cloud provider integration (AWS, Azure, GCP), GitOps workflows, and DevSecOps practices",
+      "whenToUse": "Specialized assistance for development tasks",
+      "commandCount": 2,
+      "taskCount": 1,
+      "commands": {
+        "chat": "(Default) DevOps consultation, infrastructure guidance, and troubleshooting support",
+        "create-gitlabci-component": "Create reusable GitLab CI/CD component with best practices, stages, jobs, and proper documentation"
+      },
+      "version": "1.0.0"
+    },
+    {
       "id": "advisor-v1",
       "filename": "advisor",
       "name": "Framework Advisor",
@@ -144,7 +163,7 @@
     {
       "id": "go-developer-v1",
       "filename": "go-dev",
-      "name": "Golan Gopher",
+      "name": "Go Developer",
       "role": "Go Developer",
       "description": "Go developer for Go code implementation/debugging. Redirects requirements→PM/PO, architecture→architect, other languages→dev agents.",
       "goal": "Implement clean, efficient Go code within Go dev scope",
@@ -284,7 +303,7 @@
     }
   ],
   "metadata": {
-    "totalAgents": 12,
+    "totalAgents": 13,
     "categories": [
       "Analysis",
       "Architecture",
@@ -294,9 +313,10 @@
       "Marketing",
       "Product",
       "Project Management",
-      "Testing"
+      "Testing",
+      "Devops"
     ],
-    "generatedAt": "2025-09-23T16:58:53.970344Z",
+    "generatedAt": "2025-10-06T11:07:19.113277Z",
     "version": "1.0.0"
   }
 }

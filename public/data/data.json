@@ -64,6 +64,13 @@
       "path": ".krci-ai/data/design-patterns.md"
     },
     {
+      "id": "gitlabci-component-patterns",
+      "name": "Gitlabci Component Patterns",
+      "description": "Reusable GitLab CI/CD component patterns with standardized stages, templates, and dependency management",
+      "categories": ["Devops"],
+      "path": ".krci-ai/data/devops/gitlabci-component-patterns.yaml"
+    },
+    {
       "id": "go-coding-standards",
       "name": "Go Coding Standards",
       "description": "Go development instructions following idiomatic practices, Effective Go, and Google's style guide",
@@ -128,17 +135,18 @@
     }
   ],
   "metadata": {
-    "totalDatafiles": 18,
+    "totalDatafiles": 19,
     "categories": [
       "Analysis",
       "Architecture",
       "Development",
+      "Devops",
       "Framework Core",
       "Product",
       "Project Management",
       "Testing"
     ],
-    "generatedAt": "2025-09-23T12:06:54.502517Z",
+    "generatedAt": "2025-10-06T11:32:22.016997Z",
     "version": "1.0.0"
   }
 }

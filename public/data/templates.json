@@ -85,6 +85,13 @@
       "categories": ["Product"]
     },
     {
+      "id": "gitlabci-component-template",
+      "path": ".krci-ai/templates/devops/gitlabci-component-template.md",
+      "name": "Gitlabci Component Template",
+      "description": "Scaffolds a complete GitLab CI/CD component library with standardized flow and dependencies.",
+      "categories": ["Devops"]
+    },
+    {
       "id": "launch-materials-template",
       "path": ".krci-ai/templates/launch-materials-template.md",
       "name": "Launch Materials",
@@ -240,17 +247,18 @@
     }
   ],
   "metadata": {
-    "totalTemplates": 34,
+    "totalTemplates": 35,
     "categories": [
       "Analysis",
       "Architecture",
+      "Devops",
       "Framework Core",
       "Marketing",
       "Product",
       "Project Management",
       "Testing"
     ],
-    "generatedAt": "2025-09-23T12:06:44.794809Z",
+    "generatedAt": "2025-10-06T11:07:09.646982Z",
     "version": "1.0.0"
   }
 }
